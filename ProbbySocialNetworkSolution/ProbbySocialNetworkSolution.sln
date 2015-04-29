@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbbySocialNetwork", "ProbbySocialNetwork\ProbbySocialNetwork.csproj", "{32FFE975-C886-453B-B24D-41CB339C5F79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbbySocialNetwork.Tests", "ProbbySocialNetwork.Tests\ProbbySocialNetwork.Tests.csproj", "{DB7AA0B6-674D-46B0-8CAE-60B66075012B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32FFE975-C886-453B-B24D-41CB339C5F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32FFE975-C886-453B-B24D-41CB339C5F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32FFE975-C886-453B-B24D-41CB339C5F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32FFE975-C886-453B-B24D-41CB339C5F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB7AA0B6-674D-46B0-8CAE-60B66075012B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7AA0B6-674D-46B0-8CAE-60B66075012B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7AA0B6-674D-46B0-8CAE-60B66075012B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7AA0B6-674D-46B0-8CAE-60B66075012B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
