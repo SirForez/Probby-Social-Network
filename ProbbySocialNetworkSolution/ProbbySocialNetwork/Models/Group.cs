@@ -7,19 +7,38 @@ namespace ProbbySocialNetwork.Models
 {
 	public class Group
 	{
-		private string name;
-		private string description;
-		private User founder;
+        public string name { get; set; }
+        public string description { get; set; }
+        public User founder { get; set; }
+        public Hobby hobby { get; set; }
 		private List<User> admins;
 		private List<User> users;
 		private List<Status> statuses;
-		private Hobby hobby;
 
-		public void addUser(User u);
-		public void makeAdmin(User u);
-		public void deleteGroup();
-		public void addStatus();
-		public void editStatus();
-		public void removeStatus();
+
+        public void addUser(User u)
+        {
+
+        }
+        public void makeAdmin(User u)
+        {
+
+        }
+        public void deleteGroup()
+        {
+
+        }
+        public void addStatus()
+        {
+
+        }
+        public void editStatus()
+        {
+
+        }
+        public void removeStatus()
+        {
+
+        }
 	}
 }

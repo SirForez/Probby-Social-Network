@@ -9,7 +9,13 @@ namespace ProbbySocialNetwork.Models
 	{
 		private List<Comment> comments;
 
-		public void addComment();
-		public void removeComment();
+        public void addComment()
+        {
+
+        }
+        public void removeComment()
+        {
+
+        }
 	}
 }

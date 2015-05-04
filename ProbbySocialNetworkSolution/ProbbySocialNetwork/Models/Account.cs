@@ -7,10 +7,10 @@ namespace ProbbySocialNetwork.Models
 {
 	public class Account
 	{
-		private int userID;
-		private string username;
-		private string password;
-		private string email;
-		private string phone;
+        public int userID { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
 	}
 }

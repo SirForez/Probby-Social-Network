@@ -7,10 +7,10 @@ namespace ProbbySocialNetwork.Models
 {
 	public class Report
 	{
-		private string reason;
-		private string explanation;
-		private User reportedUser;
-		private User sender;
-		private DateTime date;
+        public string reason { get; set; }
+        public string explanation { get; set; }
+        public User reportedUser { get; set; }
+        public User sender { get; set; }
+        public DateTime date { get; set; }
 	}
 }

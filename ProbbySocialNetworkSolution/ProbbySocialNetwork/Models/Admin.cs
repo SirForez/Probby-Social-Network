@@ -10,6 +10,9 @@ namespace ProbbySocialNetwork.Models
 		private List<Report> reports;
 		private List<User> bannedUsers;
 
-		public void banUser();
+        public void banUser()
+        {
+
+        }
 	}
 }

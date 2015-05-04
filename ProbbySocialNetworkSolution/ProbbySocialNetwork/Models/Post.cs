@@ -7,9 +7,12 @@ namespace ProbbySocialNetwork.Models
 {
 	public class Post
 	{
-		private DateTime date;
-		private string content;
+        public DateTime date { get; set; }
+		public string content { get; set; }
+     
+        public void edit()
+        {
 
-		public void edit();
+        }
 	}
 }
