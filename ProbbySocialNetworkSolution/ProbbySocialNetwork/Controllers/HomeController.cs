@@ -15,7 +15,7 @@ namespace ProbbySocialNetwork.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Some information about Probby!";
 
             return View();
         }
