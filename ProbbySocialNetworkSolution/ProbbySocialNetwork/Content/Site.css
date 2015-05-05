@@ -22,3 +22,19 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#homePic{
+    margin-top: 5%;
+    padding: 0%;
+    float: left;
+}
+
+.container{
+    width:100%;
+    margin:0px;
+}
+
+#logIn{
+    margin-top: 5%;
+    float: left;
+}
