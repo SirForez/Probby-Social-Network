@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-	public class Comment : Post
+	public class Comment
 	{
 		private List<Comment> replies;
 

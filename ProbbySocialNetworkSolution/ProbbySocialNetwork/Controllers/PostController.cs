@@ -9,8 +9,8 @@ namespace ProbbySocialNetwork.Controllers
 {
     public class PostController : Controller
     {
-        public List<Post> reportedPosts;
-        public List<Account> reportedAccounts;
+        //public List<Post> reportedPosts;
+        //public List<Account> reportedAccounts;
 
         public ActionResult viewStatus()
         {
@@ -18,11 +18,11 @@ namespace ProbbySocialNetwork.Controllers
             return View();
         }
 
-        public ActionResult getPostsByAccount(Account a)
+        /*public ActionResult getPostsByAccount(Account a)
         {
             //TODO: implement
             return View();
-        }
+        }*/
 
         // GET: Post
         public ActionResult Index()
