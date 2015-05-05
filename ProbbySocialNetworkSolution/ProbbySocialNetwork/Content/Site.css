@@ -23,18 +23,23 @@ textarea {
     max-width: 280px;
 }
 
+.container{
+    margin: 0 auto;
+    width: 100%;
+}
+
 #homePic{
+    width: 70%;
+    height: auto;
     margin-top: 5%;
     padding: 0%;
     float: left;
 }
 
-.container{
-    width:100%;
-    margin:0px;
-}
-
 #logIn{
+    width: 30%;
+    margin-top: 0;
+    padding-left: 5%;
     margin-top: 5%;
     float: left;
 }
