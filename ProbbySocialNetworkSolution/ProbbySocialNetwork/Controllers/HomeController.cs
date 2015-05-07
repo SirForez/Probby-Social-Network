@@ -28,5 +28,29 @@ namespace ProbbySocialNetwork.Controllers
 
             return View();
         }
+
+        public ActionResult AddFollower()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult AddFollowing()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult RemoveFollower()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult RemoveFollowing()
+        {
+            //TODO: Implement
+            return View();
+        }
     }
 }
