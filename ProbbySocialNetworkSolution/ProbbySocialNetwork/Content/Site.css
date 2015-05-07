@@ -62,6 +62,10 @@ textarea {
     width: 100%;
 }
 
+.col-md-offset-2 {
+    margin: 0;
+}
+
 .footer{
     font-family: Arial;
     text-align: center;
