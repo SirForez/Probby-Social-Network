@@ -11,6 +11,31 @@ namespace ProbbySocialNetwork.Controllers
         // GET: Group
         public ActionResult Index()
         {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult CreateGroup()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult EditGroup()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult RemoveGroup()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult Search()
+        {
+            //TODO: Implement
             return View();
         }
     }

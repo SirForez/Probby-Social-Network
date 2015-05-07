@@ -5,7 +5,9 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-	public class probbyContext
+	public class ProbbyDbContext : IdentityDbContext<>
 	{
+
+
 	}
 }

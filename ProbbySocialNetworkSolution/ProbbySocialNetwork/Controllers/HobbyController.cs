@@ -9,36 +9,35 @@ namespace ProbbySocialNetwork.Controllers
 {
     public class HobbyController : Controller
     {
-
-        public List<Hobby> hobbiesAwaitingApproval;
-
-        public ActionResult addHobby()
-        {
-            //TODO: implement
-            return View();
-        }
-
-        public ActionResult removeHobby()
-        {
-            //TODO: implement
-            return View();
-        }
-
-        public ActionResult approveHobby()
-        {
-            //TODO: implement
-            return View();
-        }
-
-        public ActionResult viewHobby()
-        {
-            //TODO: implement
-            return View();
-        }
         // GET: Hobby
         public ActionResult Index()
         {
-            //TODO: implement
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult CreateHobby()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult RemoveHobby()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+
+        public ActionResult ViewHobby()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult Search()
+        {
+            //TODO: Implement
             return View();
         }
     }
