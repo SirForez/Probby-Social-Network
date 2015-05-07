@@ -21,9 +21,33 @@
                     <img class="logo" src="http://i.imgur.com/zafRyOe.jpg?1" />
                 </a>
             </div>
+            <ul class="nav navbar-nav navbar">
+                <li>
+                        <input type="search" placeholder="Search" />
+                </li>
+                <li>
+                        @Html.ActionLink("Messages", "Messages", "Home", routeValues: null, htmlAttributes: new { title = "Messages" })
+                </li>
+                <li>
+                        @Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })
+                </li>
+                <li>
+                        @Html.ActionLink("Profile", "Profile", "Home", routeValues: null, htmlAttributes: new { title = "Profile" })
+                </li>
+                <li>
+                    @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li>
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                </li>
+            </ul>
+            
+            <!-- Shouldn't be needed! 
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")
-            </div>
+            </div> 
+            -->
+
         </div>
     </div>
     <div class="container body-content">

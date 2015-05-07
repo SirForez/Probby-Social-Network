@@ -62,3 +62,7 @@ textarea {
     font-family: Arial;
     text-align: center;
 }
+
+#messageLink{
+    color: white;
+}

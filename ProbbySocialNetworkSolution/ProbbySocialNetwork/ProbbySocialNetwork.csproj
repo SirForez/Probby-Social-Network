@@ -39,10 +39,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
+=======
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> 00e56e41f427d2cdf13ab0ca7b67c087ca60ea73
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -167,22 +176,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountRepository.cs" />
-    <Compile Include="Models\AccountService.cs" />
-    <Compile Include="Models\GroupRepository.cs" />
-    <Compile Include="Models\GroupService.cs" />
-    <Compile Include="Models\HobbyRepository.cs" />
-    <Compile Include="Models\HobbyService.cs" />
-    <Compile Include="Models\probbyContext.cs" />
-    <Compile Include="Models\StatusRepository.cs" />
-    <Compile Include="Models\StatusService.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserConnection.cs" />
+    <Compile Include="Models\Repositories\AccountRepository.cs" />
+    <Compile Include="Models\Services\AccountService.cs" />
+    <Compile Include="Models\Repositories\GroupRepository.cs" />
+    <Compile Include="Models\Services\GroupService.cs" />
+    <Compile Include="Models\Repositories\HobbyRepository.cs" />
+    <Compile Include="Models\Services\HobbyService.cs" />
+    <Compile Include="Models\ProbbyDbContext.cs" />
+    <Compile Include="Models\Repositories\StatusRepository.cs" />
+    <Compile Include="Models\Services\StatusService.cs" />
+    <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="Models\Entities\UserConnection.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\Hobby.cs" />
-    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Entities\Comment.cs" />
+    <Compile Include="Models\Entities\Group.cs" />
+    <Compile Include="Models\Entities\Hobby.cs" />
+    <Compile Include="Models\Entities\Status.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
