@@ -7,7 +7,7 @@ namespace ProbbySocialNetwork.Models
 {
     public class StatusRepository
     {
-        public List<Status> getStatusByUser(ApplicationUser a)
+        public List<Status> getStatusByUser(ApplicationUser a) 
         {
             //TODO: Implement
             return new List<Status>();
@@ -19,7 +19,7 @@ namespace ProbbySocialNetwork.Models
             return new List<Comment>();
         }
 
-        public List<Comment> getCommentsByStatus(ApplicationUser a)
+        public List<Comment> getCommentsByStatus(Status s)
         {
             //TODO: Implement
             return new List<Comment>();
@@ -61,16 +61,16 @@ namespace ProbbySocialNetwork.Models
             return false;
         }
 
+        public List<Status> tagStatusSearch(String tag)
+        {
+            //TODO: Implement
+            return new List<Status>();
+        }
+
         public bool editComment(Comment c, Comment edited)
         {
             //TODO: Implement
             return false;
-        }
-
-        public List<Status> searchByTag(String tag)
-        {
-            //TODO: Implement
-            return new List<Status>();
         }
     }
 }

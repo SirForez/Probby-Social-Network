@@ -19,9 +19,9 @@ namespace ProbbySocialNetwork.Models
             return repo.getCommentsByUser(a);
         }
 
-        public List<Comment> getCommentsByStatus(ApplicationUser a)
+        public List<Comment> getCommentsByStatus(Status s)
         {
-            return repo.getCommentsByStatus(a);
+            return repo.getCommentsByStatus(s);
         }
 
         public List<Status> getGroupStatusHistory(Group g)
@@ -54,14 +54,14 @@ namespace ProbbySocialNetwork.Models
             return repo.removeCommentFromStatus(s, toDel);
         }
 
+        public List<Status> tagStatusSearch(String tag)
+        {
+            return repo.tagStatusSearch(tag);
+        }
+
         public bool editComment(Comment c, Comment edited)
         {
             return repo.editComment(c, edited);
-        }
-
-        public List<Status> searchByTag(String tag)
-        {
-            return repo.searchByTag(tag);
         }
 
         private StatusRepository repo;

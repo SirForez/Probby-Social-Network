@@ -7,13 +7,11 @@ namespace ProbbySocialNetwork.Models
 {
 	public class Status
 	{
-		private List<Comment> comments;
-
-        public int ID { get; set; }
-        public DateTime Date { get; set; }
-        public string Post { get; set; }
-        public string MediaURL { get; set; }
-        public ICollection<Hobby> HobbyTags;
-        public ICollection<Comment> Comments;
+		public int ID { get; set; }
+		public DateTime Date { get; set; }
+		public string Post { get; set; }
+		public string MediaURL { get; set; }
+		private ICollection<Hobby> HobbyTags;
+		private ICollection<Comment> Comments;
 	}
 }
