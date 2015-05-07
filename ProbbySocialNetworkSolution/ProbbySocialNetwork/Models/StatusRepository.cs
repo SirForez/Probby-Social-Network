@@ -5,8 +5,10 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-    public class StatusRepository : Repository
+    public class StatusRepository
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+
         public List<Status> getStatusByUser(ApplicationUser a) 
         {
             var statuses = (from s in db.Statuses

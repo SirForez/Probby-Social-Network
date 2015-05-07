@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-    public class AccountRepository : Repository
+    public class AccountRepository
     {
-
+        ApplicationDbContext db = new ApplicationDbContext();
 
         public ApplicationUser getUserByName(String name)
         {

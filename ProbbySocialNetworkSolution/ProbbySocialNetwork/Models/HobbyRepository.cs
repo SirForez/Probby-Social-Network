@@ -5,8 +5,10 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-    public class HobbyRepository : Repository
+    public class HobbyRepository
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+
         //TODO: Cant implement yet to due not having access to ApplicationUser in db
         public List<Hobby> getHobbiesByUser(ApplicationUser a)
         {
