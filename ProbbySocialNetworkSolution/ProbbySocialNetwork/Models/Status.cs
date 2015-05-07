@@ -8,10 +8,11 @@ namespace ProbbySocialNetwork.Models
 	public class Status
 	{
 		public int ID { get; set; }
+        public string UserID { get; set; }
+        public int? GroupID { get; set; }
 		public DateTime Date { get; set; }
 		public string Post { get; set; }
 		public string MediaURL { get; set; }
-		private ICollection<Hobby> HobbyTags;
-		private ICollection<Comment> Comments;
+		public ICollection<Hobby> HobbyTags;
 	}
 }

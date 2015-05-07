@@ -7,69 +7,121 @@ namespace ProbbySocialNetwork.Models
 {
     public class StatusRepository
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+
         public List<Status> getStatusByUser(ApplicationUser a) 
         {
-            //TODO: Implement
-            return new List<Status>();
+            var statuses = (from s in db.Statuses
+                            where a.Id == s.UserID
+                            select s).ToList(); 
+            return statuses;
         }
 
         public List<Comment> getCommentsByUser(ApplicationUser a)
         {
-            //TODO: Implement
-            return new List<Comment>();
+            var comments = (from c in db.Comments
+                            where a.Id == c.UserID
+                            select c).ToList();
+            return comments;
         }
 
         public List<Comment> getCommentsByStatus(Status s)
         {
-            //TODO: Implement
-            return new List<Comment>();
+            var comments = (from c in db.Comments
+                            where c.StatusID == s.ID
+                            select c).ToList();
+            return comments;
         }
 
         public List<Status> getGroupStatusHistory(Group g)
         {
-            //TODO: Implement
-            return new List<Status>();
+            var statuses = (from s in db.Statuses
+                            where s.GroupID == g.ID
+                            select s).ToList();
+            return statuses;
+        }
+
+        public Status getStatusByID(int id)
+        {
+            var status = (from s in db.Statuses
+                          where s.ID == id
+                          select s).SingleOrDefault();
+            return status;
         }
 
         public bool addStatus(Status s)
         {
-            //TODO: Implement
+            db.Statuses.Add(s);
+            return db.SaveChanges() != 0;
+        }
+
+        public bool editStatus(Status edited)
+        {
+            Status s = getStatusByID(edited.ID);
+            if (s != null)
+            {
+                s.Date = edited.Date;
+                s.HobbyTags = edited.HobbyTags;
+                s.Post = edited.Post;
+                s.MediaURL = edited.MediaURL;
+                return db.SaveChanges() != 0;
+            }
             return false;
         }
 
-        public bool editStatus(Status s, Status edited)
+        public bool addComment(Comment toAdd)
         {
-            //TODO: Implement
-            return false;
-        }
-
-        public bool addCommentToStatus(Status s, Comment toAdd)
-        {
-            //TODO: Implement
-            return false;
+            db.Comments.Add(toAdd);
+            return db.SaveChanges() != 0;
         }
 
         public bool removeStatus(Status toDel)
         {
-            //TODO: Implement
-            return false;
+            db.Statuses.Remove(toDel);
+            return db.SaveChanges() != 0;
         }
 
-        public bool removeCommentFromStatus(Status s, Comment toDel)
+        public bool removeComment(Comment toDel)
         {
-            //TODO: Implement
-            return false;
+            db.Comments.Remove(toDel);
+            return db.SaveChanges() != 0;
+        }
+
+        //NOTE: Should this not be in the hobby repo? Think about moving it there.
+        public Hobby getHobbyFromTag(String tag)
+        {
+            var hobby = (from h in db.Hobbies
+                         where h.Name == tag
+                         select h).SingleOrDefault();
+            return hobby;
         }
 
         public List<Status> tagStatusSearch(String tag)
         {
-            //TODO: Implement
-            return new List<Status>();
+            var hobby = getHobbyFromTag(tag);
+            var statuses = (from s in db.Statuses
+                            where s.HobbyTags.Contains(hobby)
+                            select s).ToList();
+            return statuses;
         }
 
-        public bool editComment(Comment c, Comment edited)
+        public Comment getCommentByID(int id)
         {
-            //TODO: Implement
+            var comment = (from c in db.Comments
+                          where c.ID == id
+                          select c).SingleOrDefault();
+            return comment;
+        }
+
+        public bool editComment(Comment edited)
+        {
+            Comment c = getCommentByID(edited.ID);
+            if (c != null)
+            {
+                c.Body = edited.Body;
+                c.DateInserted = edited.DateInserted;
+                return db.SaveChanges() != 0;
+            }
             return false;
         }
     }

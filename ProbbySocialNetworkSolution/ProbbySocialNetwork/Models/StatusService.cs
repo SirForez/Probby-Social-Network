@@ -34,14 +34,14 @@ namespace ProbbySocialNetwork.Models
             return repo.addStatus(s);
         }
 
-        public bool editStatus(Status s, Status edited)
+        public bool editStatus(Status edited)
         {
-            return repo.editStatus(s, edited);
+            return repo.editStatus(edited);
         }
 
-        public bool addCommentToStatus(Status s, Comment toAdd)
+        public bool addComment(Comment toAdd)
         {
-            return repo.addCommentToStatus(s, toAdd);
+            return repo.addComment(toAdd);
         }
 
         public bool removeStatus(Status toDel)
@@ -49,9 +49,9 @@ namespace ProbbySocialNetwork.Models
             return repo.removeStatus(toDel);
         }
 
-        public bool removeCommentFromStatus(Status s, Comment toDel)
+        public bool removeComment(Comment toDel)
         {
-            return repo.removeCommentFromStatus(s, toDel);
+            return repo.removeComment(toDel);
         }
 
         public List<Status> tagStatusSearch(String tag)
@@ -59,9 +59,9 @@ namespace ProbbySocialNetwork.Models
             return repo.tagStatusSearch(tag);
         }
 
-        public bool editComment(Comment c, Comment edited)
+        public bool editComment(Comment edited)
         {
-            return repo.editComment(c, edited);
+            return repo.editComment(edited);
         }
 
         private StatusRepository repo;

@@ -11,8 +11,7 @@ namespace ProbbySocialNetwork.Models
 		public string name { get; set; }
 		public string description { get; set; }
 		public virtual Hobby hobby { get; set; }
-		private ICollection<User> admins;
-		private ICollection<User> users;
-		private ICollection<Status> statuses;
+		public ICollection<User> admins;
+		public ICollection<User> users;
 	}
 }

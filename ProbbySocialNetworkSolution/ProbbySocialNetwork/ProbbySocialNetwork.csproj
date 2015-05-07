@@ -181,7 +181,6 @@
     <Compile Include="Models\GroupService.cs" />
     <Compile Include="Models\HobbyRepository.cs" />
     <Compile Include="Models\HobbyService.cs" />
-    <Compile Include="Models\ProbbyContext.cs" />
     <Compile Include="Models\StatusRepository.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />

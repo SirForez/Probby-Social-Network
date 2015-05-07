@@ -8,6 +8,8 @@ namespace ProbbySocialNetwork.Models
     public class AccountRepository
     {
         //TODO: Get DB context, and add tables to database, etc...
+        ApplicationDbContext UserContext = new ApplicationDbContext();
+
 
         public ApplicationUser getUserByName(String name)
         {
@@ -56,6 +58,5 @@ namespace ProbbySocialNetwork.Models
             //TODO: Implement
             return new List<ApplicationUser>();
         }
-
     }
 }
