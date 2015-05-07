@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,6 +23,9 @@
                     <img class="logo" src="http://i.imgur.com/zafRyOe.jpg?1" />
                 </a>
             </div>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                @Html.AntiForgeryToken()
             <ul class="nav navbar-nav navbar">
                 <li>
                         <input type="search" placeholder="Search" />
@@ -37,31 +42,19 @@
                 <li>
                     @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </li>
+                
                 <li>
-                    @using Microsoft.AspNet.Identity
-                    
-                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                    {
-                        @Html.AntiForgeryToken()
-                    
                         <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                    }
                 </li>
             </ul>
-            
-            <!-- Shouldn't be needed! 
-            <div class="navbar-collapse collapse">
-                @Html.Partial("_LoginPartial")
-            </div> 
-            -->
-
+            }
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p class="footer">&copy; @DateTime.Now.Year - Probby Social Network | Want to know more about Probby? You can find more info @Html.ActionLink("here", "About", "Home")!</p>
+            <p class="footer">&copy; @DateTime.Now.Year - Probby Social Network</p>
         </footer>
     </div>
 
