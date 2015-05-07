@@ -58,6 +58,10 @@ textarea {
     float: left;
 }
 
+.col-md-8{
+    width: 100%;
+}
+
 .footer{
     font-family: Arial;
     text-align: center;
