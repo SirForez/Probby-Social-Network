@@ -8,6 +8,8 @@ namespace ProbbySocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
+        // This is the feed
+        [Authorize]
         public ActionResult Index()
         {
             return View();
