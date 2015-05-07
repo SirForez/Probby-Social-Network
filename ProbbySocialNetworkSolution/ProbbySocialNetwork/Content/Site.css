@@ -29,8 +29,14 @@ textarea {
 }
 
 .logo{
-    width: 60%;
-    height: 60%;
+    width: 30%;
+    height: 30%;
+    padding: 0;
+}
+
+.searchBar {
+    float: right;
+    padding: 0;
 }
 
 .headers{

@@ -22,14 +22,13 @@
                 <a href='@Url.Action("Index", "Home")'>
                     <img class="logo" src="http://i.imgur.com/zafRyOe.jpg?1" />
                 </a>
+                <input type="search" class="searchBar" placeholder="Search" />
             </div>
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
                 @Html.AntiForgeryToken()
             <ul class="nav navbar-nav navbar">
-                <li>
-                        <input type="search" placeholder="Search" />
-                </li>
+
                 <li>
                         @Html.ActionLink("Messages", "Messages", "Home", routeValues: null, htmlAttributes: new { title = "Messages" })
                 </li>
