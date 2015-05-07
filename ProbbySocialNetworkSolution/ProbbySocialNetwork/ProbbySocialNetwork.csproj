@@ -179,7 +179,6 @@
     <Compile Include="Models\StatusRepository.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserConnection.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Group.cs" />
