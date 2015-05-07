@@ -7,36 +7,61 @@ namespace ProbbySocialNetwork.Models
 {
     public class GroupRepository
     {
-        public bool addGroup(Group g)
+        ApplicationDbContext db = new ApplicationDbContext();
+
+        public Group getGroupByID(int id)
         {
-            //TODO: Implement
-            return false;
+            var group = (from g in db.Groups
+                         where g.ID == id
+                         select g).SingleOrDefault();
+            return group;   
         }
 
-        public bool editGroup(Group g, Group edited)
+        public bool addGroup(Group g)
         {
-            //TODO: Implement
+            db.Groups.Add(g);
+            return db.SaveChanges() != 0;
+        }
+
+        public bool editGroup(Group edited)
+        {
+            var group = getGroupByID(edited.ID);
+            if (group != null)
+            {
+                group.description = edited.description;
+                group.hobby = edited.hobby;
+                group.name = edited.name;
+                group.users = edited.users;
+                group.admins = edited.admins;
+                return db.SaveChanges() != 0;
+            }
             return false;
         }
 
         public bool removeGroup(Group g)
         {
-            //TODO: Implement
-            return false;
+            db.Groups.Remove(g);
+            return db.SaveChanges() != 0;
         }
 
-        public List<Group> prefixGroupSearch(String groupPrefix)
+        public List<Group> groupSearch(String searchString)
         {
-            //TODO: Implement
-            return new List<Group>();
+            var groups = (from g in db.Groups
+                          where g.name.Contains(searchString)
+                          select g).ToList();
+            return groups;
         }
 
         public List<Group> tagGroupSearch(String tag)
         {
-            //TODO: Implement
-            return new List<Group>();
+            var groups = (from g in db.Groups
+                          where g.hobby.Name == tag
+                          select g).ToList();
+            return groups;
         }
 
+        //Cant implement these next two until we implement the database table 
+        //properly with ApplicationUser instead of our own User entity class
         public List<Group> getGroupsByUser(ApplicationUser a)
         {
             //TODO: Implement

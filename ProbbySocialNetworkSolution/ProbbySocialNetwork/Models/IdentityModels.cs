@@ -20,7 +20,6 @@ namespace ProbbySocialNetwork.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-		
 		public DbSet<Comment> Comments {get; set;}
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Hobby> Hobbies { get; set; }
