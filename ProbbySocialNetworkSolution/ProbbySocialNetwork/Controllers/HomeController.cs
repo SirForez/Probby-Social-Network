@@ -22,12 +22,26 @@ namespace ProbbySocialNetwork.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+		public ActionResult Messages()
+		{
+			ViewBag.Message = "Here you should see your messages!";
 
-            return View();
-        }
+			return View();
+		}
+
+		public ActionResult Profile()
+		{
+			ViewBag.Message = "Here you should see your profile!";
+
+			return View();
+		}
+
+		public ActionResult Notifications()
+		{
+			ViewBag.Message = "Here you should see your notifications!";
+
+			return View();
+		}
 
         public ActionResult AddFollower()
         {
