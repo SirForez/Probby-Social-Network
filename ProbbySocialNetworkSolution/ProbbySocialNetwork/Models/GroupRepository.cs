@@ -5,10 +5,8 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-    public class GroupRepository
+    public class GroupRepository : Repository
     {
-        ApplicationDbContext db = new ApplicationDbContext();
-
         public Group getGroupByID(int id)
         {
             var group = (from g in db.Groups

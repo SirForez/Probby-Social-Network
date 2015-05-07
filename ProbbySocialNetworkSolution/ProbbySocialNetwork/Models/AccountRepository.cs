@@ -5,10 +5,8 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-    public class AccountRepository
+    public class AccountRepository : Repository
     {
-        //TODO: Get DB context, and add tables to database, etc...
-        ApplicationDbContext UserContext = new ApplicationDbContext();
 
 
         public ApplicationUser getUserByName(String name)
