@@ -14,9 +14,9 @@ namespace ProbbySocialNetwork.Models
             return repo.addGroup(g);
         }
 
-        public bool editGroup(Group g, Group edited)
+        public bool editGroup(Group edited)
         {
-            return repo.editGroup(g, edited);
+            return repo.editGroup(edited);
         }
 
         public bool removeGroup(Group g)
@@ -24,9 +24,9 @@ namespace ProbbySocialNetwork.Models
             return repo.removeGroup(g);
         }
 
-        public List<Group> prefixGroupSearch(String groupPrefix)
+        public List<Group> groupSearch(String searchString)
         {
-            return repo.prefixGroupSearch(groupPrefix);
+            return repo.groupSearch(searchString);
         }
 
         public List<Group> tagGroupSearch(String tag)
