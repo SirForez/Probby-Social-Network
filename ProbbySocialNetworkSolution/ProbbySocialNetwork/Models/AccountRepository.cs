@@ -7,6 +7,8 @@ namespace ProbbySocialNetwork.Models
 {
     public class AccountRepository
     {
+        //TODO: Get DB context, and add tables to database, etc...
+
         public ApplicationUser getUserByName(String name)
         {
             //TODO: Implement
