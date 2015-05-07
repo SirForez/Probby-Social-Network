@@ -5,10 +5,10 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-	public class Comment
+	public class UserConnection
 	{
 		public int ID { get; set; }
-		public System.DateTime DateInserted { get; set; }
-		public string Body { get; set; }
+		public virtual User TheUser { get; set; }
+		public virtual User OtherUser { get; set; }
 	}
 }

@@ -11,22 +11,5 @@ namespace ProbbySocialNetwork.Models
         private List<Hobby> subHobbies;
         public string name { get; set; }
         public string description { get; set; }
-
-        public void addGroup(Group g)
-        {
-
-        }
-        public void rempoveGroup(Group g)
-        {
-
-        }
-        public void addSubHobby(Hobby h)
-        {
-
-        }
-        public void removeSubHobby(Hobby h)
-        {
-
-        }
 	}
 }
