@@ -11,7 +11,7 @@ namespace ProbbySocialNetwork.Models
         public DateTime Date { get; set; }
         public string Post { get; set; }
         public string MediaURL { get; set; }
-        public virtual ICollection<Hobby> HobbyTags;
-        public virtual ICollection<Comment> Comments;
+        public ICollection<Hobby> HobbyTags;
+        public ICollection<Comment> Comments;
 	}
 }
