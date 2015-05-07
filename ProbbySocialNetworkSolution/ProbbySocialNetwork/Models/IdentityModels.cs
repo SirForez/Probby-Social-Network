@@ -20,13 +20,14 @@ namespace ProbbySocialNetwork.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+		/*
 		public DbSet<Comment> Comments {get; set;}
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Hobby> Hobbies { get; set; }
 		public DbSet<Status> Statuses { get; set; }
 		public DbSet<User> Users { get; set; }
 		public DbSet<UserConnection> UserConnections { get; set; }
-
+		*/
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
