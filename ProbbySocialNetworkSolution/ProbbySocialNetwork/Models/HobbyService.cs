@@ -14,10 +14,11 @@ namespace ProbbySocialNetwork.Models
             return repo.getHobbiesByUser(a);
         }
 
-        public List<Hobby> getSubHobbiesByHobby(Hobby h)
+        //Totes bailed on this for the time being, see repo.getSubHobbies note for better explanation and fix for this
+        /*public List<Hobby> getSubHobbiesByHobby(Hobby h)
         {
             return repo.getSubHobbiesByHobby(h);
-        }
+        }*/
 
         public List<ApplicationUser> getUsersByHobby(Hobby h)
         {
@@ -39,9 +40,9 @@ namespace ProbbySocialNetwork.Models
             return repo.removeHobby(h);
         }
 
-        public List<Hobby> prefixHobbySearch(String hobbyPrefix)
+        public List<Hobby> hobbySearch(String searchString)
         {
-            return repo.prefixHobbySearch(hobbyPrefix);
+            return repo.hobbySearch(searchString);
         }
 
         public List<Hobby> tagHobbySearch(String tag)
