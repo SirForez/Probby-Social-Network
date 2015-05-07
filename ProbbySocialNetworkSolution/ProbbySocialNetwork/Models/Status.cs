@@ -9,13 +9,11 @@ namespace ProbbySocialNetwork.Models
 	{
 		private List<Comment> comments;
 
-        public void addComment()
-        {
-
-        }
-        public void removeComment()
-        {
-
-        }
+		public int ID { get; set; }
+		public DateTime Date { get; set; }
+		public string Post { get; set; }
+		public string MediaURL { get; set; }
+		public ICollection<Hobby> HobbyTags;
+		public ICollection<Comment> Comments;
 	}
 }
