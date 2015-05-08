@@ -19,8 +19,6 @@
     </div>
     <div class="theContent">
         <!--breyta i html helper-->
-        <input type="text" />
-        <p>foreach user do show status and stuff</p>
 
         <section>
             <h4>Create Status</h4>
@@ -29,10 +27,31 @@
                 <input type="hidden" name="userid" value="" />
                 <div class="form-horizontal">
                     <label class="sr-only" for="statustext">Status</label>
-                    <textarea class="form-control" rows="5" id="statustext" name="statustext" style="max-width:100%"></textarea>
+                    <textarea class="form-control" rows="5" id="statustext" name="statustext" ></textarea>
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
                 @Html.ValidationSummary(false)
+            }
+        </section>
+        <section id="commentList">
+            @foreach(Status s in Model.newestStatuses)
+            {
+                <h3>
+                    @Model.currentUser
+                </h3>
+                <p>
+                    @s.Date | @s.Post
+                </p>
+                foreach(Comment c in Model.commentsForStatuses)
+                {
+                    if (c.StatusID == s.ID)
+                    {
+                        <p>
+                            @c.Body
+                            @c.DateInserted
+                        </p>
+                    }
+                }
             }
         </section>
 
