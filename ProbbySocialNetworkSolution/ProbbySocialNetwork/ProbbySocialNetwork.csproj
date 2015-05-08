@@ -181,6 +181,7 @@
     <Compile Include="Connections\HobbyGroupConnection.cs" />
     <Compile Include="Models\ServiceSingleton.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\ViewModels\FeedViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\GroupService.cs" />

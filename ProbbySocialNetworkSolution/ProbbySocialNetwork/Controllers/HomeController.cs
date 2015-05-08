@@ -19,6 +19,7 @@ namespace ProbbySocialNetwork.Controllers
         [Authorize]
         public ActionResult Index()
         {
+			ViewBag.Message = "Some information about home page";
             return View();
         }
 
