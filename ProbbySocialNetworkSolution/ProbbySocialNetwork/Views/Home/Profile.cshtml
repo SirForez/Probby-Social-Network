@@ -1,23 +1,20 @@
-﻿@model ProbbySocialNetwork.Models.ApplicationUser
+﻿@model ProbbySocialNetwork.Models.ViewModels.ProfileViewModel
 
 @{
     ViewBag.Title = "Profile";
 }
 
-
 <h2>
-    @Model.UserName
+    @Model.currentUser.UserName's Profile
 </h2>
 
-<div class="container">
-    <div class="lhsNav">
-        
-    <img src="@Model.ProfilePic" />
-
-    </div>
-    <div class="feedContent">
-        
-
-
-    </div>
-</div>
+@using ProbbySocialNetwork.Models
+@foreach(Status s in Model.currentUserStatusHistory) 
+{
+    <h3>
+        @s.Date
+    </h3>
+    <p>
+        @s.Post
+    </p>
+}

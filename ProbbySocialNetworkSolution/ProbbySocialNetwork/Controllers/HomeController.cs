@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProbbySocialNetwork.Models;
+using ProbbySocialNetwork.Models.ViewModels;
 
 namespace ProbbySocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
         //FUTURE NOTE: To get current foloower, var UserID = User.Identity.getUserID()
-        public ServiceSingleton ss = ServiceSingleton.GetInstance;
-        public AccountService ass = ServiceSingleton.GetAccountService;
+        public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+        public AccountService accountService = ServiceSingleton.GetAccountService;
+        public StatusService statusService = ServiceSingleton.GetStatusService;
 
         // This is the feed
         [Authorize]
@@ -38,8 +40,23 @@ namespace ProbbySocialNetwork.Controllers
 		public ActionResult Profile()
 		{
 			ViewBag.Message = "Here you should see your profile!";
-            ApplicationUser a = ass.getUserByName(User.Identity.Name);
-            return View(a);
+
+            ProfileViewModel model = new ProfileViewModel();
+            model.currentUser = accountService.getUserByName(User.Identity.Name);
+            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
+
+            //Just testing
+            Status s1 = new Status();
+            s1.Post = "Hello, World!";
+            s1.Date = DateTime.Now;
+            Status s2 = new Status();
+            s2.Post = "Goodbye, cruel world!";
+            s2.Date = DateTime.Now;
+
+            model.currentUserStatusHistory.Add(s1);
+            model.currentUserStatusHistory.Add(s2);
+
+            return View(model);
 		}
 
 		public ActionResult Notifications()
