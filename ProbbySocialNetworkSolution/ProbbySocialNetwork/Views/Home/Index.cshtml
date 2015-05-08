@@ -18,8 +18,6 @@
     </div>
     <div class="feedContent">
         <!--breyta i html helper-->
-        <input type="text" />
-        <p>foreach user do show status and stuff</p>
 
         <section>
             <h4>Create Status</h4>
@@ -28,7 +26,7 @@
                 <input type="hidden" name="userid" value="" />
                 <div class="form-horizontal">
                     <label class="sr-only" for="statustext">Status</label>
-                    <textarea class="form-control" rows="5" id="statustext" name="statustext" style="max-width:100%"></textarea>
+                    <textarea class="form-control" rows="5" id="statustext" name="statustext" ></textarea>
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
                 @Html.ValidationSummary(false)

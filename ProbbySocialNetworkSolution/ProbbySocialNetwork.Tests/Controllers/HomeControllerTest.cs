@@ -48,12 +48,8 @@ namespace ProbbySocialNetwork.Tests.Controllers
             //ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
-<<<<<<< HEAD
-           // Assert.IsNotNull(result);
-        }
-=======
+
             Assert.IsNotNull(result);
         }*/
->>>>>>> 96b8fa27c4e495574f147c348f57b36c26c1f71a
     }
 }
