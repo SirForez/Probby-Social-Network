@@ -46,35 +46,7 @@ namespace ProbbySocialNetwork.Controllers
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 
-            //Just testing
-            Status s1 = new Status();
-            s1.ID = 1;
-            s1.Post = "Hello, World!";
-            s1.Date = DateTime.Now;
-            Status s2 = new Status();
-            s2.ID = 2;
-            s2.Post = "Goodbye, cruel world!";
-            s2.Date = DateTime.Now;
-
-            model.currentUserStatusHistory.Add(s1);
-            model.currentUserStatusHistory.Add(s2);
-
-            Comment c1 = new Comment();
-            c1.ID = 1;
-            c1.Body = "Go fuck yourself!";
-            c1.DateInserted = DateTime.Now;
-            c1.StatusID = s1.ID;
-            c1.UserID = model.currentUser.Id;
-            statusService.addComment(c1);
-
-            Comment c2 = new Comment();
-            c2.ID = 2;
-            c2.Body = "Do a 360 noscope dumbass";
-            c2.DateInserted = DateTime.Now;
-            c2.StatusID = s2.ID;
-            c2.UserID = model.currentUser.Id;
-            statusService.addComment(c2);
-
+            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             foreach(Status s in model.currentUserStatusHistory) {
                 List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
                 foreach(Comment c in currentCommentList)
