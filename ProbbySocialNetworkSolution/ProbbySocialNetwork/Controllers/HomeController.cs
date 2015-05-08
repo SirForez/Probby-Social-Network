@@ -19,7 +19,9 @@ namespace ProbbySocialNetwork.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            FeedViewModel model = new FeedViewModel();
+            model.currentUser = accountService.getUserByName(User.Identity.Name);
+            return View(model);
         }
 
         public ActionResult About()
