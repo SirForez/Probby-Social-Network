@@ -45,6 +45,12 @@ namespace ProbbySocialNetwork.Controllers
 			return View();
 		}
 
+		public ActionResult Search()
+		{
+			ViewBag.Message = "Here you should see your search results";
+			return View();
+		}
+
         public ActionResult AddFollower()
         {
             //TODO: Implement
