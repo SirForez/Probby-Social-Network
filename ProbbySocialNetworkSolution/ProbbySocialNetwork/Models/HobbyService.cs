@@ -7,49 +7,68 @@ namespace ProbbySocialNetwork.Models
 {
     public class HobbyService
     {
-        //TODO: Implement buisness logic to all functions if necessary.
+        ApplicationDbContext db = null;
 
-        public List<Hobby> getHobbiesByUser(ApplicationUser a)
+        public HobbyService(ApplicationDbContext _db)
         {
-            return repo.getHobbiesByUser(a);
+            db = _db;
         }
 
-        //Totes bailed on this for the time being, see repo.getSubHobbies note for better explanation and fix for this
+        //TODO: Cant implement yet to due not having access to ApplicationUser in db
+        public List<Hobby> getHobbiesByUser(ApplicationUser a)
+        {
+            //TODO: Implement
+            return new List<Hobby>();
+        }
+
+        //NOTE: Totally BAILED on subhobbies for the time being, to implement would be to add a ParentHobbyID to the Hobby identity class which is nullable
         /*public List<Hobby> getSubHobbiesByHobby(Hobby h)
         {
-            return repo.getSubHobbiesByHobby(h);
+            //TODO: Implement
+            return new List<Hobby>();
         }*/
 
+        //TODO: Cant implement yet to due not having access to ApplicationUser in db
         public List<ApplicationUser> getUsersByHobby(Hobby h)
         {
-            return repo.getUsersByHobby(h);
+            //TODO: Implement
+            return new List<ApplicationUser>();
         }
 
         public List<Group> getGroupsByHobby(Hobby h)
         {
-            return repo.getGroupsByHobby(h);
+            var groups = (from g in db.Groups
+                          where g.hobby == h
+                          select g).ToList();
+            return groups;
         }
 
         public bool addHobby(Hobby h)
         {
-            return repo.addHobby(h);
+            db.Hobbies.Add(h);
+            return db.SaveChanges() != 1;
         }
 
         public bool removeHobby(Hobby h)
         {
-            return repo.removeHobby(h);
+            db.Hobbies.Remove(h);
+            return db.SaveChanges() != 1;
         }
 
         public List<Hobby> hobbySearch(String searchString)
         {
-            return repo.hobbySearch(searchString);
+            var hobbies = (from h in db.Hobbies
+                           where h.Name.Contains(searchString)
+                           select h).ToList();
+            return hobbies;
         }
 
         public List<Hobby> tagHobbySearch(String tag)
         {
-            return repo.tagHobbySearch(tag);
+            var hobbies = (from h in db.Hobbies
+                           where h.Name == tag
+                           select h).ToList();
+            return hobbies;
         }
-
-        private HobbyRepository repo;
     }
 }

@@ -8,7 +8,7 @@ namespace ProbbySocialNetwork.Models
 	public class UserConnection
 	{
 		public int ID { get; set; }
-		public User TheUser { get; set; }
-		public User OtherUser { get; set; }
+		public int FollowingID { get; set; }
+		public int FollowerID { get; set; }
 	}
 }

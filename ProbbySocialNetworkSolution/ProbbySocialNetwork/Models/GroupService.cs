@@ -7,43 +7,76 @@ namespace ProbbySocialNetwork.Models
 {
     public class GroupService
     {
-        //TODO: Implement buisness logic to all functions if necessary.
+        ApplicationDbContext db = null;
+
+        public GroupService(ApplicationDbContext _db)
+        {
+            db = _db;
+        }
+
+        public Group getGroupByID(int id)
+        {
+            var group = (from g in db.Groups
+                         where g.ID == id
+                         select g).SingleOrDefault();
+            return group;
+        }
 
         public bool addGroup(Group g)
         {
-            return repo.addGroup(g);
+            db.Groups.Add(g);
+            return db.SaveChanges() != 0;
         }
 
         public bool editGroup(Group edited)
         {
-            return repo.editGroup(edited);
+            var group = getGroupByID(edited.ID);
+            if (group != null)
+            {
+                group.description = edited.description;
+                group.hobby = edited.hobby;
+                group.name = edited.name;
+                group.users = edited.users;
+                group.admins = edited.admins;
+                return db.SaveChanges() != 0;
+            }
+            return false;
         }
 
         public bool removeGroup(Group g)
         {
-            return repo.removeGroup(g);
+            db.Groups.Remove(g);
+            return db.SaveChanges() != 0;
         }
 
         public List<Group> groupSearch(String searchString)
         {
-            return repo.groupSearch(searchString);
+            var groups = (from g in db.Groups
+                          where g.name.Contains(searchString)
+                          select g).ToList();
+            return groups;
         }
 
         public List<Group> tagGroupSearch(String tag)
         {
-            return repo.tagGroupSearch(tag);
+            var groups = (from g in db.Groups
+                          where g.hobby.Name == tag
+                          select g).ToList();
+            return groups;
         }
 
+        //Cant implement these next two until we implement the database table 
+        //properly with ApplicationUser instead of our own User entity class
         public List<Group> getGroupsByUser(ApplicationUser a)
         {
-            return repo.getGroupsByUser(a);
+            //TODO: Implement
+            return new List<Group>();
         }
 
         public List<ApplicationUser> getUsersByGroup(Group g)
         {
-            return repo.getUsersByGroup(g);
+            //TODO: Implement
+            return new List<ApplicationUser>();
         }
-
-        private GroupRepository repo;
     }
 }

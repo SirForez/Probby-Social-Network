@@ -7,48 +7,59 @@ namespace ProbbySocialNetwork.Models
 {
     public class AccountService
     {
-        //TODO: Implement buisness logic to all functions if necessary.
+        ApplicationDbContext db = null;
+
+        public AccountService(ApplicationDbContext _db)
+        {
+            db = _db;
+        }
 
         public ApplicationUser getUserByName(String name)
         {
-            return repo.getUserByName(name);
+            //TODO: Implement
+            return new ApplicationUser();
         }
 
         public List<ApplicationUser> getFollowersByUser(ApplicationUser a)
         {
-            return repo.getFollowersByUser(a);
+            //TODO: Implement
+            return new List<ApplicationUser>();
         }
 
         public bool addFollowerToUser(ApplicationUser a, ApplicationUser toAdd)
         {
-            return repo.addFollowerToUser(a, toAdd);
+            //TODO: Implement
+            return false;
         }
 
         public bool removeFollowerFromUser(ApplicationUser a, ApplicationUser toDel)
         {
-            return repo.removeFollowerFromUser(a, toDel);
+            //TODO: Implement
+            return false;
         }
 
         public List<ApplicationUser> getFollowingByUser(ApplicationUser a)
         {
-            return repo.getFollowingByUser(a);
+            //TODO: Implement
+            return new List<ApplicationUser>();
         }
 
         public bool addFollowingToUser(ApplicationUser a, ApplicationUser toAdd)
         {
-            return repo.addFollowingToUser(a, toAdd);
+            //TODO: Implement
+            return false;
         }
 
         public bool removeFollowingFromUser(ApplicationUser a, ApplicationUser toDel)
         {
-            return repo.removeFollowingFromUser(a, toDel);
+            //TODO: Implement
+            return false;
         }
 
         public List<ApplicationUser> prefixAccountSearch(String namePrefix)
         {
-            return repo.prefixAccountSearch(namePrefix);
+            //TODO: Implement
+            return new List<ApplicationUser>();
         }
-
-        private AccountRepository repo;
     }
 }
