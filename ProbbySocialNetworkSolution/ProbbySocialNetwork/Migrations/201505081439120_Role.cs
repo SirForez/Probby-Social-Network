@@ -112,8 +112,8 @@ namespace ProbbySocialNetwork.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        FollowerID = c.Int(nullable: false),
-                        FollowingID = c.Int(nullable: false),
+                        FollowerID = c.String(),
+                        FollowingID = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
