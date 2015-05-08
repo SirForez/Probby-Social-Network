@@ -35,6 +35,12 @@ namespace ProbbySocialNetwork.Models
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Hobby> Hobbies { get; set; }
 		public DbSet<Status> Statuses { get; set; }
+        public DbSet<AdminGroupConnection> AdminGroupConnections { get; set; }
+        public DbSet<HobbyGroupConnection> HobbyGroupConnections { get; set; }
+        public DbSet<StatusHobbyConnection> StatusHobbyConnections { get; set; }
+        public DbSet<UserFollowConnection> UserFollowConnections { get; set; }
+        public DbSet<UserGroupConnection> UserGroupConnections { get; set; }
+        public DbSet<UserHobbyConnection> UserHobbyConnections { get; set; }
 		//public DbSet<ApplicationUser> Users { get; set; }
 		//public DbSet<UserConnection> UserConnections { get; set; }
 		

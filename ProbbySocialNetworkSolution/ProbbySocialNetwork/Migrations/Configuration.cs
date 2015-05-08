@@ -10,7 +10,6 @@ namespace ProbbySocialNetwork.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "ProbbySocialNetwork.Models.ApplicationDbContext";
         }
 
         protected override void Seed(ProbbySocialNetwork.Models.ApplicationDbContext context)
