@@ -62,6 +62,42 @@ namespace ProbbySocialNetwork.Models
             return groups;
         }
 
+        public bool addUserToGroup(Group g, ApplicationUser toAdd)
+        {
+            UserGroupConnection gConnection = new UserGroupConnection();
+            gConnection.GroupID = g.ID;
+            gConnection.UserID = toAdd.Id;
+            db.UserGroupConnections.Add(gConnection);
+            return db.SaveChanges() != 1;
+        }
+
+        public bool removeUserFromGroup(Group g, ApplicationUser toDel)
+        {
+            UserGroupConnection gConnection = new UserGroupConnection();
+            gConnection.GroupID = g.ID;
+            gConnection.UserID = toDel.Id;
+            db.UserGroupConnections.Remove(gConnection);
+            return db.SaveChanges() != 1;
+        }
+
+        public bool addAdminToGroup(Group g, ApplicationUser toAdd)
+        {
+            AdminGroupConnection gConnection = new AdminGroupConnection();
+            gConnection.GroupID = g.ID;
+            gConnection.UserID = toAdd.Id;
+            db.AdminGroupConnections.Add(gConnection);
+            return db.SaveChanges() != 1;
+        }
+
+        public bool removeAdminFromGroup(Group g, ApplicationUser toDel)
+        {
+            AdminGroupConnection gConnection = new AdminGroupConnection();
+            gConnection.GroupID = g.ID;
+            gConnection.UserID = toDel.Id;
+            db.AdminGroupConnections.Remove(gConnection);
+            return db.SaveChanges() != 1;
+        }
+
         public List<Group> tagGroupSearch(String tag)
         {
             var groups = (from g in db.Groups

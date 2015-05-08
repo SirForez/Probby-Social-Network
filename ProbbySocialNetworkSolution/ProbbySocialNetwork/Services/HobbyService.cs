@@ -14,25 +14,22 @@ namespace ProbbySocialNetwork.Models
             db = _db;
         }
 
-        //TODO: Cant implement yet to due not having access to ApplicationUser in db
         public List<Hobby> getHobbiesByUser(ApplicationUser a)
         {
-            //TODO: Implement
-            return new List<Hobby>();
+            var hobbies = (from c in db.UserHobbyConnections
+                           where c.UserID == a.Id
+                           join h in db.Hobbies on c.HobbyID equals h.ID
+                           select h).ToList();
+            return hobbies;
         }
 
-        //NOTE: Totally BAILED on subhobbies for the time being, to implement would be to add a ParentHobbyID to the Hobby identity class which is nullable
-        /*public List<Hobby> getSubHobbiesByHobby(Hobby h)
-        {
-            //TODO: Implement
-            return new List<Hobby>();
-        }*/
-
-        //TODO: Cant implement yet to due not having access to ApplicationUser in db
         public List<ApplicationUser> getUsersByHobby(Hobby h)
         {
-            //TODO: Implement
-            return new List<ApplicationUser>();
+            var users = (from c in db.UserHobbyConnections
+                         where c.HobbyID == h.ID
+                         join u in db.Users on c.UserID equals u.Id
+                         select u).ToList();
+            return users;
         }
 
         public List<Group> getGroupsByHobby(Hobby h)
@@ -52,6 +49,24 @@ namespace ProbbySocialNetwork.Models
         public bool removeHobby(Hobby h)
         {
             db.Hobbies.Remove(h);
+            return db.SaveChanges() != 1;
+        }
+
+        public bool addHobbyToUser(ApplicationUser a, Hobby toAdd)
+        {
+            UserHobbyConnection hConnection = new UserHobbyConnection();
+            hConnection.UserID = a.Id;
+            hConnection.HobbyID = toAdd.ID;
+            db.UserHobbyConnections.Add(hConnection);
+            return db.SaveChanges() != 1;
+        }
+
+        public bool removeHobbyFromuser(ApplicationUser a, Hobby toDel)
+        {
+            UserHobbyConnection hConnection = new UserHobbyConnection();
+            hConnection.UserID = a.Id;
+            hConnection.HobbyID = toDel.ID;
+            db.UserHobbyConnections.Remove(hConnection);
             return db.SaveChanges() != 1;
         }
 
