@@ -38,6 +38,33 @@ namespace ProbbySocialNetwork.Models
             return comments;
         }
 
+        public List<Hobby> getHobbiesByStatus(Status s)
+        {
+            var hobbies = (from c in db.StatusHobbyConnections
+                           where c.StatusID == s.ID
+                           join h in db.Hobbies on c.HobbyID equals h.ID
+                           select h).ToList();
+            return hobbies;
+        }
+
+        public bool addHobbyToStatus(Status s, Hobby toAdd)
+        {
+            StatusHobbyConnection sConnection = new StatusHobbyConnection();
+            sConnection.StatusID = s.ID;
+            sConnection.HobbyID = toAdd.ID;
+            db.StatusHobbyConnections.Add(sConnection);
+            return db.SaveChanges() != 1;
+        }
+
+        public bool removeHobbyFromStatus(Status s, Hobby toDel)
+        {
+            StatusHobbyConnection sConnection = new StatusHobbyConnection();
+            sConnection.StatusID = s.ID;
+            sConnection.HobbyID = toDel.ID;
+            db.StatusHobbyConnections.Remove(sConnection);
+            return db.SaveChanges() != 1;
+        }
+
         public List<Status> getGroupStatusHistory(Group g)
         {
             var statuses = (from s in db.Statuses
@@ -65,8 +92,9 @@ namespace ProbbySocialNetwork.Models
             Status s = getStatusByID(edited.ID);
             if (s != null)
             {
+                //NOTE: Do hobbies on statuses need ever to be edited?
+                //If so: TODO: implement hobby status editing
                 s.Date = edited.Date;
-                //s.HobbyTags = edited.HobbyTags;
                 s.Post = edited.Post;
                 s.MediaURL = edited.MediaURL;
                 return db.SaveChanges() != 0;
@@ -104,10 +132,11 @@ namespace ProbbySocialNetwork.Models
         public List<Status> tagStatusSearch(String tag)
         {
             var hobby = getHobbyFromTag(tag);
-           /* var statuses = (from s in db.Statuses
-                            where s.HobbyTags.Contains(hobby)
-                            select s).ToList();*/
-            return new List<Status>();
+            var statuses = (from c in db.StatusHobbyConnections
+                            where c.HobbyID == hobby.ID
+                            join s in db.Statuses on c.StatusID equals s.ID
+                            select s).ToList();
+            return statuses;
         }
 
         public Comment getCommentByID(int id)
