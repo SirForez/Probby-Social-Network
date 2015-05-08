@@ -38,6 +38,7 @@ namespace ProbbySocialNetwork.Controllers
 			return View();
 		}
 
+        [Authorize]
         [HttpGet]
 		public ActionResult Profile()
 		{
