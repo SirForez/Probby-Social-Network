@@ -8,6 +8,8 @@ namespace ProbbySocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
+        //FUTURE NOTE: To get current foloower, var UserID = User.Identity.getUserID()
+
         // This is the feed
         [Authorize]
         public ActionResult Index()
