@@ -19,8 +19,9 @@ namespace ProbbySocialNetwork.Controllers
         [Authorize]
         public ActionResult Index()
         {
-			ViewBag.Message = "Some information about home page";
-            return View();
+            FeedViewModel model = new FeedViewModel();
+            model.currentUser = accountService.getUserByName(User.Identity.Name);
+            return View(model);
         }
 
         public ActionResult About()
