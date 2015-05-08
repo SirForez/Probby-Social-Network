@@ -36,8 +36,8 @@ namespace ProbbySocialNetwork.Models
                 group.description = edited.description;
                 group.hobby = edited.hobby;
                 group.name = edited.name;
-                group.users = edited.users;
-                group.admins = edited.admins;
+                //group.users = edited.users;
+                //group.admins = edited.admins;
                 return db.SaveChanges() != 0;
             }
             return false;

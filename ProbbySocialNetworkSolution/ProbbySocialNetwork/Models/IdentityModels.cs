@@ -15,10 +15,10 @@ namespace ProbbySocialNetwork.Models
         public string ProfilePic { get; set; }
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }
-        private ICollection<UserConnection> Followers;
-        private ICollection<UserConnection> Followings;
-        private ICollection<Hobby> Hobbies;
-        private ICollection<Group> Groups;
+        public virtual ICollection<UserConnection> Followers { get; set; }
+        public virtual ICollection<UserConnection> Followings { get; set; }
+        public virtual ICollection<Hobby> Hobbies { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -35,7 +35,7 @@ namespace ProbbySocialNetwork.Models
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Hobby> Hobbies { get; set; }
 		public DbSet<Status> Statuses { get; set; }
-		public DbSet<ApplicationUser> Users { get; set; }
+		//public DbSet<ApplicationUser> Users { get; set; }
 		public DbSet<UserConnection> UserConnections { get; set; }
 		
         public ApplicationDbContext()

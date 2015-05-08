@@ -11,7 +11,7 @@ namespace ProbbySocialNetwork.Models
 		public string name { get; set; }
 		public string description { get; set; }
 		public virtual Hobby hobby { get; set; }
-		public ICollection<ApplicationUser> admins;
-		public ICollection<ApplicationUser> users;
+        //public virtual ICollection<ApplicationUser> admins { get; set; }
+        //public virtual ICollection<ApplicationUser> users { get; set; }
 	}
 }
