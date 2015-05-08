@@ -9,5 +9,6 @@ namespace ProbbySocialNetwork.Models.ViewModels
     {
         public ApplicationUser currentUser;
         public List<Status> currentUserStatusHistory;
+        public List<Comment> commentsForStatuses;
     }
 }
