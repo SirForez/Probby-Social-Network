@@ -7,8 +7,8 @@ namespace ProbbySocialNetwork.Models.ViewModels
 {
 	public class FeedViewModel
 	{
-		public List<Comment> commentsForStatuses { get; set; }
-		public ApplicationUser currentUser {get; set;}
-		public List<Status> newestStatuses { get; set; }
+		public List<Comment> commentsForStatuses;
+		public ApplicationUser currentUser;
+		public List<Status> newestStatuses;
 	}
 }
