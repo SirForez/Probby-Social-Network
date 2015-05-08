@@ -17,4 +17,14 @@
     <p>
         @s.Post
     </p>
+    foreach(Comment c in Model.commentsForStatuses) 
+    {
+        if (c.StatusID == s.ID)
+        {
+            <p>
+                @c.Body
+                @c.DateInserted
+            </p>
+        }
+    }
 }

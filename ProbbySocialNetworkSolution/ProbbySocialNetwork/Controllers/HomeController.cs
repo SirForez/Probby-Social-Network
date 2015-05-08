@@ -45,17 +45,18 @@ namespace ProbbySocialNetwork.Controllers
             ProfileViewModel model = new ProfileViewModel();
             model.currentUser = accountService.getUserByName(User.Identity.Name);
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
+            model.commentsForStatuses = new List<Comment>();
 
-            //Just testing
-            Status s1 = new Status();
-            s1.Post = "Hello, World!";
-            s1.Date = DateTime.Now;
-            Status s2 = new Status();
-            s2.Post = "Goodbye, cruel world!";
-            s2.Date = DateTime.Now;
+            //For statuses, we also need to add the hobbies and shit
 
-            model.currentUserStatusHistory.Add(s1);
-            model.currentUserStatusHistory.Add(s2);
+            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
+            foreach(Status s in model.currentUserStatusHistory) {
+                List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
+                foreach(Comment c in currentCommentList)
+                {
+                    model.commentsForStatuses.Add(c);
+                }
+            }
 
             return View(model);
 		}
