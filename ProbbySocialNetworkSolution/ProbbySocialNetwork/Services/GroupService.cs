@@ -36,8 +36,13 @@ namespace ProbbySocialNetwork.Models
                 group.description = edited.description;
                 group.hobby = edited.hobby;
                 group.name = edited.name;
-                //group.users = edited.users;
-                //group.admins = edited.admins;
+
+                //We do not know if this works, must test:
+                var users = getUsersByGroup(group);
+                users = getUsersByGroup(edited);
+                var admins = getAdminsByGroup(group);
+                users = getAdminsByGroup(edited);
+
                 return db.SaveChanges() != 0;
             }
             return false;
@@ -65,18 +70,31 @@ namespace ProbbySocialNetwork.Models
             return groups;
         }
 
-        //Cant implement these next two until we implement the database table 
-        //properly with ApplicationUser instead of our own User entity class
         public List<Group> getGroupsByUser(ApplicationUser a)
         {
-            //TODO: Implement
-            return new List<Group>();
+            var groups = (from c in db.UserGroupConnections
+                         where c.UserID == a.Id
+                         join g in db.Groups on c.GroupID equals g.ID
+                         select g).ToList();
+            return groups;
         }
 
         public List<ApplicationUser> getUsersByGroup(Group g)
         {
-            //TODO: Implement
-            return new List<ApplicationUser>();
+            var users = (from c in db.UserGroupConnections
+                         where c.GroupID == g.ID
+                         join u in db.Users on c.UserID equals u.Id
+                         select u).ToList();
+            return users;
+        }
+
+        public List<ApplicationUser> getAdminsByGroup(Group g)
+        {
+            var users = (from c in db.AdminGroupConnections
+                         where c.GroupID == g.ID
+                         join u in db.Users on c.UserID equals u.Id
+                         select u).ToList();
+            return users;
         }
     }
 }

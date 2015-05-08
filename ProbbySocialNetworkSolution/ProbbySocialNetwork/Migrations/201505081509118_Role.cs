@@ -12,7 +12,7 @@ namespace ProbbySocialNetwork.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        UserID = c.Int(nullable: false),
+                        UserID = c.String(),
                         GroupID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -122,7 +122,7 @@ namespace ProbbySocialNetwork.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        UserID = c.Int(nullable: false),
+                        UserID = c.String(),
                         GroupID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -132,7 +132,7 @@ namespace ProbbySocialNetwork.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        UserID = c.Int(nullable: false),
+                        UserID = c.String(),
                         HobbyID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -143,7 +143,7 @@ namespace ProbbySocialNetwork.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Role = c.String(),
-                        Karma = c.Int(nullable: false),
+                        Karma = c.Int(),
                         ProfilePic = c.String(),
                         NumberOfFollowers = c.Int(nullable: false),
                         NumberOfFollowing = c.Int(nullable: false),

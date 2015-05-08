@@ -11,7 +11,7 @@ namespace ProbbySocialNetwork.Models
     public class ApplicationUser : IdentityUser
     {
         public string Role { get; set; }
-        public int Karma { get; set; }
+        public int? Karma { get; set; }
         public string ProfilePic { get; set; }
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }
