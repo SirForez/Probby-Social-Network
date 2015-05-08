@@ -51,6 +51,18 @@ textarea {
     width: 100%;
 }
 
+.lhsNav {
+    float: left;
+    width: 20%;
+    border: solid 1px;
+}
+
+.theContent {
+    float: left;
+    width: 80%;
+    border: solid 1px;
+}
+
 #homePic{
     width: 70%;
     height: auto;

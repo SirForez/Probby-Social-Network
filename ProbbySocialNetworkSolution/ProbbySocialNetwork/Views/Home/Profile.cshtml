@@ -4,27 +4,60 @@
     ViewBag.Title = "Profile";
 }
 
-<h2>
-    @Model.currentUser.UserName's Profile
-</h2>
+<h2>Profile</h2>
 
-@using ProbbySocialNetwork.Models
-@foreach(Status s in Model.currentUserStatusHistory) 
-{
-    <h3>
-        @s.Date
-    </h3>
-    <p>
-        @s.Post
-    </p>
-    foreach(Comment c in Model.commentsForStatuses) 
-    {
-        if (c.StatusID == s.ID)
+<div class="container">
+    <div class="lhsNav">
+        <img src="http://fc06.deviantart.net/fs49/f/2009/220/b/0/Spongebob_4_150x150_PNG_by_somemilk.png">
+        <p>@Model.currentUser.UserName's Profile</p>
+    </div>
+    <div class="theContent">
+        @using ProbbySocialNetwork.Models
+        @foreach (Status s in Model.currentUserStatusHistory)
         {
+            <h3>
+                @s.Date
+            </h3>
             <p>
-                @c.Body
-                @c.DateInserted
+                @s.Post
             </p>
+            foreach (Comment c in Model.commentsForStatuses)
+            {
+                if (c.StatusID == s.ID)
+                {
+                    <p>
+                        @c.Body
+                        @c.DateInserted
+                    </p>
+                }
+            }
+        }
+    </div>
+</div>
+
+        @*
+    <h2>
+        @Model.currentUser.UserName's Profile
+    </h2>
+
+    @using ProbbySocialNetwork.Models
+    @foreach(Status s in Model.currentUserStatusHistory)
+    {
+        <h3>
+            @s.Date
+        </h3>
+        <p>
+            @s.Post
+        </p>
+        foreach(Comment c in Model.commentsForStatuses)
+        {
+            if (c.StatusID == s.ID)
+            {
+                <p>
+                    @c.Body
+                    @c.DateInserted
+                </p>
+            }
         }
     }
-}
+*@
