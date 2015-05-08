@@ -36,7 +36,7 @@ namespace ProbbySocialNetwork.Models
 		public DbSet<Hobby> Hobbies { get; set; }
 		public DbSet<Status> Statuses { get; set; }
 		//public DbSet<ApplicationUser> Users { get; set; }
-		public DbSet<UserConnection> UserConnections { get; set; }
+		//public DbSet<UserConnection> UserConnections { get; set; }
 		
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
