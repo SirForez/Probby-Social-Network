@@ -18,6 +18,7 @@ namespace ProbbySocialNetwork.Models
         {
             var statuses = (from s in db.Statuses
                             where a.Id == s.UserID
+                            orderby s.Date descending
                             select s).ToList();
             return statuses;
         }
@@ -26,6 +27,7 @@ namespace ProbbySocialNetwork.Models
         {
             var comments = (from c in db.Comments
                             where a.Id == c.UserID
+                            orderby c.DateInserted ascending
                             select c).ToList();
             return comments;
         }
@@ -34,6 +36,7 @@ namespace ProbbySocialNetwork.Models
         {
             var comments = (from c in db.Comments
                             where c.StatusID == s.ID
+                            orderby c.DateInserted ascending
                             select c).ToList();
             return comments;
         }
@@ -69,6 +72,7 @@ namespace ProbbySocialNetwork.Models
         {
             var statuses = (from s in db.Statuses
                             where s.GroupID == g.ID
+                            orderby s.Date descending
                             select s).ToList();
             return statuses;
         }
