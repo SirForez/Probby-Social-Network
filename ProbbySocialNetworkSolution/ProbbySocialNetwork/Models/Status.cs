@@ -13,6 +13,6 @@ namespace ProbbySocialNetwork.Models
 		public DateTime Date { get; set; }
 		public string Post { get; set; }
 		public string MediaURL { get; set; }
-        public virtual ICollection<Hobby> HobbyTags { get; set; }
+        //public virtual ICollection<Hobby> HobbyTags { get; set; }
 	}
 }
