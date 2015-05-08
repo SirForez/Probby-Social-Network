@@ -190,16 +190,21 @@
       <DependentUpon>201505081052269_Role1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminGroupConnection.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Hobby.cs" />
+    <Compile Include="Models\HobbyGroupConnection.cs" />
     <Compile Include="Models\ServiceSingleton.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\UserConnection.cs" />
     <Compile Include="Models\AccountService.cs" />
     <Compile Include="Models\GroupService.cs" />
     <Compile Include="Models\HobbyService.cs" />
+    <Compile Include="Models\StatusHobbyConnection.cs" />
     <Compile Include="Models\StatusService.cs" />
+    <Compile Include="Models\UserFollowConnection.cs" />
+    <Compile Include="Models\UserGroupConnection.cs" />
+    <Compile Include="Models\UserHobbyConnection.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
