@@ -46,6 +46,8 @@ namespace ProbbySocialNetwork.Controllers
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 
+            //For statuses, we also need to add the hobbies and shit
+
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             foreach(Status s in model.currentUserStatusHistory) {
                 List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
