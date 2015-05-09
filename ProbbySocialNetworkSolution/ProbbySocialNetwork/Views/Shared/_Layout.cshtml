@@ -28,15 +28,17 @@
                 {
                 @Html.AntiForgeryToken()
             <ul class="nav navbar-nav navbar">
-
                 <li>
-                        @Html.ActionLink("Messages", "Messages", "Home", routeValues: null, htmlAttributes: new { title = "Messages" })
+                    @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Home" })
+                </li>
+                <!--<li>
+                    @Html.ActionLink("Messages", "Messages", "Home", routeValues: null, htmlAttributes: new { title = "Messages" })
                 </li>
                 <li>
-                        @Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })
-                </li>
+                    @Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })
+                </li>-->
                 <li>
-                        @Html.ActionLink("Profile", "Profile", "Home", routeValues: null, htmlAttributes: new { title = "Profile" })
+                    @Html.ActionLink("Profile", "Profile", "Home", routeValues: null, htmlAttributes: new { title = "Profile" })
                 </li>
                 <li>
                     @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
