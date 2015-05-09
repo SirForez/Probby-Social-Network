@@ -10,6 +10,7 @@ namespace ProbbySocialNetwork.Models
 		public int ID { get; set; }
         public int StatusID { get; set; }
         public string UserID { get; set; }
+        public string UserName { get; set; }
 		public System.DateTime DateInserted { get; set; }
 		public string Body { get; set; }
 	}
