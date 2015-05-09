@@ -10,12 +10,19 @@
         <img src="http://fc06.deviantart.net/fs49/f/2009/220/b/0/Spongebob_4_150x150_PNG_by_somemilk.png">
         <p>@Model.currentUser.UserName</p>
 
+        <h2>Groups</h2>
+
         <ul>
             @foreach(Group g in Model.currentUserGroups)
             {
-                @Html.ActionLink(g.name, "Group", routeValues: g.ID, htmlAttributes: new { title = "Group" })
+                <li>
+                    @Html.ActionLink(g.name, "Index", "Group", routeValues: g.ID, htmlAttributes: new { title = "Group" })
+                </li>
             }
         </ul>
+
+        @Html.ActionLink("Create a new Group", "Create", "Group", routeValues: null, htmlAttributes: new { title = "Create a Group" })
+
     </div>
     <div class="theContent">
         <!--breyta i html helper-->

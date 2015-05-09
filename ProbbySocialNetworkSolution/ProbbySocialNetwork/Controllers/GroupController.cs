@@ -18,7 +18,7 @@ namespace ProbbySocialNetwork.Controllers
         // GET: Group
 		[Authorize]
         public ActionResult Index(int id)
-        {
+        {	
 			GroupViewModel model = new GroupViewModel();
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
 			model.currentGroup = groupService.getGroupByID(id);

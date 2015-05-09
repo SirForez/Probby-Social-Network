@@ -81,6 +81,7 @@ namespace ProbbySocialNetwork.Controllers
                 model.currentUser = accountService.getUserByName(User.Identity.Name);
             }*/
 
+			model.currentUser = accountService.getUserByID(id);
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 
