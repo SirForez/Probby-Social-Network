@@ -423,6 +423,11 @@ namespace ProbbySocialNetwork.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult AddFollowing()
+        {
+            return View();
+        }
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
