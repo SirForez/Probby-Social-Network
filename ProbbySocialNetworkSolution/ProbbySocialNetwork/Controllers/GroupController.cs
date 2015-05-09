@@ -37,10 +37,22 @@ namespace ProbbySocialNetwork.Controllers
             return View(model);
         }
 
-        public ActionResult CreateGroup()
+		[HttpPost]
+        public ActionResult CreateGroup(FormCollection collection)
         {
-            //TODO: Implement
-            return View();
+			Group g = new Group();
+
+			g.name = collection["groupName"];
+			g.description = collection["groupDesc"];
+
+			groupService.addGroup(g);
+
+			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+
+			groupService.addUserToGroup(g, currentUser);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
         }
 
         public ActionResult EditGroup()

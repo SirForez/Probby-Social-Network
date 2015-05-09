@@ -21,7 +21,19 @@
             }
         </ul>
 
-        @Html.ActionLink("Create a new Group", "Create", "Group", routeValues: null, htmlAttributes: new { title = "Create a Group" })
+        <h4>Create a new Group</h4>
+        @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
+        {
+            <input type="hidden" name="userid" value="" />
+            <div class="form-horizontal">
+                <label class="sr-only" for="groupName">Name</label>
+                <textarea class="form-control" rows="1" id="groupName" name="groupName" placeholder="Group Name"></textarea>
+                <label class="sr-only" for="groupDesc">Description</label>
+                <textarea class="form-control" rows="4" id="groupDesc" name="groupDesc" placeholder="Group Description"></textarea>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            @Html.ValidationSummary(false)
+        }
 
     </div>
     <div class="theContent">
