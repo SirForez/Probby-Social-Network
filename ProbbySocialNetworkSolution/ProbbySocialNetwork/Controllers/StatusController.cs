@@ -12,9 +12,12 @@ namespace ProbbySocialNetwork.Controllers
 {
 	public class StatusController : Controller
 	{
-		public ServiceSingleton ss = ServiceSingleton.GetInstance;
+		public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+		public AccountService accountService = ServiceSingleton.GetAccountService;
 		public StatusService statusService = ServiceSingleton.GetStatusService;
-		//public AccountService accountService = ServiceSingleton.GetAccountService;
+		public GroupService groupService = ServiceSingleton.GetGroupService;
+		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
+		
 		// GET: Status
 		public ActionResult Index()
 		{

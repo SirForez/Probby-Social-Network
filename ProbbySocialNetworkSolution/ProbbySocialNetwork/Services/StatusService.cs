@@ -27,6 +27,7 @@ namespace ProbbySocialNetwork.Models
                                     where a.Id == s.PostedToID
                                     orderby s.Date descending
                                     select s).ToList();
+
             foreach (Status s in statusesPostedTo)
             {
                 if (!statuses.Contains(s))
@@ -36,6 +37,15 @@ namespace ProbbySocialNetwork.Models
             }
             return statuses;
         }
+
+		public List<Status> getStatusesByHobby(Hobby h)
+		{
+			var statuses = (from s in db.Statuses
+							where h.ID == s.ID
+							orderby s.Date ascending
+							select s).ToList();
+			return statuses;
+		}
 
         public List<Comment> getCommentsByUser(ApplicationUser a)
         {

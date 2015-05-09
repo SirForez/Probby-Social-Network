@@ -4,22 +4,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ProbbySocialNetwork.Models;
+using ProbbySocialNetwork.Models.ViewModels;
 
 namespace ProbbySocialNetwork.Controllers
 {
     public class HobbyController : Controller
     {
-        // GET: Hobby
-        public ActionResult Index()
+		public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+		public AccountService accountService = ServiceSingleton.GetAccountService;
+		public StatusService statusService = ServiceSingleton.GetStatusService;
+		public GroupService groupService = ServiceSingleton.GetGroupService;
+		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
+		
+		// GET: Hobby
+        public ActionResult Index(int id)
         {
-            //TODO: Implement
-            return View();
+            HobbyViewModel model = new HobbyViewModel();
+
+			model.currentUser = accountService.getUserByName(User.Identity.Name);
+			model.currentHobby = hobbyService.getHobbyByID(id);
+			model.currentHobbyGroups = hobbyService.getGroupsByHobby(model.currentHobby);
+			model.currentHobbyStatusHistory = statusService.getStatusesByHobby(model.currentHobby);
+			model.currentHobbyUsers = hobbyService.getUsersByHobby(model.currentHobby);
+
+            return View(model);
         }
 
-        public ActionResult CreateHobby()
+        public ActionResult CreateHobby(FormCollection collection)
         {
-            //TODO: Implement
-            return View();
+            Hobby h = new Hobby();
+			h.Name = collection["hobbyName"];
+
+			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+
+			hobbyService.addHobby(h);
+			hobbyService.addHobbyToUser(currentUser, h);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
         }
 
         public ActionResult RemoveHobby()

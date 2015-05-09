@@ -11,10 +11,11 @@ namespace ProbbySocialNetwork.Controllers
     public class HomeController : Controller
     {
         //FUTURE NOTE: To get current foloower, var UserID = User.Identity.getUserID()
-        public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-        public AccountService accountService = ServiceSingleton.GetAccountService;
-        public StatusService statusService = ServiceSingleton.GetStatusService;
+		public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+		public AccountService accountService = ServiceSingleton.GetAccountService;
+		public StatusService statusService = ServiceSingleton.GetStatusService;
 		public GroupService groupService = ServiceSingleton.GetGroupService;
+		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
 
         // This is the feed
         [Authorize]

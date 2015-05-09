@@ -14,7 +14,15 @@ namespace ProbbySocialNetwork.Models
             db = _db;
         }
 
-        public List<Hobby> getHobbiesByUser(ApplicationUser a)
+        public Hobby getHobbyByID(int id)
+		{
+			var hobby = (from h in db.Hobbies
+						 where h.ID == id
+						 select h).SingleOrDefault();
+			return hobby;
+		}
+		
+		public List<Hobby> getHobbiesByUser(ApplicationUser a)
         {
             var hobbies = (from c in db.UserHobbyConnections
                            where c.UserID == a.Id
