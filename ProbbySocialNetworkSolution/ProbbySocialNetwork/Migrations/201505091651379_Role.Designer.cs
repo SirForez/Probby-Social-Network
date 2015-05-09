@@ -13,7 +13,7 @@ namespace ProbbySocialNetwork.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201505081509118_Role"; }
+            get { return "201505091651379_Role"; }
         }
         
         string IMigrationMetadata.Source

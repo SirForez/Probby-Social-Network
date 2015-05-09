@@ -63,6 +63,7 @@ namespace ProbbySocialNetwork.Controllers
 			c.Body = collection["commentText"];
 			c.DateInserted = DateTime.Now;
 			c.UserID = User.Identity.GetUserId();
+            c.UserName = User.Identity.Name;
 			c.StatusID = Convert.ToInt32(collection["statusID"]);
 			statusService.addComment(c);
 

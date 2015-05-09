@@ -24,6 +24,7 @@ namespace ProbbySocialNetwork.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         StatusID = c.Int(nullable: false),
                         UserID = c.String(),
+                        UserName = c.String(),
                         DateInserted = c.DateTime(nullable: false),
                         Body = c.String(),
                     })

@@ -32,7 +32,7 @@
                     {
                         if (c.StatusID == s.ID)
                         {
-                            <span id="status-comment-body">
+                            <span id="status-comment-body" class="comment">
                                 <p>
                                     @c.UserName: @c.Body | @c.DateInserted
                                 </p>
@@ -40,7 +40,19 @@
                         }
                     }
                 </div>
-            </div>
+                <div>
+                    @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                    {
+                    <input type="hidden" name="statusID" value="@s.ID" />
+                    <div class="form-horizontal">
+                        <label class="sr-only" for="commentText">Status</label>
+                        <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                    @Html.ValidationSummary(false)
+                    }
+                </div>
+            </div> 
         }
     </div>
 </div>
