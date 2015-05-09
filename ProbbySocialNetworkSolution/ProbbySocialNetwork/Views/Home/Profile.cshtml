@@ -15,22 +15,34 @@
         @using ProbbySocialNetwork.Models
         @foreach (Status s in Model.currentUserStatusHistory)
         {
-            <h3>
-                @s.Date
-            </h3>
-            <p>
-                @s.Post
-            </p>
-            foreach (Comment c in Model.commentsForStatuses)
-            {
-                if (c.StatusID == s.ID)
-                {
-                    <p>
-                        @c.Body
-                        @c.DateInserted
-                    </p>
-                }
-            }
+            <div id="status">
+                <h4>
+                    @Model.currentUser.UserName
+                </h4>
+                <div id="status-body">
+                    <span id="status-body-post">
+                        @s.Post
+                    </span>
+                    <span id"status-body-date">
+                        @s.Date
+                    </span>
+                </div>
+                <div id="status-comment">
+                    @foreach (Comment c in Model.commentsForStatuses)
+                    {
+                        if (c.StatusID == s.ID)
+                        {
+                            <span id="status-comment-body">
+                                <h5>username</h5>
+                                <p>
+                                    @c.Body
+                                    @c.DateInserted
+                                </p>
+                            </span>
+                        }
+                    }
+                </div>
+            </div>
         }
     </div>
 </div>

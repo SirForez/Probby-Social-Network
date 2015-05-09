@@ -14,6 +14,14 @@ namespace ProbbySocialNetwork.Models
             db = _db;
         }
 
+        public ApplicationUser getUserByID(string ID)
+        {
+            var user = (from u in db.Users
+                        where u.Id == ID
+                        select u).SingleOrDefault();
+            return user;
+        }
+
         public ApplicationUser getUserByName(String name)
         {
             var user = (from u in db.Users

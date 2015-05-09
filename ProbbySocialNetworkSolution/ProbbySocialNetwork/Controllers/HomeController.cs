@@ -26,7 +26,8 @@ namespace ProbbySocialNetwork.Controllers
 
 			FeedViewModel model = new FeedViewModel();
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
-			model.newestStatuses = statusService.getStatusByUser(model.currentUser);
+            model.newestStatuses = statusService.getStatusByUser(model.currentUser);
+            model.commentsForStatuses = new List<Comment>();
 
 			//For statuses, we also need to add the hobbies and shit
 
@@ -58,12 +59,24 @@ namespace ProbbySocialNetwork.Controllers
 
         [Authorize]
         [HttpGet]
-		public ActionResult Profile()
+		public ActionResult Profile(string id)
 		{
 			ViewBag.Message = "Here you should see your profile!";
-
             ProfileViewModel model = new ProfileViewModel();
-            model.currentUser = accountService.getUserByName(User.Identity.Name);
+
+            //NOTE: This works, but if a parameter is given in the url, and profile button is pressed again, it will go to that profile.
+            //So, if you go to your own profile by pressing the default profile button, then to quangs profile, then click the profile button
+            //again to go back to your profile, it will go to quangs profile until the url has changed. Needs fixing.
+
+            if (id != null)
+            {
+                model.currentUser = accountService.getUserByName(id);
+            }
+            else
+            {
+                model.currentUser = accountService.getUserByName(User.Identity.Name);
+            }
+
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 
