@@ -17,11 +17,11 @@
         {
             <div id="status">
                 <h4>
-                    @Model.currentUser.UserName
+                    @Model.currentUser.UserName:
                 </h4>
                 <div id="status-body">
                     <span id="status-body-post">
-                        @s.Post
+                        @s.Post | 
                     </span>
                     <span id"status-body-date">
                         @s.Date
@@ -33,9 +33,9 @@
                         if (c.StatusID == s.ID)
                         {
                             <span id="status-comment-body">
-                                <h5>username</h5>
+                                <h5>username: </h5>
                                 <p>
-                                    @c.Body
+                                    @c.Body | 
                                     @c.DateInserted
                                 </p>
                             </span>
