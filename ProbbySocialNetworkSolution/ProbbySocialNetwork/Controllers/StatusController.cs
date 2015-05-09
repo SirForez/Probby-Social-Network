@@ -34,6 +34,7 @@ namespace ProbbySocialNetwork.Controllers
 			//ApplicationUser a = accountService.getUserByName(User.Identity.Name);
 			//s.UserID = a.Id;
 			statusService.addStatus(s);
+
 			return RedirectToAction("Index", "Home");
 		}
 
@@ -50,6 +51,30 @@ namespace ProbbySocialNetwork.Controllers
 		}
 
 		public ActionResult Search()
+		{
+			//TODO: Implement
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult CreateComment(FormCollection collection)
+		{
+			Comment c = new Comment();
+			c.Body = collection["commentText"];
+			c.DateInserted = DateTime.Now;
+			c.UserID = User.Identity.GetUserId();
+			statusService.addComment(c);
+
+			return RedirectToAction("Index", "Home");
+		}
+
+		public ActionResult EditComment()
+		{
+			//TODO: Implement
+			return View();
+		}
+
+		public ActionResult RemoveComment()
 		{
 			//TODO: Implement
 			return View();

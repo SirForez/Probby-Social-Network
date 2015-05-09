@@ -26,8 +26,8 @@
             {
                 <input type="hidden" name="userid" value="" />
                 <div class="form-horizontal">
-                    <label class="sr-only" for="statustext">Status</label>
-                    <textarea class="form-control" rows="5" id="statustext" name="statustext" ></textarea>
+                    <label class="sr-only" for="statusText">Status</label>
+                    <textarea class="form-control" rows="4" id="statusText" name="statusText" ></textarea>
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
                 @Html.ValidationSummary(false)
@@ -56,6 +56,18 @@
                         }
                     }
                 }
+                
+                using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                {
+                    <input type="hidden" name="userid" value="" />
+                    <div class="form-horizontal">
+                        <label class="sr-only" for="commentText">Status</label>
+                        <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                    @Html.ValidationSummary(false)
+                }
+
             }
         </section>
          

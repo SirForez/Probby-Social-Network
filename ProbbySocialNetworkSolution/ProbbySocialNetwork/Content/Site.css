@@ -86,11 +86,15 @@ textarea {
     margin: 0;
 }
 
-.footer{
+.footer {
     font-family: Arial;
     text-align: center;
 }
 
-#messageLink{
+#messageLink {
     color: white;
+}
+
+#statusText {
+    max-width: 100%;
 }
