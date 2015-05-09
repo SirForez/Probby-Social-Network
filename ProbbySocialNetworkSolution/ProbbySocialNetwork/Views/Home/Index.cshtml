@@ -50,7 +50,7 @@
                     {
                         if (c.StatusID == s.ID)
                         {
-                            <p>
+                            <p class="comment">
                                 @c.Body | @c.DateInserted
                             </p>
                         }
@@ -59,7 +59,7 @@
                 
                 using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                 {
-                    <input type="hidden" name="userid" value="" />
+                    <input type="hidden" name="statusID" value="@s.ID" />
                     <div class="form-horizontal">
                         <label class="sr-only" for="commentText">Status</label>
                         <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>

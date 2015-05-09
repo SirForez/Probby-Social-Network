@@ -98,3 +98,7 @@ textarea {
 #statusText {
     max-width: 100%;
 }
+
+.comment {
+    margin-left: 20px;
+}
