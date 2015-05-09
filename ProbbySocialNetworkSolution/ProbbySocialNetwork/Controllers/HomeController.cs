@@ -19,9 +19,27 @@ namespace ProbbySocialNetwork.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            FeedViewModel model = new FeedViewModel();
+           /* FeedViewModel model = new FeedViewModel();
             model.currentUser = accountService.getUserByName(User.Identity.Name);
             return View(model);
+		    */
+
+			FeedViewModel model = new FeedViewModel();
+			model.currentUser = accountService.getUserByName(User.Identity.Name);
+			model.newestStatuses = statusService.getStatusByUser(model.currentUser);
+
+			//For statuses, we also need to add the hobbies and shit
+
+		    foreach (Status s in model.newestStatuses)
+			{
+				List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
+				foreach (Comment c in currentCommentList)
+				{
+					model.commentsForStatuses.Add(c);
+				}
+			}
+			
+			return View(model);
         }
 
         public ActionResult About()

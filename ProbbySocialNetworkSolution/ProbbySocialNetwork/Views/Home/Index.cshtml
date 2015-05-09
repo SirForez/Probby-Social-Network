@@ -32,31 +32,33 @@
                 </div>
                 @Html.ValidationSummary(false)
             }
-        @*
+      
         </section>
         @using ProbbySocialNetwork.Models
         <section id="commentList">
             @foreach(Status s in Model.newestStatuses)
             {
                 <h3>
-                    @Model.currentUser
+                    @Model.currentUser.UserName
                 </h3>
                 <p>
-                    @s.Date | @s.Post
+                    @s.Post | @s.Date
                 </p>
-                foreach(Comment c in Model.commentsForStatuses)
-                {
-                    if (c.StatusID == s.ID)
+                if (Model.commentsForStatuses != null)
+                { 
+                    foreach(Comment c in Model.commentsForStatuses)
                     {
-                        <p>
-                            @c.Body
-                            @c.DateInserted
-                        </p>
+                        if (c.StatusID == s.ID)
+                        {
+                            <p>
+                                @c.Body | @c.DateInserted
+                            </p>
+                        }
                     }
                 }
             }
         </section>
-            *@
+         
         
     </div>
 </div>
