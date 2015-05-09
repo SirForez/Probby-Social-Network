@@ -67,7 +67,8 @@ namespace ProbbySocialNetwork.Controllers
 			c.StatusID = Convert.ToInt32(collection["statusID"]);
 			statusService.addComment(c);
 
-			return RedirectToAction("Index", "Home");
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
 		}
 
 		public ActionResult EditComment()
