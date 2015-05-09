@@ -9,6 +9,7 @@ namespace ProbbySocialNetwork.Models
 	{
 		public int ID { get; set; }
         public string UserID { get; set; }
+        public string PostedToID { get; set; }
         public int? GroupID { get; set; }
 		public DateTime Date { get; set; }
 		public string Post { get; set; }

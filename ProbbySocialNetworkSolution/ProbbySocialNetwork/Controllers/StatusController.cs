@@ -24,18 +24,27 @@ namespace ProbbySocialNetwork.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult CreateStatus(FormCollection collection)
+        public ActionResult CreateStatus(FormCollection collection, string id)
 		{
 			Status s = new Status();
 			s.Post = collection["statusText"];
 			s.MediaURL = null;
 			s.Date = DateTime.Now;
 			s.UserID = User.Identity.GetUserId();
+            if (id != null)
+            {
+                s.PostedToID = id;
+            }
+            else
+            {
+                s.PostedToID = User.Identity.GetUserId();
+            }
 			//ApplicationUser a = accountService.getUserByName(User.Identity.Name);
 			//s.UserID = a.Id;
 			statusService.addStatus(s);
 
-			return RedirectToAction("Index", "Home");
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
 		}
 
 		public ActionResult EditStatus()
@@ -67,7 +76,9 @@ namespace ProbbySocialNetwork.Controllers
 			c.StatusID = Convert.ToInt32(collection["statusID"]);
 			statusService.addComment(c);
 
-			return RedirectToAction("Index", "Home");
+			//temp fix until we can find better solution
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
 		}
 
 		public ActionResult EditComment()

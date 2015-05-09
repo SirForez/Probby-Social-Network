@@ -65,7 +65,8 @@
                         <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
                         <button type="submit" class="btn btn-primary">Post</button>
                     </div>
-                    @*<input type="hidden" name="returnUrl" value="@Url"/ />*@
+                    
+                    <input type="hidden" name="returnUrl" value="" />
                     @Html.ValidationSummary(false)
                 }
 
