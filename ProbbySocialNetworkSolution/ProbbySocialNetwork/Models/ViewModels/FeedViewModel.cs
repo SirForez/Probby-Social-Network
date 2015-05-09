@@ -10,5 +10,6 @@ namespace ProbbySocialNetwork.Models.ViewModels
 		public List<Comment> commentsForStatuses;
 		public ApplicationUser currentUser;
 		public List<Status> newestStatuses;
+		public List<Group> currentUserGroups;
 	}
 }

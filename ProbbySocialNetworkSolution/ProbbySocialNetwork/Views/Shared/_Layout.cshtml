@@ -32,13 +32,19 @@
                     @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Home" })
                 </li>
                 <!--<li>
-                    @Html.ActionLink("Messages", "Messages", "Home", routeValues: null, htmlAttributes: new { title = "Messages" })
+                    @*Html.ActionLink("Messages", "Messages", "Home", routeValues: null, htmlAttributes: new { title = "Messages" })*@
                 </li>
                 <li>
-                    @Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })
+                    @*Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })*@
                 </li>-->
                 <li>
-                    @Html.ActionLink("Profile", "Profile", "Home", routeValues: null, htmlAttributes: new { title = "Profile" })
+                    @using ProbbySocialNetwork.Models;
+                    @{
+                        ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+		                AccountService accountService = ServiceSingleton.GetAccountService;
+                    }
+                    @Html.ActionLink("Profile", "Profile", "Home", routeValues: accountService.getUserByName(User.Identity.Name), htmlAttributes: new { title = "Profile" })
+                    
                 </li>
                 <li>
                     @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

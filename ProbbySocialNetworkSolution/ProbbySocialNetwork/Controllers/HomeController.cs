@@ -14,6 +14,7 @@ namespace ProbbySocialNetwork.Controllers
         public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
         public AccountService accountService = ServiceSingleton.GetAccountService;
         public StatusService statusService = ServiceSingleton.GetStatusService;
+		public GroupService groupService = ServiceSingleton.GetGroupService;
 
         // This is the feed
         [Authorize]
@@ -28,6 +29,7 @@ namespace ProbbySocialNetwork.Controllers
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
             model.newestStatuses = statusService.getStatusByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
+			model.currentUserGroups = groupService.getGroupsByUser(model.currentUser);
 
 			//For statuses, we also need to add the hobbies and shit
 
@@ -68,14 +70,16 @@ namespace ProbbySocialNetwork.Controllers
             //So, if you go to your own profile by pressing the default profile button, then to quangs profile, then click the profile button
             //again to go back to your profile, it will go to quangs profile until the url has changed. Needs fixing.
 
-            if (id != null)
+           //Think it always gives a parameter now, needs testing though! - Bjartur
+			
+			/*if (id != null)
             {
                 model.currentUser = accountService.getUserByName(id);
             }
             else
             {
                 model.currentUser = accountService.getUserByName(User.Identity.Name);
-            }
+            }*/
 
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();

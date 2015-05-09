@@ -11,10 +11,10 @@
         <p>@Model.currentUser.UserName</p>
 
         <ul>
-            <li>group 1</li>
-            <li>group 2</li>
-            <li>group 3</li>
-            <li>group 4</li>
+            @foreach(Group g in Model.currentUserGroups)
+            {
+                @Html.ActionLink(g.name, "Group", routeValues: g.ID, htmlAttributes: new { title = "Group" })
+            }
         </ul>
     </div>
     <div class="theContent">
