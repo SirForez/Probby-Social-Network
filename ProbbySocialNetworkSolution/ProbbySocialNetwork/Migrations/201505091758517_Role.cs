@@ -91,6 +91,7 @@ namespace ProbbySocialNetwork.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         UserID = c.String(),
+                        PostedToID = c.String(),
                         GroupID = c.Int(),
                         Date = c.DateTime(nullable: false),
                         Post = c.String(),

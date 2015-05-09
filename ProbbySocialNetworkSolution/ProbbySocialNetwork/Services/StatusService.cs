@@ -17,9 +17,23 @@ namespace ProbbySocialNetwork.Models
         public List<Status> getStatusByUser(ApplicationUser a)
         {
             var statuses = (from s in db.Statuses
-                            where a.Id == s.UserID
+                            where a.Id == s.UserID 
                             orderby s.Date descending
                             select s).ToList();
+
+            //Very temporary fix due to errors
+            //Need one LINQ statement to potentially get both
+            var statusesPostedTo = (from s in db.Statuses
+                                    where a.Id == s.PostedToID
+                                    orderby s.Date descending
+                                    select s).ToList();
+            foreach (Status s in statusesPostedTo)
+            {
+                if (!statuses.Contains(s))
+                {
+                    statuses.Add(s);
+                }
+            }
             return statuses;
         }
 

@@ -24,13 +24,21 @@ namespace ProbbySocialNetwork.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult CreateStatus(FormCollection collection)
+        public ActionResult CreateStatus(FormCollection collection, string id)
 		{
 			Status s = new Status();
 			s.Post = collection["statusText"];
 			s.MediaURL = null;
 			s.Date = DateTime.Now;
 			s.UserID = User.Identity.GetUserId();
+            if (id != null)
+            {
+                s.PostedToID = id;
+            }
+            else
+            {
+                s.PostedToID = User.Identity.GetUserId();
+            }
 			//ApplicationUser a = accountService.getUserByName(User.Identity.Name);
 			//s.UserID = a.Id;
 			statusService.addStatus(s);
