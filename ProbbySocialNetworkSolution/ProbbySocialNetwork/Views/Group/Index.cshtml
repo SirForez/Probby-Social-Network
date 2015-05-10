@@ -11,18 +11,19 @@
 
     <section>
         <h4>Create Status</h4>
-        @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
+        @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { groupID = Model.currentGroup.ID, id = "statusForm" }))
         {
             <input type="hidden" name="userid" value="" />
             <div class="form-horizontal">
                 <label class="sr-only" for="statusText">Status</label>
                 <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
+                <input type="checkbox" id="imageortext" name="imageOrText" value="image" />This is an image<br />
                 <button type="submit" class="btn btn-primary">Post</button>
             </div>
             @Html.ValidationSummary(false)
         }
-
     </section>
+
     @using ProbbySocialNetwork.Models
     <section id="commentList">
         @foreach (Status s in Model.currentGroupStatusHistory)
@@ -31,7 +32,19 @@
                 @Model.currentUser.UserName
             </h3>
             <p>
-                @s.Post | @s.Date
+                @if (s.Post == null)
+                {
+                    <img src="@s.MediaURL" alt="image" />
+                }
+                else
+                {
+                    @s.Post
+                }
+                | @s.Date |
+                @if (Model.currentUser.Id == s.UserID)
+                {
+                    @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { title = "Remove" })
+                }
             </p>
             if (Model.commentsForStatuses != null)
             {
@@ -52,14 +65,14 @@
                 <div class="form-horizontal">
                     <label class="sr-only" for="commentText">Status</label>
                     <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
-                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button type="submit" class="btn btn-primary">Comment</button>
                 </div>
-                @*<input type="hidden" name="returnUrl" value="@Url"/ />*@
+
+                <input type="hidden" name="returnUrl" value="" />
                 @Html.ValidationSummary(false)
             }
 
         }
     </section>
-
 
 </div>

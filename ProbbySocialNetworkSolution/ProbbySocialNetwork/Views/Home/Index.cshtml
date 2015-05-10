@@ -4,7 +4,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<h2>Dem feed</h2>
+<h2>What a newsfeed!</h2>
 <div class="container">
     <div class="lhsNav">
         <img src="http://fc06.deviantart.net/fs49/f/2009/220/b/0/Spongebob_4_150x150_PNG_by_somemilk.png">
@@ -16,7 +16,7 @@
             @foreach(Group g in Model.currentUserGroups)
             {
                 <li>
-                    @Html.ActionLink(g.name, "Index", "Group", routeValues: g.ID, htmlAttributes: new { title = "Group" })
+                    @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
                 </li>
             }
         </ul>
@@ -70,7 +70,7 @@
                         }
                         | @s.Date | 
                     @if (Model.currentUser.Id == s.UserID) {
-                         @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { title = "Remove" })
+                         @Html.ActionLink("Remove", "RemoveStatus", "Status", htmlAttributes: new { id = s.ID })
                     }
                 </p>
                 if (Model.commentsForStatuses != null)

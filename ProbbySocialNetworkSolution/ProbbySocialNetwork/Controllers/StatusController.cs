@@ -27,7 +27,7 @@ namespace ProbbySocialNetwork.Controllers
 		}
 
 		[HttpPost]
-        public ActionResult CreateStatus(FormCollection collection, string id)
+        public ActionResult CreateStatus(FormCollection collection, string id, int? groupID)
 		{
 			Status s = new Status();
 
@@ -40,6 +40,11 @@ namespace ProbbySocialNetwork.Controllers
 			{
 				s.Post = collection["statusText"];
 				s.MediaURL = null;
+			}
+
+			if (groupID != null)
+			{
+				s.GroupID = groupID;
 			}
 
 			s.Date = DateTime.Now;

@@ -17,11 +17,13 @@ namespace ProbbySocialNetwork.Controllers
 
         // GET: Group
 		[Authorize]
-        public ActionResult Index(int id)
-        {	
+        public ActionResult Index(string id)
+        {
+			int ID = Int32.Parse(id);
+
 			GroupViewModel model = new GroupViewModel();
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
-			model.currentGroup = groupService.getGroupByID(id);
+			model.currentGroup = groupService.getGroupByID(ID);
 			model.currentGroupMembers = groupService.getUsersByGroup(model.currentGroup);
 			model.currentGroupStatusHistory = statusService.getGroupStatusHistory(model.currentGroup);
 
