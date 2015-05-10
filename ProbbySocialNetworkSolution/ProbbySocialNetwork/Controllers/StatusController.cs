@@ -60,10 +60,20 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult EditStatus()
+		public ActionResult EditStatus(int id, FormCollection collection)
 		{
-			//TODO: Implement
-			return View();
+			Status currentStatus = statusService.getStatusByID(id);
+			if (currentStatus.Post == null) 
+			{
+				currentStatus.MediaURL = collection["editedPost"];
+			}
+			else
+			{
+				currentStatus.Post = collection["editedPost"];
+			}
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
 		}
 
 		public ActionResult RemoveStatus(int id)
