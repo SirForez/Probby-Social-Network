@@ -30,8 +30,18 @@ namespace ProbbySocialNetwork.Controllers
         public ActionResult CreateStatus(FormCollection collection, string id)
 		{
 			Status s = new Status();
-			s.Post = collection["statusText"];
-			s.MediaURL = null;
+
+			if (collection["imageOrText"] == "image")
+			{
+				s.MediaURL = collection["statusText"];
+				s.Post = null;
+			}
+			else
+			{
+				s.Post = collection["statusText"];
+				s.MediaURL = null;
+			}
+
 			s.Date = DateTime.Now;
 			s.UserID = User.Identity.GetUserId();
             if (id != null)
