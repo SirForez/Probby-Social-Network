@@ -29,14 +29,16 @@ textarea {
 }
 
 .logo{
-    width: 90px;
+    width: 140px;
     height: 50px;
     padding: 0;
 }
 
 .searchBar {
-    float: right;
-    padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 90px;
 }
 
 .headers{
@@ -54,13 +56,16 @@ textarea {
 .lhsNav {
     float: left;
     width: 20%;
-    border: solid 1px;
 }
 
 .theContent {
+    padding-left: 5%;
     float: left;
     width: 80%;
-    border: solid 1px;
+}
+
+.lhsNav, .theContent {
+    padding-top: 5%;
 }
 
 #homePic{
