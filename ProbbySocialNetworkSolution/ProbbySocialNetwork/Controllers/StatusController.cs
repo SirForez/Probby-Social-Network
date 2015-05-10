@@ -66,10 +66,14 @@ namespace ProbbySocialNetwork.Controllers
 			return View();
 		}
 
-		public ActionResult RemoveStatus()
+		public ActionResult RemoveStatus(int id)
 		{
-			//TODO: Implement
-			return View();
+
+			Status currentStatus = statusService.getStatusByID(id);	
+			statusService.removeStatus(currentStatus);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
 		}
 
 		public ActionResult Search()

@@ -68,7 +68,9 @@
                         } else {
                             @s.Post
                         }
-                        | @s.Date
+                        | @s.Date | 
+                    @if (Model.currentUser.Id == s.UserID) {
+                         @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { title = "Remove" })
                     }
                 </p>
                 if (Model.commentsForStatuses != null)
