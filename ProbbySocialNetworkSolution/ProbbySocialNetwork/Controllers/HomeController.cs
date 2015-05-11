@@ -28,7 +28,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			FeedViewModel model = new FeedViewModel();
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
-            model.newestStatuses = statusService.getStatusByUser(model.currentUser);
+            model.newestStatuses = statusService.getStatusFeedByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 			model.currentUserGroups = groupService.getGroupsByUser(model.currentUser);
             model.currentUserHobbies = hobbyService.getHobbiesByUser(model.currentUser);
