@@ -1,14 +1,4 @@
-﻿.commentText {
-    width: 300px;
-    rows: 15;
-    resize: vertical;
-}
-
-.commentText:active {
-    height: auto;
-}
-
-.profilePic {
+﻿.profilePic {
     width: 100px;
     height: 100px;
 }
