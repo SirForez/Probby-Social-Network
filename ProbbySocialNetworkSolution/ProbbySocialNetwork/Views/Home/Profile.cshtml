@@ -30,9 +30,6 @@
         {
             <div id="status">
                 <h3>
-                    @Model.currentUser.UserName
-                </h3>
-                <p>
                     @if (s.Post == null)
                     {
                         <img src="@s.MediaURL" alt="image" />
@@ -41,15 +38,12 @@
                     {
                         @s.Post
                     }
-                    | @s.Date |
+                </h3>
+                <p>
+                    @Model.currentUser.UserName | @s.Date |
                     @if (Model.currentUser.Id == s.UserID)
                     {
-                        @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { id = s.ID })
-                        using (Html.BeginForm("RemoveStatus", "Status", new { id = s.ID }))
-                        {
-                            
-                            <button type="submit" class="btn btn-primary btn-xs">Remove</button>
-                        }
+                        @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
                     }
                 </p>
                 <div id="status-comment">

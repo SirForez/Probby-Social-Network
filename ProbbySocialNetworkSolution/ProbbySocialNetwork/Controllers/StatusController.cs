@@ -70,14 +70,21 @@ namespace ProbbySocialNetwork.Controllers
 			if (id != null)
 			{
 				Status currentStatus = statusService.getStatusByID(id);
+				Status editedStatus = new Status();
+				editedStatus.ID = currentStatus.ID;
+				editedStatus.Date = DateTime.Now;
+
 				if (currentStatus.Post == null)
 				{
-					currentStatus.MediaURL = collection["editedPost"];
+					editedStatus.MediaURL = collection["editTextbox"];
+					editedStatus.Post = null;
 				}
 				else
 				{
-					currentStatus.Post = collection["editedPost"];
+					editedStatus.Post = collection["editTextbox"];
+					editedStatus.MediaURL = null;
 				}
+				statusService.editStatus(editedStatus);
 
 				string url = this.Request.UrlReferrer.AbsolutePath;
 				return Redirect(url);

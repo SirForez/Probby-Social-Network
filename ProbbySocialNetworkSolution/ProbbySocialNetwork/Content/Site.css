@@ -107,3 +107,7 @@ textarea {
 .comment {
     margin-left: 20px;
 }
+
+.editTextbox {
+    display: none;
+}

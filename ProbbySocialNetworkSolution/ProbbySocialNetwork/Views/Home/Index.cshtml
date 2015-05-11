@@ -55,27 +55,46 @@
         </section>
 
         @using ProbbySocialNetwork.Models
-        <section id="commentList">
+        <section id="statusList">
             @foreach(Status s in Model.newestStatuses)
             {
-                <h3>
-                    @Model.currentUser.UserName
+                <h3 class="statusContent">
+                    @if (s.Post == null)
+                    { 
+                        <img src="@s.MediaURL" alt="image" />
+                        <input type="text" value="@s.MediaURL" class="editTextbox" hidden="" />
+                    }
+                    else
+                    {
+                        @s.Post
+                        <input type="text" value="@s.Post" class="editTextbox" hidden="" />
+                    }
+
                 </h3>
                 <p>
-                        @if (s.Post == null) {
-                            <img src="@s.MediaURL" alt="image" />
-                        } else {
-                            @s.Post
-                        }
-                        | @s.Date | 
+                    @Model.currentUser.UserName | @s.Date | 
                     @if (Model.currentUser.Id == s.UserID)
                     {
-                        using (Html.BeginForm("RemoveStatus", "Status", new { id = s.ID }))
-                        {
-                            <button type="submit" class="btn btn-primary btn-xs">Remove</button>
-                        }
-                         @*einhver vitleysa sem bjartur gerdi: @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID })*@
+                        @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
+                        <span> | </span>
+                        @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
                         
+                        <script>
+                            $(document).ready(function() {
+                                $("#editButton").click(function() {
+                                    $(".statusContent").css("display: none;")
+                                    if (@s.Post == null)
+                                    {
+                                        $(".editTextbox").css("display: block;");
+                                    }
+                                    else
+                                    {
+                                        $(".editTextbox").css("display: block;");
+                                    }
+                                });
+                                
+                            });
+                        </script>
                     }
                 </p>
                 if (Model.commentsForStatuses != null)
@@ -86,15 +105,13 @@
                         {
                             <p class="comment">
                                 @c.UserName: @c.Body | @c.DateInserted
+                                @if (Model.currentUser.Id == s.UserID)
+                                {
+                                    @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = s.ID }, null)
+                                }
                             </p>
                         }
-                        if (Model.currentUser.Id == s.UserID) 
-                        {
-                            using (Html.BeginForm("RemoveComment", "Status", new { id = c.ID }))
-                            {
-                                <button type="submit" class="btn btn-primary btn-xs">Remove</button>
-                            }
-                        }
+                        
                     }
                 }
 
