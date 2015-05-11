@@ -45,7 +45,12 @@
                     | @s.Date |
                     @if (Model.currentUser.Id == s.UserID)
                     {
-                        @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { title = "Remove" })
+                        @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { id = s.ID })
+                        using (Html.BeginForm("RemoveStatus", "Status", new { id = s.ID }))
+                        {
+                            
+                            <button type="submit" class="btn btn-primary btn-xs">Remove</button>
+                        }
                     }
                 </p>
                 <div id="status-comment">

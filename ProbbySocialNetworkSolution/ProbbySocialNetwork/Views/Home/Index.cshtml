@@ -68,13 +68,14 @@
                             @s.Post
                         }
                         | @s.Date | 
-                    @if (Model.currentUser.Id == s.UserID) 
+                    @if (Model.currentUser.Id == s.UserID)
                     {
                         using (Html.BeginForm("RemoveStatus", "Status", new { id = s.ID }))
                         {
                             <button type="submit" class="btn btn-primary btn-xs">Remove</button>
                         }
-                         @*@Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID })*@
+                         @*einhver vitleysa sem bjartur gerdi: @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID })*@
+                        
                     }
                 </p>
                 if (Model.commentsForStatuses != null)
