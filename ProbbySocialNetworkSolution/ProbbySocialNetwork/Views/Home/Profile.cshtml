@@ -7,7 +7,7 @@
 <div class="container">
     <div class="lhsNav">
         <img src="~/Content/Images/dabs.jpg" id="profilePic">
-        <p>@Model.currentUser.UserName's Profile</p>
+        <p>@Model.currentUserProfile.UserName's Profile</p>
     </div>
     <div class="theContent">
         <section>
@@ -16,7 +16,7 @@
             {
                 <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                 <input type="hidden" name="groupID" value="" />
-                <input type="hidden" name="postedToID" value="" />
+                <input type="hidden" name="postedToID" value="@Model.currentUserProfile.Id" />
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
                     <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
@@ -42,7 +42,7 @@
                     }
                 </h3>
                 <p>
-                    @Model.currentUser.UserName | @s.Date |
+                    @s.UserID | @s.Date |
                     @if (Model.currentUser.Id == s.UserID)
                     {
                         @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)

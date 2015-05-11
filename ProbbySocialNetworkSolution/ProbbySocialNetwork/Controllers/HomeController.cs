@@ -73,22 +73,23 @@ namespace ProbbySocialNetwork.Controllers
             //again to go back to your profile, it will go to quangs profile until the url has changed. Needs fixing.
 
            //Think it always gives a parameter now, needs testing though! - Bjartur
+            model.currentUser = accountService.getUserByName(User.Identity.Name);
 		    if (username != null)
             {
-                model.currentUser = accountService.getUserByName(username);
+                model.currentUserProfile = accountService.getUserByName(username);
             }
             else
             {
-                model.currentUser = accountService.getUserByName(User.Identity.Name);
+                model.currentUserProfile = model.currentUser;
             }
 
 			//model.currentUser = accountService.getUserByID(id);
-            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
+            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
             model.commentsForStatuses = new List<Comment>();
 
             //For statuses, we also need to add the hobbies and shit
 
-            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
+            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
             foreach(Status s in model.currentUserStatusHistory) {
                 List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
                 foreach(Comment c in currentCommentList)
@@ -112,29 +113,5 @@ namespace ProbbySocialNetwork.Controllers
 			ViewBag.Message = "Here you should see your search results";
 			return View();
 		}
-
-        public ActionResult AddFollower()
-        {
-            //TODO: Implement
-            return View();
-        }
-
-        public ActionResult AddFollowing()
-        {
-            //TODO: Implement
-            return View();
-        }
-
-        public ActionResult RemoveFollower()
-        {
-            //TODO: Implement
-            return View();
-        }
-
-        public ActionResult RemoveFollowing()
-        {
-            //TODO: Implement
-            return View();
-        }
     }
 }
