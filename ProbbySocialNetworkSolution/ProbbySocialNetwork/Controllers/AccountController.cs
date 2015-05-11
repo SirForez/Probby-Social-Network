@@ -15,6 +15,12 @@ namespace ProbbySocialNetwork.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+        public AccountService accountService = ServiceSingleton.GetAccountService;
+        public StatusService statusService = ServiceSingleton.GetStatusService;
+        public GroupService groupService = ServiceSingleton.GetGroupService;
+        public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -423,28 +429,40 @@ namespace ProbbySocialNetwork.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult AddFollower()
+        public ActionResult AddFollower(string username)
         {
-            //TODO: Implement
-            return View();
+            if (username != null)
+            {
+                ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+                ApplicationUser addTo = accountService.getUserByName(username);
+
+                accountService.addFollowingToUser(currentUser, addTo);
+
+                string url = this.Request.UrlReferrer.AbsolutePath;
+                return Redirect(url);
+            }
+            else
+            {
+                return View();
+            }
         }
 
-        public ActionResult AddFollowing()
+        public ActionResult RemoveFollower(string username)
         {
-            //TODO: Implement
-            return View();
-        }
+            if (username != null)
+            {
+                ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+                ApplicationUser removeFrom = accountService.getUserByName(username);
 
-        public ActionResult RemoveFollower()
-        {
-            //TODO: Implement
-            return View();
-        }
+                accountService.removeFollowingFromUser(currentUser, removeFrom);
 
-        public ActionResult RemoveFollowing()
-        {
-            //TODO: Implement
-            return View();
+                string url = this.Request.UrlReferrer.AbsolutePath;
+                return Redirect(url);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         #region Helpers
