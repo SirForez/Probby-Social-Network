@@ -23,8 +23,8 @@ namespace ProbbySocialNetwork.Models
         }
 
         public ApplicationUser getUserByName(String name)
-        {
-            var user = (from u in db.Users
+        {	
+			var user = (from u in db.Users
                         where u.UserName == name
                         select u).SingleOrDefault();
             return user;
