@@ -132,9 +132,10 @@
                         <input type="hidden" name="statusID" value="@s.ID" />
                         <div class="form-horizontal">
                             <label class="sr-only" for="commentText">Status</label>
-                            <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
-                            <button type="submit" class="btn btn-primary">Post</button>
+                            <input type="text" class="form-control" rows="2" id="commentText" name="commentText"></input>
                         </div>
+
+                        <input type="hidden" name="returnUrl" value="" />
                         @Html.ValidationSummary(false)
                     }
                 </div>           
