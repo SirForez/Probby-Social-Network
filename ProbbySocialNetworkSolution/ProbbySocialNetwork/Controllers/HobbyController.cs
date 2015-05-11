@@ -45,10 +45,42 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
         }
 
-        public ActionResult RemoveHobby()
+        public ActionResult AddHobby(int? id)
         {
-            //TODO: Implement
-            return View();
+            if (id.HasValue)
+            {
+                int realid = id.Value;
+                Hobby toAdd = hobbyService.getHobbyByID(realid);
+                ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+
+                hobbyService.addHobbyToUser(currentUser, toAdd);
+
+                string url = this.Request.UrlReferrer.AbsolutePath;
+                return Redirect(url);
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+        public ActionResult RemoveHobby(int? id)
+        {
+            if (id.HasValue)
+            {
+                int realid = id.Value;
+                Hobby toDel = hobbyService.getHobbyByID(realid);
+                ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+
+                hobbyService.removeHobbyFromuser(currentUser, toDel);
+
+                string url = this.Request.UrlReferrer.AbsolutePath;
+                return Redirect(url);
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
 
