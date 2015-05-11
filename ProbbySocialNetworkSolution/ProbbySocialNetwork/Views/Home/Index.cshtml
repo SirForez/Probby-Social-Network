@@ -34,6 +34,31 @@
             @Html.ValidationSummary(false)
         }
 
+        <h2>Hobbies</h2>
+
+        <ul>
+            @foreach (Hobby h in Model.currentUserHobbies)
+            {
+                <li>
+                    @Html.ActionLink(h.Name, "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID })
+                </li>
+            }
+        </ul>
+
+        <h4>Create a new Hobby</h4>
+        @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
+        {
+            <input type="hidden" name="userid" value="" />
+            <div class="form-horizontal">
+                <label class="sr-only" for="hobbyName">Name</label>
+                <textarea class="form-control" rows="1" id="hobbyName" name="hobbyName" placeholder="Hobby Name"></textarea>
+                <label class="sr-only" for="hobbyDesc">Description</label>
+                <textarea class="form-control" rows="4" id="hobbyDesc" name="hobbyDesc" placeholder="Hobby Description"></textarea>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            @Html.ValidationSummary(false)
+        }
+
     </div>
     <div class="theContent">
         <!--breyta i html helper-->
