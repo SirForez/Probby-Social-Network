@@ -14,10 +14,40 @@ namespace ProbbySocialNetwork.Models
             db = _db;
         }
 
+        public List<Status> getStatusesByUserID(string id)
+        {
+            var statuses = (from s in db.Statuses
+                            where s.UserID == id
+                            select s).ToList();
+            return statuses;
+        }
+
+        public List<Status> getStatusFeedByUser(ApplicationUser a)
+        {
+            var statuses = getStatusByUser(a);
+            List<UserFollowConnection> userFollowingIDs = (from f in db.UserFollowConnections
+                                             where f.FollowerID == a.Id
+                                             select f).ToList();
+            var statusesFromFollowing = new List<Status>();
+            foreach (UserFollowConnection c in userFollowingIDs)
+            {
+                var statusesFromCurrentFollowing = getStatusesByUserID(c.FollowingID);
+                foreach (Status s in statusesFromCurrentFollowing)
+                {
+                    statusesFromFollowing.Add(s);
+                }
+            }
+
+
+            //Needs to be sorted with comparer (want to be comparted useing DateTime)
+            statuses.AddRange(statusesFromFollowing);
+            return statuses;
+        }
+
         public List<Status> getStatusByUser(ApplicationUser a)
         {
             var statuses = (from s in db.Statuses
-                            where (a.Id == s.UserID) || (a.Id == s.PostedToID)
+                            where ((a.Id == s.UserID) && (s.PostedToID == a.Id)) || (a.Id == s.PostedToID)
                             orderby s.Date descending
                             select s).ToList();
 
