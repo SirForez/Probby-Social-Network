@@ -5,18 +5,20 @@
 }
 
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 <script>
 
     var main = function () {
 
-        $('.imageUrl').hide();
+        $(".imageUrl").hide();
 
-        $('#uploadImage').click(function () {
+        $("button").click(function () {
 
 
-            $('.imageUrl').toggle();
+            $(".imageUrl").toggle();
 
-            $('#uploadImage').hide();
+            $("button").hide();
         });
 
 
@@ -52,7 +54,7 @@
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
                     <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
-                    <input type="button" id="uploadImage" value="Upload image" />
+                    <button>Upload image</button>
                     <div class="imageUrl">
                         <label for="url">Enter URL:</label>
                         <input type="text" name="url" size="35" maxlength="255" />
