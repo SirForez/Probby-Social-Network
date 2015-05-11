@@ -21,7 +21,8 @@ namespace ProbbySocialNetwork.Controllers
         {
 			int ID = Int32.Parse(id);
 
-			GroupViewModel model = new GroupViewModel();
+            GroupViewModel model = new GroupViewModel();
+            model.commentsForStatuses = new List<Comment>();
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
 			model.currentGroup = groupService.getGroupByID(ID);
 			model.currentGroupMembers = groupService.getUsersByGroup(model.currentGroup);

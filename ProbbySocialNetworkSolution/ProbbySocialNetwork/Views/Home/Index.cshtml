@@ -67,7 +67,9 @@
             <h4>Create Status</h4>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
             {
-                <input type="hidden" name="userid" value="" />
+                <input type="hidden" name="userid" value="@Model.currentUser.Id " />
+                <input type="hidden" name="groupID" value="" />
+                <input type="hidden" name="postedToID" value="" />
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
                     <textarea class="form-control" rows="4" id="statusText" name="statusText" ></textarea>
@@ -87,12 +89,12 @@
                     @if (s.Post == null)
                     { 
                         <img src="@s.MediaURL" alt="image" />
-                        <input type="text" value="@s.MediaURL" class="editTextbox" hidden="" />
+                        <input type="text" value="@s.MediaURL" class="editTextbox"/>
                     }
                     else
                     {
                         @s.Post
-                        <input type="text" value="@s.Post" class="editTextbox" hidden="" />
+                        <input type="text" value="@s.Post" class="editTextbox"/>
                     }
 
                 </h3>
@@ -107,14 +109,14 @@
                         <script>
                             $(document).ready(function() {
                                 $("#editButton").click(function() {
-                                    $(".statusContent").css("display: none;")
+                                    $(".statusContent").hide();
                                     if (@s.Post == null)
                                     {
-                                        $(".editTextbox").css("display: block;");
+                                        $(".editTextbox").show();
                                     }
                                     else
                                     {
-                                        $(".editTextbox").css("display: block;");
+                                        $(".editTextbox").show();
                                     }
                                 });
                                 
@@ -129,10 +131,11 @@
                         if (c.StatusID == s.ID)
                         {
                             <p class="comment">
-                                @c.UserName: @c.Body | @c.DateInserted
+                                @c.UserName: @c.Body | @c.DateInserted 
+                                <span> | </span>
                                 @if (Model.currentUser.Id == s.UserID)
                                 {
-                                    @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = s.ID }, null)
+                                    @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
                                 }
                             </p>
                         }
