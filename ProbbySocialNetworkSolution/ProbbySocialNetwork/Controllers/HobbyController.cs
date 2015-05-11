@@ -89,13 +89,6 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
-
-        public ActionResult ViewHobby()
-        {
-            //TODO: Implement
-            return View();
-        }
-
         public ActionResult Search()
         {
             //TODO: Implement
