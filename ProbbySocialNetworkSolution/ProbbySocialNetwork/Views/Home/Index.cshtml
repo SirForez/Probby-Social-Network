@@ -19,7 +19,7 @@
         <h2>Groups</h2>
 
         <ul>
-            @foreach (Group g in Model.currentUserGroups)
+            @foreach(Group g in Model.currentUserGroups)
             {
                 <li>
                     @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
@@ -79,66 +79,61 @@
                 <input type="hidden" name="postedToID" value="" />
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
-                    <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
+                    <textarea class="form-control" rows="4" id="statusText" name="statusText" ></textarea>
                     <input type="checkbox" id="imageortext" name="imageOrText" value="image" />This is an image<br />
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
                 @Html.ValidationSummary(false)
             }
-
+      
         </section>
 
         @using ProbbySocialNetwork.Models
         <section id="statusList">
-            @foreach (Status s in Model.newestStatuses)
+            @foreach(Status s in Model.newestStatuses)
             {
-                <h3 class="statusContent">
-                    @if (s.Post == null)
+                
+                    if (s.MediaURL != null)
                     {
-                        <img src="@s.MediaURL" alt="image" />
-                        <input type="text" value="@s.MediaURL" class="editTextbox" />
+                        <h3 class="statusContent">
+                            <img src="@s.MediaURL" alt="image" />
+                        </h3>
+                        <textarea rows="4" value="@s.MediaURL" class=" editTextbox"/>
                     }
-                    else
+                    else if (s.Post != null)
                     {
-                        @s.Post
-                        <input type="text" value="@s.Post" class="editTextbox" />
+                        <h3 class="statusContent">
+                            @s.Post
+                        </h3>
+                        <textarea rows="4" value="@s.Post" class=" editTextbox" />
                     }
-
-                </h3>
                 <p>
-                    @Model.currentUser.UserName | @s.Date |
+                    @Model.currentUser.UserName | @s.Date | 
                     @if (Model.currentUser.Id == s.UserID)
                     {
                         @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
                         <span> | </span>
                         @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
-
+                        
                         <script>
-                            $(document).ready(function() {
-                                $("#editButton").click(function() {
+                            $(document).ready(function(){
+                                $(".editButton").click(function(){
                                     $(".statusContent").hide();
-                                    if (@s.Post == null)
-                                    {
-                                        $(".editTextbox").show();
-                                    }
-                                    else
-                                    {
-                                        $(".editTextbox").show();
-                                    }
-                                });
+                                    $(".editTextbox").css("display", "block");
 
+                                });
                             });
                         </script>
                     }
                 </p>
                 if (Model.commentsForStatuses != null)
-                {
-                    foreach (Comment c in Model.commentsForStatuses)
+                { 
+                    foreach(Comment c in Model.commentsForStatuses)
                     {
                         if (c.StatusID == s.ID)
                         {
                             <p class="comment">
-                                @c.UserName: @c.Body | @c.DateInserted
+                                @c.UserName: @c.Body | @c.DateInserted 
                                 <span> | </span>
                                 @if (Model.currentUser.Id == s.UserID)
                                 {
@@ -146,7 +141,7 @@
                                 }
                             </p>
                         }
-
+                        
                     }
                 }
 
@@ -158,15 +153,15 @@
                         <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
                         <button type="submit" class="btn btn-primary">Comment</button>
                     </div>
-
+                    
                     <input type="hidden" name="returnUrl" value="" />
                     @Html.ValidationSummary(false)
                 }
 
             }
         </section>
-
-
+         
+        
     </div>
 </div>
 
