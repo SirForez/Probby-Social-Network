@@ -170,9 +170,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Connections\AdminGroupConnection.cs" />
-    <Compile Include="Migrations\201505091758517_Role.cs" />
-    <Compile Include="Migrations\201505091758517_Role.Designer.cs">
-      <DependentUpon>201505091758517_Role.cs</DependentUpon>
+    <Compile Include="Migrations\201505111811121_R.cs" />
+    <Compile Include="Migrations\201505111811121_R.Designer.cs">
+      <DependentUpon>201505111811121_R.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -275,8 +275,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505091758517_Role.resx">
-      <DependentUpon>201505091758517_Role.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505111811121_R.resx">
+      <DependentUpon>201505111811121_R.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
