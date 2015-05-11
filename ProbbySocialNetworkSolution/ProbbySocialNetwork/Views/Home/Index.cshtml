@@ -106,7 +106,7 @@
 
                 </h3>
                 <p>
-                    @Model.currentUser.UserName | @s.Date |
+                    @s.UserName | @s.Date |
                     @if (Model.currentUser.Id == s.UserID)
                     {
                         @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })

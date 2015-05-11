@@ -49,6 +49,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			s.Date = DateTime.Now;
 			s.UserID = User.Identity.GetUserId();
+            s.UserName = User.Identity.Name;
             if (id != null)
             {
                 s.PostedToID = id;
