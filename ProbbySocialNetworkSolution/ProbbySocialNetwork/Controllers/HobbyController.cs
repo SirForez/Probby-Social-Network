@@ -17,17 +17,24 @@ namespace ProbbySocialNetwork.Controllers
 		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
 		
 		// GET: Hobby
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
             HobbyViewModel model = new HobbyViewModel();
+            if (id.HasValue)
+            {
+                int realid = id.Value;
+                model.currentUser = accountService.getUserByName(User.Identity.Name);
+                model.currentHobby = hobbyService.getHobbyByID(realid);
+                model.currentHobbyGroups = hobbyService.getGroupsByHobby(model.currentHobby);
+                model.currentHobbyStatusHistory = statusService.getStatusesByHobby(model.currentHobby);
+                model.currentHobbyUsers = hobbyService.getUsersByHobby(model.currentHobby);
 
-			model.currentUser = accountService.getUserByName(User.Identity.Name);
-			model.currentHobby = hobbyService.getHobbyByID(id);
-			model.currentHobbyGroups = hobbyService.getGroupsByHobby(model.currentHobby);
-			model.currentHobbyStatusHistory = statusService.getStatusesByHobby(model.currentHobby);
-			model.currentHobbyUsers = hobbyService.getUsersByHobby(model.currentHobby);
-
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         public ActionResult CreateHobby(FormCollection collection)
@@ -80,13 +87,6 @@ namespace ProbbySocialNetwork.Controllers
             {
                 return View("Error");
             }
-        }
-
-
-        public ActionResult ViewHobby()
-        {
-            //TODO: Implement
-            return View();
         }
 
         public ActionResult Search()
