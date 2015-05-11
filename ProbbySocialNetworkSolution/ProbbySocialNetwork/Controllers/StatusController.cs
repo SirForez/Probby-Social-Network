@@ -57,6 +57,7 @@ namespace ProbbySocialNetwork.Controllers
             {
                 s.PostedToID = User.Identity.GetUserId();
             }
+
 			//ApplicationUser a = accountService.getUserByName(User.Identity.Name);
 			//s.UserID = a.Id;
 			statusService.addStatus(s);

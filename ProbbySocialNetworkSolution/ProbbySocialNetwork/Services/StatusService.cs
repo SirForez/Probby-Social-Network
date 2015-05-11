@@ -17,24 +17,11 @@ namespace ProbbySocialNetwork.Models
         public List<Status> getStatusByUser(ApplicationUser a)
         {
             var statuses = (from s in db.Statuses
-                            where a.Id == s.UserID 
+                            where (a.Id == s.UserID) || (a.Id == s.PostedToID)
                             orderby s.Date descending
                             select s).ToList();
 
-            //Very temporary fix due to errors                              DOESNT WORK
-            //Need one LINQ statement to potentially get both
-            /*var statusesPostedTo = (from s in db.Statuses
-                                    where a.Id == s.PostedToID
-                                    orderby s.Date descending
-                                    select s).ToList();
-
-            foreach (Status s in statusesPostedTo)
-            {
-                if (!statuses.Contains(s))
-                {
-                    statuses.Add(s);
-                }
-            }*/
+            //Use postedToID to get all statuses posted to the user, for this as well, somehow
 
             return statuses;
         }
