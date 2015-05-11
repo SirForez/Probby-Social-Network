@@ -43,7 +43,7 @@ namespace ProbbySocialNetwork.Models
         public List<Group> getGroupsByHobby(Hobby h)
         {
             var groups = (from g in db.Groups
-                          where g.hobby == h
+                          where g.hobby.ID == h.ID
                           select g).ToList();
             return groups;
         }
