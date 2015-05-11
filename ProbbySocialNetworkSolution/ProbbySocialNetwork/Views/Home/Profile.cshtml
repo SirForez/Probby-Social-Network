@@ -34,7 +34,23 @@
 
 <div class="container">
     <div class="lhsNav">
-        <img src="~/Content/Images/dabs.jpg" id="profilePic">
+        @if (Model.currentUser.ProfilePic == null)
+        {
+            <img src="~/Content/Images/dabs.jpg" class="profilePic">
+        }
+        else
+        {
+            <img src="@Model.currentUser.ProfilePic" class="profilePic">
+        }
+        @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
+        {
+            <div class="form-horizontal">
+                <label class="sr-only" for="picLink">New Picture</label>
+                <textarea class="form-control" rows="1" id="newProfilePic" name="picLink"></textarea>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            @Html.ValidationSummary(false)
+        }
         <p>@Model.currentUserProfile.UserName's Profile</p>
     </div>
     <div class="theContent">
@@ -115,5 +131,4 @@
         }
     </div>
 </div>
-    
 

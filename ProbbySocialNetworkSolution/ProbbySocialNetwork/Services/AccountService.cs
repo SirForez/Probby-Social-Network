@@ -91,5 +91,12 @@ namespace ProbbySocialNetwork.Models
                          select u).ToList();
             return users;
         }
+
+		public void editProfilePicture(ApplicationUser a, string link)
+		{
+			a.ProfilePic = link;
+			
+			db.SaveChanges();
+		}
     }
 }
