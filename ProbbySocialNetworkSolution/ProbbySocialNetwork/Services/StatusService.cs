@@ -101,7 +101,7 @@ namespace ProbbySocialNetwork.Models
             return statuses;
         }
 
-        public Status getStatusByID(int id)
+        public Status getStatusByID(int? id)
         {
             var status = (from s in db.Statuses
                           where s.ID == id

@@ -65,30 +65,44 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult EditStatus(int id, FormCollection collection)
+		public ActionResult EditStatus(int? id, FormCollection collection)
 		{
-			Status currentStatus = statusService.getStatusByID(id);
-			if (currentStatus.Post == null) 
+			if (id != null)
 			{
-				currentStatus.MediaURL = collection["editedPost"];
+				Status currentStatus = statusService.getStatusByID(id);
+				if (currentStatus.Post == null)
+				{
+					currentStatus.MediaURL = collection["editedPost"];
+				}
+				else
+				{
+					currentStatus.Post = collection["editedPost"];
+				}
+
+				string url = this.Request.UrlReferrer.AbsolutePath;
+				return Redirect(url);
 			}
 			else
 			{
-				currentStatus.Post = collection["editedPost"];
+				return View("Error");
 			}
-
-			string url = this.Request.UrlReferrer.AbsolutePath;
-			return Redirect(url);
+			
 		}
 
-		public ActionResult RemoveStatus(int id)
+		public ActionResult RemoveStatus(int? id)
 		{
+			if (id != null)
+			{
+				Status currentStatus = statusService.getStatusByID(id);
+				statusService.removeStatus(currentStatus);
 
-			Status currentStatus = statusService.getStatusByID(id);	
-			statusService.removeStatus(currentStatus);
-
-			string url = this.Request.UrlReferrer.AbsolutePath;
-			return Redirect(url);
+				//string url = this.Request.UrlReferrer.AbsolutePath;
+				return RedirectToAction("Index", "Home");
+			}
+			else
+			{
+				return View("Error");
+			}
 		}
 
 		public ActionResult Search()
