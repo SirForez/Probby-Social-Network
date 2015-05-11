@@ -174,6 +174,10 @@
     <Compile Include="Migrations\201505111811121_R.Designer.cs">
       <DependentUpon>201505111811121_R.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505112210586_init.cs" />
+    <Compile Include="Migrations\201505112210586_init.Designer.cs">
+      <DependentUpon>201505112210586_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Group.cs" />
@@ -277,6 +281,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201505111811121_R.resx">
       <DependentUpon>201505111811121_R.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505112210586_init.resx">
+      <DependentUpon>201505112210586_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
