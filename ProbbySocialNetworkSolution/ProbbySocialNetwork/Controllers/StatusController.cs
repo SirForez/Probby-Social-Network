@@ -103,8 +103,8 @@ namespace ProbbySocialNetwork.Controllers
 				Status currentStatus = statusService.getStatusByID(id);
 				statusService.removeStatus(currentStatus);
 
-				//string url = this.Request.UrlReferrer.AbsolutePath;
-				return RedirectToAction("Index", "Home");
+				string url = this.Request.UrlReferrer.AbsolutePath;
+				return Redirect(url);
 			}
 			else
 			{
@@ -147,8 +147,8 @@ namespace ProbbySocialNetwork.Controllers
 				Comment currentComment = statusService.getCommentByID(id);
 				statusService.removeComment(currentComment);
 
-				//string url = this.Request.UrlReferrer.AbsolutePath;
-				return RedirectToAction("Index", "Home");
+				string url = this.Request.UrlReferrer.AbsoluteUri;
+				return Redirect(url);
 			}
 			else
 			{

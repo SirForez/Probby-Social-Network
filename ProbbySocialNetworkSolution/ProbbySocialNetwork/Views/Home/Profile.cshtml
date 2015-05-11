@@ -52,8 +52,12 @@
                         if (c.StatusID == s.ID)
                         {
                             <span id="status-comment-body" class="comment">
-                                <p>
-                                    @c.UserName: @c.Body | @c.DateInserted
+                                <p>@c.UserName: @c.Body | @c.DateInserted |
+
+                                    @if (Model.currentUser.Id == s.UserID)
+                                    {
+                                        @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                    }
                                 </p>
                             </span>
                         }
