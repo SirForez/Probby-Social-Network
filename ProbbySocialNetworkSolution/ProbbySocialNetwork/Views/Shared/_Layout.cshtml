@@ -38,13 +38,7 @@
                     @*Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })*@
                 </li>-->
                 <li>
-                    @using ProbbySocialNetwork.Models;
-                    @{
-                        ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-		                AccountService accountService = ServiceSingleton.GetAccountService;
-                    }
-                    @*Html.ActionLink("Profile", "Profile", "Home", routeValues: User.Identity.Name, htmlAttributes: new { title = "Profile" })*@
-                    @Html.ActionLink("Profile", "Profile", "Home", new { username = User.Identity.Name }, null);
+                    @Html.ActionLink("Profile", "Profile", "Home", new { username = User.Identity.Name }, null)
                     
                 </li>
                 <li>
