@@ -54,7 +54,6 @@
         <p>@Model.currentUserProfile.UserName's Profile</p>
     </div>
     <div class="theContent">
-
         <!--Status-->
         <div class="status">
             <h4>Create Status</h4>
@@ -78,12 +77,6 @@
             }
 
         </div>
-    </div>
-</div>
-
-
-
-
         @using ProbbySocialNetwork.Models
         @foreach (Status s in Model.currentUserStatusHistory)
         {
@@ -99,7 +92,7 @@
                     }
                 </h3>
                 <p>
-                    @s.UserID | @s.Date |
+                    @s.UserName | @s.Date |
                     @if (Model.currentUser.Id == s.UserID)
                     {
                         @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
@@ -125,14 +118,17 @@
                 <div>
                     @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                     {
-                    <input type="hidden" name="statusID" value="@s.ID" />
-                    <div class="form-horizontal">
-                        <label class="sr-only" for="commentText">Status</label>
-                        <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
-                        <button type="submit" class="btn btn-primary">Post</button>
-                    </div>
-                    @Html.ValidationSummary(false)
+                        <input type="hidden" name="statusID" value="@s.ID" />
+                        <div class="form-horizontal">
+                            <label class="sr-only" for="commentText">Status</label>
+                            <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
+                            <button type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                        @Html.ValidationSummary(false)
                     }
-                </div>
-            </div> 
+                </div>           
+            </div>
         }
+    </div>
+</div>
+
