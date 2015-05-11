@@ -23,7 +23,6 @@
                 </div>
                 @Html.ValidationSummary(false)
             }
-
         </section>
 
         @using ProbbySocialNetwork.Models
@@ -82,30 +81,3 @@
         }
     </div>
 </div>
-
-        @*
-    <h2>
-        @Model.currentUser.UserName's Profile
-    </h2>
-
-    @using ProbbySocialNetwork.Models
-    @foreach(Status s in Model.currentUserStatusHistory)
-    {
-        <h3>
-            @s.Date
-        </h3>
-        <p>
-            @s.Post
-        </p>
-        foreach(Comment c in Model.commentsForStatuses)
-        {
-            if (c.StatusID == s.ID)
-            {
-                <p>
-                    @c.Body
-                    @c.DateInserted
-                </p>
-            }
-        }
-    }
-*@
