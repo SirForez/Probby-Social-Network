@@ -52,6 +52,17 @@
             @Html.ValidationSummary(false)
         }
         <p>@Model.currentUserProfile.UserName's Profile</p>
+        @if (Model.currentUserProfile.UserName != User.Identity.Name)
+        {
+            if (Model.currentUserFollowing.Contains(Model.currentUserProfile))
+            {
+                @Html.ActionLink("Unfollow", "RemoveFollowing", "Account", new { username = Model.currentUserProfile.UserName }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.currentUserProfile.UserName }, null)
+            }
+        }
     </div>
     <div class="theContent">
         <!--Status-->

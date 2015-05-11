@@ -429,7 +429,7 @@ namespace ProbbySocialNetwork.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult AddFollower(string username)
+        public ActionResult AddFollowing(string username)
         {
             if (username != null)
             {
@@ -447,7 +447,7 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
-        public ActionResult RemoveFollower(string username)
+        public ActionResult RemoveFollowing(string username)
         {
             if (username != null)
             {

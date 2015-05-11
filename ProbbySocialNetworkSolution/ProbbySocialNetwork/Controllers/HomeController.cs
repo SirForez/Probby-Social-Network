@@ -85,6 +85,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			//model.currentUser = accountService.getUserByID(id);
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
+            model.currentUserFollowing = accountService.getFollowingByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 
             //For statuses, we also need to add the hobbies and shit
@@ -113,30 +114,6 @@ namespace ProbbySocialNetwork.Controllers
 			ViewBag.Message = "Here you should see your search results";
 			return View();
 		}
-
-        public ActionResult AddFollower()
-        {
-            //TODO: Implement
-            return View();
-        }
-
-        public ActionResult AddFollowing()
-        {
-            //TODO: Implement
-            return View();
-        }
-
-        public ActionResult RemoveFollower()
-        {
-            //TODO: Implement
-            return View();
-        }
-
-        public ActionResult RemoveFollowing()
-        {
-            //TODO: Implement
-            return View();
-        }
 
 		public ActionResult EditProfilePic(FormCollection collection)
 		{
