@@ -62,7 +62,7 @@ namespace ProbbySocialNetwork.Controllers
 
         [Authorize]
         [HttpGet]
-		public ActionResult Profile(string id)
+		public ActionResult Profile(string username)
 		{
 			ViewBag.Message = "Here you should see your profile!";
             ProfileViewModel model = new ProfileViewModel();
@@ -72,17 +72,16 @@ namespace ProbbySocialNetwork.Controllers
             //again to go back to your profile, it will go to quangs profile until the url has changed. Needs fixing.
 
            //Think it always gives a parameter now, needs testing though! - Bjartur
-			
-			/*if (id != null)
+		    if (username != null)
             {
-                model.currentUser = accountService.getUserByName(id);
+                model.currentUser = accountService.getUserByName(username);
             }
             else
             {
                 model.currentUser = accountService.getUserByName(User.Identity.Name);
-            }*/
+            }
 
-			model.currentUser = accountService.getUserByID(id);
+			//model.currentUser = accountService.getUserByID(id);
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 

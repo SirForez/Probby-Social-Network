@@ -21,9 +21,9 @@ namespace ProbbySocialNetwork.Models
                             orderby s.Date descending
                             select s).ToList();
 
-            //Very temporary fix due to errors
+            //Very temporary fix due to errors                              DOESNT WORK
             //Need one LINQ statement to potentially get both
-            var statusesPostedTo = (from s in db.Statuses
+            /*var statusesPostedTo = (from s in db.Statuses
                                     where a.Id == s.PostedToID
                                     orderby s.Date descending
                                     select s).ToList();
@@ -34,7 +34,8 @@ namespace ProbbySocialNetwork.Models
                 {
                     statuses.Add(s);
                 }
-            }
+            }*/
+
             return statuses;
         }
 
