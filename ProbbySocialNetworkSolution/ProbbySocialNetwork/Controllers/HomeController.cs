@@ -113,5 +113,37 @@ namespace ProbbySocialNetwork.Controllers
 			ViewBag.Message = "Here you should see your search results";
 			return View();
 		}
+
+        public ActionResult AddFollower()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult AddFollowing()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult RemoveFollower()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+        public ActionResult RemoveFollowing()
+        {
+            //TODO: Implement
+            return View();
+        }
+
+		public ActionResult EditProfilePic(FormCollection collection)
+		{
+			accountService.editProfilePicture(accountService.getUserByName(User.Identity.Name), collection["picLink"]);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
+		}
     }
 }

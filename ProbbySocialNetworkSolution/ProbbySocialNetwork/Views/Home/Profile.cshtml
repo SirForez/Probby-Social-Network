@@ -44,13 +44,26 @@
 
 <div class="container">
     <div class="lhsNav">
-        <img src="~/Content/Images/dabs.jpg" id="profilePic">
+        @if (Model.currentUser.ProfilePic == null)
+        {
+            <img src="~/Content/Images/dabs.jpg" class="profilePic">
+        }
+        else
+        {
+            <img src="@Model.currentUser.ProfilePic" class="profilePic">
+        }
+        @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
+        {
+            <div class="form-horizontal">
+                <label class="sr-only" for="picLink">New Picture</label>
+                <textarea class="form-control" rows="1" id="newProfilePic" name="picLink"></textarea>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            @Html.ValidationSummary(false)
+        }
         <p>@Model.currentUserProfile.UserName's Profile</p>
     </div>
     <div class="theContent">
-
-
-        
         <!--Status-->
       
         <div class="status">
@@ -75,12 +88,6 @@
             }
 
         </div>
-    </div>
-</div>
-
-
-
-
         @using ProbbySocialNetwork.Models
         @foreach (Status s in Model.currentUserStatusHistory)
         {
@@ -96,7 +103,7 @@
                     }
                 </h3>
                 <p>
-                    @s.UserID | @s.Date |
+                    @s.UserName | @s.Date |
                     @if (Model.currentUser.Id == s.UserID)
                     {
                         @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
@@ -107,7 +114,7 @@
                     {
                         if (c.StatusID == s.ID)
                         {
-                            <span id="status-comment-body" class="comment">
+                            <div id="status-comment-body" class="comment">
                                 <p>@c.UserName: @c.Body | @c.DateInserted |
 
                                     @if (Model.currentUser.Id == s.UserID)
@@ -115,23 +122,24 @@
                                         @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
                                     }
                                 </p>
-                            </span>
+                            </div>
                         }
                     }
                 </div>
                 <div>
                     @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                     {
-                    <input type="hidden" name="statusID" value="@s.ID" />
-                    <div class="form-horizontal">
-                        <label class="sr-only" for="commentText">Status</label>
-                        <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
-                        <button type="submit" class="btn btn-primary">Post</button>
-                    </div>
-                    @Html.ValidationSummary(false)
+                        <input type="hidden" name="statusID" value="@s.ID" />
+                        <div class="form-horizontal">
+                            <label class="sr-only" for="commentText">Status</label>
+                            <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
+                            <button type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                        @Html.ValidationSummary(false)
                     }
-                </div>
-            </div> 
+                </div>           
+            </div>
         }
-    
+    </div>
+</div>
 
