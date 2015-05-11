@@ -68,10 +68,11 @@
                             @s.Post
                         }
                         | @s.Date | 
-                    @if (Model.currentUser.Id == s.UserID) {
+                    @if (Model.currentUser.Id == s.UserID) 
+                    {
                         using (Html.BeginForm("RemoveStatus", "Status", new { id = s.ID }))
                         {
-                            <button type="submit" class="btn btn-primary">Remove</button>
+                            <button type="submit" class="btn btn-primary btn-xs">Remove</button>
                         }
                          @*@Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID })*@
                     }
@@ -86,9 +87,16 @@
                                 @c.UserName: @c.Body | @c.DateInserted
                             </p>
                         }
+                        if (Model.currentUser.Id == s.UserID) 
+                        {
+                            using (Html.BeginForm("RemoveComment", "Status", new { id = c.ID }))
+                            {
+                                <button type="submit" class="btn btn-primary btn-xs">Remove</button>
+                            }
+                        }
                     }
                 }
-                
+
                 using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                 {
                     <input type="hidden" name="statusID" value="@s.ID" />

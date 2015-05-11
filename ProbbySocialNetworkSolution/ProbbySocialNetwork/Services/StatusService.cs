@@ -167,7 +167,7 @@ namespace ProbbySocialNetwork.Models
             return statuses;
         }
 
-        public Comment getCommentByID(int id)
+        public Comment getCommentByID(int? id)
         {
             var comment = (from c in db.Comments
                            where c.ID == id

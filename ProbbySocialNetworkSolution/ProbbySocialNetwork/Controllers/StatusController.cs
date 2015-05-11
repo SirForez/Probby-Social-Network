@@ -133,10 +133,20 @@ namespace ProbbySocialNetwork.Controllers
 			return View();
 		}
 
-		public ActionResult RemoveComment()
+		public ActionResult RemoveComment(int? id)
 		{
-			//TODO: Implement
-			return View();
+			if (id != null)
+			{
+				Comment currentComment = statusService.getCommentByID(id);
+				statusService.removeComment(currentComment);
+
+				//string url = this.Request.UrlReferrer.AbsolutePath;
+				return RedirectToAction("Index", "Home");
+			}
+			else
+			{
+				return View("Error");
+			}
 		}
 	}
 }
