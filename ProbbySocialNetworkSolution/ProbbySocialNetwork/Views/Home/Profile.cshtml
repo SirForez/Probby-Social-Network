@@ -6,7 +6,16 @@
 
 <div class="container">
     <div class="lhsNav">
-        <img src="~/Content/Images/dabs.jpg" id="profilePic">
+        <img src="model.profile" id="profilePic">
+        @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
+        {
+            <div class="form-horizontal">
+                <label class="sr-only" for="picLink">New Picture</label>
+                <textarea class="form-control" rows="1" id="newProfilePic" name="picLink"></textarea>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+            @Html.ValidationSummary(false)
+        }
         <p>@Model.currentUser.UserName's Profile</p>
     </div>
     <div class="theContent">

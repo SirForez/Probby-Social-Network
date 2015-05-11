@@ -136,5 +136,13 @@ namespace ProbbySocialNetwork.Controllers
             //TODO: Implement
             return View();
         }
+
+		public ActionResult EditProfilePic(FormCollection collection)
+		{
+			accountService.editProfilePicture(accountService.getUserByName(User.Identity.Name), collection["picLink"]);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
+		}
     }
 }
