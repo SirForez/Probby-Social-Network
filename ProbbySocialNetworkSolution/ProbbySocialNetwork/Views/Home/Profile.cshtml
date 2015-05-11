@@ -11,14 +11,14 @@
 
     var main = function () {
 
-        $(".imageUrl").hide();
-
+       
         $("button").click(function () {
 
 
-            $(".imageUrl").toggle();
-
+            $(".imageUrl").toggle(250);
             $("button").hide();
+            $(".theContent").addClass("moveDown");
+           
         });
 
 
@@ -34,6 +34,14 @@
 
 </script>
 
+<style>
+
+    .moveDown{
+
+        margin-top: 15px;
+    }
+</style>
+
 <div class="container">
     <div class="lhsNav">
         <img src="~/Content/Images/dabs.jpg" id="profilePic">
@@ -44,6 +52,7 @@
 
         
         <!--Status-->
+      
         <div class="status">
             <h4>Create Status</h4>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
@@ -55,7 +64,7 @@
                     <label class="sr-only" for="statusText">Status</label>
                     <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
                     <button>Upload image</button>
-                    <div class="imageUrl">
+                    <div style="display:none;"class="imageUrl">
                         <label for="url">Enter URL:</label>
                         <input type="text" name="url" size="35" maxlength="255" />
                         <input type="submit" name="submit" value="Submit" />

@@ -1,11 +1,11 @@
 ﻿var main = function () {
 
-    $(".imageUrl").hide();
+    
 
-    $("#uploadImage").click(function () {
+    $("button").click(function () {
 
 
-        $(".imageUrl").toggle();
+       
         $(".imageUrl").show();
     });
 
