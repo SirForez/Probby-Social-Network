@@ -112,7 +112,7 @@ namespace ProbbySocialNetwork.Models
         public bool addStatus(Status s)
         {
             db.Statuses.Add(s);
-            return db.SaveChanges() != 0;
+            return db.SaveChanges() != 1;
         }
 
         public bool editStatus(Status edited)
@@ -125,7 +125,7 @@ namespace ProbbySocialNetwork.Models
                 s.Date = edited.Date;
                 s.Post = edited.Post;
                 s.MediaURL = edited.MediaURL;
-                return db.SaveChanges() != 0;
+                return db.SaveChanges() != 1;
             }
             return false;
         }
@@ -133,19 +133,19 @@ namespace ProbbySocialNetwork.Models
         public bool addComment(Comment toAdd)
         {
             db.Comments.Add(toAdd);
-            return db.SaveChanges() != 0;
+            return db.SaveChanges() != 1;
         }
 
         public bool removeStatus(Status toDel)
         {
             db.Statuses.Remove(toDel);
-            return db.SaveChanges() != 0;
+            return db.SaveChanges() != 1;
         }
 
         public bool removeComment(Comment toDel)
         {
             db.Comments.Remove(toDel);
-            return db.SaveChanges() != 0;
+            return db.SaveChanges() != 1;
         }
 
         //NOTE: Should this not be in the hobby service? Think about moving it there.
@@ -182,7 +182,7 @@ namespace ProbbySocialNetwork.Models
             {
                 c.Body = edited.Body;
                 c.DateInserted = edited.DateInserted;
-                return db.SaveChanges() != 0;
+                return db.SaveChanges() != 1;
             }
             return false;
         }
