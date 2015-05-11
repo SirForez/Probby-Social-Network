@@ -4,13 +4,45 @@
     ViewBag.Title = "Profile";
 }
 
+
+<script>
+
+    var main = function () {
+
+        $('.imageUrl').hide();
+
+        $('#uploadImage').click(function () {
+
+
+            $('.imageUrl').toggle();
+
+            $('#uploadImage').hide();
+        });
+
+
+
+
+    }
+
+    $(document).ready(main);
+
+
+
+
+
+</script>
+
 <div class="container">
     <div class="lhsNav">
         <img src="~/Content/Images/dabs.jpg" id="profilePic">
         <p>@Model.currentUserProfile.UserName's Profile</p>
     </div>
     <div class="theContent">
-        <section>
+
+
+        
+        <!--Status-->
+        <div class="status">
             <h4>Create Status</h4>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
             {
@@ -20,12 +52,23 @@
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
                     <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
-                    <input type="checkbox" id="imageortext" name="imageOrText" value="image" />This is an image<br />
+                    <input type="button" id="uploadImage" value="Upload image" />
+                    <div class="imageUrl">
+                        <label for="url">Enter URL:</label>
+                        <input type="text" name="url" size="35" maxlength="255" />
+                        <input type="submit" name="submit" value="Submit" />
+                    </div>
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
                 @Html.ValidationSummary(false)
             }
-        </section>
+
+        </div>
+    </div>
+</div>
+
+
+
 
         @using ProbbySocialNetwork.Models
         @foreach (Status s in Model.currentUserStatusHistory)
@@ -79,5 +122,5 @@
                 </div>
             </div> 
         }
-    </div>
-</div>
+    
+
