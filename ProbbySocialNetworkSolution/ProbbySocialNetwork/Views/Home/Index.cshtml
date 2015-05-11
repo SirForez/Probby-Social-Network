@@ -85,19 +85,21 @@
         <section id="statusList">
             @foreach(Status s in Model.newestStatuses)
             {
-                <h3 class="statusContent">
-                    @if (s.Post == null)
-                    { 
-                        <img src="@s.MediaURL" alt="image" />
-                        <input type="text" value="@s.MediaURL" class="editTextbox"/>
-                    }
-                    else
+                
+                    if (s.MediaURL != null)
                     {
-                        @s.Post
-                        <input type="text" value="@s.Post" class="editTextbox"/>
+                        <h3 class="statusContent">
+                            <img src="@s.MediaURL" alt="image" />
+                        </h3>
+                        <textarea rows="4" value="@s.MediaURL" class=" editTextbox"/>
                     }
-
-                </h3>
+                    else if (s.Post != null)
+                    {
+                        <h3 class="statusContent">
+                            @s.Post
+                        </h3>
+                        <textarea rows="4" value="@s.Post" class=" editTextbox" />
+                    }
                 <p>
                     @Model.currentUser.UserName | @s.Date | 
                     @if (Model.currentUser.Id == s.UserID)
@@ -107,19 +109,12 @@
                         @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
                         
                         <script>
-                            $(document).ready(function() {
-                                $("#editButton").click(function() {
+                            $(document).ready(function(){
+                                $(".editButton").click(function(){
                                     $(".statusContent").hide();
-                                    if (@s.Post == null)
-                                    {
-                                        $(".editTextbox").show();
-                                    }
-                                    else
-                                    {
-                                        $(".editTextbox").show();
-                                    }
+                                    $(".editTextbox").css("display", "block");
+
                                 });
-                                
                             });
                         </script>
                     }
