@@ -26,7 +26,8 @@ namespace ProbbySocialNetwork
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-					  "~/Content/feed.css"));
+					  "~/Content/feed.css",
+                      "~/Content/Javascript1.css"));
         }
     }
 }
