@@ -44,8 +44,55 @@
 
             <h2>Hobbies</h2>
 
+<<<<<<< HEAD
             <ul>
                 @foreach (Hobby h in Model.currentUserHobbies)
+=======
+        @using ProbbySocialNetwork.Models
+        <section id="statusList">
+            @foreach (Status s in Model.newestStatuses)
+            {
+                <h3 class="statusContent">
+                    @if (s.Post == null)
+                    {
+                        <img src="@s.MediaURL" alt="image" />
+                        <input type="text" value="@s.MediaURL" class="editTextbox" />
+                    }
+                    else
+                    {
+                        @s.Post
+                        <input type="text" value="@s.Post" class="editTextbox" />
+                    }
+
+                </h3>
+                <p>
+                    @s.UserName | @s.Date |
+                    @if (Model.currentUser.Id == s.UserID)
+                    {
+                        @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
+                        <span> | </span>
+                        @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
+
+                        <script>
+                            $(document).ready(function() {
+                                $("#editButton").click(function() {
+                                    $(".statusContent").hide();
+                                    if (@s.Post == null)
+                                    {
+                                        $(".editTextbox").show();
+                                    }
+                                    else
+                                    {
+                                        $(".editTextbox").show();
+                                    }
+                                });
+
+                            });
+                        </script>
+                    }
+                </p>
+                if (Model.commentsForStatuses != null)
+>>>>>>> eb3c1791cbb48d78418182a9eff75dec38d582d5
                 {
                     <li>
                         @Html.ActionLink(h.Name, "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID })
