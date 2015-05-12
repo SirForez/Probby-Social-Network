@@ -87,14 +87,16 @@ namespace ProbbySocialNetwork.Controllers
             }
 
             model.currentUserProfileFollowing = accountService.getFollowingByUser(model.currentUserProfile);
+			model.currentUserProfileFollowers = accountService.getFollowersByUser(model.currentUserProfile);
 
 			//model.currentUser = accountService.getUserByID(id);
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
             model.currentUserFollowing = accountService.getFollowingByUser(model.currentUser);
+			model.currentUserFollowers = accountService.getFollowersByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 			model.currentUserHobbies = hobbyService.getHobbiesByUser(model.currentUser);
-
-            //For statuses, we also need to add the hobbies and shit
+			model.currentUserProfileNumberOfFollowers = model.currentUserProfile.NumberOfFollowers;
+			model.currentUserProfileNumberOfFollowing = model.currentUserProfile.NumberOfFollowing;
 
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
             foreach(Status s in model.currentUserStatusHistory) {

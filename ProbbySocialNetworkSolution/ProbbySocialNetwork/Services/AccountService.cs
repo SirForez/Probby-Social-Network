@@ -39,6 +39,15 @@ namespace ProbbySocialNetwork.Models
             return followers;
         }
 
+		public List<ApplicationUser> getFollowingByUser(ApplicationUser a)
+		{
+			var following = (from c in db.UserFollowConnections
+							 where c.FollowerID == a.Id
+							 join u in db.Users on c.FollowingID equals u.Id
+							 select u).ToList();
+			return following;
+		}
+
         public bool addFollowerToUser(ApplicationUser a, ApplicationUser toAdd)
         {
             UserFollowConnection uConnection = new UserFollowConnection();
@@ -57,15 +66,6 @@ namespace ProbbySocialNetwork.Models
             uConnection.FollowerID = toDel.Id;
             db.UserFollowConnections.Remove(uConnection);
             return db.SaveChanges() != 1;
-        }
-
-        public List<ApplicationUser> getFollowingByUser(ApplicationUser a)
-        {
-            var following = (from c in db.UserFollowConnections
-                             where c.FollowerID == a.Id
-                             join u in db.Users on c.FollowingID equals u.Id
-                             select u).ToList();
-            return following;
         }
 
         public bool addFollowingToUser(ApplicationUser a, ApplicationUser toAdd)

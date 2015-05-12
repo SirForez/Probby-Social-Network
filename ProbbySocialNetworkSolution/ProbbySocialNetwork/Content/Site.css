@@ -14,13 +14,13 @@
     font-weight: bold;
 }
 
-.group, .hobby, .followings {
+.group, .hobby, .follow {
     background: rgba(228, 228, 228, 0.51);
     border-radius: 15px;
     box-shadow: 1px 2px 5px rgba(215, 212, 212, 1);
 }
 
-.group > h2 , .hobby > h2, .followings > h2 {
+.group > h2 , .hobby > h2, .follow > h2 {
     font-weight: bold;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -32,7 +32,7 @@
     color: white;
 }
 
-.groupCreation, .hobbyCreation, #following-list {
+.groupCreation, .hobbyCreation, #follow-list {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;

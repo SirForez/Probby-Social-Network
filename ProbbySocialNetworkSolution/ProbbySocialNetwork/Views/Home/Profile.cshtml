@@ -46,9 +46,9 @@
                 @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.currentUserProfile.UserName }, new { @class = "followButton" })
             }
         }
-        <div class="followings">
-            <h2>Following list</h2>
-            <div id="following-list">
+        <div class="follow">
+            <h2>Following list : @Model.currentUserProfileNumberOfFollowing</h2>
+            <div class="follow-list">
                 <ul>
                     @foreach (ApplicationUser a in Model.currentUserProfileFollowing)
                     {
@@ -59,6 +59,20 @@
                 </ul>
             </div>
         </div>
+        <div class="follow">
+            <h2>Follower list : @Model.currentUserProfileNumberOfFollowers</h2>
+            <div class="follow-list">
+                <ul>
+                    @foreach (ApplicationUser a in Model.currentUserProfileFollowers)
+                    {
+                        <li>
+                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        
     </div>
     <div class="theContent">
         <section>
