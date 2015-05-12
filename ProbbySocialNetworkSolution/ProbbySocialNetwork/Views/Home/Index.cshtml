@@ -42,6 +42,20 @@
 
                             <label class="sr-only" for="groupName">Name</label>
                             <textarea class="form-control" rows="1" id="groupName" name="groupName" placeholder="Group Name"></textarea>
+                            <label class="sr-only" for="groupHobby">Name</label>
+                            <select class="form-control" rows="1" id="groupHobby" name="groupHobby" placeholder="Group Hobby">
+                                @foreach (Hobby h in Model.currentUserHobbies)
+                                {
+                                    if (@h.Name == "Misc")
+                                    {
+                                        <option value="@h.Name" selected="selected">#@h.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@h.Name">#@h.Name</option>
+                                    }
+                                }
+                            </select>
                             <label class="sr-only" for="groupDesc">Description</label>
                             <textarea class="form-control" rows="4" id="groupDesc" name="groupDesc" placeholder="Group Description"></textarea>
                             <button type="submit" class="btn btn-primary">Create</button>

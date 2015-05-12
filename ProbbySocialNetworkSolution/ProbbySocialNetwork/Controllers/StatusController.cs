@@ -40,18 +40,23 @@ namespace ProbbySocialNetwork.Controllers
 
 			if (groupID != null)
 			{
-				s.GroupID = groupID;
-			}
-
-			if (collection["chosenHobby"] != "Misc")
-			{
-				s.HobbyID = hobbyService.getHobbyByName(collection["chosenHobby"]).ID;
-			}
-			else
-			{
-				Hobby defaultHobby = hobbyService.getDefaultHobby();
-				s.HobbyID = defaultHobby.ID;
-			}
+                int realGroupID = groupID.Value;
+                Group g = groupService.getGroupByID(realGroupID);
+				s.GroupID = g.ID;
+                s.HobbyID = g.hobby.ID;
+            }
+            else
+            {
+                if (collection["chosenHobby"] != "Misc")
+                {
+                    s.HobbyID = hobbyService.getHobbyByName(collection["chosenHobby"]).ID;
+                }
+                else
+                {
+                    Hobby defaultHobby = hobbyService.getDefaultHobby();
+                    s.HobbyID = defaultHobby.ID;
+                }
+            }
 
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 

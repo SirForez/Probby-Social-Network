@@ -14,6 +14,7 @@ namespace ProbbySocialNetwork.Controllers
 		public AccountService accountService = ServiceSingleton.GetAccountService;
 		public StatusService statusService = ServiceSingleton.GetStatusService;
 		public GroupService groupService = ServiceSingleton.GetGroupService;
+        public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
 
         // GET: Group
 		[Authorize]
@@ -47,6 +48,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			g.name = collection["groupName"];
 			g.description = collection["groupDesc"];
+            g.hobby = hobbyService.getHobbyByName(collection["groupHobby"]);
 
 			groupService.addGroup(g);
 
