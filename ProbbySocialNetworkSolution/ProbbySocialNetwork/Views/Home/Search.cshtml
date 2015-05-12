@@ -7,11 +7,11 @@
 <h2>Search results:</h2>
 <div id="content-container">
     <div id="content-container-users">
-        <h3>
-            Users:
-        </h3>
         @if (Model.userSearchResults.Count != 0)
         {
+            <h3>
+                Users:
+            </h3>
             <div id="user-results">
                 @foreach (ApplicationUser a in Model.userSearchResults)
                 {
@@ -22,11 +22,11 @@
     </div>
 
     <div id="content-container-hobbies">
-        <h3>
-            Hobbies:
-        </h3>
         @if (Model.hobbySearchResults.Count != 0)
         {
+            <h3>
+                Hobbies:
+            </h3>
             <div id="hobby-results">
                 @foreach (Hobby h in Model.hobbySearchResults)
                 {
@@ -36,11 +36,11 @@
         }
     </div>
     <div id="content-container-groups">
-        <h3>
-            Groups:
-        </h3>
         @if (Model.groupSearchResults.Count != 0)
         {
+            <h3>
+                Groups:
+            </h3>
             <div id="user-results">
                 @foreach (Group g in Model.groupSearchResults)
                 {
