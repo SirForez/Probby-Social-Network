@@ -25,6 +25,7 @@ namespace ProbbySocialNetwork.Models
         public List<Status> getStatusFeedByUser(ApplicationUser a)
         {
 			var statuses = getStatusByUser(a);
+
             List<UserFollowConnection> userFollowingIDs = (from f in db.UserFollowConnections
                                              where f.FollowerID == a.Id
                                              select f).ToList();
@@ -46,11 +47,8 @@ namespace ProbbySocialNetwork.Models
 
         public List<Status> getStatusByUser(ApplicationUser a)
         {
-            if (a == null)
-			{ return null; }
-			
 			var statuses = (from s in db.Statuses
-                            where ((a.Id == s.UserID) && (s.PostedToID == a.Id)) || (a.Id == s.PostedToID)
+                            where ((a.Id == s.UserID) || (a.Id == s.PostedToID))
                             orderby s.Date descending
                             select s).ToList();
 
@@ -207,5 +205,12 @@ namespace ProbbySocialNetwork.Models
             }
             return false;
         }
+
+		public void editStatusProfilePicture(Status s, string link)
+		{
+			s.ProfilePic = link;
+
+			db.SaveChanges();
+		}
     }
 }

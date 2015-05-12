@@ -117,7 +117,17 @@ namespace ProbbySocialNetwork.Controllers
 
 		public ActionResult EditProfilePic(FormCollection collection)
 		{
-			accountService.editProfilePicture(accountService.getUserByName(User.Identity.Name), collection["picLink"]);
+			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+			
+			accountService.editProfilePicture(currentUser, collection["picLink"]);
+
+
+			List<Status> userStatuses = statusService.getStatusByUser(currentUser);
+
+			foreach (Status s in userStatuses)
+			{
+				statusService.editStatusProfilePicture(s, currentUser.ProfilePic);
+			}
 
 			string url = this.Request.UrlReferrer.AbsolutePath;
 			return Redirect(url);
