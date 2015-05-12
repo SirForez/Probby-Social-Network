@@ -42,6 +42,7 @@ namespace ProbbySocialNetwork.Models
         public bool addFollowerToUser(ApplicationUser a, ApplicationUser toAdd)
         {
             UserFollowConnection uConnection = new UserFollowConnection();
+            a.NumberOfFollowers++;
             uConnection.FollowingID = a.Id;
             uConnection.FollowerID = toAdd.Id;
             db.UserFollowConnections.Add(uConnection);
@@ -52,6 +53,7 @@ namespace ProbbySocialNetwork.Models
         {
             UserFollowConnection uConnection = new UserFollowConnection();
             uConnection.FollowingID = a.Id;
+            a.NumberOfFollowers--;
             uConnection.FollowerID = toDel.Id;
             db.UserFollowConnections.Remove(uConnection);
             return db.SaveChanges() != 1;
@@ -70,6 +72,7 @@ namespace ProbbySocialNetwork.Models
         {
             UserFollowConnection uConnection = new UserFollowConnection();
             uConnection.FollowerID = a.Id;
+            a.NumberOfFollowing++;
             uConnection.FollowingID = toAdd.Id;
             db.UserFollowConnections.Add(uConnection);
             return db.SaveChanges() != 1;
@@ -86,6 +89,7 @@ namespace ProbbySocialNetwork.Models
         public bool removeFollowingFromUser(ApplicationUser a, ApplicationUser toDel)
         {
             UserFollowConnection uConnection = getUserFollowConnectionByUsers(a, toDel);
+            a.NumberOfFollowing--;
             db.UserFollowConnections.Remove(uConnection);
             return db.SaveChanges() != 1;
         }
