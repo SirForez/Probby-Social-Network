@@ -83,6 +83,8 @@ namespace ProbbySocialNetwork.Controllers
                 model.currentUserProfile = model.currentUser;
             }
 
+            model.currentUserProfileFollowing = accountService.getFollowingByUser(model.currentUserProfile);
+
 			//model.currentUser = accountService.getUserByID(id);
             model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
             model.currentUserFollowing = accountService.getFollowingByUser(model.currentUser);
