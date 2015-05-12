@@ -8,32 +8,13 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script>
-
     var main = function () {
-
-       
         $(".onClick").click(function () {
-
-
             $(".appendTo").append("<label for='url'>Enter URL:</label><input type='text' name='url' size='35' maxlength='255'/><input type='submit'name='submit' value='Submit' />");
-
             $(".onClick").hide();
-            
-            
-           
         });
-
-
-
-
     }
-
     $(document).ready(main);
-
-
-
-
-
 </script>
 
 
@@ -60,7 +41,7 @@
             </div>
             @Html.ValidationSummary(false)
         }
-        <p>@Model.currentUserProfile.UserName's Profile</p>
+        <p><a href="/Home/Profile?username=@Model.currentUserProfile.UserName">@Model.currentUserProfile.UserName's Profile</a></p>
         @if (Model.currentUserProfile.UserName != User.Identity.Name)
         {
             if (Model.currentUserFollowing.Contains(Model.currentUserProfile))
@@ -72,6 +53,12 @@
                 @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.currentUserProfile.UserName }, null)
             }
         }
+        <div id="following-list">
+            @foreach (ApplicationUser a in Model.currentUserProfileFollowing)
+            {
+                <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+            }
+        </div>
     </div>
     <div class="theContent">
         <!--Status-->
@@ -109,7 +96,7 @@
                         }
                     </h3>
                     <p>
-                        @s.UserName | @s.Date |
+                        <a href="/Home/Profile?username=@s.UserName">@s.UserName</a> | @s.Date |
                         @if (Model.currentUser.Id == s.UserID)
                         {
                             @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
@@ -122,13 +109,13 @@
                             {
                                 <div id="status-comment-body" class="comment">
                                     <p>
-                                        @c.UserName: @c.Body | @c.DateInserted |
+                                        <a href="/Home/Profile?username=@c.UserName">@c.UserName:</a> @c.Body | @c.DateInserted |
 
-                                        @if (Model.currentUser.Id == s.UserID)
-                                        {
-                                            @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                        }
-                                    </p>
+                                            @if (Model.currentUser.Id == s.UserID)
+                                            {
+                                                @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                            }
+</p>
                                 </div>
                             }
                         }
