@@ -4,76 +4,78 @@
     ViewBag.Title = "Hobby";
 }
 
-<h2>@Model.currentHobby.Name</h2>
+<div class="container">
+    <div class="lhsNav">
+        <h2>@Model.currentHobby.Name</h2>
+    </div>
+    <div class="theContent">
+        <!--breyta i html helper-->
 
-<div class="theContent">
-    <!--breyta i html helper-->
-
-    <section>
-        <h4>Create Status</h4>
-        @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { hobbyID = Model.currentHobby.ID, id = "statusForm" }))
-        {
-            <input type="hidden" name="userid" value="" />
-            <div class="form-horizontal">
-                <label class="sr-only" for="statusText">Status</label>
-                <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
-                <input type="checkbox" id="imageortext" name="imageOrText" value="image" />This is an image<br />
-                <button type="submit" class="btn btn-primary">Post</button>
-            </div>
-            @Html.ValidationSummary(false)
-        }
-    </section>
-
-    @using ProbbySocialNetwork.Models
-    <section id="commentList">
-        @foreach (Status s in Model.currentHobbyStatusHistory)
-        {
-            <h3>
-                @*Change this so it shows the user that actually posted the status*@
-                @Model.currentUser.UserName
-            </h3>
-            <p>
-                @if (s.Post == null)
-                {
-                    <img src="@s.MediaURL" alt="image" />
-                }
-                else
-                {
-                    @s.Post
-                }
-                | @s.Date |
-                @if (Model.currentUser.Id == s.UserID)
-                {
-                    @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { title = "Remove" })
-                }
-            </p>
-            if (Model.commentsForStatuses != null)
+        <section>
+            <h4>Create Status</h4>
+            @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { hobbyID = Model.currentHobby.ID, id = "statusForm" }))
             {
-                foreach (Comment c in Model.commentsForStatuses)
-                {
-                    if (c.StatusID == s.ID)
-                    {
-                        <p class="comment">
-                            @c.UserName: @c.Body | @c.DateInserted
-                        </p>
-                    }
-                }
-            }
-
-            using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
-            {
-                <input type="hidden" name="statusID" value="@s.ID" />
+                <input type="hidden" name="userid" value="" />
                 <div class="form-horizontal">
-                    <label class="sr-only" for="commentText">Status</label>
-                    <input type="text" class="form-control commentText" rows="2" name="commentText" />
+                    <label class="sr-only" for="statusText">Status</label>
+                    <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
+                    <input type="checkbox" id="imageortext" name="imageOrText" value="image" />This is an image<br />
+                    <button type="submit" class="btn btn-primary">Post</button>
                 </div>
-
-                <input type="hidden" name="returnUrl" value="" />
                 @Html.ValidationSummary(false)
             }
+        </section>
 
-        }
-    </section>
+        @using ProbbySocialNetwork.Models
+        <section id="commentList">
+            @foreach (Status s in Model.currentHobbyStatusHistory)
+            {
+                <h3>
+                    @*Change this so it shows the user that actually posted the status*@
+                    @Model.currentUser.UserName
+                </h3>
+                <p>
+                    @if (s.Post == null)
+                    {
+                        <img src="@s.MediaURL" alt="image" />
+                    }
+                    else
+                    {
+                        @s.Post
+                    }
+                    | @s.Date |
+                    @if (Model.currentUser.Id == s.UserID)
+                    {
+                        @Html.ActionLink("Remove this post", "RemoveStatus", "Status", routeValues: s.ID, htmlAttributes: new { title = "Remove" })
+                    }
+                </p>
+                if (Model.commentsForStatuses != null)
+                {
+                    foreach (Comment c in Model.commentsForStatuses)
+                    {
+                        if (c.StatusID == s.ID)
+                        {
+                            <p class="comment">
+                                @c.UserName: @c.Body | @c.DateInserted
+                            </p>
+                        }
+                    }
+                }
 
+                using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                {
+                    <input type="hidden" name="statusID" value="@s.ID" />
+                    <div class="form-horizontal">
+                        <label class="sr-only" for="commentText">Status</label>
+                        <input type="text" class="form-control commentText" rows="2" name="commentText" />
+                    </div>
+
+                    <input type="hidden" name="returnUrl" value="" />
+                    @Html.ValidationSummary(false)
+                }
+
+            }
+        </section>
+
+    </div>
 </div>
-
