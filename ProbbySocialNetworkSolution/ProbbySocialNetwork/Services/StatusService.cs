@@ -55,7 +55,7 @@ namespace ProbbySocialNetwork.Models
             }
 
             statuses.AddRange(statusesFromFollowing);
-            statuses.Sort((x, y) => x.Date.CompareTo(y.Date)); //Needs to be in the oposite order
+            statuses.Sort((x, y) => y.Date.CompareTo(x.Date)); //Needs to be in the oposite order
             return statuses;
         }
 
