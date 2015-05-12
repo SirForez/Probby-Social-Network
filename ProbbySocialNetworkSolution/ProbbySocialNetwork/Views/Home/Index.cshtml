@@ -137,7 +137,7 @@
                     <div class="status">
                         <p>
                             <img src="@s.ProfilePic" class="postPic" />
-                        <p class="postUserName">@s.UserName</p>
+                        <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
                         
                         <div class="theStatus">
                             <h3 class="statusContent">
@@ -185,13 +185,13 @@
                                     if (c.StatusID == s.ID)
                                     {
                                         <p class="comment">
-                                            @c.UserName | @c.Body | @c.DateInserted
-                                            <span> | </span>
-                                            @if (Model.currentUser.Id == s.UserID)
-                                            {
-                                                @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                            }
-                                        </p>
+                                            <a href="/Home/Profile?username=@c.UserName">@c.UserName</a> | @c.Body | @c.DateInserted
+                                                <span> | </span>
+                                                @if (Model.currentUser.Id == s.UserID)
+                                                {
+                                                    @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                                }
+</p>
                                     }
 
                                 }
