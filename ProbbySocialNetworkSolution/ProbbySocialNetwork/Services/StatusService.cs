@@ -55,7 +55,7 @@ namespace ProbbySocialNetwork.Models
             }
 
             statuses.AddRange(statusesFromFollowing);
-            statuses.Sort((x, y) => y.Date.CompareTo(x.Date)); //Needs to be in the oposite order
+            statuses.Sort((x, y) => y.Date.CompareTo(x.Date));
             return statuses;
         }
 
@@ -67,11 +67,9 @@ namespace ProbbySocialNetwork.Models
 			}
 			
 			var statuses = (from s in db.Statuses
-                            where ((a.Id == s.UserID) || (a.Id == s.PostedToID))
+                            where (((a.Id == s.UserID) && (s.GroupID == null)) || (a.Id == s.PostedToID))
                             orderby s.Date descending
                             select s).ToList();
-
-            //Use postedToID to get all statuses posted to the user, for this as well, somehow
 
             return statuses;
         }
@@ -79,7 +77,7 @@ namespace ProbbySocialNetwork.Models
 		public List<Status> getStatusesByHobby(Hobby h)
 		{
 			var statuses = (from s in db.Statuses
-							where h.ID == s.ID
+							where h.ID == s.HobbyID
 							orderby s.Date descending
 							select s).ToList();
 			return statuses;
