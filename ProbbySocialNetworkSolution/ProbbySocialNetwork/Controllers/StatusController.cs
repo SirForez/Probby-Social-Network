@@ -43,6 +43,16 @@ namespace ProbbySocialNetwork.Controllers
 				s.GroupID = groupID;
 			}
 
+			if (collection["chosenHobby"] != "Misc")
+			{
+				s.HobbyID = hobbyService.getHobbyByName(collection["chosenHobby"]).ID;
+			}
+			else
+			{
+				Hobby defaultHobby = hobbyService.getDefaultHobby();
+				s.HobbyID = defaultHobby.ID;
+			}
+
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 
 			if (currentUser.ProfilePic == null)
