@@ -60,24 +60,22 @@
                     }
                 </ul>
 
+                <div class="groupCreation">
+                    <h4>Create a new Group</h4>
+                    @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
+                    {
+                        <input type="hidden" name="userid" value="" />
+                        <div class="form-horizontal">
 
-            <h4>Create a new Group</h4>
-            @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
-            {
-                <input type="hidden" name="userid" value="" />
-                <div class="form-horizontal">
-
-                    <label class="sr-only" for="groupName">Name</label>
-                    <textarea class="form-control" rows="1" id="groupName" name="groupName" placeholder="Group Name"></textarea>
-                    <label class="sr-only" for="groupDesc">Description</label>
-                    <textarea class="form-control" rows="4" id="groupDesc" name="groupDesc" placeholder="Group Description"></textarea>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                            <label class="sr-only" for="groupName">Name</label>
+                            <textarea class="form-control" rows="1" id="groupName" name="groupName" placeholder="Group Name"></textarea>
+                            <label class="sr-only" for="groupDesc">Description</label>
+                            <textarea class="form-control" rows="4" id="groupDesc" name="groupDesc" placeholder="Group Description"></textarea>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        @Html.ValidationSummary(false)
+                    }
                 </div>
-                @Html.ValidationSummary(false)
-            }
-
-            
-
             </div>
 
             <div class="hobby">
@@ -91,21 +89,22 @@
                         </li>
                     }
                 </ul>
+                <div class="hobbyCreation">
+                    <h4>Create a new Hobby</h4>
+                    @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
+                    {
+                        <input type="hidden" name="userid" value="" />
+                        <div class="form-horizontal">
+                            <label class="sr-only" for="hobbyName">Name</label>
+                            <textarea class="form-control" rows="1" id="hobbyName" name="hobbyName" placeholder="Hobby Name"></textarea>
+                            <label class="sr-only" for="hobbyDesc">Description</label>
+                            <textarea class="form-control" rows="4" id="hobbyDesc" name="hobbyDesc" placeholder="Hobby Description"></textarea>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        @Html.ValidationSummary(false)
 
-                <h4>Create a new Hobby</h4>
-                @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
-                {
-                    <input type="hidden" name="userid" value="" />
-                    <div class="form-horizontal">
-                        <label class="sr-only" for="hobbyName">Name</label>
-                        <textarea class="form-control" rows="1" id="hobbyName" name="hobbyName" placeholder="Hobby Name"></textarea>
-                        <label class="sr-only" for="hobbyDesc">Description</label>
-                        <textarea class="form-control" rows="4" id="hobbyDesc" name="hobbyDesc" placeholder="Hobby Description"></textarea>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                    @Html.ValidationSummary(false)
-
-                }
+                    }
+                </div>
             </div>
         </div>
         <div class="theContent">
@@ -138,7 +137,7 @@
                         <div class="lhsStatus">
                             <p>
                                 <img src="@s.ProfilePic" class="postPic" />
-                            <p class="postUserName">@s.UserName</p>
+                            <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
                         </div>
                         <div class="rhsStatus">
                             <h3 class="statusContent">
@@ -160,7 +159,7 @@
                                     @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
                                     <span> | </span>
                                     @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
-
+                    
                                     <script>
                                         $(document).ready(function() {
                                             $("#editButton").click(function() {
@@ -174,7 +173,7 @@
                                                     $(".editTextbox").show();
                                                 }
                                             });
-
+                    
                                         });
                                     </script>
                                 }
@@ -186,7 +185,7 @@
                                     if (c.StatusID == s.ID)
                                     {
                                         <p class="comment">
-                                            @c.UserName | @c.Body | @c.DateInserted
+                                            <a href="/Home/Profile?username=@c.UserName">@c.UserName</a> | @c.Body | @c.DateInserted
                                             <span> | </span>
                                             @if (Model.currentUser.Id == s.UserID)
                                             {
@@ -194,10 +193,10 @@
                                             }
                                         </p>
                                     }
-
+                    
                                 }
                             }
-
+                    
                             @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                             {
                                 <input type="hidden" name="statusID" value="@s.ID" />
