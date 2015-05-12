@@ -111,10 +111,17 @@ namespace ProbbySocialNetwork.Controllers
 			return View();
 		}
 
-		public ActionResult Search()
+		public ActionResult Search(FormCollection collection)
 		{
-			ViewBag.Message = "Here you should see your search results";
-			return View();
+            String searchString = collection["searchBar"];
+            SearchViewModel model = new SearchViewModel();
+
+            model.searchString = searchString;
+            model.groupSearchResults = groupService.groupSearch(searchString);
+            model.hobbySearchResults = hobbyService.hobbySearch(searchString);
+            model.userSearchResults = accountService.userSearch(searchString);
+
+			return View(model);
 		}
 
 		public ActionResult EditProfilePic(FormCollection collection)
