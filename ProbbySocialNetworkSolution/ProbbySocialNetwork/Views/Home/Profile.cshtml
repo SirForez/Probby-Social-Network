@@ -153,10 +153,11 @@
                         </p>
                         @if (Model.commentsForStatuses != null)
                         {
-                            foreach (Comment c in Model.commentsForStatuses)
-                            {
-                                if (c.StatusID == s.ID)
+                            <div class="allComments">
+                                @foreach (Comment c in Model.commentsForStatuses)
                                 {
+                                    if (c.StatusID == s.ID)
+                                    {
                                     <div class="comment">
                                         <h5 id="@("commentText"+c.ID)" class="commentContent2">@c.Body</h5>
                                         @using (Html.BeginForm("EditComment", "Status", FormMethod.Post, new { id = c.ID }))
@@ -165,7 +166,7 @@
                                             <div id="@("commentTextForm"+c.ID)" class="editForm">
                                                 @*need id for textarea to get into controller*@
                                                 <label for="@("commentTextbox"+c.ID)">Comment:</label>
-                                                <br/>
+                                                <br />
                                                 <input type="text" name="@("commentTextbox"+c.ID)" value="@c.Body" />
                                                 <br />
                                                 <button type="submit" class="btn btn-primary">Confirm Edit</button>
@@ -180,8 +181,9 @@
                                             @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
                                         }
                                     </div>
+                                    }
                                 }
-                            }
+                            </div>
                         }
 
                         @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
