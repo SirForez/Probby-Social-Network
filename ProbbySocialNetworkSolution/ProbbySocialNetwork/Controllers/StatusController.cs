@@ -92,7 +92,7 @@ namespace ProbbySocialNetwork.Controllers
 			Status currentStatus = statusService.getStatusByID(id);
 			Status editedStatus = new Status();
 			editedStatus.ID = currentStatus.ID;
-			editedStatus.Date = DateTime.Now;
+			editedStatus.Date = currentStatus.Date;
 			editedStatus.Post = null;
 			editedStatus.MediaURL = null;
 
