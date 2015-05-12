@@ -66,7 +66,7 @@
     </div>
     <div class="theContent">
         <!--Status-->
-        <div class="status">
+        
             <h4>Create Status</h4>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
             {
@@ -87,60 +87,60 @@
                 @Html.ValidationSummary(false)
             }
 
-        </div>
-        @using ProbbySocialNetwork.Models
-        @foreach (Status s in Model.currentUserStatusHistory)
-        {
-            <div id="status">
-                <h3>
-                    @if (s.Post == null)
-                    {
-                        <img src="@s.MediaURL" alt="image" />
-                    }
-                    else
-                    {
-                        @s.Post
-                    }
-                </h3>
-                <p>
-                    @s.UserName | @s.Date |
-                    @if (Model.currentUser.Id == s.UserID)
-                    {
-                        @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
-                    }
-                </p>
-                <div id="status-comment">
-                    @foreach (Comment c in Model.commentsForStatuses)
-                    {
-                        if (c.StatusID == s.ID)
+
+            @using ProbbySocialNetwork.Models
+            @foreach (Status s in Model.currentUserStatusHistory)
+            {
+                <div class="status">
+                    <h3>
+                        @if (s.Post == null)
                         {
-                            <div id="status-comment-body" class="comment">
-                                <p>@c.UserName: @c.Body | @c.DateInserted |
-
-                                    @if (Model.currentUser.Id == s.UserID)
-                                    {
-                                        @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                    }
-                                </p>
-                            </div>
+                            <img src="@s.MediaURL" alt="image" />
                         }
-                    }
-                </div>
-                <div>
-                    @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
-                    {
-                        <input type="hidden" name="statusID" value="@s.ID" />
-                        <div class="form-horizontal">
-                            <label class="sr-only" for="commentText">Status</label>
-                            <input type="text" class="form-control commentText" rows="2" name="commentText" />
-                        </div>
+                        else
+                        {
+                            @s.Post
+                        }
+                    </h3>
+                    <p>
+                        @s.UserName | @s.Date |
+                        @if (Model.currentUser.Id == s.UserID)
+                        {
+                            @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
+                        }
+                    </p>
+                    <div id="status-comment">
+                        @foreach (Comment c in Model.commentsForStatuses)
+                        {
+                            if (c.StatusID == s.ID)
+                            {
+                                <div id="status-comment-body" class="comment">
+                                    <p>
+                                        @c.UserName: @c.Body | @c.DateInserted |
 
-                        <input type="hidden" name="returnUrl" value="" />
-                        @Html.ValidationSummary(false)
-                    }
-                </div>           
-            </div>
-        }
-    </div>
+                                        @if (Model.currentUser.Id == s.UserID)
+                                        {
+                                            @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div>
+                        @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                        {
+                            <input type="hidden" name="statusID" value="@s.ID" />
+                            <div class="form-horizontal">
+                                <label class="sr-only" for="commentText">Status</label>
+                                <input type="text" class="form-control commentText" rows="2" name="commentText" />
+                            </div>
+
+                            <input type="hidden" name="returnUrl" value="" />
+                            @Html.ValidationSummary(false)
+                        }
+                    </div>
+                </div>
+            }
 </div>
 
