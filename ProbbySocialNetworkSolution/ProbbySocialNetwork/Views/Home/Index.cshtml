@@ -139,74 +139,75 @@
                             <img src="@s.ProfilePic" class="postPic" />
                         <p class="postUserName">@s.UserName</p>
                         
-
-                        <h3 class="statusContent">
-                            @if (s.Post == null)
-                            {
-                                <img src="@s.MediaURL" alt="image" />
-                                <input type="text" value="@s.MediaURL" class="editTextbox" />
-                            }
-                            else
-                            {
-                                @s.Post
-                                <input type="text" value="@s.Post" class="editTextbox" />
-                            }
-                        </h3>
-                        <p>
-                            @s.Date |
-                            @if (Model.currentUser.Id == s.UserID)
-                            {
-                                @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
-                                <span> | </span>
-                                @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
-
-                                <script>
-                                    $(document).ready(function() {
-                                        $("#editButton").click(function() {
-                                            $(".statusContent").hide();
-                                            if (@s.Post == null)
-                                            {
-                                                $(".editTextbox").show();
-                                            }
-                                            else
-                                            {
-                                                $(".editTextbox").show();
-                                            }
-                                        });
-
-                                    });
-                                </script>
-                            }
-                        </p>
-                        @if (Model.commentsForStatuses != null)
-                        {
-                            foreach (Comment c in Model.commentsForStatuses)
-                            {
-                                if (c.StatusID == s.ID)
+                        <div class="theStatus">
+                            <h3 class="statusContent">
+                                @if (s.Post == null)
                                 {
-                                    <p class="comment">
-                                        @c.UserName | @c.Body | @c.DateInserted
-                                        <span> | </span>
-                                        @if (Model.currentUser.Id == s.UserID)
-                                        {
-                                            @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                        }
-                                    </p>
+                                    <img src="@s.MediaURL" alt="image" />
+                                    <input type="text" value="@s.MediaURL" class="editTextbox" />
                                 }
+                                else
+                                {
+                                    @s.Post
+                                    <input type="text" value="@s.Post" class="editTextbox" />
+                                }
+                            </h3>
+                            <p>
+                                @s.Date |
+                                @if (Model.currentUser.Id == s.UserID)
+                                {
+                                    @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
+                                    <span> | </span>
+                                    @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
 
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#editButton").click(function() {
+                                                $(".statusContent").hide();
+                                                if (@s.Post == null)
+                                                {
+                                                    $(".editTextbox").show();
+                                                }
+                                                else
+                                                {
+                                                    $(".editTextbox").show();
+                                                }
+                                            });
+
+                                        });
+                                    </script>
+                                }
+                            </p>
+                            @if (Model.commentsForStatuses != null)
+                            {
+                                foreach (Comment c in Model.commentsForStatuses)
+                                {
+                                    if (c.StatusID == s.ID)
+                                    {
+                                        <p class="comment">
+                                            @c.UserName | @c.Body | @c.DateInserted
+                                            <span> | </span>
+                                            @if (Model.currentUser.Id == s.UserID)
+                                            {
+                                                @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                            }
+                                        </p>
+                                    }
+
+                                }
                             }
-                        }
-                        
-                        @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
-                        {
-                        <input type="hidden" name="statusID" value="@s.ID" />
-                        <div class="form-horizontal">
-                            <label class="sr-only" for="commentText">Status</label>
-                            <input type="text" class="form-control" name="commentText"/>
+
+                            @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                            {
+                                <input type="hidden" name="statusID" value="@s.ID" />
+                                <div class="form-horizontal">
+                                    <label class="sr-only" for="commentText">Status</label>
+                                    <input type="text" class="form-control" name="commentText" />
+                                </div>
+                                <input type="hidden" name="returnUrl" value="" />
+                                @Html.ValidationSummary(false)
+                            }
                         </div>
-                        <input type="hidden" name="returnUrl" value="" />
-                        @Html.ValidationSummary(false)
-                        }
                     </div>
                 }
             </section>
