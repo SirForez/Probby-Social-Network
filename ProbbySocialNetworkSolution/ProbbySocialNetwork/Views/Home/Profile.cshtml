@@ -165,6 +165,7 @@
                                             <div id="@("commentTextForm"+c.ID)" class="editForm">
                                                 @*need id for textarea to get into controller*@
                                                 <label for="@("commentTextbox"+c.ID)">Comment:</label>
+                                                <br/>
                                                 <input type="text" name="@("commentTextbox"+c.ID)" value="@c.Body" />
                                                 <br />
                                                 <button type="submit" class="btn btn-primary">Confirm Edit</button>
