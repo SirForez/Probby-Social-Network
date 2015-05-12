@@ -9,7 +9,7 @@
 <script>
     var main = function () {
         $(".onClick").click(function () {
-            $(".appendTo").append("<label for='url'>Enter URL:</label><input type='text' name='url' size='35' maxlength='255'/><input type='submit'name='submit' value='Submit' />");
+            $(".appendTo").append("<label for='url'>Enter image URL:</label><input type='text' name='url' size='35' maxlength='255'/>");
             $(".onClick").hide();
         });
     }
@@ -122,16 +122,18 @@
                         </div>
                         <div class="rhsStatus">
                             <h3 class="statusContent">
-                                @if (s.Post == null)
+                                
+                                <span>
+                                    @s.Post
+                                    <input type="text" value="@s.Post" class="editTextbox" />
+                                </span>
+
+                                @if (s.MediaURL != null)
                                 {
                                     <img src="@s.MediaURL" alt="image" />
                                     <input type="text" value="@s.MediaURL" class="editTextbox" />
                                 }
-                                else
-                                {
-                                    @s.Post
-                                    <input type="text" value="@s.Post" class="editTextbox" />
-                                }
+
                             </h3>
                             <p>
                                 @s.Date |

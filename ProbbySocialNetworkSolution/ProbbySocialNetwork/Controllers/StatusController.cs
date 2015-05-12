@@ -31,15 +31,11 @@ namespace ProbbySocialNetwork.Controllers
 		{
 			Status s = new Status();
 
-			if (collection["imageOrText"] == "image")
+			s.Post = collection["statusText"];
+			
+			if (collection["url"] != null)
 			{
-				s.MediaURL = collection["statusText"];
-				s.Post = null;
-			}
-			else
-			{
-				s.Post = collection["statusText"];
-				s.MediaURL = null;
+				s.MediaURL = collection["url"];
 			}
 
 			if (groupID != null)
