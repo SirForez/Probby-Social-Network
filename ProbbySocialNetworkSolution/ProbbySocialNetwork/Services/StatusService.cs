@@ -77,7 +77,7 @@ namespace ProbbySocialNetwork.Models
 		public List<Status> getStatusesByHobby(Hobby h)
 		{
 			var statuses = (from s in db.Statuses
-							where h.ID == s.ID
+							where h.ID == s.HobbyID
 							orderby s.Date descending
 							select s).ToList();
 			return statuses;
