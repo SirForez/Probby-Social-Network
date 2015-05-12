@@ -144,6 +144,10 @@
                                     <div id="@("statusTextForm"+s.ID)" class="editForm">
                                         @*need id for textarea to get into controller*@
                                         <input type="text" name="@("statusTextbox"+s.ID)" value="@s.Post" />
+                                        @if (s.MediaURL != null) 
+                                        { 
+                                            <input type="text" name="@("picTextbox"+s.ID)" value="@s.MediaURL" />
+                                        }
                                         <button type="submit" class="btn btn-primary">Confirm Edit</button>
                                     </div>
                                 }
@@ -152,14 +156,6 @@
                                 @if (s.MediaURL != null)
                                 {
                                     <img src="@s.MediaURL" alt="image" class="statusContent2" id="@("statusPic"+s.ID)" />
-                                    using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID }))
-                                    {
-                                        <input type="hidden" name="statusId" value="@s.ID" />
-                                        <div id="@("statusPicForm"+s.ID)" class="editForm">
-                                            <input type="text" name="@("picTextbox"+s.ID)" value="@s.MediaURL" />
-                                            <button type="submit" class="btn btn-primary">Confirm Edit</button>
-                                        </div>
-                                    }
                                 }
                             </div>
                             <!--edit and remove links-->

@@ -100,7 +100,7 @@ namespace ProbbySocialNetwork.Controllers
 			}
 			if (currentStatus.MediaURL != null)
 			{
-				editedStatus.Post = collection[picTextboxId];
+				editedStatus.MediaURL = collection[picTextboxId];
 			}
 				
 			statusService.editStatus(editedStatus);
