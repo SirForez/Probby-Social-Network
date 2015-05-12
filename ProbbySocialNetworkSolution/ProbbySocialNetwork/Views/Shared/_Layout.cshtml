@@ -22,7 +22,13 @@
                 <a href='@Url.Action("Index", "Home")'>
                     <img class="logo" src="~/Content/Images/Logo2.png" />
                 </a>
-                <input type="text" class="searchBar" placeholder="Search" />
+                @using (Html.BeginForm("Search", "Search", "Home", FormMethod.Get, new { id = "searchBar" }))
+                {
+                    <div class="form-horizontal">
+                        <input type="text" class="searchBar" name="searchBar" placeholder="Search"/>
+                    </div>
+                    @Html.ValidationSummary(false)
+                }
             </div>
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
