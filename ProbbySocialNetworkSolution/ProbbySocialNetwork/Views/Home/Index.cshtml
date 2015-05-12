@@ -149,46 +149,49 @@
                                 }
                         </div>
                         <span class="rhsStatus">
-                            <div class="statusContent">
-                                <!--Status content and edit form for status-->
-                                <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
-                                @using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID}))
-                                {
-                                    <input type="hidden" name="statusId" value="@s.ID" />
-                                    <div id="@("statusTextForm"+s.ID)" class="editForm">
-                                        @*need id for textarea to get into controller*@
-                                        <label for="@("statusTextbox"+s.ID)">Status:</label>
-                                        <input type="text" name="@("statusTextbox"+s.ID)" value="@s.Post" />
-                                        <br />
-                                        @if (s.MediaURL != null)
-                                        {
-                                            <label for="@("picTextbox"+s.ID)">Picture:</label>
-                                            <input type="text" name="@("picTextbox"+s.ID)" value="@s.MediaURL" />
-                                            <br/>
-                                        }
-                                        <button type="submit" class="btn btn-primary">Confirm Edit</button>
-                                    </div>
-                                }
-                                
-                                <!--img status and edit form for img url-->
-                                @if (s.MediaURL != null)
-                                {
-                                    <img src="@s.MediaURL" alt="image" class="statusContent2" id="@("statusPic"+s.ID)" />
-                                }
-                            </div>
-                            <!--edit and remove links-->
-                            <p>
+                            <div class="allStatus">
+                                <div class="statusContent">
+                                    <!--Status content and edit form for status-->
+                                    <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
+                                    @using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID }))
+                                    {
+                                        <input type="hidden" name="statusId" value="@s.ID" />
+                                        <div id="@("statusTextForm"+s.ID)" class="editForm">
+                                            @*need id for textarea to get into controller*@
+                                            <label for="@("statusTextbox"+s.ID)">Status:</label>
+                                            <input type="text" name="@("statusTextbox"+s.ID)" value="@s.Post" />
+                                            <br />
+                                            @if (s.MediaURL != null)
+                                            {
+                                                <label for="@("picTextbox"+s.ID)">Picture:</label>
+                                                <input type="text" name="@("picTextbox"+s.ID)" value="@s.MediaURL" />
+                                                <br />
+                                            }
+                                            <button type="submit" class="btn btn-primary">Confirm Edit</button>
+                                        </div>
+                                    }
 
-                                @s.Date
-                                @if (Model.currentUser.Id == s.UserID)
-                                {
+                                    <!--img status and edit form for img url-->
+                                    @if (s.MediaURL != null)
+                                    {
+                                        <img src="@s.MediaURL" alt="image" class="statusContent2" id="@("statusPic"+s.ID)" />
+                                    }
+                                </div>
+                                <!--edit and remove links-->
+                                <p>
+
+                                    @s.Date
+                                    @if (Model.currentUser.Id == s.UserID)
+                                    {
                                     <!--onclick it will hide status content and show edit form-->
-                                    <span> | </span>
-                                    <a class="editLink" onclick="editStatus(@s.ID)">Edit</a>
-                                    <span> | </span>
-                                    @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
-                                }
-                            </p>
+                                        <span> | </span>
+                                        <a class="editLink" onclick="editStatus(@s.ID)">Edit</a>
+                                        <span> | </span>
+                                        @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
+                                    }
+                                </p>
+                            </div>
+                            
                             @if (Model.commentsForStatuses != null)
                             {
                                 <div class="allComments">
@@ -225,7 +228,7 @@
                             }
 
                     
-                            @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                            @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm"}))
                             {
                                 <input type="hidden" name="statusID" value="@s.ID" />
                                 <div class="form-horizontal">
