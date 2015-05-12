@@ -126,7 +126,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			foreach (Status s in userStatuses)
 			{
-				s.ProfilePic = currentUser.ProfilePic;
+				statusService.editStatusProfilePicture(s, currentUser.ProfilePic);
 			}
 
 			string url = this.Request.UrlReferrer.AbsolutePath;

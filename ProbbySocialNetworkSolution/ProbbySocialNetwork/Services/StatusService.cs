@@ -205,5 +205,12 @@ namespace ProbbySocialNetwork.Models
             }
             return false;
         }
+
+		public void editStatusProfilePicture(Status s, string link)
+		{
+			s.ProfilePic = link;
+
+			db.SaveChanges();
+		}
     }
 }

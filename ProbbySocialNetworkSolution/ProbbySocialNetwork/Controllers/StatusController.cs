@@ -49,6 +49,11 @@ namespace ProbbySocialNetwork.Controllers
 
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 
+			if (currentUser.ProfilePic == null)
+			{
+				s.ProfilePic = "~/Content/Images/dabs.jpg";
+			}
+
 			s.ProfilePic = currentUser.ProfilePic;
 			s.Date = DateTime.Now;
 			s.UserID = User.Identity.GetUserId();
