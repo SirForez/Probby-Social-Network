@@ -49,7 +49,8 @@ namespace ProbbySocialNetwork.Controllers
             {
                 if (collection["chosenHobby"] != "Misc")
                 {
-                    s.HobbyID = hobbyService.getHobbyByName(collection["chosenHobby"]).ID;
+					Hobby statusHobby = hobbyService.getHobbyByName(collection["chosenHobby"]);
+					s.HobbyID = statusHobby.ID;
                 }
                 else
                 {
