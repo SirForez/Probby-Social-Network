@@ -6,4 +6,9 @@ function editStatus(id) {
     $("#statusText" + id).hide();
     $("#statusPic" + id).hide();
     $("#statusTextForm" + id).show();
-}; 
+};
+
+function editComment(id) {
+    $("#commentText" + id).hide();
+    $("#commentTextForm" + id).show();
+};

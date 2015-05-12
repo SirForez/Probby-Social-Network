@@ -126,12 +126,6 @@ namespace ProbbySocialNetwork.Controllers
 			}
 		}
 
-		public ActionResult Search()
-		{
-			//TODO: Implement
-			return View();
-		}
-
 		[HttpPost]
 		public ActionResult CreateComment(FormCollection collection)
 		{
@@ -148,10 +142,26 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult EditComment()
+		public ActionResult EditComment(FormCollection collection)
 		{
-			//TODO: Implement
-			return View();
+			int? id = Convert.ToInt32(collection["commentId"]);
+			Comment currentComment = statusService.getCommentByID(id);
+			Comment editComment = new Comment();
+			editComment.ID = currentComment.ID;
+			editComment.DateInserted = currentComment.DateInserted;
+			editComment.Body = null;
+			
+			string commentTextboxId = "commentTextbox" + Convert.ToString(id);
+
+			if (currentComment.Body != null)
+			{
+				editComment.Body = collection[commentTextboxId];
+			}
+
+			statusService.editComment(editComment);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
 		}
 
 		public ActionResult RemoveComment(int? id)
