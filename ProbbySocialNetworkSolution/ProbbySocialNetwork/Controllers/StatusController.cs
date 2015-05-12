@@ -47,8 +47,9 @@ namespace ProbbySocialNetwork.Controllers
 				s.GroupID = groupID;
 			}
 
-			
+			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 
+			s.ProfilePic = currentUser.ProfilePic;
 			s.Date = DateTime.Now;
 			s.UserID = User.Identity.GetUserId();
             s.UserName = User.Identity.Name;
