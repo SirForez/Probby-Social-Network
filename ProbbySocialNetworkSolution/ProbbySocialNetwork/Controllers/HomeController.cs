@@ -37,6 +37,9 @@ namespace ProbbySocialNetwork.Controllers
 
 		    foreach (Status s in model.newestStatuses)
 			{
+				if (model.newestStatuses == null)
+				{ break; }
+				
 				List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
 				foreach (Comment c in currentCommentList)
 				{

@@ -107,7 +107,12 @@ namespace ProbbySocialNetwork.Models
         }
 
         public List<Group> getGroupsByUser(ApplicationUser a)
-        {	
+        {
+			if (a == null)
+			{
+				return null;
+			}
+			
 			var groups = (from c in db.UserGroupConnections
                          where c.UserID == a.Id
                          join g in db.Groups on c.GroupID equals g.ID

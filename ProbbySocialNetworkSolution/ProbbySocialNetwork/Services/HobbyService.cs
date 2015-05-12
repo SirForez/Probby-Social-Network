@@ -40,6 +40,11 @@ namespace ProbbySocialNetwork.Models
 		
 		public List<Hobby> getHobbiesByUser(ApplicationUser a)
         {
+			if (a == null)
+			{
+				return null;
+			}
+			
 			var hobbies = (from c in db.UserHobbyConnections
                            where c.UserID == a.Id
                            join h in db.Hobbies on c.HobbyID equals h.ID

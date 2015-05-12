@@ -16,7 +16,12 @@ namespace ProbbySocialNetwork.Models
 
         public List<Status> getStatusesByUserID(string id)
         {
-            var statuses = (from s in db.Statuses
+			if (id == null)
+			{
+				return null;
+			}
+			
+			var statuses = (from s in db.Statuses
                             where s.UserID == id
                             select s).ToList();
             return statuses;
@@ -24,6 +29,11 @@ namespace ProbbySocialNetwork.Models
 
         public List<Status> getStatusFeedByUser(ApplicationUser a)
         {
+			if (a == null)
+			{
+				return null;
+			}
+			
 			var statuses = getStatusByUser(a);
 
             List<UserFollowConnection> userFollowingIDs = (from f in db.UserFollowConnections
@@ -47,6 +57,11 @@ namespace ProbbySocialNetwork.Models
 
         public List<Status> getStatusByUser(ApplicationUser a)
         {
+			if (a == null)
+			{
+				return null;
+			}
+			
 			var statuses = (from s in db.Statuses
                             where ((a.Id == s.UserID) || (a.Id == s.PostedToID))
                             orderby s.Date descending
