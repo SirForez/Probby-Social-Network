@@ -60,7 +60,7 @@
                 }
             }
 
-            @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+            using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
             {
                 <input type="hidden" name="statusID" value="@s.ID" />
                 <div class="form-horizontal">
