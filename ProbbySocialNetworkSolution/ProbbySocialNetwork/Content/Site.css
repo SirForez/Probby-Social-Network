@@ -180,6 +180,12 @@ textarea {
 
 .comment {
     margin-left: 20px;
+    border-left: 4px solid #ADADAD;
+    padding-left: 10px;
+}
+
+.form-horizontal {
+    padding-top: 10px;
 }
 
 .editForm {
