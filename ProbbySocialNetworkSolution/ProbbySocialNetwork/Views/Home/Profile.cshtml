@@ -62,7 +62,7 @@
     </div>
     <div class="theContent">
         <!--Status-->
-      
+
         <h4>Create Status</h4>
         @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
         {
@@ -72,19 +72,25 @@
             <div class="form-horizontal">
                 <label class="sr-only" for="statusText">Status</label>
                 <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
-                
+
                 <div class="appendTo"></div>
-               
+
                 <button type="submit" class="btn btn-primary">Post</button>
             </div>
             @Html.ValidationSummary(false)
         }
         <button class="onClick">Upload image</button>
 
-            @using ProbbySocialNetwork.Models
-            @foreach (Status s in Model.currentUserStatusHistory)
-            {
-                <div class="status">
+        @using ProbbySocialNetwork.Models
+        @foreach (Status s in Model.currentUserStatusHistory)
+        {
+            <div class="status">
+                <div class="lhsStatus">
+                    <p>
+                        <img src="@s.ProfilePic" class="postPic" />
+                    <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
+                </div>
+                <span class="rhsStatus">
                     <h3>
                         @if (s.Post == null)
                         {
@@ -96,7 +102,7 @@
                         }
                     </h3>
                     <p>
-                        <a href="/Home/Profile?username=@s.UserName">@s.UserName</a> | @s.Date |
+                        @s.Date |
                         @if (Model.currentUser.Id == s.UserID)
                         {
                             @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
@@ -111,11 +117,11 @@
                                     <p>
                                         <a href="/Home/Profile?username=@c.UserName">@c.UserName:</a> @c.Body | @c.DateInserted |
 
-                                            @if (Model.currentUser.Id == s.UserID)
-                                            {
-                                                @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                            }
-</p>
+                                        @if (Model.currentUser.Id == s.UserID)
+                                        {
+                                            @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                        }
+                                    </p>
                                 </div>
                             }
                         }
@@ -133,7 +139,8 @@
                             @Html.ValidationSummary(false)
                         }
                     </div>
-                </div>
-            }
-</div>
+                </span>
+            </div>
+        }
+    </div>
 
