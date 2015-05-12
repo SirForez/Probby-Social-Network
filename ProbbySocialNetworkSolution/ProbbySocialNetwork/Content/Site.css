@@ -108,11 +108,10 @@ textarea {
     padding: 0;
 }
 
-.searchBar {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 90px;
+#searchBar {
+     display: inline;
+     padding: 7px;
+     width: 100%;
 }
 
 .headers{
@@ -216,7 +215,7 @@ button:hover, .btn:hover, input[type="submit"]:hover {
 
 #searchBar {
     display: inline;
-    padding: 0px;
-    margin: 8px;
+    padding: 7px;
+    margin: 0px;
     position: absolute;
 }
