@@ -67,7 +67,7 @@
             {
                 <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                 <input type="hidden" name="groupID" value="" />
-                <input type="hidden" name="postedToID" value="" />
+                <input type="hidden" name="postedToID" value="@Model.currentUserProfile.Id" />
                 <select name="chosenHobby">
                     @foreach (Hobby h in Model.currentUserHobbies)
                     {
