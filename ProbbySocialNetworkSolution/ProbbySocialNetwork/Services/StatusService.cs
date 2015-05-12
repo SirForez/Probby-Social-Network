@@ -54,10 +54,8 @@ namespace ProbbySocialNetwork.Models
                 }
             }
 
-
-            //Needs to be sorted with comparer (want to be comparted useing DateTime)
             statuses.AddRange(statusesFromFollowing);
-            statuses.OrderByDescending(o => o.Date);
+            statuses.Sort((x, y) => x.Date.CompareTo(y.Date)); //Needs to be in the oposite order
             return statuses;
         }
 
