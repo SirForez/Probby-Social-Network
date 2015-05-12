@@ -19,7 +19,7 @@
     border-radius: 15px;
 }
 
-h2 {
+.group > h2 , .hobby > h2 {
     font-weight: bold;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -39,7 +39,7 @@ h2 {
 
 .status {
     background: rgba(228, 228, 228, 0.51);
-    border-radius: 25px;
+    border-radius: 15px;
     padding: 3%;
     margin-top: 2%;
 }

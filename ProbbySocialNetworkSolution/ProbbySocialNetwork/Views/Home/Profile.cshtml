@@ -75,58 +75,24 @@
     </div>
     <div class="theContent">
         <!--Status-->
-<<<<<<< HEAD
       
-        <div class="status">
-=======
-        
->>>>>>> 50304f1c682d4f28d14ac7896b949e89bc2ad111
-            <h4>Create Status</h4>
-            @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
-            {
-                <input type="hidden" name="UserID" value="@Model.currentUser.Id" />
-                <input type="hidden" name="groupID" value="" />
-                <input type="hidden" name="PostedToID" value="@Model.currentUserProfile.Id" />
-                <div class="form-horizontal">
-                    <label class="sr-only" for="statusText">Status</label>
-                    <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
-                    
-                    <div class="appendTo"></div>
-                   
-                    <button type="submit" class="btn btn-primary">Post</button>
-                </div>
-                @Html.ValidationSummary(false)
-            }
-<<<<<<< HEAD
-            <button class="onClick">Upload image</button>
-        </div>
-        @using ProbbySocialNetwork.Models
-        @foreach (Status s in Model.currentUserStatusHistory)
+        <h4>Create Status</h4>
+        @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
         {
-            <div id="status">
-                <h3>
-                    @if (s.Post == null)
-                    {
-                        <img src="@s.MediaURL" alt="image" />
-                    }
-                    else
-                    {
-                        @s.Post
-                    }
-                </h3>
-                <p>
-                    @s.UserName | @s.Date |
-                    @if (Model.currentUser.Id == s.UserID)
-                    {
-                        @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
-                    }
-                </p>
-                <div id="status-comment">
-                    @foreach (Comment c in Model.commentsForStatuses)
-                    {
-                        if (c.StatusID == s.ID)
-=======
-
+            <input type="hidden" name="UserID" value="@Model.currentUser.Id" />
+            <input type="hidden" name="groupID" value="" />
+            <input type="hidden" name="PostedToID" value="@Model.currentUserProfile.Id" />
+            <div class="form-horizontal">
+                <label class="sr-only" for="statusText">Status</label>
+                <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
+                
+                <div class="appendTo"></div>
+               
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+            @Html.ValidationSummary(false)
+        }
+        <button class="onClick">Upload image</button>
 
             @using ProbbySocialNetwork.Models
             @foreach (Status s in Model.currentUserStatusHistory)
@@ -151,7 +117,6 @@
                     </p>
                     <div id="status-comment">
                         @foreach (Comment c in Model.commentsForStatuses)
->>>>>>> 50304f1c682d4f28d14ac7896b949e89bc2ad111
                         {
                             if (c.StatusID == s.ID)
                             {
