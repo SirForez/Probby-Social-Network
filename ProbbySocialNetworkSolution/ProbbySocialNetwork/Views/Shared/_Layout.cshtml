@@ -22,7 +22,7 @@
                 <a href='@Url.Action("Index", "Home")'>
                     <img class="logo" src="~/Content/Images/Logo2.png" />
                 </a>
-                @using (Html.BeginForm("Search", "Search", "Home", FormMethod.Get, new { id = "searchBar" }))
+                @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { id = "searchBar" }))
                 {
                     <div class="form-horizontal">
                         <input type="text" class="searchBar" name="searchBar" placeholder="Search"/>
