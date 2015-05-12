@@ -7,37 +7,46 @@
 <h2>Search results:</h2>
 <div id="content-container">
     <div id="content-container-users">
-        <h3>
-            Users:
-        </h3>
-        <div id="user-results">
-            @foreach (ApplicationUser a in Model.userSearchResults)
-            {
+        @if (Model.userSearchResults.Count != 0)
+        {
+            <h3>
+                Users:
+            </h3>
+            <div id="user-results">
+                @foreach (ApplicationUser a in Model.userSearchResults)
+                {
                     <a href="/Home/Profile?username=@a.UserName">@a.UserName</a><br />
-            }
-        </div>
+                }
+            </div>
+        }
     </div>
 
     <div id="content-container-hobbies">
-        <h3>
-            Hobbies:
-        </h3>
-        <div id="hobby-results">
-            @foreach (Hobby h in Model.hobbySearchResults)
-            {
-                <a href="/Hobby/Index/@h.ID?Name=@h.Name">@h.Name</a><br />
-            }
-        </div>
+        @if (Model.hobbySearchResults.Count != 0)
+        {
+            <h3>
+                Hobbies:
+            </h3>
+            <div id="hobby-results">
+                @foreach (Hobby h in Model.hobbySearchResults)
+                {
+                    <a href="/Hobby/Index/@h.ID?Name=@h.Name">@h.Name</a><br />
+                }
+            </div>
+        }
     </div>
     <div id="content-container-groups">
-        <h3>
-            Groups:
-        </h3>
-        <div id="user-results">
-            @foreach (Group g in Model.groupSearchResults)
-            {
-                <a href="/Group/Index/@g.ID?Name=@g.name">@g.name</a><br />
-            }
-        </div>
+        @if (Model.groupSearchResults.Count != 0)
+        {
+            <h3>
+                Groups:
+            </h3>
+            <div id="user-results">
+                @foreach (Group g in Model.groupSearchResults)
+                {
+                    <a href="/Group/Index/@g.ID?Name=@g.name">@g.name</a><br />
+                }
+            </div>
+        }
     </div>
 </div>
