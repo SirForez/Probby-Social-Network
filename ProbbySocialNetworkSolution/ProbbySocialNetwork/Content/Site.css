@@ -37,11 +37,28 @@
 
 }
 
+#statusList {
+    
+}
+
 .status {
     background: rgba(228, 228, 228, 0.51);
     border-radius: 15px;
     padding: 3%;
     margin-top: 2%;
+    width: 100%;
+    clear: both;
+}
+
+.lhsStatus {
+    float: left;
+    width: 30%;
+}
+
+.rhsStatus {
+    float: left;
+    width: 60%;
+    padding: 0;
 }
 
 body {
@@ -163,8 +180,4 @@ textarea {
 #profilePic {
     width: 150px;
     height: auto;
-}
-
-.theStatus {
-    
 }

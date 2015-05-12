@@ -135,11 +135,12 @@
                 @foreach (Status s in Model.newestStatuses)
                 {
                     <div class="status">
-                        <p>
-                            <img src="@s.ProfilePic" class="postPic" />
-                        <p class="postUserName">@s.UserName</p>
-                        
-                        <div class="theStatus">
+                        <div class="lhsStatus">
+                            <p>
+                                <img src="@s.ProfilePic" class="postPic" />
+                            <p class="postUserName">@s.UserName</p>
+                        </div>
+                        <div class="rhsStatus">
                             <h3 class="statusContent">
                                 @if (s.Post == null)
                                 {
