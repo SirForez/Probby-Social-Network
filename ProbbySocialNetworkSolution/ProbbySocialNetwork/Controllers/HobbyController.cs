@@ -16,7 +16,9 @@ namespace ProbbySocialNetwork.Controllers
 		public GroupService groupService = ServiceSingleton.GetGroupService;
 		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
 		
+        
 		// GET: Hobby
+        [Authorize]
         public ActionResult Index(int? id)
         {
             HobbyViewModel model = new HobbyViewModel();
