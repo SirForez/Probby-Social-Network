@@ -7,6 +7,7 @@
 <div class="container">
     <div class="lhsNav">
         <h2>Group name: @Model.currentGroup.name</h2>
+        @Html.ActionLink("Join Group", "JoinGroup", "Group", new { g = Model.currentGroup }, null)
     </div>
     <div class="theContent">
         <!--breyta i html helper-->
@@ -17,6 +18,7 @@
                 <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                 <input type="hidden" name="groupID" value="" />
                 <input type="hidden" name="postedToID" value="" />
+                <input type="hidden" name="chosenHobby" id="chosenHobby" value="@Model.currentGroup.hobby"/>
                 <label>#@Model.currentGroup.hobby.Name</label>
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>

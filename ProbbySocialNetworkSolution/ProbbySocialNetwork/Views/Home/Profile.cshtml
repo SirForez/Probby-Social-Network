@@ -51,11 +51,11 @@
             <div id="following-list">
                 <ul>
                     @foreach (ApplicationUser a in Model.currentUserProfileFollowing)
-                        {
-                            <li>
-                                <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-                            </li>
-                        }
+                    {
+                        <li>
+                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -204,3 +204,6 @@
 
     </div>
 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -60,6 +60,15 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
         }
 
+		public ActionResult JoinGroup(Group g)
+		{
+			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+			groupService.addUserToGroup(g, currentUser);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
+		}
+
         public ActionResult EditGroup()
         {
             //TODO: Implement
