@@ -158,6 +158,13 @@ namespace ProbbySocialNetwork.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+				if (hobbyService.getDefaultHobby() == null)
+				{
+					var defaultHobby = new Hobby();
+					defaultHobby.Name = "Misc";
+					hobbyService.addHobby(defaultHobby);
+				}
+				hobbyService.addHobbyToUser(user, hobbyService.getDefaultHobby());
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
