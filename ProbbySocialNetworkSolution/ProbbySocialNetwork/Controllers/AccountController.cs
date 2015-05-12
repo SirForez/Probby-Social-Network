@@ -157,7 +157,7 @@ namespace ProbbySocialNetwork.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, ProfilePic = "@Model.currentUserProfile.ProfilePic", Karma = 0, NumberOfFollowers = 0, NumberOfFollowing = 0 };
 				if (hobbyService.getDefaultHobby() == null)
 				{
 					var defaultHobby = new Hobby();

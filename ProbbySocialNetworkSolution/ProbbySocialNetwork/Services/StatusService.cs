@@ -5,6 +5,11 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
+    public class StatusComparer
+    {
+
+    }
+
     public class StatusService
     {
         ApplicationDbContext db = null;
@@ -49,9 +54,8 @@ namespace ProbbySocialNetwork.Models
                 }
             }
 
-
-            //Needs to be sorted with comparer (want to be comparted useing DateTime)
             statuses.AddRange(statusesFromFollowing);
+            statuses.Sort((x, y) => y.Date.CompareTo(x.Date)); //Needs to be in the oposite order
             return statuses;
         }
 
@@ -76,7 +80,7 @@ namespace ProbbySocialNetwork.Models
 		{
 			var statuses = (from s in db.Statuses
 							where h.ID == s.ID
-							orderby s.Date ascending
+							orderby s.Date descending
 							select s).ToList();
 			return statuses;
 		}

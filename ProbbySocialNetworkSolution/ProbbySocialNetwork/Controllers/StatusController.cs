@@ -81,34 +81,32 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult EditStatus(int? id, FormCollection collection)
+		public ActionResult EditStatus(FormCollection collection)
 		{
-			if (id != null)
-			{
-				Status currentStatus = statusService.getStatusByID(id);
-				Status editedStatus = new Status();
-				editedStatus.ID = currentStatus.ID;
-				editedStatus.Date = DateTime.Now;
+			int? id = Convert.ToInt32(collection["StatusId"]);
+			Status currentStatus = statusService.getStatusByID(id);
+			Status editedStatus = new Status();
+			editedStatus.ID = currentStatus.ID;
+			editedStatus.Date = DateTime.Now;
+			editedStatus.Post = null;
+			editedStatus.MediaURL = null;
 
-				if (currentStatus.Post == null)
-				{
-					editedStatus.MediaURL = collection["editTextbox"];
-					editedStatus.Post = null;
-				}
-				else
-				{
-					editedStatus.Post = collection["editTextbox"];
-					editedStatus.MediaURL = null;
-				}
-				statusService.editStatus(editedStatus);
+			string statusTextboxId = "statusTextbox" + Convert.ToString(id);
+			string picTextboxId = "picTextbox" + Convert.ToString(id);
 
-				string url = this.Request.UrlReferrer.AbsolutePath;
-				return Redirect(url);
-			}
-			else
+			if (currentStatus.Post != null)
 			{
-				return View("Error");
+				editedStatus.Post = collection[statusTextboxId];
 			}
+			if (currentStatus.MediaURL != null)
+			{
+				editedStatus.MediaURL = collection[picTextboxId];
+			}
+				
+			statusService.editStatus(editedStatus);
+
+			string url = this.Request.UrlReferrer.AbsolutePath;
+			return Redirect(url);
 			
 		}
 
