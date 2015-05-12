@@ -116,6 +116,7 @@ namespace ProbbySocialNetwork.Controllers
             String searchString = collection["searchBar"];
             SearchViewModel model = new SearchViewModel();
 
+            model.searchString = searchString;
             model.groupSearchResults = groupService.groupSearch(searchString);
             model.hobbySearchResults = hobbyService.hobbySearch(searchString);
             model.userSearchResults = accountService.userSearch(searchString);
