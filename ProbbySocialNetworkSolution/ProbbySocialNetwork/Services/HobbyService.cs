@@ -14,10 +14,26 @@ namespace ProbbySocialNetwork.Models
             db = _db;
         }
 
-        public Hobby getHobbyByID(int id)
+        public Hobby getDefaultHobby()
+		{
+			var hobby = (from h in db.Hobbies
+						 where h.Name == "Misc"
+						 select h).SingleOrDefault();
+			return hobby; 
+		}
+		
+		public Hobby getHobbyByID(int id)
 		{
 			var hobby = (from h in db.Hobbies
 						 where h.ID == id
+						 select h).SingleOrDefault();
+			return hobby;
+		}
+
+		public Hobby getHobbyByName(string name)
+		{
+			var hobby = (from h in db.Hobbies
+						 where h.Name == name
 						 select h).SingleOrDefault();
 			return hobby;
 		}

@@ -98,6 +98,19 @@
                     <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                     <input type="hidden" name="groupID" value="" />
                     <input type="hidden" name="postedToID" value="" />
+                    <select name="chosenHobby">
+                        @foreach (Hobby h in Model.currentUserHobbies)
+                        {
+                            if (@h.Name == "Misc")
+                            {
+                                <option value="@h.Name" selected="selected">#@h.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@h.Name">#@h.Name</option>
+                            }
+                        }
+                    </select>
                     <div class="form-horizontal">
                         <label class="sr-only" for="statusText">Status</label>
                         <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
@@ -119,6 +132,15 @@
                             <p>
                                 <img src="@s.ProfilePic" class="postPic" />
                             <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
+                                @{
+                                    ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+                                    HobbyService service = ServiceSingleton.GetHobbyService;
+                                    Hobby statusHobby = service.getHobbyByID(s.HobbyID);
+                                    if (statusHobby != null)
+                                    {
+                                        <p>#@statusHobby.Name</p>
+                                    }   
+                                }
                         </div>
                         <span class="rhsStatus">
                             <h3 class="statusContent">
