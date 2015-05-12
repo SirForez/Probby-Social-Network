@@ -24,7 +24,7 @@ namespace ProbbySocialNetwork.Models
 		
 		public List<Hobby> getHobbiesByUser(ApplicationUser a)
         {
-            var hobbies = (from c in db.UserHobbyConnections
+			var hobbies = (from c in db.UserHobbyConnections
                            where c.UserID == a.Id
                            join h in db.Hobbies on c.HobbyID equals h.ID
                            select h).ToList();

@@ -23,8 +23,8 @@ namespace ProbbySocialNetwork.Models
         }
 
         public ApplicationUser getUserByName(String name)
-        {
-            var user = (from u in db.Users
+        {	
+			var user = (from u in db.Users
                         where u.UserName == name
                         select u).SingleOrDefault();
             return user;
@@ -75,11 +75,17 @@ namespace ProbbySocialNetwork.Models
             return db.SaveChanges() != 1;
         }
 
+        public UserFollowConnection getUserFollowConnectionByUsers(ApplicationUser follower, ApplicationUser following)
+        {
+            var connection = (from uConnection in db.UserFollowConnections
+                               where (uConnection.FollowerID == follower.Id) && (uConnection.FollowingID == following.Id)
+                               select uConnection).SingleOrDefault();
+            return connection;
+        }
+
         public bool removeFollowingFromUser(ApplicationUser a, ApplicationUser toDel)
         {
-            UserFollowConnection uConnection = new UserFollowConnection();
-            uConnection.FollowerID = a.Id;
-            uConnection.FollowingID = toDel.Id;
+            UserFollowConnection uConnection = getUserFollowConnectionByUsers(a, toDel);
             db.UserFollowConnections.Remove(uConnection);
             return db.SaveChanges() != 1;
         }

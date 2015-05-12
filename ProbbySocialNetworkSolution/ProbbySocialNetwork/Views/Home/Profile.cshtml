@@ -12,10 +12,12 @@
     var main = function () {
 
        
-        $("button").click(function () {
+        $(".onClick").click(function () {
 
 
-            $(".imageUrl").show(1000);
+            $(".appendTo").append("<label for='url'>Enter URL:</label><input type='text' name='url' size='35' maxlength='255'/><input type='submit'name='submit' value='Submit' />");
+
+            $(".onClick").hide();
             
             
            
@@ -34,15 +36,12 @@
 
 </script>
 
-<style>
 
-    .moveDown{
 
-        margin-top: 15px;
-    }
-</style>
 
-<div class="container">
+
+<div class="container" class="nw">
+
     <div class="lhsNav">
         @if (Model.currentUser.ProfilePic == null)
         {
@@ -50,7 +49,7 @@
         }
         else
         {
-            <img src="@Model.currentUser.ProfilePic" class="profilePic">
+            <img src="@Model.currentUserProfile.ProfilePic" class="profilePic">
         }
         @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
         {
@@ -62,6 +61,17 @@
             @Html.ValidationSummary(false)
         }
         <p>@Model.currentUserProfile.UserName's Profile</p>
+        @if (Model.currentUserProfile.UserName != User.Identity.Name)
+        {
+            if (Model.currentUserFollowing.Contains(Model.currentUserProfile))
+            {
+                @Html.ActionLink("Unfollow", "RemoveFollowing", "Account", new { username = Model.currentUserProfile.UserName }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.currentUserProfile.UserName }, null)
+            }
+        }
     </div>
     <div class="theContent">
         <!--Status-->
@@ -70,23 +80,20 @@
             <h4>Create Status</h4>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
             {
-                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                <input type="hidden" name="UserID" value="@Model.currentUser.Id" />
                 <input type="hidden" name="groupID" value="" />
-                <input type="hidden" name="postedToID" value="@Model.currentUserProfile.Id" />
+                <input type="hidden" name="PostedToID" value="@Model.currentUserProfile.Id" />
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
                     <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
-                    <button>Upload image</button>
-                    <div class="imageUrl">
-                        <label for="url">Enter URL:</label>
-                        <input type="text" name="url" size="35" maxlength="255" />
-                        <input type="submit" name="submit" value="Submit" />
-                    </div>
+                    
+                    <div class="appendTo"></div>
+                   
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
                 @Html.ValidationSummary(false)
             }
-
+            <button class="onClick">Upload image</button>
         </div>
         @using ProbbySocialNetwork.Models
         @foreach (Status s in Model.currentUserStatusHistory)
@@ -132,9 +139,10 @@
                         <input type="hidden" name="statusID" value="@s.ID" />
                         <div class="form-horizontal">
                             <label class="sr-only" for="commentText">Status</label>
-                            <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
-                            <button type="submit" class="btn btn-primary">Post</button>
+                            <input type="text" class="form-control commentText" rows="2" name="commentText" />
                         </div>
+
+                        <input type="hidden" name="returnUrl" value="" />
                         @Html.ValidationSummary(false)
                     }
                 </div>           

@@ -61,13 +61,12 @@
                 }
             }
 
-            using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+            @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
             {
                 <input type="hidden" name="statusID" value="@s.ID" />
                 <div class="form-horizontal">
                     <label class="sr-only" for="commentText">Status</label>
-                    <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
-                    <button type="submit" class="btn btn-primary">Comment</button>
+                    <input type="text" class="form-control commentText" rows="2" name="commentText" />
                 </div>
 
                 <input type="hidden" name="returnUrl" value="" />

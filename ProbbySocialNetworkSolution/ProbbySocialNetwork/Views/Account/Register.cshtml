@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href='@Url.Action("Index", "Home")'>
-                    <img class="logo" src="http://i.imgur.com/zafRyOe.jpg?1" />
+                    <img class="logo" src="~/Content/Images/Logo2.png" />
                 </a>
             </div>
         </div>
@@ -75,15 +75,15 @@
             </div>
         </div>
     }
-        <hr />
-        <footer>
-            <p class="footer">&copy; @DateTime.Now.Year - Probby Social Network | Want to know more about Probby? You can find more info @Html.ActionLink("here", "About", "Home")!</p>
-        </footer>
-        
+    <hr />
+    <footer>
+        <p class="footer">&copy; @DateTime.Now.Year - Probby Social Network | Want to know more about Probby? You can find more info @Html.ActionLink("here", "About", "Home")!</p>
+    </footer>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
 
-    </body>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</body>
 </html>

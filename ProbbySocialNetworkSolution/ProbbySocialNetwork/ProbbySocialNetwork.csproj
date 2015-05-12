@@ -170,9 +170,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Connections\AdminGroupConnection.cs" />
-    <Compile Include="Migrations\201505111811121_R.cs" />
-    <Compile Include="Migrations\201505111811121_R.Designer.cs">
-      <DependentUpon>201505111811121_R.cs</DependentUpon>
+    <Compile Include="Migrations\201505112329127_init.cs" />
+    <Compile Include="Migrations\201505112329127_init.Designer.cs">
+      <DependentUpon>201505112329127_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -203,7 +203,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\feed.css" />
-    <Content Include="Content\HideShow.css" />
     <Content Include="Content\Images\dabs.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -263,6 +262,7 @@
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Hobby\Index.cshtml" />
     <Content Include="Views\Status\EditStatus.cshtml" />
+    <Content Include="Views\Shared\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -276,8 +276,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505111811121_R.resx">
-      <DependentUpon>201505111811121_R.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505112329127_init.resx">
+      <DependentUpon>201505112329127_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

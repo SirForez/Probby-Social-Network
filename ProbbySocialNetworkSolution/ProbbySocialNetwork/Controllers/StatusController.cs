@@ -47,15 +47,18 @@ namespace ProbbySocialNetwork.Controllers
 				s.GroupID = groupID;
 			}
 
+			
+
 			s.Date = DateTime.Now;
 			s.UserID = User.Identity.GetUserId();
+            s.UserName = User.Identity.Name;
             if (id != null)
             {
                 s.PostedToID = id;
             }
             else
             {
-                s.PostedToID = User.Identity.GetUserId();
+                s.PostedToID = collection["PostedToID"];
             }
 
 			//ApplicationUser a = accountService.getUserByName(User.Identity.Name);

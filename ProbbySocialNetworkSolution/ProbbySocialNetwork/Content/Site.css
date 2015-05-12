@@ -3,6 +3,28 @@
     height: 100px;
 }
 
+.postPic {
+    width: 100px;
+    height: 100px;
+}
+
+.postUserName {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.theContent {
+    background: #EEE;
+}
+
+.newsfeed {
+    background: #EEE;
+}
+
+.status {
+    background: #FFF;
+}
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;

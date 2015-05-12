@@ -4,164 +4,210 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container">
-    <div class="lhsNav">
-        @if (Model.currentUser.ProfilePic == null)
-        {
-            <img src="~/Content/Images/dabs.jpg" class="profilePic">
-        }
-        else
-        {
-            <img src="@Model.currentUser.ProfilePic" class="profilePic">
-        }
-        <p>@Model.currentUser.UserName</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-        <h2>Groups</h2>
+<script>
 
-        <ul>
-            @foreach(Group g in Model.currentUserGroups)
+    var main = function () {
+
+
+        $(".onClick").click(function () {
+
+
+            $(".appendTo").append("<label for='url'>Enter URL:</label><input type='text' name='url' size='35' maxlength='255'/><input type='submit'name='submit' value='Submit' />");
+
+            $(".onClick").hide();
+
+
+
+        });
+
+
+
+
+    }
+
+    $(document).ready(main);
+
+
+
+
+
+</script>
+
+<div class="newsfeed">
+    <div class="container">
+        <div class="lhsNav">
+            @if (Model.currentUser.ProfilePic == null)
+
             {
-                <li>
-                    @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
-                </li>
+                <img src="~/Content/Images/dabs.jpg" class="profilePic">
             }
-        </ul>
-
-        <h4>Create a new Group</h4>
-        @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
-        {
-            <input type="hidden" name="userid" value="" />
-            <div class="form-horizontal">
-                <label class="sr-only" for="groupName">Name</label>
-                <textarea class="form-control" rows="1" id="groupName" name="groupName" placeholder="Group Name"></textarea>
-                <label class="sr-only" for="groupDesc">Description</label>
-                <textarea class="form-control" rows="4" id="groupDesc" name="groupDesc" placeholder="Group Description"></textarea>
-                <button type="submit" class="btn btn-primary">Create</button>
-            </div>
-            @Html.ValidationSummary(false)
-        }
-
-        <h2>Hobbies</h2>
-
-        <ul>
-            @foreach (Hobby h in Model.currentUserHobbies)
+            else
             {
-                <li>
-                    @Html.ActionLink(h.Name, "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID })
-                </li>
+                <img src="@Model.currentUser.ProfilePic" class="profilePic">
             }
-        </ul>
+            <p>@Model.currentUser.UserName</p>
 
-        <h4>Create a new Hobby</h4>
-        @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
-        {
-            <input type="hidden" name="userid" value="" />
-            <div class="form-horizontal">
-                <label class="sr-only" for="hobbyName">Name</label>
-                <textarea class="form-control" rows="1" id="hobbyName" name="hobbyName" placeholder="Hobby Name"></textarea>
-                <label class="sr-only" for="hobbyDesc">Description</label>
-                <textarea class="form-control" rows="4" id="hobbyDesc" name="hobbyDesc" placeholder="Hobby Description"></textarea>
-                <button type="submit" class="btn btn-primary">Create</button>
-            </div>
-            @Html.ValidationSummary(false)
-        }
+            <h2>Groups</h2>
 
-    </div>
-    <div class="theContent">
-        <!--breyta i html helper-->
+            <ul>
+                @foreach (Group g in Model.currentUserGroups)
+                {
+                    <li>
+                        @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
+                    </li>
+                }
+            </ul>
 
-        <section>
-            <h4>Create Status</h4>
-            @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
+            <h4>Create a new Group</h4>
+            @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
             {
-                <input type="hidden" name="userid" value="@Model.currentUser.Id " />
-                <input type="hidden" name="groupID" value="" />
-                <input type="hidden" name="postedToID" value="" />
+                <input type="hidden" name="userid" value="" />
                 <div class="form-horizontal">
-                    <label class="sr-only" for="statusText">Status</label>
-                    <textarea class="form-control" rows="4" id="statusText" name="statusText" ></textarea>
-                    <input type="checkbox" id="imageortext" name="imageOrText" value="image" />This is an image<br />
-                    <button type="submit" class="btn btn-primary">Post</button>
+
+                    <label class="sr-only" for="groupName">Name</label>
+                    <textarea class="form-control" rows="1" id="groupName" name="groupName" placeholder="Group Name"></textarea>
+                    <label class="sr-only" for="groupDesc">Description</label>
+                    <textarea class="form-control" rows="4" id="groupDesc" name="groupDesc" placeholder="Group Description"></textarea>
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </div>
                 @Html.ValidationSummary(false)
             }
-      
-        </section>
 
-        @using ProbbySocialNetwork.Models
-        <section id="statusList">
-            @foreach(Status s in Model.newestStatuses)
-            {
-                
-                    if (s.MediaURL != null)
-                    {
-                        <h3 class="statusContent">
-                            <img src="@s.MediaURL" alt="image" />
-                        </h3>
-                        <textarea rows="4" value="@s.MediaURL" class=" editTextbox"/>
-                    }
-                    else if (s.Post != null)
-                    {
-                        <h3 class="statusContent">
-                            @s.Post
-                        </h3>
-                        <textarea rows="4" value="@s.Post" class=" editTextbox" />
-                    }
-                <p>
-                    @Model.currentUser.UserName | @s.Date | 
-                    @if (Model.currentUser.Id == s.UserID)
-                    {
-                        @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
-                        <span> | </span>
-                        @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
-                        
-                        <script>
-                            $(document).ready(function(){
-                                $(".editButton").click(function(){
-                                    $(".statusContent").hide();
-                                    $(".editTextbox").css("display", "block");
-
-                                });
-                            });
-                        </script>
-                    }
-                </p>
-                if (Model.commentsForStatuses != null)
-                { 
-                    foreach(Comment c in Model.commentsForStatuses)
-                    {
-                        if (c.StatusID == s.ID)
-                        {
-                            <p class="comment">
-                                @c.UserName: @c.Body | @c.DateInserted 
-                                <span> | </span>
-                                @if (Model.currentUser.Id == s.UserID)
-                                {
-                                    @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                }
-                            </p>
-                        }
-                        
-                    }
-                }
-
-                using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+            <h2>Hobbies</h2>
+            <ul>
+                @using ProbbySocialNetwork.Models;
+                @foreach (Hobby h in Model.currentUserHobbies)
                 {
-                    <input type="hidden" name="statusID" value="@s.ID" />
+                    <li>
+                        @Html.ActionLink(h.Name, "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID })
+                    </li>
+
+                }
+            </ul>
+                
+            <h4>Create a new Hobby</h4>
+            @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
+            {
+                <input type="hidden" name="userid" value="" />
+                <div class="form-horizontal">
+                    <label class="sr-only" for="hobbyName">Name</label>
+                    <textarea class="form-control" rows="1" id="hobbyName" name="hobbyName" placeholder="Hobby Name"></textarea>
+                    <label class="sr-only" for="hobbyDesc">Description</label>
+                    <textarea class="form-control" rows="4" id="hobbyDesc" name="hobbyDesc" placeholder="Hobby Description"></textarea>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                @Html.ValidationSummary(false)
+            }
+
+        </div>
+        <div class="theContent">
+            <!--breyta i html helper-->
+
+            <section>
+                <h4>Create Status</h4>
+                @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
+                {
+                    <input type="hidden" name="userid" value="@Model.currentUser.Id " />
+                    <input type="hidden" name="groupID" value="" />
+                    <input type="hidden" name="postedToID" value="" />
                     <div class="form-horizontal">
-                        <label class="sr-only" for="commentText">Status</label>
-                        <textarea class="form-control" rows="2" id="commentText" name="commentText"></textarea>
-                        <button type="submit" class="btn btn-primary">Comment</button>
+                        <label class="sr-only" for="statusText">Status</label>
+                        <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
+                        <div class="appendTo"></div>
+                        <button type="submit" class="btn btn-primary">Post</button>
                     </div>
-                    
-                    <input type="hidden" name="returnUrl" value="" />
+
                     @Html.ValidationSummary(false)
                 }
+                <button class="onClick">Upload image</button>
+            </section>
 
-            }
-        </section>
-         
-        
+            @using ProbbySocialNetwork.Models
+            <section id="statusList">
+                @foreach (Status s in Model.newestStatuses)
+                {
+                    <div class="status">
+                        <p>
+                            <img src="@Model.currentUser.ProfilePic" class="postPic" />
+                        <p class="postUserName">@s.UserName</p>
+                        
+
+                        <h3 class="statusContent">
+                            @if (s.Post == null)
+                            {
+                                <img src="@s.MediaURL" alt="image" />
+                                <input type="text" value="@s.MediaURL" class="editTextbox" />
+                            }
+                            else
+                            {
+                                @s.Post
+                                <input type="text" value="@s.Post" class="editTextbox" />
+                            }
+                        </h3>
+                        <p>
+                            @s.Date |
+                            @if (Model.currentUser.Id == s.UserID)
+                            {
+                                @Html.ActionLink("Edit", "EditStatus", "Status", new { id = s.ID }, new { @class = "myCssClass" })
+                                <span> | </span>
+                                @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
+
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#editButton").click(function() {
+                                            $(".statusContent").hide();
+                                            if (@s.Post == null)
+                                            {
+                                                $(".editTextbox").show();
+                                            }
+                                            else
+                                            {
+                                                $(".editTextbox").show();
+                                            }
+                                        });
+
+                                    });
+                                </script>
+                            }
+                        </p>
+                        @if (Model.commentsForStatuses != null)
+                        {
+                            foreach (Comment c in Model.commentsForStatuses)
+                            {
+                                if (c.StatusID == s.ID)
+                                {
+                                    <p class="comment">
+                                        @c.UserName | @c.Body | @c.DateInserted
+                                        <span> | </span>
+                                        @if (Model.currentUser.Id == s.UserID)
+                                        {
+                                            @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                        }
+                                    </p>
+                                }
+
+                            }
+                        }
+                        
+                        @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                        {
+                        <input type="hidden" name="statusID" value="@s.ID" />
+                        <div class="form-horizontal">
+                            <label class="sr-only" for="commentText">Status</label>
+                            <input type="text" class="form-control" name="commentText"/>
+                        </div>
+                        <input type="hidden" name="returnUrl" value="" />
+                        @Html.ValidationSummary(false)
+                        }
+                    </div>
+                }
+            </section>
+
+
+        </div>
+
     </div>
 </div>
 
