@@ -14,13 +14,13 @@
     font-weight: bold;
 }
 
-.group, .hobby {
+.group, .hobby, .followings {
     background: rgba(228, 228, 228, 0.51);
     border-radius: 15px;
     box-shadow: 1px 2px 5px rgba(215, 212, 212, 1);
 }
 
-.group > h2 , .hobby > h2 {
+.group > h2 , .hobby > h2, .followings > h2 {
     font-weight: bold;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -32,7 +32,7 @@
     color: white;
 }
 
-.groupCreation, .hobbyCreation {
+.groupCreation, .hobbyCreation, #following-list {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
@@ -196,7 +196,6 @@ button, .btn, input[type="submit"] {
     font-family: arial;
     color: #FFFFFF !important;
     font-size: 14px;
-    text-shadow: 1px 1px 0px #7CACDE;
     padding: 2px 5px;
     border: 2px solid #ADADAD;
     background: #ADADAD;
@@ -206,7 +205,6 @@ button, .btn, input[type="submit"] {
     background: -moz-linear-gradient(top,  #ADADAD,  #ADADAD);
 }
 button:hover, .btn:hover, input[type="submit"]:hover {
-    color: #9E9E9E !important;
     background: #9E9E9E;
     background: linear-gradient(top,  #9E9E9E,  #9E9E9E);
     background: -ms-linear-gradient(top,  #9E9E9E,  #9E9E9E);
@@ -220,3 +218,30 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     margin: 0px;
     position: absolute;
 }
+
+.followButton {
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    background-color: #36D7B6;
+    box-shadow: 1px 2px 5px rgba(54, 215, 182, 1);
+    padding: 10px 95px;
+    border-radius: 15px;
+}
+
+.unfollowButton {
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    background-color: #36D7B6;
+    box-shadow: 1px 2px 5px rgba(54, 215, 182, 1);
+    padding: 10px 88px;
+    border-radius: 15px;
+}
+
+.followButton:hover, .unfollowButton:hover {
+    text-decoration: none;
+    color: white;
+    background-color: rgba(45, 176, 149, 1);
+}
+

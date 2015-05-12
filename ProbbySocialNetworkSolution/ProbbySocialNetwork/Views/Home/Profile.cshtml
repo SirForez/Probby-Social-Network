@@ -41,23 +41,30 @@
             </div>
             @Html.ValidationSummary(false)
         }
-        <p><a href="/Home/Profile?username=@Model.currentUserProfile.UserName">@Model.currentUserProfile.UserName's Profile</a></p>
+        <p>@Model.currentUserProfile.UserName's Profile</p>
         @if (Model.currentUserProfile.UserName != User.Identity.Name)
         {
             if (Model.currentUserFollowing.Contains(Model.currentUserProfile))
             {
-                @Html.ActionLink("Unfollow", "RemoveFollowing", "Account", new { username = Model.currentUserProfile.UserName }, null)
+                @Html.ActionLink("Unfollow", "RemoveFollowing", "Account", new { username = Model.currentUserProfile.UserName }, new { @class = "unfollowButton" })
             }
             else
             {
-                @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.currentUserProfile.UserName }, null)
+                @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.currentUserProfile.UserName }, new { @class = "followButton" })
             }
         }
-        <div id="following-list">
-            @foreach (ApplicationUser a in Model.currentUserProfileFollowing)
-            {
-                <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-            }
+        <div class="followings">
+            <h2>Following list</h2>
+            <div id="following-list">
+                <ul>
+                    @foreach (ApplicationUser a in Model.currentUserProfileFollowing)
+                        {
+                            <li>
+                                <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                            </li>
+                        }
+                </ul>
+            </div>
         </div>
     </div>
     <div class="theContent">
