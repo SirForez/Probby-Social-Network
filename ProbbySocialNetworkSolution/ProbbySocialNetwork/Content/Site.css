@@ -14,13 +14,13 @@
     font-weight: bold;
 }
 
-.group, .hobby, .follow, .inGroup {
+.group, .hobby, .follow, .inGroup, .peopleInGroup, .adminsInGroup {
     background: rgba(228, 228, 228, 0.51);
     border-radius: 15px;
     box-shadow: 1px 2px 5px rgba(215, 212, 212, 1);
 }
 
-.group > h2 , .hobby > h2, .follow > h2, .inGroup > h2 {
+.group > h2 , .hobby > h2, .follow > h2, .inGroup > h2, .adminsInGroup > h2, .peopleInGroup > h2 {
     font-weight: bold;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -32,10 +32,11 @@
     color: white;
 }
 
-.groupCreation, .hobbyCreation, #follow-list {
+.groupCreation, .hobbyCreation, #follow-list, .adminsInGroup-list, .peopleInGroup-list {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .theContent {
@@ -116,12 +117,12 @@ textarea {
      width: 100%;
 }
 
-.headers{
+.headers {
     font-family: Arial;
     text-align: center;
 }
 
-.container{
+.container {
     padding-left: 0;
     padding-right: 0;
     margin: 0 auto;
@@ -236,11 +237,11 @@ button:hover, .btn:hover, input[type="submit"]:hover {
 }
 
 .followButton {
-    padding: 10px 95px;
+    padding: 10px 93px;
 }
 
 .unfollowButton {
-    padding: 10px 88px;
+    padding: 10px 86px;
 }
 
 .joinGroupButton {
@@ -259,4 +260,9 @@ button:hover, .btn:hover, input[type="submit"]:hover {
 
 ul {
     list-style-type: none;
+}
+
+.aboutDescription {
+    padding-bottom: 15px;
+    border-bottom: solid 4px #eeeeee;
 }

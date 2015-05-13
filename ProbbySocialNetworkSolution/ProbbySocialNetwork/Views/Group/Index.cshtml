@@ -21,28 +21,32 @@
             @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "joinGroupButton" })
         }
         
-        <div class="inGroup">
-            <h2>Admins of group : </h2>
-            <div class="adminInGroup-list">
-                <ul>
-                    @foreach (ApplicationUser a in Model.currentGroupAdmins)
-                    {
-                        <li>
-                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-                        </li>
-                    }
-                </ul>
+        <div class="usersInGroup">
+            <div class="adminsInGroup">
+                <h2>Admins of group : </h2>
+                <div class="adminsInGroup-list">
+                    <ul>
+                        @foreach (ApplicationUser a in Model.currentGroupAdmins)
+                        {
+                            <li>
+                                <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </div>
-            <h2>People in group : </h2>
-            <div class="peopleInGroup-list">
-                <ul>
-                    @foreach (ApplicationUser a in Model.currentGroupMembers)
-                    {
-                        <li>
-                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-                        </li>
-                    }
-                </ul>
+            <div class="peopleInGroup">
+                <h2>People in group : </h2>
+                <div class="peopleInGroup-list">
+                    <ul>
+                        @foreach (ApplicationUser a in Model.currentGroupMembers)
+                        {
+                            <li>
+                                <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
 
