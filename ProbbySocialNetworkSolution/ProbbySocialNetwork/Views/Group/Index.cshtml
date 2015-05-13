@@ -30,6 +30,17 @@
         }
         
     <div class="inGroup">
+        <h2>Admins of group : </h2>
+        <div class="adminInGroup-list">
+            <ul>
+                @foreach (ApplicationUser a in Model.currentGroupAdmins)
+                {
+                    <li>
+                        <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                    </li>
+                }
+            </ul>
+        </div>
         <h2>People in group : </h2>
         <div class="peopleInGroup-list">
             <ul>

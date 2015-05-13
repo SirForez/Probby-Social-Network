@@ -10,6 +10,7 @@ namespace ProbbySocialNetwork.Models.ViewModels
 		public ApplicationUser currentUser;
 		public Group currentGroup;
 		public List<ApplicationUser> currentGroupMembers;
+        public List<ApplicationUser> currentGroupAdmins;
 		public List<Status> currentGroupStatusHistory;
 		public List<Comment> commentsForStatuses;
 	}
