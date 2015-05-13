@@ -302,9 +302,10 @@
                         <!--edit and remove links-->
                         <p>
                             @s.Date
-                            @if (Model.currentUser.Id == s.UserID)
+                            @if (Model.currentUser.Id == s.UserID || Model.currentGroupAdmins.Contains(Model.currentUser))
                             {
                                     <!--onclick it will hide status content and show edit form-->
+                                <span> | </span>
                                 <a href="#" class="editLink" onclick="editStatus(@s.ID)">Edit</a>
                                 <span> | </span>
                                 @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
