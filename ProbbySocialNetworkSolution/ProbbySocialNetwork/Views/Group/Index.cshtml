@@ -10,12 +10,27 @@
         <p>@Model.currentGroup.description</p>
         @if (Model.currentGroupMembers.Contains(Model.currentUser))
         {
-            @Html.ActionLink("Leave Group", "LeaveGroup", "Group", new { id = Model.currentGroup.ID }, null)
+            @Html.ActionLink("Leave Group", "LeaveGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "leaveGroupButton" })
         }
         else
         {
-            @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, null)
+            @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "joinGroupButton" })
         }
+        
+    <div class="inGroup">
+        <h2>People in group : </h2>
+        <div class="peopleInGroup-list">
+            <ul>
+                @foreach (ApplicationUser a in Model.currentGroupMembers)
+                {
+                    <li>
+                        <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
     </div>
     <div class="theContent">
         <!--breyta i html helper-->
