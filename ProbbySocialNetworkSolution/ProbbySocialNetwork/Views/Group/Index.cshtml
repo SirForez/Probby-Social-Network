@@ -12,6 +12,10 @@
         {
             @Html.ActionLink("Leave Group", "LeaveGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "leaveGroupButton" })
         }
+        else if (Model.currentGroupAdmins.Contains(Model.currentUser))
+        {
+            @Html.ActionLink("Delete Group", "DeleteGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "deleteGroupButton" })
+        }
         else
         {
             @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "joinGroupButton" })
@@ -34,12 +38,9 @@
             <ul>
                 @foreach (ApplicationUser a in Model.currentGroupMembers)
                 {
-                    if (Model.currentGroupAdmins.Contains(a))
-                    {
-                        <li>
-                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-                        </li>
-                    }
+                    <li>
+                        <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                    </li>
                 }
             </ul>
         </div>
@@ -87,7 +88,7 @@
                 }
                         }
                     </div>
-                    <span class="rhsStatus">
+                    <div class="rhsStatus">
                         <div class="statusContent">
                             <!--Status content and edit form for status-->
                             <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
@@ -150,7 +151,7 @@
                             <input type="hidden" name="returnUrl" value="" />
                             @Html.ValidationSummary(false)
                         }
-                    </span>
+                    </div>
 
                 </div>
             }

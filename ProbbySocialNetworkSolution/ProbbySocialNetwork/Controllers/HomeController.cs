@@ -31,6 +31,7 @@ namespace ProbbySocialNetwork.Controllers
             model.newestStatuses = statusService.getStatusFeedByUser(model.currentUser);
             model.commentsForStatuses = new List<Comment>();
 			model.currentUserGroups = groupService.getGroupsByUser(model.currentUser);
+            model.currentUserGroups.AddRange(groupService.getGroupsByAdmin(model.currentUser));
             model.currentUserHobbies = hobbyService.getHobbiesByUser(model.currentUser);
 
 			//For statuses, we also need to add the hobbies and shit

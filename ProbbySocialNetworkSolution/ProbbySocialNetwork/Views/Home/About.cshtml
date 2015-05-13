@@ -1,62 +1,22 @@
 ﻿@{
     ViewBag.Title = "About Probby";
-    Layout = "";
+    Layout = "~/View/Shared/_UnauthorizedLayout.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Probby</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-    
-</head>
-<body>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href='@Url.Action("Index", "Home")'>
-                    <img class="logo" src="~/Content/Images/Logo2.png" />
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>@ViewBag.Title.</h2>
-        <p>
-            This website was built for a three week course in Reykjavik University where the goal was to create a social media website. 
-            Our idea was to create a foundation for people to promote their hobbies and establish relationship with people that 
-            have the same or similar interests. People can follow other people, join groups and discover content under specific hobby tags.
-        </p>
-        <h3>Creators</h3>
-        <ul>
-            <li>Bjartur Hafþórsson</li>
-            <li>Eyþór Snær Tryggvason</li>
-            <li>Helena Júlíusdóttir</li>
-            <li>Orri Guðlaugur Jónsson</li>
-            <li>Quang Nguyen</li>
-            <li>Dabs</li>
-        </ul>
-
-        <hr />
-        <footer>
-            <p class="footer">&copy; @DateTime.Now.Year - Probby Social Network | Want to know more about Probby? You can find more info @Html.ActionLink("here", "About", "Home")!</p>
-        </footer>
-   </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-</body>
-</html>
-
+<div class="container">
+    <h2>@ViewBag.Title.</h2>
+    <p>
+        This website was built for a three week course in Reykjavik University where the goal was to create a social media website. 
+        Our idea was to create a foundation for people to promote their hobbies and establish relationship with people that 
+        have the same or similar interests. People can follow other people, join groups and discover content under specific hobby tags.
+    </p>
+    <h3>Creators</h3>
+    <ul>
+        <li>Bjartur Hafþórsson</li>
+        <li>Eyþór Snær Tryggvason</li>
+        <li>Helena Júlíusdóttir</li>
+        <li>Orri Guðlaugur Jónsson</li>
+        <li>Quang Nguyen</li>
+        <li>Dabs</li>
+    </ul>
+</div>

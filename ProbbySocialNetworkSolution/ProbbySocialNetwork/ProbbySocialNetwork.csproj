@@ -267,6 +267,7 @@
     <Content Include="Views\Hobby\Index.cshtml" />
     <Content Include="Views\Status\EditStatus.cshtml" />
     <Content Include="Views\Shared\Test.cshtml" />
+    <Content Include="Views\Shared\_UnauthorizedLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

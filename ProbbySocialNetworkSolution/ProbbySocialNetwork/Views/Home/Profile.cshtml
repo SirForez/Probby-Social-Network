@@ -35,7 +35,7 @@
         <p>@Model.profileOwner.UserName's Profile</p>
         @if (Model.profileOwner.UserName != User.Identity.Name)
         {
-            if (Model.profileOwnerFollowing.Contains(Model.profileOwner))
+            if (Model.profileOwnerFollowing.Contains(Model.currentUser))
             {
                 @Html.ActionLink("Unfollow", "RemoveFollowing", "Account", new { username = Model.profileOwner.UserName }, new { @class = "unfollowButton" })
             }

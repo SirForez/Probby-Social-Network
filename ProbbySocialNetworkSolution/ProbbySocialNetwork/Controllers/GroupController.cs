@@ -55,7 +55,6 @@ namespace ProbbySocialNetwork.Controllers
 
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 
-            groupService.addUserToGroup(g, currentUser);
             groupService.addAdminToGroup(g, currentUser);
 
 			string url = this.Request.UrlReferrer.AbsoluteUri;
@@ -97,6 +96,22 @@ namespace ProbbySocialNetwork.Controllers
 
 				string url = this.Request.UrlReferrer.AbsoluteUri;
 				return Redirect(url);
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+        public ActionResult DeleteGroup(int? id)
+        {
+            if (id.HasValue)
+            {
+                int realid = id.Value;
+                Group g = groupService.getGroupByID(realid);
+                groupService.removeGroup(g);
+
+                return RedirectToAction("Index", "Home", null);
             }
             else
             {
