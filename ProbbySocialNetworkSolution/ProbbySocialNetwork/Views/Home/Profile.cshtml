@@ -80,7 +80,6 @@
     </div>
     <div class="theContent">
         <section>
-            <h4>Create Status</h4>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
             {
                 <input type="hidden" name="userid" value="@Model.currentUser.Id " />
@@ -101,7 +100,7 @@
                 </select>
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
-                    <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Post status..."></textarea>
+                    <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Insert a status..."></textarea>
                     <span class="appendTo"></span>
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
