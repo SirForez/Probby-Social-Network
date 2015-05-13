@@ -28,22 +28,19 @@
             <div class="navbar-right">
                 <ul class="nav navbar-nav navbar">
                     <li>
-                        @Html.ActionLink("Home", "Index", "Home", null)
+                        @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Home" })
                     </li>
                     <li>
-                        @Html.ActionLink("About", "About", "Home", null)
+                        @Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { title = "About" })
 
                     </li>
                     <li>
                         @Html.ActionLink("Register", "Register", "Manage", null)
                     </li>
-
-                    <li>
-                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                    </li>
                 </ul>
             </div>
         </div>
+    </div>
     @RenderBody()
     <hr />
     <footer>
