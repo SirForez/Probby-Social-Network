@@ -463,8 +463,8 @@ namespace ProbbySocialNetwork.Controllers
 
                 accountService.removeFollowingFromUser(currentUser, removeFrom);
 
-                string url = this.Request.UrlReferrer.AbsolutePath;
-                return Redirect(url);
+				string url = this.Request.UrlReferrer.AbsoluteUri;
+				return Redirect(url);
             }
             else
             {
