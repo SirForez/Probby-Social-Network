@@ -4,23 +4,49 @@
     ViewBag.Title = "Group";
 }
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<script>
+    var main = function () {
+        $(".onClick").click(function () {
+            $(".appendTo").append("<input type='text' name='url' size='35' maxlength='255' placeholder='Insert IMG url here'/>");
+            $(".onClick").hide();
+        });
+    }
+    $(document).ready(main);
+</script>
+
 <div class="container">
     <div class="lhsNav">
         <h2>@Model.currentGroup.name</h2>
         <p>@Model.currentGroup.description</p>
         @if (Model.currentGroupMembers.Contains(Model.currentUser))
         {
-            @Html.ActionLink("Leave Group", "LeaveGroup", "Group", new { id = Model.currentGroup.ID }, null)
+            @Html.ActionLink("Leave Group", "LeaveGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "leaveGroupButton" })
         }
         else
         {
-            @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, null)
+            @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "joinGroupButton" })
         }
+        
+    <div class="inGroup">
+        <h2>People in group : </h2>
+        <div class="peopleInGroup-list">
+            <ul>
+                @foreach (ApplicationUser a in Model.currentGroupMembers)
+                {
+                    <li>
+                        <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
     </div>
     <div class="theContent">
         <!--breyta i html helper-->
         <section>
-            <h4>Create Status</h4>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm", groupID = Model.currentGroup.ID }))
             {
                 <input type="hidden" name="userid" value="@Model.currentUser.Id " />
@@ -30,8 +56,8 @@
                 <label>#@Model.currentGroup.hobby.Name</label>
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
-                    <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Post status..."></textarea>
-                    <div class="appendTo"></div>
+                    <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Insert a status..."></textarea>
+                    <span class="appendTo"></span>
                     <button type="submit" class="btn btn-primary">Post</button>
                 </div>
 
@@ -85,7 +111,7 @@
                         </div>
                         <!--edit and remove links-->
                         <p>
-                            @s.Date |
+                            @s.Date
                             @if (Model.currentUser.Id == s.UserID)
                             {
                                     <!--onclick it will hide status content and show edit form-->
