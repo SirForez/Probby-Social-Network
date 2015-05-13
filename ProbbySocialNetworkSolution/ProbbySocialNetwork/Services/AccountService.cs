@@ -24,6 +24,11 @@ namespace ProbbySocialNetwork.Models
 
         public ApplicationUser getUserByName(String name)
         {	
+			if (name == null)
+			{ 
+				return null;
+			}
+			
 			var user = (from u in db.Users
                         where u.UserName == name
                         select u).SingleOrDefault();
