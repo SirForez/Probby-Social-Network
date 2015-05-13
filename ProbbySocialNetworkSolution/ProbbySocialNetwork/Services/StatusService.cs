@@ -39,7 +39,7 @@ namespace ProbbySocialNetwork.Models
 				return null;
 			}
 			
-			var statuses = getStatusByUser(a);
+			var statuses = getStatusesByUser(a);
 
             List<UserFollowConnection> userFollowingIDs = (from f in db.UserFollowConnections
                                              where f.FollowerID == a.Id
@@ -56,10 +56,11 @@ namespace ProbbySocialNetwork.Models
 
             statuses.AddRange(statusesFromFollowing);
             statuses.Sort((x, y) => y.Date.CompareTo(x.Date));
-            return statuses;
+			List<Status> statusesWithoutDuplicates = statuses.Distinct().ToList();
+            return statusesWithoutDuplicates;
         }
 
-        public List<Status> getStatusByUser(ApplicationUser a)
+        public List<Status> getStatusesByUser(ApplicationUser a)
         {
 			if (a == null)
 			{
