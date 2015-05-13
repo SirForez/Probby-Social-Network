@@ -8,6 +8,12 @@
 
      });
 
+    $(".changeProfilePic").click(function () {
+
+        $(".changeProfilePic").hide();
+        $(".changePic").append("<label for='picLink'>New Picture</label><input type='text' id='newProfilePic' name='picLink' placeholder='Link to profile picture' /><button type='submit' name='submit' value='Submit' class='btn btn-primary'>Submit</button>"
+            );
+        });
 
 
 }

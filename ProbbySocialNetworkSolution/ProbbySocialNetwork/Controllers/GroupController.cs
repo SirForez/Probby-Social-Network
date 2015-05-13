@@ -103,6 +103,22 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
+        public ActionResult DeleteGroup(int? id)
+        {
+            if (id.HasValue)
+            {
+                int realid = id.Value;
+                Group g = groupService.getGroupByID(realid);
+                groupService.removeGroup(g);
+
+                return RedirectToAction("Index", "Home", null);
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
         public ActionResult Search()
         {
             //TODO: Implement
