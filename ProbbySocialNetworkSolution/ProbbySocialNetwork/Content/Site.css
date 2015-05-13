@@ -176,6 +176,7 @@ textarea {
 
 #statusText {
     max-width: 100%;
+    margin-bottom: 10px;
 }
 
 .comment {
@@ -248,4 +249,8 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     text-decoration: none;
     color: white;
     background-color: rgba(45, 176, 149, 1);
+}
+
+ul {
+    list-style-type: none;
 }
