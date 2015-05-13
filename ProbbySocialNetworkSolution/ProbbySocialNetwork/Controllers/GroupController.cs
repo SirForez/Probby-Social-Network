@@ -28,6 +28,7 @@ namespace ProbbySocialNetwork.Controllers
 			model.currentGroup = groupService.getGroupByID(ID);
             model.currentGroupAdmins = groupService.getAdminsByGroup(model.currentGroup);
 			model.currentGroupMembers = groupService.getUsersByGroup(model.currentGroup);
+            model.availableHobbies = hobbyService.getAllHobbies();
 			model.currentGroupStatusHistory = statusService.getGroupStatusHistory(model.currentGroup);
 
 			foreach (Status s in model.currentGroupStatusHistory)
@@ -79,10 +80,19 @@ namespace ProbbySocialNetwork.Controllers
             }
 		}
 
-        public ActionResult EditGroup()
+        public ActionResult EditGroup(FormCollection collection)
         {
-            //TODO: Implement
-            return View();
+            int groupID = Int32.Parse(collection["groupID"]);
+            Group g = groupService.getGroupByID(groupID);
+
+            g.name = collection["groupName"];
+            g.description = collection["groupDesc"];
+            g.hobby = hobbyService.getHobbyByName(collection["groupHobby"]);
+
+            groupService.editGroup(g);
+
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
         }
 
         public ActionResult LeaveGroup(int? id)
@@ -117,6 +127,57 @@ namespace ProbbySocialNetwork.Controllers
             {
                 return View("Error");
             }
+        }
+
+        public ActionResult AssignAdmin(FormCollection collection)
+        {
+            int groupID = Int32.Parse(collection["groupID"]);
+            Group g = groupService.getGroupByID(groupID);
+            ApplicationUser a = accountService.getUserByName(collection["userName"]);
+            
+            groupService.removeUserFromGroup(g, a);
+            groupService.addAdminToGroup(g, a);
+
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
+        }
+
+        public ActionResult RemoveAdmin(FormCollection collection)
+        {
+            int groupID = Int32.Parse(collection["groupID"]);
+            Group g = groupService.getGroupByID(groupID);
+            ApplicationUser a = accountService.getUserByName(collection["userName"]);
+
+            groupService.removeAdminFromGroup(g, a);
+            groupService.addUserToGroup(g, a);
+
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+        }
+
+        //Do not need this yet, until we implement notifications (if we do)
+        /*public ActionResult AddUser(FormCollection collection)
+        {
+            int groupID = Int32.Parse(collection["groupID"]);
+            Group g = groupService.getGroupByID(groupID);
+            ApplicationUser a = accountService.getUserByName(collection["userName"]);
+
+            groupService.addUserToGroup(g, a);
+
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+        }*/
+
+        public ActionResult RemoveUser(FormCollection collection)
+        {
+            int groupID = Int32.Parse(collection["groupID"]);
+            Group g = groupService.getGroupByID(groupID);
+            ApplicationUser a = accountService.getUserByName(collection["userName"]);
+
+            groupService.removeUserFromGroup(g, a);
+
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
         }
 
         public ActionResult Search()
