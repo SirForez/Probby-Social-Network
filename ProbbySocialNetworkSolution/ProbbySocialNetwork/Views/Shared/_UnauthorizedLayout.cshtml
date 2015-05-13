@@ -25,8 +25,25 @@
                     <img class="logo" src="~/Content/Images/Logo2.png" />
                 </a>
             </div>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav navbar">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home", null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("About", "About", "Home", null)
+
+                    </li>
+                    <li>
+                        @Html.ActionLink("Register", "Register", "Manage", null)
+                    </li>
+
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
     @RenderBody()
     <hr />
     <footer>
