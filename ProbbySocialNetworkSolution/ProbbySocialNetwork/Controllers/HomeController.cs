@@ -35,17 +35,18 @@ namespace ProbbySocialNetwork.Controllers
 
 			//For statuses, we also need to add the hobbies and shit
 
-		    foreach (Status s in model.newestStatuses)
+			if (model.newestStatuses != null)
 			{
-				if (model.newestStatuses == null)
-				{ break; }
-				
-				List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
-				foreach (Comment c in currentCommentList)
+				foreach (Status s in model.newestStatuses)
 				{
-					model.commentsForStatuses.Add(c);
+					List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
+					foreach (Comment c in currentCommentList)
+					{
+						model.commentsForStatuses.Add(c);
+					}
 				}
 			}
+		    
 			
 			return View(model);
         }
