@@ -19,29 +19,26 @@
 <div class="container nw">
     <div class="lhsNav">
     <img src="@Model.profileOwner.ProfilePic" class="profilePic">
-    @if (Model.currentUser.Id == Model.profileOwner.Id)
-    {
-
-        <button class="changeProfilePic">Change profile picture</button>
-        <div id="hideChangePic">
-
-        @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
+        @if (Model.currentUser.Id == Model.profileOwner.Id)
         {
-            <div class="form-horizontal">
-                <label class="sr-only" for="picLink">New Picture</label>
-                <input tyep="text" id="newProfilePic" name="picLink" placeholder="Link to profile picture..." />
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+            <button class="changeProfilePic">Change profile picture</button>
+            <div id="hideChangePic">
+                @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
+                {
+                    <div class="form-horizontal">
+                        <label class="sr-only" for="picLink">New Picture</label>
+                        <input tyep="text" id="newProfilePic" name="picLink" placeholder="Link to profile picture..." />
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    @Html.ValidationSummary(false)
+
+                }
             </div>
-            @Html.ValidationSummary(false)
-
         }
-</div>
-    }
 
-        
-        
         <p>@Model.profileOwner.UserName's Profile</p>
-        @if (Model.profileOwner.UserName != User.Identity.Name)
+        @if (Model.profileOwner.UserName != Model.currentUser.UserName)
         {
             if (Model.profileOwnerFollowing.Contains(Model.currentUser))
             {
