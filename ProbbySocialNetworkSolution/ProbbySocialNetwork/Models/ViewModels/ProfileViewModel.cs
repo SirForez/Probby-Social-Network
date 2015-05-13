@@ -8,18 +8,12 @@ namespace ProbbySocialNetwork.Models.ViewModels
     public class ProfileViewModel
     {
         public ApplicationUser currentUser;
-        public ApplicationUser currentUserProfile;
-        public List<ApplicationUser> currentUserProfileFollowing;
-		public List<ApplicationUser> currentUserProfileFollowers;
-		public int currentUserProfileNumberOfFollowers;
-		public int currentUserProfileNumberOfFollowing;
-        public List<Status> currentUserStatusHistory;
+        public ApplicationUser profileOwner;
+        public List<ApplicationUser> profileOwnerFollowing;
+		public List<ApplicationUser> profileOwnerFollowers;
+		public List<Status> profileOwnerStatusHistory;
         public List<Comment> commentsForStatuses;
-		public List<Group> currentUserGroups;
-		public List<Hobby> currentUserHobbies;
-		public List<ApplicationUser> currentUserFollowing;
-		public List<ApplicationUser> currentUserFollowers;
-		public int currentUserNumberOfFollowers;
-		public int currentUserNumberOfFollowing;
+		public List<Group> profileOwnerGroups;
+		public List<Hobby> profileOwnerHobbies;
     }
 }

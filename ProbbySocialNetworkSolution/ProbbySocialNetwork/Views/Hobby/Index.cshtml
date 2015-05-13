@@ -19,11 +19,11 @@
 <div class="container">
     <div class="lhsNav">
         <h2>@Model.currentHobby.Name</h2>
-        @if (Model.currentHobbyUsers.Contains(Model.currentUser))
+        @if (Model.currentHobbyUsers.Contains(Model.currentUser) && Model.currentHobby.Name != "Misc")
         {
             @Html.ActionLink("Remove Hobby", "RemoveHobby", "Hobby", new { id = Model.currentHobby.ID }, null)
         }
-        else
+        else if (!Model.currentHobbyUsers.Contains(Model.currentUser) && Model.currentHobby.Name != "Misc")
         {
             @Html.ActionLink("Add Hobby", "AddHobby", "Hobby", new { id = Model.currentHobby.ID }, null)
         }

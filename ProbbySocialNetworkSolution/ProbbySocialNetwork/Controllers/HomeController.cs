@@ -80,27 +80,24 @@ namespace ProbbySocialNetwork.Controllers
             model.currentUser = accountService.getUserByName(User.Identity.Name);
 		    if (username != null)
             {
-                model.currentUserProfile = accountService.getUserByName(username);
+                model.profileOwner = accountService.getUserByName(username);
             }
             else
             {
-                model.currentUserProfile = model.currentUser;
+                model.profileOwner = model.currentUser;
             }
 
-            model.currentUserProfileFollowing = accountService.getFollowingByUser(model.currentUserProfile);
-			model.currentUserProfileFollowers = accountService.getFollowersByUser(model.currentUserProfile);
-
-			//model.currentUser = accountService.getUserByID(id);
-            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
-            model.currentUserFollowing = accountService.getFollowingByUser(model.currentUser);
-			model.currentUserFollowers = accountService.getFollowersByUser(model.currentUser);
+			model.profileOwnerFollowing = accountService.getFollowingByUser(model.profileOwner);
+			model.profileOwnerFollowers = accountService.getFollowersByUser(model.profileOwner);
+			model.profileOwnerStatusHistory = statusService.getStatusByUser(model.profileOwner);
+			model.profileOwnerFollowing = accountService.getFollowingByUser(model.profileOwner);
+			model.profileOwnerFollowers = accountService.getFollowersByUser(model.profileOwner);
             model.commentsForStatuses = new List<Comment>();
-			model.currentUserHobbies = hobbyService.getHobbiesByUser(model.currentUser);
-			model.currentUserProfileNumberOfFollowers = model.currentUserProfile.NumberOfFollowers;
-			model.currentUserProfileNumberOfFollowing = model.currentUserProfile.NumberOfFollowing;
+			model.profileOwnerHobbies = hobbyService.getHobbiesByUser(model.profileOwner);
 
-            model.currentUserStatusHistory = statusService.getStatusByUser(model.currentUserProfile);
-            foreach(Status s in model.currentUserStatusHistory) {
+			model.profileOwnerStatusHistory = statusService.getStatusByUser(model.profileOwner);
+			foreach (Status s in model.profileOwnerStatusHistory)
+			{
                 List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
                 foreach(Comment c in currentCommentList)
                 {

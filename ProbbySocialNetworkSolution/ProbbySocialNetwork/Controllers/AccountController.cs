@@ -445,7 +445,7 @@ namespace ProbbySocialNetwork.Controllers
 
                 accountService.addFollowingToUser(currentUser, addTo);
 
-                string url = this.Request.UrlReferrer.AbsolutePath;
+                string url = this.Request.UrlReferrer.AbsoluteUri;
                 return Redirect(url);
             }
             else
