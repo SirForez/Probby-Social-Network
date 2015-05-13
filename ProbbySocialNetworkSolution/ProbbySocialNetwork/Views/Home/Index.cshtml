@@ -34,37 +34,50 @@
                 </ul>
 
                 <div class="groupCreation">
-                    <h4>Create a new Group</h4>
-                    @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
-                    {
-                        <input type="hidden" name="userid" value="" />
-                        <div class="form-horizontal">
-
-                            <label class="sr-only" for="groupName">Name</label>
-                            <textarea class="form-control" rows="1" id="groupName" name="groupName" placeholder="Group Name"></textarea>
-                            <label class="sr-only" for="groupHobby">Name</label>
-                            <select class="form-control" rows="1" id="groupHobby" name="groupHobby" placeholder="Group Hobby">
-                                @foreach (Hobby h in Model.currentUserHobbies)
-                                {
-                                    if (@h.Name == "Misc")
-                                    {
-                                        <option value="@h.Name" selected="selected">#@h.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@h.Name">#@h.Name</option>
-                                    }
-                                }
-                            </select>
-                            <label class="sr-only" for="groupDesc">Description</label>
-                            <textarea class="form-control" rows="4" id="groupDesc" name="groupDesc" placeholder="Group Description"></textarea>
-                            <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createGroup" data-whatever="">Create a new group</button>
+                    <div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="exampleModalLabel">Create a new group</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="groupName" class="control-label">Name of group</label>
+                                            <input type="text" class="form-control" id="groupName">
+                                        </div>
+                                        <div class="form-group">
+                                            <select name="chosenHobby">
+                                                @foreach (Hobby h in Model.currentUserHobbies)
+                                                {
+                                                    if (@h.Name == "Misc")
+                                                    {
+                                                        <option value="@h.Name" selected="selected">#@h.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@h.Name">#@h.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                            <div class="form-group">
+                                                <label for="description" class="control-label">Description</label>
+                                                <textarea class="form-control" id="description"></textarea>
+                                            </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Create a new group</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
                         </div>
-                        @Html.ValidationSummary(false)
-                    }
-                </div>
+                    </div>
             </div>
-
+    </div>
             <div class="hobby">
                 <h2>Hobbies</h2>
                 <ul>
@@ -77,20 +90,32 @@
                     }
                 </ul>
                 <div class="hobbyCreation">
-                    <h4>Create a new Hobby</h4>
-                    @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
-                    {
-                        <input type="hidden" name="userid" value="" />
-                        <div class="form-horizontal">
-                            <label class="sr-only" for="hobbyName">Name</label>
-                            <textarea class="form-control" rows="1" id="hobbyName" name="hobbyName" placeholder="Hobby Name"></textarea>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                        @Html.ValidationSummary(false)
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createHobby" data-whatever="">Create a new hobby</button>
 
-                    }
+                    <div class="modal fade" id="createHobby" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="exampleModalLabel">Create hobby</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="hobbyName" class="control-label">Hobby name</label>
+                                            <input type="text" class="form-control" id="hobbyName">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Create hobby</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+             </div>
         </div>
         <div class="theContent">
             <!--breyta i html helper-->
