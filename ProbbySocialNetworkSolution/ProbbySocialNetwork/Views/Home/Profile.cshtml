@@ -172,6 +172,11 @@
                                     <span> | </span>
                                     <a class="editLink" onclick="editStatus(@s.ID)">Edit</a>
                                     <span> | </span>
+    <div>
+        <a class="btn" href="@Url.Action("RemoveStatus", "Status")" id="A1">
+            <span class="font-icon-group"></span> All Groups
+        </a>
+    </div>
                                     @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
                                 }
                             </p>
