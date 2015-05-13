@@ -6,8 +6,16 @@
 
 <div class="container">
     <div class="lhsNav">
-        <h2>Group name: @Model.currentGroup.name</h2>
-        @Html.ActionLink("Join Group", "JoinGroup", "Group", new { g = Model.currentGroup }, null)
+        <h2>@Model.currentGroup.name</h2>
+        <p>@Model.currentGroup.description</p>
+        @if (Model.currentGroupMembers.Contains(Model.currentUser))
+        {
+            @Html.ActionLink("Leave Group", "LeaveGroup", "Group", new { id = Model.currentGroup.ID }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, null)
+        }
     </div>
     <div class="theContent">
         <!--breyta i html helper-->

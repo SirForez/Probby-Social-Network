@@ -71,11 +71,17 @@ namespace ProbbySocialNetwork.Models
             return db.SaveChanges() != 1;
         }
 
+        public UserGroupConnection getUserGroupConnection(Group g, ApplicationUser u)
+        {
+            var uConnection = (from c in db.UserGroupConnections
+                               where c.GroupID == g.ID && c.UserID == u.Id
+                               select c).SingleOrDefault();
+            return uConnection;
+        }
+
         public bool removeUserFromGroup(Group g, ApplicationUser toDel)
         {
-            UserGroupConnection gConnection = new UserGroupConnection();
-            gConnection.GroupID = g.ID;
-            gConnection.UserID = toDel.Id;
+            UserGroupConnection gConnection = getUserGroupConnection(g, toDel);
             db.UserGroupConnections.Remove(gConnection);
             return db.SaveChanges() != 1;
         }

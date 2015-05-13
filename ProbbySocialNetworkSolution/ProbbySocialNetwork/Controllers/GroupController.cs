@@ -60,13 +60,22 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
         }
 
-		public ActionResult JoinGroup(Group g)
+		public ActionResult JoinGroup(int? id)
 		{
-			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
-			groupService.addUserToGroup(g, currentUser);
+            if (id.HasValue)
+            {
+                int realid = id.Value;
+                ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+                Group g = groupService.getGroupByID(realid);
+                groupService.addUserToGroup(g, currentUser);
 
-			string url = this.Request.UrlReferrer.AbsolutePath;
-			return Redirect(url);
+                string url = this.Request.UrlReferrer.AbsolutePath;
+                return Redirect(url);
+            }
+            else
+            {
+                return View("Error");
+            }
 		}
 
         public ActionResult EditGroup()
@@ -75,10 +84,22 @@ namespace ProbbySocialNetwork.Controllers
             return View();
         }
 
-        public ActionResult RemoveGroup()
+        public ActionResult LeaveGroup(int? id)
         {
-            //TODO: Implement
-            return View();
+            if (id.HasValue)
+            {
+                int realid = id.Value;
+                ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+                Group g = groupService.getGroupByID(realid);
+                groupService.removeUserFromGroup(g, currentUser);
+
+                string url = this.Request.UrlReferrer.AbsolutePath;
+                return Redirect(url);
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         public ActionResult Search()
