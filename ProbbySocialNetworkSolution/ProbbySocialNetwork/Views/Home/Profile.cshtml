@@ -21,11 +21,11 @@
 
 
 
-<div class="container" class="nw">
+<div class="container nw">
 
     <div class="lhsNav">
-        <img src="@Model.currentUserProfile.ProfilePic" class="profilePic">
-        @if (Model.currentUser.Id == Model.currentUserProfile.Id)
+        <img src="@Model.profileOwner.ProfilePic" class="profilePic">
+        @if (Model.currentUser.Id == Model.profileOwner.Id)
         {
             using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
             {
@@ -38,23 +38,23 @@
             }
         }
         
-        <p>@Model.currentUserProfile.UserName's Profile</p>
-        @if (Model.currentUserProfile.UserName != User.Identity.Name)
+        <p>@Model.profileOwner.UserName's Profile</p>
+        @if (Model.profileOwner.UserName != User.Identity.Name)
         {
-            if (Model.currentUserFollowing.Contains(Model.currentUserProfile))
+            if (Model.profileOwnerFollowing.Contains(Model.profileOwner))
             {
-                @Html.ActionLink("Unfollow", "RemoveFollowing", "Account", new { username = Model.currentUserProfile.UserName }, new { @class = "unfollowButton" })
+                @Html.ActionLink("Unfollow", "RemoveFollowing", "Account", new { username = Model.profileOwner.UserName }, new { @class = "unfollowButton" })
             }
             else
             {
-                @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.currentUserProfile.UserName }, new { @class = "followButton" })
+                @Html.ActionLink("Follow", "AddFollowing", "Account", new { username = Model.profileOwner.UserName }, new { @class = "followButton" })
             }
         }
         <div class="follow">
-            <h2>Following list : @Model.currentUserProfileNumberOfFollowing</h2>
+            <h2>Following list : @Model.profileOwnerFollowing.Count</h2>
             <div class="follow-list">
                 <ul>
-                    @foreach (ApplicationUser a in Model.currentUserProfileFollowing)
+                    @foreach (ApplicationUser a in Model.profileOwnerFollowing)
                     {
                         <li>
                             <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
@@ -64,10 +64,10 @@
             </div>
         </div>
         <div class="follow">
-            <h2>Follower list : @Model.currentUserProfileNumberOfFollowers</h2>
+            <h2>Follower list : @Model.profileOwnerFollowers.Count</h2>
             <div class="follow-list">
                 <ul>
-                    @foreach (ApplicationUser a in Model.currentUserProfileFollowers)
+                    @foreach (ApplicationUser a in Model.profileOwnerFollowers)
                     {
                         <li>
                             <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
@@ -84,9 +84,9 @@
             {
                 <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                 <input type="hidden" name="groupID" value="" />
-                <input type="hidden" name="postedToID" value="@Model.currentUserProfile.Id" />
+                <input type="hidden" name="postedToID" value="@Model.profileOwner.Id" />
                 <select name="chosenHobby">
-                    @foreach (Hobby h in Model.currentUserHobbies)
+                    @foreach (Hobby h in Model.profileOwnerHobbies)
                     {
                         if (@h.Name == "Misc")
                         {
@@ -112,7 +112,7 @@
 
         @using ProbbySocialNetwork.Models
         <section id="statusList">
-            @foreach (Status s in Model.currentUserStatusHistory)
+            @foreach (Status s in Model.profileOwnerStatusHistory)
             {
                 <div class="status">
                     <div class="lhsStatus">
@@ -218,13 +218,12 @@
                                 <input type="hidden" name="returnUrl" value="" />
                                 @Html.ValidationSummary(false)
                             }
-</span>
-
+                    </span>
                 </div>
             }
         </section>
-
     </div>
+</div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
