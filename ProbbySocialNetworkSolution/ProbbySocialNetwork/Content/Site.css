@@ -262,7 +262,19 @@ ul {
     list-style-type: none;
 }
 
+
 .aboutDescription {
     padding-bottom: 15px;
     border-bottom: solid 4px #eeeeee;
+}
+
+img {
+    width: 400px;
+    height: 400px;
+
+}
+
+.searchResultPic {
+    width: 30px;
+    height: 30px;
 }
