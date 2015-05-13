@@ -56,7 +56,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			groupService.addUserToGroup(g, currentUser);
 
-			string url = this.Request.UrlReferrer.AbsolutePath;
+			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
         }
 
@@ -69,8 +69,8 @@ namespace ProbbySocialNetwork.Controllers
                 Group g = groupService.getGroupByID(realid);
                 groupService.addUserToGroup(g, currentUser);
 
-                string url = this.Request.UrlReferrer.AbsolutePath;
-                return Redirect(url);
+				string url = this.Request.UrlReferrer.AbsoluteUri;
+				return Redirect(url);
             }
             else
             {
@@ -93,8 +93,8 @@ namespace ProbbySocialNetwork.Controllers
                 Group g = groupService.getGroupByID(realid);
                 groupService.removeUserFromGroup(g, currentUser);
 
-                string url = this.Request.UrlReferrer.AbsolutePath;
-                return Redirect(url);
+				string url = this.Request.UrlReferrer.AbsoluteUri;
+				return Redirect(url);
             }
             else
             {

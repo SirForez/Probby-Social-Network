@@ -49,7 +49,7 @@ namespace ProbbySocialNetwork.Controllers
 			hobbyService.addHobby(h);
 			hobbyService.addHobbyToUser(currentUser, h);
 
-			string url = this.Request.UrlReferrer.AbsolutePath;
+			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
         }
 
@@ -63,8 +63,8 @@ namespace ProbbySocialNetwork.Controllers
 
                 hobbyService.addHobbyToUser(currentUser, toAdd);
 
-                string url = this.Request.UrlReferrer.AbsolutePath;
-                return Redirect(url);
+				string url = this.Request.UrlReferrer.AbsoluteUri;
+				return Redirect(url);
             }
             else
             {
@@ -82,8 +82,8 @@ namespace ProbbySocialNetwork.Controllers
 
                 hobbyService.removeHobbyFromuser(currentUser, toDel);
 
-                string url = this.Request.UrlReferrer.AbsolutePath;
-                return Redirect(url);
+				string url = this.Request.UrlReferrer.AbsoluteUri;
+				return Redirect(url);
             }
             else
             {

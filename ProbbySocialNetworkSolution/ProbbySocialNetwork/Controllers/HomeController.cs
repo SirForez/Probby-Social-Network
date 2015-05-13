@@ -144,7 +144,7 @@ namespace ProbbySocialNetwork.Controllers
 				statusService.editStatusProfilePicture(s, currentUser.ProfilePic);
 			}
 
-			string url = this.Request.UrlReferrer.AbsolutePath;
+			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 		}
     }

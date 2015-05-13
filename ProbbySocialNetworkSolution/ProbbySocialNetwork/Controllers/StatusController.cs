@@ -83,7 +83,7 @@ namespace ProbbySocialNetwork.Controllers
 			//s.UserID = a.Id;
 			statusService.addStatus(s);
 
-			string url = this.Request.UrlReferrer.AbsolutePath;
+			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 		}
 
@@ -111,7 +111,7 @@ namespace ProbbySocialNetwork.Controllers
 				
 			statusService.editStatus(editedStatus);
 
-			string url = this.Request.UrlReferrer.AbsolutePath;
+			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 			
 		}
@@ -144,7 +144,7 @@ namespace ProbbySocialNetwork.Controllers
 			statusService.addComment(c);
 
 			//temp fix until we can find better solution
-			string url = this.Request.UrlReferrer.AbsolutePath;
+			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 		}
 
@@ -166,7 +166,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			statusService.editComment(editComment);
 
-			string url = this.Request.UrlReferrer.AbsolutePath;
+			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 		}
 
