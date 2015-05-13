@@ -5,37 +5,38 @@
 }
 <script>
 
-    var main = function () {
-        $(".changeProfilePic").click(function () {
-
-            $(".changeProfilePic").hide();
-            $(".changePic").append("using (Html.BeginForm('EditProfilePic', 'Home', FormMethod.Post, new { id = 'profilePictureForm })){<input type='text' id='newProfilePic' name='picLink' placeholder='Link to profile picture' /><button type='submit' name='submit' value='Submit'class='btn btn-primary'>Change picture</button>}"
-                );
-        });
+    
 
 
 
 
 
-    }
-    $(document).ready(main);
+   
 </script>
 
 
 
 <div class="container nw">
     <div class="lhsNav">
-        <img src="@Model.profileOwner.ProfilePic" class="profilePic">
-        @if (Model.currentUser.Id == Model.profileOwner.Id)
+    <img src="@Model.profileOwner.ProfilePic" class="profilePic">
+    @if (Model.currentUser.Id == Model.profileOwner.Id)
+    {
+
+        <button class="changeProfilePic">Change profile picture</button>
+        <div id="hideChangePic">
+
+        @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
         {
-            using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
-            {
-            <button class="changeProfilePic">Change profile picture</button>
-            <span class="changePic"></span>
+            <div class="form-horizontal">
+                <label class="sr-only" for="picLink">New Picture</label>
+                <input tyep="text" id="newProfilePic" name="picLink" placeholder="Link to profile picture..." />
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
             @Html.ValidationSummary(false)
-             }
-             
+
         }
+</div>
+    }
 
         
         
