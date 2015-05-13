@@ -7,26 +7,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-<script>
-    var main = function () {
-        $(".onClick").click(function () {
-            $(".appendTo").append("<input type='text' name='url' size='35' maxlength='255' placeholder='Insert IMG url here'/>");
-            $(".onClick").hide();
-        });
-    }
-    $(document).ready(main);
-</script>
-
-
-<<<<<<< HEAD
-
-
-
 <div class="container nw">
-=======
-<div class="container" class="nw">
->>>>>>> b6edac0a3d84aa0fe177a51a2d72ec87e258d91c
-
     <div class="lhsNav">
         <img src="@Model.profileOwner.ProfilePic" class="profilePic">
         @if (Model.currentUser.Id == Model.profileOwner.Id)
