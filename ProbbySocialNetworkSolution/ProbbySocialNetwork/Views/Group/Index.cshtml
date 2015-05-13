@@ -34,12 +34,9 @@
             <ul>
                 @foreach (ApplicationUser a in Model.currentGroupMembers)
                 {
-                    if (Model.currentGroupAdmins.Contains(a))
-                    {
-                        <li>
-                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-                        </li>
-                    }
+                    <li>
+                        <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                    </li>
                 }
             </ul>
         </div>

@@ -55,7 +55,6 @@ namespace ProbbySocialNetwork.Controllers
 
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 
-            groupService.addUserToGroup(g, currentUser);
             groupService.addAdminToGroup(g, currentUser);
 
 			string url = this.Request.UrlReferrer.AbsoluteUri;

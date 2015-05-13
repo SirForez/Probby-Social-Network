@@ -132,6 +132,21 @@ namespace ProbbySocialNetwork.Models
             return groups;
         }
 
+        public List<Group> getGroupsByAdmin(ApplicationUser a)
+        {
+            if (a == null)
+            {
+                return null;
+            }
+
+            var groups = (from c in db.AdminGroupConnections
+                          where c.UserID == a.Id
+                          join g in db.Groups on c.GroupID equals g.ID
+                          select g).ToList();
+            return groups;
+        }
+
+
         public List<ApplicationUser> getUsersByGroup(Group g)
         {
             var users = (from c in db.UserGroupConnections
