@@ -260,3 +260,48 @@ button:hover, .btn:hover, input[type="submit"]:hover {
 ul {
     list-style-type: none;
 }
+
+img {
+    width: 400px;
+    height: 400px;
+
+}
+
+.searchResultPic {
+    width: 100px;
+    height: 100px;
+}
+
+   .searchResultTitle {
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 28px;
+    color: white;
+    background-color: #36D7B6;
+    box-shadow: 1px 2px 5px rgba(54, 215, 182, 1);
+    border-radius: 15px;
+    margin-left: 300px;
+    margin-right: 300px;
+   }
+
+   #groupText, #nameText, #hobbyText {
+
+       font-size: 16px;
+       color: #003399;
+       font-weight: bold;
+   }
+
+   #hobby-results, #user-results {
+
+       text-align: center;
+   }
+
+   h2 {
+
+       text-align: center;
+   }
+
+   a:hover {
+       color: aquamarine;
+   }

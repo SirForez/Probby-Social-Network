@@ -9,13 +9,15 @@
     <div id="content-container-users">
         @if (Model.userSearchResults.Count != 0)
         {
-            <h3>
+            <h3 class="searchResultTitle">
                 Users:
             </h3>
             <div id="user-results">
                 @foreach (ApplicationUser a in Model.userSearchResults)
-                {
-                    <a href="/Home/Profile?username=@a.UserName">@a.UserName</a><br />
+                {   
+                    <img src="@a.ProfilePic" class="searchResultPic" />
+                    <a href="/Home/Profile?username=@a.UserName" id="nameText">@a.UserName</a><br />
+                    
                 }
             </div>
         }
@@ -24,13 +26,13 @@
     <div id="content-container-hobbies">
         @if (Model.hobbySearchResults.Count != 0)
         {
-            <h3>
+            <h3 class="searchResultTitle">
                 Hobbies:
             </h3>
             <div id="hobby-results">
                 @foreach (Hobby h in Model.hobbySearchResults)
                 {
-                    <a href="/Hobby/Index/@h.ID?Name=@h.Name">@h.Name</a><br />
+                    <a href="/Hobby/Index/@h.ID?Name=@h.Name" id="hobbyText">@h.Name</a><br />
                 }
             </div>
         }
@@ -38,13 +40,13 @@
     <div id="content-container-groups">
         @if (Model.groupSearchResults.Count != 0)
         {
-            <h3>
+            <h3 class="searchResultTitle">
                 Groups:
             </h3>
             <div id="user-results">
                 @foreach (Group g in Model.groupSearchResults)
                 {
-                    <a href="/Group/Index/@g.ID?Name=@g.name">@g.name</a><br />
+                    <a href="/Group/Index/@g.ID?Name=@g.name" id="groupText">@g.name</a><br />
                 }
             </div>
         }
