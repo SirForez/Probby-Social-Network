@@ -27,7 +27,7 @@ namespace ProbbySocialNetwork.Models
 			}
 			
 			var statuses = (from s in db.Statuses
-                            where s.UserID == id
+                            where s.UserID == id && s.GroupID == null
                             select s).ToList();
             return statuses;
         }
