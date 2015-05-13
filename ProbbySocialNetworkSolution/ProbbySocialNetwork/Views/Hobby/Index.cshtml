@@ -7,6 +7,14 @@
 <div class="container">
     <div class="lhsNav">
         <h2>@Model.currentHobby.Name</h2>
+        @if (Model.currentHobbyUsers.Contains(Model.currentUser))
+        {
+            @Html.ActionLink("Remove Hobby", "RemoveHobby", "Hobby", new { id = Model.currentHobby.ID }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Add Hobby", "AddHobby", "Hobby", new { id = Model.currentHobby.ID }, null)
+        }
     </div>
     <div class="theContent">
         <!--breyta i html helper-->

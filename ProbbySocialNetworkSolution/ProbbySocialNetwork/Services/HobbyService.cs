@@ -90,11 +90,17 @@ namespace ProbbySocialNetwork.Models
             return db.SaveChanges() != 1;
         }
 
+        public UserHobbyConnection getUserHobbyConnection(ApplicationUser a, Hobby h)
+        {
+            var hConnection = (from c in db.UserHobbyConnections
+                               where c.HobbyID == h.ID && c.UserID == a.Id
+                               select c).SingleOrDefault();
+            return hConnection;
+        }
+
         public bool removeHobbyFromuser(ApplicationUser a, Hobby toDel)
         {
-            UserHobbyConnection hConnection = new UserHobbyConnection();
-            hConnection.UserID = a.Id;
-            hConnection.HobbyID = toDel.ID;
+            UserHobbyConnection hConnection = getUserHobbyConnection(a, toDel);
             db.UserHobbyConnections.Remove(hConnection);
             return db.SaveChanges() != 1;
         }
