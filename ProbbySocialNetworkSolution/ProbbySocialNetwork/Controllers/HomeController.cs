@@ -89,13 +89,13 @@ namespace ProbbySocialNetwork.Controllers
 
 			model.profileOwnerFollowing = accountService.getFollowingByUser(model.profileOwner);
 			model.profileOwnerFollowers = accountService.getFollowersByUser(model.profileOwner);
-			model.profileOwnerStatusHistory = statusService.getStatusByUser(model.profileOwner);
+			model.profileOwnerStatusHistory = statusService.getStatusesByUser(model.profileOwner);
 			model.profileOwnerFollowing = accountService.getFollowingByUser(model.profileOwner);
 			model.profileOwnerFollowers = accountService.getFollowersByUser(model.profileOwner);
             model.commentsForStatuses = new List<Comment>();
 			model.profileOwnerHobbies = hobbyService.getHobbiesByUser(model.profileOwner);
 
-			model.profileOwnerStatusHistory = statusService.getStatusByUser(model.profileOwner);
+			model.profileOwnerStatusHistory = statusService.getStatusesByUser(model.profileOwner);
 			foreach (Status s in model.profileOwnerStatusHistory)
 			{
                 List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
@@ -135,7 +135,7 @@ namespace ProbbySocialNetwork.Controllers
 			accountService.editProfilePicture(currentUser, collection["picLink"]);
 
 
-			List<Status> userStatuses = statusService.getStatusByUser(currentUser);
+			List<Status> userStatuses = statusService.getStatusesByUser(currentUser);
 
 			foreach (Status s in userStatuses)
 			{
