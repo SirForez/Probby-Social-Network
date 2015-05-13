@@ -153,7 +153,7 @@
                                     {
                                         AccountService accountService = ServiceSingleton.GetAccountService;
                                         ApplicationUser postedToUser = accountService.getUserByID(s.PostedToID);
-                                        <p>Posted to @postedToUser.UserName's profile</p>
+                                        <p>Posted to <a href="/Home/Profile?username=@postedToUser.UserName">@postedToUser.UserName</a>'s profile</p>
                                     }
                                     <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
                                     @using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID }))
