@@ -95,11 +95,17 @@ namespace ProbbySocialNetwork.Models
             return db.SaveChanges() != 1;
         }
 
+        public AdminGroupConnection getAdminGroupConnection(Group g, ApplicationUser u)
+        {
+            var aConnection = (from c in db.AdminGroupConnections
+                               where c.GroupID == g.ID && c.UserID == u.Id
+                               select c).SingleOrDefault();
+            return aConnection;
+        }
+
         public bool removeAdminFromGroup(Group g, ApplicationUser toDel)
         {
-            AdminGroupConnection gConnection = new AdminGroupConnection();
-            gConnection.GroupID = g.ID;
-            gConnection.UserID = toDel.Id;
+            AdminGroupConnection gConnection = getAdminGroupConnection(g, toDel);
             db.AdminGroupConnections.Remove(gConnection);
             return db.SaveChanges() != 1;
         }
