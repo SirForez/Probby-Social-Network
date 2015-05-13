@@ -26,6 +26,7 @@ namespace ProbbySocialNetwork.Controllers
             model.commentsForStatuses = new List<Comment>();
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
 			model.currentGroup = groupService.getGroupByID(ID);
+            model.currentGroupAdmins = groupService.getAdminsByGroup(model.currentGroup);
 			model.currentGroupMembers = groupService.getUsersByGroup(model.currentGroup);
 			model.currentGroupStatusHistory = statusService.getGroupStatusHistory(model.currentGroup);
 
@@ -54,6 +55,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 
+            groupService.addUserToGroup(g, currentUser);
             groupService.addAdminToGroup(g, currentUser);
 
 			string url = this.Request.UrlReferrer.AbsoluteUri;
