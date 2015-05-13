@@ -21,6 +21,13 @@ namespace ProbbySocialNetwork.Models
 						 select h).SingleOrDefault();
 			return hobby; 
 		}
+
+        public List<Hobby> getAllHobbies()
+        {
+            var hobbies = (from h in db.Hobbies
+                         select h).ToList();
+            return hobbies;
+        }
 		
 		public Hobby getHobbyByID(int id)
 		{

@@ -21,30 +21,217 @@
             @Html.ActionLink("Join Group", "JoinGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "joinGroupButton" })
         }
         
-    <div class="inGroup">
-        <h2>Admins of group : </h2>
-        <div class="adminInGroup-list">
-            <ul>
-                @foreach (ApplicationUser a in Model.currentGroupAdmins)
-                {
-                    <li>
-                        <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-                    </li>
-                }
-            </ul>
+        <div class="inGroup">
+            <h2>Admins of group : </h2>
+            <div class="adminInGroup-list">
+                <ul>
+                    @foreach (ApplicationUser a in Model.currentGroupAdmins)
+                    {
+                        <li>
+                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <h2>People in group : </h2>
+            <div class="peopleInGroup-list">
+                <ul>
+                    @foreach (ApplicationUser a in Model.currentGroupMembers)
+                    {
+                        <li>
+                            <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
-        <h2>People in group : </h2>
-        <div class="peopleInGroup-list">
-            <ul>
-                @foreach (ApplicationUser a in Model.currentGroupMembers)
-                {
-                    <li>
-                        <a href="/Home/Profile?username=@a.UserName">@a.UserName</a>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
+
+        @if (Model.currentGroupAdmins.Contains(Model.currentUser))
+        {
+            <div class="admin-panel">
+                <div class="edit-group">
+                    @using (Html.BeginForm("EditGroup", "Group", FormMethod.Post, new { id = "groupEditForm" }))
+                    {
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editGroup" data-whatever="">Edit the group</button>
+                        <div class="modal fade" id="editGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="exampleModalLabel">Edit the group</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input type="hidden" name="groupID" class="groupID" id="groupID" value="@Model.currentGroup.ID" />
+                                            <div class="form-group">
+                                                <label for="groupName" class="control-label">Name of group</label>
+                                                <input type="text" name="groupName" class="form-control" id="groupName" value="@Model.currentGroup.name">
+                                            </div>
+                                            <div class="form-group">
+                                                <select name="groupHobby">
+                                                    @foreach (Hobby h in Model.availableHobbies)
+                                                    {
+                                                        if (@h.Name == "Misc")
+                                                        {
+                                                            <option value="@h.Name" selected="selected">#@h.Name</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@h.Name">#@h.Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="description" class="control-label">Description</label>
+                                                <textarea class="form-control" name="groupDesc" id="description" value="@Model.currentGroup.description"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Edit the group</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(false)
+                    }
+                </div>
+                <div class="manage-users">
+                    @using (Html.BeginForm("AssignAdmin", "Group", FormMethod.Post, new { id = "assignGroupAdminForm" }))
+                    {
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#assignAdmin" data-whatever="">Assign admin privileges</button>
+                        <div class="modal fade" id="assignAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="exampleModalLabel">Assign admin privileges</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input type="hidden" name="groupID" class="groupID" id="groupID" value="@Model.currentGroup.ID" />
+                                            <div class="form-group">
+                                                <select name="userName">
+                                                    @foreach (ApplicationUser a in Model.currentGroupMembers)
+                                                    {
+                                                        <option value="@a.UserName">@a.UserName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Assign</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(false)
+                    }
+                    @using (Html.BeginForm("RemoveAdmin", "Group", FormMethod.Post, new { id = "removeGroupAdminForm" }))
+                    {
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeAdmin" data-whatever="">Remove admin privileges</button>
+                        <div class="modal fade" id="removeAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="exampleModalLabel">Remove admin privileges</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input type="hidden" name="groupID" class="groupID" id="groupID" value="@Model.currentGroup.ID" />
+                                            <div class="form-group">
+                                                <select name="userName">
+                                                    @foreach (ApplicationUser a in Model.currentGroupAdmins)
+                                                    {
+                                                        <option value="@a.UserName">@a.UserName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Remove admin privileges</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(false)
+                    }
+                    @* //We do not need this, at least until we add notifications
+                        @using (Html.BeginForm("AddUser", "Group", FormMethod.Post, new { id = "addUserToGroupForm" }))
+                        {
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeAdmin" data-whatever="">Remove admin privileges</button>
+                            <div class="modal fade" id="removeAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="exampleModalLabel">Remove admin privileges</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <input type="hidden" name="groupID" class="groupID" id="groupID" value="@Model.currentGroup.ID" />
+                                                <div class="form-group">
+                                                    <select name="userName">
+                                                        @foreach (ApplicationUser a in Model.currentGroupAdmins)
+                                                        {
+                                                            <option value="@a.UserName">@a.UserName</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Assign</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationSummary(false)
+                        }
+                    *@
+                    @using (Html.BeginForm("RemoveUser", "Group", FormMethod.Post, new { id = "removeUserFromGroupForm" }))
+                    {
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeUser" data-whatever="">Remove user</button>
+                        <div class="modal fade" id="removeUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="exampleModalLabel">Remove user from group members</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input type="hidden" name="groupID" class="groupID" id="groupID" value="@Model.currentGroup.ID" />
+                                            <div class="form-group">
+                                                <select name="userName">
+                                                    @foreach (ApplicationUser a in Model.currentGroupMembers)
+                                                    {
+                                                        <option value="@a.UserName">@a.UserName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Remove</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(false)
+                    }
+                </div>
+            </div>
+        }
 
     </div>
     <div class="theContent">
@@ -79,13 +266,13 @@
                             <img src="@s.ProfilePic" class="postPic" />
                         <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
                         @{
-                ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-                HobbyService service = ServiceSingleton.GetHobbyService;
-                Hobby statusHobby = service.getHobbyByID(s.HobbyID);
-                if (statusHobby != null)
-                {
-                    <p>#@statusHobby.Name</p>
-                }
+                            ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+                            HobbyService service = ServiceSingleton.GetHobbyService;
+                            Hobby statusHobby = service.getHobbyByID(s.HobbyID);
+                            if (statusHobby != null)
+                            {
+                                <p>#@statusHobby.Name</p>
+                            }
                         }
                     </div>
                     <div class="rhsStatus">
@@ -115,9 +302,10 @@
                         <!--edit and remove links-->
                         <p>
                             @s.Date
-                            @if (Model.currentUser.Id == s.UserID)
+                            @if (Model.currentUser.Id == s.UserID || Model.currentGroupAdmins.Contains(Model.currentUser))
                             {
                                     <!--onclick it will hide status content and show edit form-->
+                                <span> | </span>
                                 <a href="#" class="editLink" onclick="editStatus(@s.ID)">Edit</a>
                                 <span> | </span>
                                 @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
