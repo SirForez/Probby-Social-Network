@@ -21,11 +21,6 @@ namespace ProbbySocialNetwork.Controllers
         [Authorize]
         public ActionResult Index()
         {
-           /* FeedViewModel model = new FeedViewModel();
-            model.currentUser = accountService.getUserByName(User.Identity.Name);
-            return View(model);
-		    */
-
 			FeedViewModel model = new FeedViewModel();
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
             model.newestStatuses = statusService.getStatusFeedByUser(model.currentUser);
@@ -33,8 +28,6 @@ namespace ProbbySocialNetwork.Controllers
 			model.currentUserGroups = groupService.getGroupsByUser(model.currentUser);
             model.currentUserGroups.AddRange(groupService.getGroupsByAdmin(model.currentUser));
             model.currentUserHobbies = hobbyService.getHobbiesByUser(model.currentUser);
-
-			//For statuses, we also need to add the hobbies and shit
 
 			if (model.newestStatuses != null)
 			{
@@ -73,11 +66,6 @@ namespace ProbbySocialNetwork.Controllers
 			ViewBag.Message = "Here you should see your profile!";
             ProfileViewModel model = new ProfileViewModel();
 
-            //NOTE: This works, but if a parameter is given in the url, and profile button is pressed again, it will go to that profile.
-            //So, if you go to your own profile by pressing the default profile button, then to quangs profile, then click the profile button
-            //again to go back to your profile, it will go to quangs profile until the url has changed. Needs fixing.
-
-           //Think it always gives a parameter now, needs testing though! - Bjartur
             model.currentUser = accountService.getUserByName(User.Identity.Name);
 		    if (username != null)
             {
