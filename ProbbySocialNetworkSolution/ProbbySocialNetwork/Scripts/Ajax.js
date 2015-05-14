@@ -1,8 +1,7 @@
 ﻿$(function () {
-    $('body').on('keypress', '#commentList' , function (e) {
+    $('body').on('keypress', '#commentInputBox', function (e) {
         var keyCode = e.which || e.keyCode;
         if (e.keyCode == 13) {
-            //alert('testing');
             var theForm = $(this).parents('form');
 
             $.ajax({
@@ -10,21 +9,21 @@
                 url: theForm.attr('action'),
                 data: theForm.serialize(),
             }).done(function (result) {
-
                 console.log(result);
-
-                $('#commentList').html('');
-
+                var statusid = result[0].StatusID;
+                var commentHtmlId = '#commentForStatus' + statusid.toString();
+                $(commentHtmlId).html('');
+       
                 for (var i = 0; i < result.length; i++) {
-                    //if (  == result[i].statusID) {
-                        $('#commentList').append("<div class='comment'>" +
+                    $(commentHtmlId).append(
+                        '<div class="comment">' +
                         '<h5 id="commentText' + result[i].ID + '" class="commentContent2">' + result[i].Body + '</h5>' +
                         '<form action="/Status/EditComment" id="' + result[i].ID +'" method="post">' +
-                        '<input type="hidden" name="commentId" value="'+ result[i].ID + '">' +
+                        '<input type="hidden" name="commentId" value="'+ result[i].ID + '"/>' +
                         '<div id="commentTextForm'+ result[i].ID + '" class="editForm">' +
                         '<label for="commentTextbox'+ result[i].ID + '">Comment:</label>' +
                         '<br>' + 
-                        '<input type="text" name="commentTextbox id="commentInputBox"'+ result[i].ID + '" placeholder="Write a comment">' +
+                        '<input type="text" name="commentTextbox id="commentInputBox"'+ result[i].ID + '" placeholder="Write a comment"/>' +
                         '<br>' +
                         '<button type="submit" class="btn btn-primary">Confirm Edit</button>' +
                         '</div></form>' +                                           
@@ -33,8 +32,9 @@
                         '<a class="editLink" onclick="editComment('+ result[i].ID+')">Edit</a>' +
                         '<span> | </span>' +
                         '<a href="/Status/RemoveComment/'+ result[i].ID +'">Remove</a></div>'); 
-                    //}
-                }
+                        
+            }
+            
                 theForm.find('#commentInputBox').val('');
             }).fail(function () {
                 alert('Villa kom upp!');
@@ -46,7 +46,7 @@
 
     $('body').on('click', '.editLink', function () {
         
-        alert('testing');
+        //alert('testing');
         /*
         var theForm = $(this).parents('form');
 

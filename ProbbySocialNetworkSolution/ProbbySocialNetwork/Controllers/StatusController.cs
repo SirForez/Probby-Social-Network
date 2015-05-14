@@ -153,11 +153,13 @@ namespace ProbbySocialNetwork.Controllers
             c.UserID = User.Identity.GetUserId();
             c.UserName = User.Identity.Name;
             c.StatusID = Convert.ToInt32(collection["statusID"]);
+
+			var status = statusService.getStatusByID(c.StatusID);
+			c.StatusUserID = status.UserID;
             statusService.addComment(c);
 
             var currStatus = statusService.getStatusByID(c.StatusID);
             var currComments = statusService.getCommentsByStatus(currStatus);
-
 
             return Json(currComments, JsonRequestBehavior.AllowGet);
 		}
@@ -170,6 +172,7 @@ namespace ProbbySocialNetwork.Controllers
 			editComment.ID = currentComment.ID;
 			editComment.DateInserted = currentComment.DateInserted;
 			editComment.Body = null;
+			editComment.StatusUserID = currentComment.StatusUserID;
 			
 			string commentTextboxId = "commentTextbox" + Convert.ToString(id);
 

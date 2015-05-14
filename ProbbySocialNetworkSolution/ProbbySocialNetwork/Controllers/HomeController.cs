@@ -113,30 +113,6 @@ namespace ProbbySocialNetwork.Controllers
 			return View(model);
 		}
 
-        public ActionResult Chats()
-        {
-            ChatListViewModel model = new ChatListViewModel();
-            model.currentUser = accountService.getUserByName(User.Identity.Name);
-            model.userChats = chatService.GetChatsByUser(model.currentUser);
-
-            //testing 
-            /*Chat c = new Chat();
-            UserChatConnection cConnection = new UserChatConnection();
-            cConnection.UserID = model.currentUser.Id;
-            cConnection.ChatID = c.ID;
-            chatService.AddUserChatConnection(cConnection);
-            UserChatConnection cC2 = new UserChatConnection();
-            cC2.UserID = "b124f7ff-b8f5-4fe9-a83f-d65f14f4745d";
-            cC2.ChatID = c.ID;
-            chatService.AddUserChatConnection(cC2);*/
-
-            //user can initiate a chat with those he is following
-            model.availableChatUsers = accountService.getFollowingByUser(model.currentUser);
-            model.usersChattingWith = chatService.getUsersChattingWithByUser(model.currentUser);
-
-            return View(model);
-        }
-
 		public ActionResult EditProfilePic(FormCollection collection)
 		{
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
