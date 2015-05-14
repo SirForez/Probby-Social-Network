@@ -127,5 +127,14 @@ namespace ProbbySocialNetwork.Models
                            select h).ToList();
             return hobbies;
         }
+
+		public List<Hobby> getHobbiesByStatus(Status s)
+		{
+			var hobbies = (from c in db.StatusHobbyConnections
+						   where c.StatusID == s.ID
+						   join h in db.Hobbies on c.HobbyID equals h.ID
+						   select h).ToList();
+			return hobbies;
+		}
     }
 }
