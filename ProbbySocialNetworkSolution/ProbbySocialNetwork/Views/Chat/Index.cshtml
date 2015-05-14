@@ -1,7 +1,45 @@
-﻿
+﻿@model ProbbySocialNetwork.Models.ViewModels.ChatViewModel
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Your chat with @Model.otherUser.UserName</h2>
 
+@using ProbbySocialNetwork.Models
+<div class="theContent">
+    <!--breyta i html helper-->
+
+    <section>
+        @using (Html.BeginForm("PostMessage", "Chat", new { chatID = Model.chat.ID }, FormMethod.Post, new { id = "statusForm" }))
+        {
+            <input type="hidden" name="userid" value="@Model.currentUser.Id " />
+            <input type="hidden" name="username" value="@Model.currentUser.UserName" />
+            <div class="form-horizontal">
+                <label class="sr-only" for="messageText">Text: </label>
+                <textarea class="form-control" rows="4" id="messageText" name="messageText" placeholder="Insert message..."></textarea>
+                <span class="appendTo"></span>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+
+            @Html.ValidationSummary(false)
+        }
+        <button class="onClick">Upload image</button>
+    </section>
+
+    <section>
+        <div class="messageList">
+            @foreach (Message m in Model.messages)
+            {
+                <div class="message">
+                    <div class="message-user-info">
+                        @m.UserName
+                    </div>
+                    <div class="message-body">
+                        @m.Text
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</div>

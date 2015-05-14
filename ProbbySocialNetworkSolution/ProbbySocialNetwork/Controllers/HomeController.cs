@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using ProbbySocialNetwork.Models;
 using ProbbySocialNetwork.Models.ViewModels;
+using ProbbySocialNetwork.Services;
+using ProbbySocialNetwork.Connections;
 
 namespace ProbbySocialNetwork.Controllers
 {
@@ -16,6 +18,7 @@ namespace ProbbySocialNetwork.Controllers
 		public StatusService statusService = ServiceSingleton.GetStatusService;
 		public GroupService groupService = ServiceSingleton.GetGroupService;
 		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
+        public ChatService chatService = ServiceSingleton.GetChatService;
 
         // This is the feed
         [Authorize]
@@ -110,9 +113,28 @@ namespace ProbbySocialNetwork.Controllers
 			return View(model);
 		}
 
-        public ActionResult Chat()
+        public ActionResult Chats()
         {
-            return View();
+            ChatListViewModel model = new ChatListViewModel();
+            model.currentUser = accountService.getUserByName(User.Identity.Name);
+            model.userChats = chatService.GetChatsByUser(model.currentUser);
+
+            //testing 
+            /*Chat c = new Chat();
+            UserChatConnection cConnection = new UserChatConnection();
+            cConnection.UserID = model.currentUser.Id;
+            cConnection.ChatID = c.ID;
+            chatService.AddUserChatConnection(cConnection);
+            UserChatConnection cC2 = new UserChatConnection();
+            cC2.UserID = "b124f7ff-b8f5-4fe9-a83f-d65f14f4745d";
+            cC2.ChatID = c.ID;
+            chatService.AddUserChatConnection(cC2);*/
+
+            //user can initiate a chat with those he is following
+            model.availableChatUsers = accountService.getFollowingByUser(model.currentUser);
+            model.usersChattingWith = chatService.getUsersChattingWithByUser(model.currentUser);
+
+            return View(model);
         }
 
 		public ActionResult EditProfilePic(FormCollection collection)
