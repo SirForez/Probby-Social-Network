@@ -16,7 +16,7 @@
                 $('#commentList').html('');
 
                 for (var i = 0; i < result.length; i++) {
-                    //if (result[i].ID == result[i].StatusID) {
+                    if ( reult[i].ID /*thetta er ekki rett*/== result[i].statusID) {
                         $('#commentList').append("<div class='comment'>" +
                         '<h5 id="commentText' + result[i].ID + '" class="commentContent2">' + result[i].Body + '</h5>' +
                         '<form action="/Status/EditComment" id="' + result[i].ID +'" method="post">' +
@@ -28,12 +28,12 @@
                         '<br>' +
                         '<button type="submit" class="btn btn-primary">Confirm Edit</button>' +
                         '</div></form>' +                                           
-                        '<a href="/Home/Profile?username=' + result[i].UserName + '">sjomli</a> | ' + result[i].DisplayDate +
+                        '<a href="/Home/Profile?username=' + result[i].UserName + '">' + result[i].UserName + '</a> | ' + result[i].DisplayDate +
                         '<span> | </span>' +
                         '<a class="editLink" onclick="editComment('+ result[i].ID+')">Edit</a>' +
                         '<span> | </span>' +
-                        '<a href="/Status/RemoveComment/'+ result[i].ID +'">Remove</a></div>');
-                    //}   
+                        '<a href="/Status/RemoveComment/'+ result[i].ID +'">Remove</a></div>'); 
+                    }
                 }
                 theForm.find('#commentInputBox').val('');
             }).fail(function () {
@@ -42,5 +42,21 @@
 
             return false;
         }
+    });
+
+    $('body').on('click', '.editLink', function () {
+        
+        alert('testing');
+        /*
+        var theForm = $(this).parents('form');
+
+        $.ajax({
+            type: 'POST',
+            url: theForm.attr('action'),
+            data: theForm.serialize(),
+        }).done(function (result) {
+    
+        });
+        */
     });
 })
