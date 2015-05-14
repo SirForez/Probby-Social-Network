@@ -1,7 +1,20 @@
-﻿
-@{
+﻿@model ProbbySocialNetwork.Models.ViewModels.ChatListViewModel
+
+@{    
     ViewBag.Title = "Chats";
 }
 
-<h2>Chats</h2>
-
+<h2>Chats:</h2>
+@using ProbbySocialNetwork.Models
+@foreach (ApplicationUser a in Model.usersChattingWith)
+{
+    <h4>@Html.ActionLink(a.UserName.ToString(), "Index", "Chat", new { username = a.UserName }, null)</h4>
+}
+<h2>Create new chats:</h2>
+@foreach (ApplicationUser a in Model.availableChatUsers)
+{
+    if (!Model.usersChattingWith.Contains(a))
+    {
+        <h4>@Html.ActionLink("Chat with " + a.UserName.ToString(), "CreateChat", "Chat", new { username = a.UserName }, null)</h4>
+    }
+}
