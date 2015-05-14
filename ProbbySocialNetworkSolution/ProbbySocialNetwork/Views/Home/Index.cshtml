@@ -21,7 +21,7 @@
                     }
                 </ul>
                 <section>
-                    @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
+                    @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm", onsubmit="return validateGroup(this);" }))
                     {
                         <div class="groupCreation">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createGroup" data-whatever="">Create a new group</button>
@@ -39,19 +39,10 @@
                                                     <input type="text" name="groupName" class="form-control" id="groupName">
                                                 </div>
                                                 <div class="form-group">
-                                                    <select name="groupHobby">
                                                         @foreach (Hobby h in Model.currentUserHobbies)
                                                         {
-                                                            if (@h.Name == "Misc")
-                                                            {
-                                                                <option value="@h.Name" selected="selected">#@h.Name</option>
-                                                            }
-                                                            else
-                                                            {
-                                                                <option value="@h.Name">#@h.Name</option>
-                                                            }
+                                                                <input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br/>
                                                         }
-                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="description" class="control-label">Description</label>
@@ -83,7 +74,7 @@
                     }
                 </ul>
                 <section>
-                    @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
+                    @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm", onsubmit = "return validateHobby(this);" }))
                     {
                         <div class="hobbyCreation">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createHobby" data-whatever="">Create a new hobby</button>
@@ -148,16 +139,16 @@
                                 <img src="@s.ProfilePic" class="postPic" />
                             <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
                                 @{
-                    //Put this in the viewmodel!!!
+                                    //Put this in the viewmodel!!!
 
-                    ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-                    HobbyService service = ServiceSingleton.GetHobbyService;
-                    List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
+                                    ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+                                    HobbyService service = ServiceSingleton.GetHobbyService;
+                                    List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
 
-                    foreach (Hobby h in statusHobbies)
-                    {
-                        @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
-                    }
+                                    foreach (Hobby h in statusHobbies)
+                                    {
+                                        @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
+                                    }
                                 }
                         </div>
                         <span class="rhsStatus">

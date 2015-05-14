@@ -14,3 +14,38 @@
 
 }
 $(document).ready(main);
+
+function validateHobby(form) {
+    if ($("#hobbyName").val() == '') {
+        alert("You must provide a hobby name!");
+        return false;
+    }
+    else {
+        var testRegex = /^([a-zA-Z0-9]+)$/g.exec($("#hobbyName").val());
+        if (testRegex == null) {
+            alert("Hobby name must consist only of letters and numbers!");
+            return false;
+        }
+    }
+    return true;
+}
+
+function validateGroup(form) {
+
+    
+    if ($("#groupName").val() == '') {
+        alert("You must provide a group name!");
+        return false;
+    }
+
+    else if ($("#groupName").val().length > 3) {
+    
+        alert("Group name can not be longer than 70 characters!");
+            return false;
+        }
+        
+         return true;
+
+    }
+    
+

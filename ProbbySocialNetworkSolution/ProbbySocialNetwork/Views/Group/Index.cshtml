@@ -245,8 +245,10 @@
             {
                 <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                 <input type="hidden" name="groupID" value="@Model.currentGroup.ID" />
-                <input type="hidden" name="chosenHobby" id="chosenHobby" value="@Model.currentGroup.hobby"/>
-                <label>#@Model.currentGroup.hobby.Name</label>
+                foreach (Hobby h in Model.currentGroupHobbies)
+                {
+                    <input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br />
+                }
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
                     <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Insert a status..."></textarea>
@@ -269,13 +271,16 @@
                             <img src="@s.ProfilePic" class="postPic" />
                         <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
                         @{
-                ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-                HobbyService service = ServiceSingleton.GetHobbyService;
-                Hobby statusHobby = service.getHobbyByID(s.HobbyID);
-                if (statusHobby != null)
-                {
-                    @Html.ActionLink("#" + statusHobby.Name, "Index", "Hobby", routeValues: statusHobby, htmlAttributes: new { id = statusHobby.ID });
-                }
+                            //Put this in the viewmodel!!!
+
+                            ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+                            HobbyService service = ServiceSingleton.GetHobbyService;
+                            List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
+
+                            foreach (Hobby h in statusHobbies)
+                            {
+                                @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
+                            }
                         }
                     </div>
                     <div class="rhsStatus">

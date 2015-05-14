@@ -46,7 +46,6 @@ namespace ProbbySocialNetwork.Controllers
                 int realGroupID = groupID.Value;
                 Group g = groupService.getGroupByID(realGroupID);
 				s.GroupID = g.ID;
-                s.HobbyID = g.hobby.ID;
             }
 
 			s.ProfilePic = currentUser.ProfilePic;
@@ -80,10 +79,16 @@ namespace ProbbySocialNetwork.Controllers
 			{
 				int realGroupID = groupID.Value;
 				Group g = groupService.getGroupByID(realGroupID);
-				statusService.addHobbyToStatus(s, g.hobby);
-			}
+				List<Hobby> currentGroupHobbies = hobbyService.getHobbiesByGroup(g);
 
-			
+				foreach (Hobby h in currentGroupHobbies)
+				{
+					if (collection[h.Name] == h.Name)
+					{
+						statusService.addHobbyToStatus(s, h);
+					}
+				}
+			}
 
 			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
