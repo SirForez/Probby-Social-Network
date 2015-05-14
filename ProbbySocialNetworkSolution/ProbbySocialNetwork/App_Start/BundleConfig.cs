@@ -23,7 +23,8 @@ namespace ProbbySocialNetwork
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
 					  "~/Scripts/EditStatus.js",
-					  "~/Scripts/Site.js"));
+					  "~/Scripts/Site.js",
+                      "~/Scripts/Ajax.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
