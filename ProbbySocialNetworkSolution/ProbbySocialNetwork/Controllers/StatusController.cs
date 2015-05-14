@@ -146,6 +146,7 @@ namespace ProbbySocialNetwork.Controllers
             var currStatus = statusService.getStatusByID(c.StatusID);
             var currComments = statusService.getCommentsByStatus(currStatus);
 
+
             return Json(currComments, JsonRequestBehavior.AllowGet);
 		}
 

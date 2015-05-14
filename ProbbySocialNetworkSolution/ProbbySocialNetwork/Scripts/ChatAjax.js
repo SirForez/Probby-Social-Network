@@ -9,8 +9,23 @@
                 url: theForm.attr('action'),
                 data: theForm.serialize(),
             }).done(function (result) {
-            
-            }
+
+                console.log(result);
+
+                $('#messageList').html('');
+
+                for (var i = 0; i < result.length; i++) {
+                    $('#messageList').append("<div class='message'>" +
+                        '<div class="message-user-info">' + result[i].UserName + '</div>' +
+                        '<div class="message-body">' + result[i].Text + '</div>' +
+                        '</div>');
+                }
+                theForm.find('#messageText').val('');
+            }).fail(function () {
+                alert('Villa kom upp!');
+            });
+
+            return false;
         }
     });
 });

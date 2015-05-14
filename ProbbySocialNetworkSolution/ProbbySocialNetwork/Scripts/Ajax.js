@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $('body').on('keypress', '.commentTextbox', function (e) {
+    $('body').on('keypress', '#commentList' , function (e) {
         var keyCode = e.which || e.keyCode;
         if (e.keyCode == 13) {
             //alert('testing');
@@ -16,7 +16,7 @@
                 $('#commentList').html('');
 
                 for (var i = 0; i < result.length; i++) {
-                    if ( reult[i].ID /*thetta er ekki rett*/== result[i].statusID) {
+                    //if (  == result[i].statusID) {
                         $('#commentList').append("<div class='comment'>" +
                         '<h5 id="commentText' + result[i].ID + '" class="commentContent2">' + result[i].Body + '</h5>' +
                         '<form action="/Status/EditComment" id="' + result[i].ID +'" method="post">' +
@@ -33,7 +33,7 @@
                         '<a class="editLink" onclick="editComment('+ result[i].ID+')">Edit</a>' +
                         '<span> | </span>' +
                         '<a href="/Status/RemoveComment/'+ result[i].ID +'">Remove</a></div>'); 
-                    }
+                    //}
                 }
                 theForm.find('#commentInputBox').val('');
             }).fail(function () {
