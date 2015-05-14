@@ -155,7 +155,7 @@
                             <div class="allStatus">
                                 <div class="statusContent">
                                     <!--Status content and edit form for status-->
-                                    @if (s.PostedToID != "" && s.PostedToID != s.UserID)
+                                    @if (s.PostedToID != "" && s.PostedToID != null && s.PostedToID != s.UserID)
                                     {
                                         /*AccountService accountService = ServiceSingleton.GetAccountService;
                                         ApplicationUser postedToUser = accountService.getUserByID(s.PostedToID);
