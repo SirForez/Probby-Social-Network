@@ -137,6 +137,7 @@
                         <div class="lhsStatus">
                             <p>
                                 <img src="@s.ProfilePic" class="postPic" />
+                            </p>
                             <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
                                 @{
                                     //Put this in the viewmodel!!!
@@ -157,9 +158,9 @@
                                     <!--Status content and edit form for status-->
                                     @if (s.PostedToID != "" && s.PostedToID != null && s.PostedToID != s.UserID)
                                     {
-                                        /*AccountService accountService = ServiceSingleton.GetAccountService;
+                                        AccountService accountService = ServiceSingleton.GetAccountService;
                                         ApplicationUser postedToUser = accountService.getUserByID(s.PostedToID);
-                                        <p>Posted to <a href="/Home/Profile?username=@postedToUser.UserName">@postedToUser.UserName</a>'s profile</p>*/
+                                        <p>Posted to <a href="/Home/Profile?username=@postedToUser.UserName">@postedToUser.UserName</a>'s profile</p>
                                     }
                                     <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
                                     @using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID }))
