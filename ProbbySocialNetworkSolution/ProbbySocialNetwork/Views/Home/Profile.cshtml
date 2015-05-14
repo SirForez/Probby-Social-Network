@@ -117,7 +117,7 @@
                 Hobby statusHobby = service.getHobbyByID(s.HobbyID);
                 if (statusHobby != null)
                 {
-                    <p>#@statusHobby.Name</p>
+                    @Html.ActionLink("#" + statusHobby.Name, "Index", "Hobby", routeValues: statusHobby, htmlAttributes: new { id = statusHobby.ID });
                 }
                         }
                     </div>
