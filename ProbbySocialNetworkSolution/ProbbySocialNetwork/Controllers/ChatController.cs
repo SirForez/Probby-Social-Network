@@ -31,6 +31,14 @@ namespace ProbbySocialNetwork.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult GetMessages(int chatID)
+        {
+            Chat c = chatService.getChatByID(chatID);
+            var currMessages = chatService.GetMessagesByChat(c);
+            return Json(currMessages, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult PostMessage(FormCollection collection, int chatID)
         {

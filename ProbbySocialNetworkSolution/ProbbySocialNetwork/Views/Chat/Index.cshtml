@@ -40,3 +40,28 @@
         </div>
     </section>
 </div>
+
+<script>
+    $('document').ready(function () {
+        function refresh() {
+            var url = @Url.Action("GetMessages", "Chat", new { chatID = Model.chat.ID })
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function(data) {
+                    //this clear the messagelist
+                    $('#messageList').html('');
+                    //this returns the new messages
+                    for (var i = 0; i < data.length; i++) {
+                        $('#messageList').append("<div class='message'>" +
+                            '<div class="message-user-info">' + data[i].UserName + '</div>' +
+                            '<div class="message-body">' + data[i].Text + '</div>' +
+                            '</div>');
+                    }
+                    alert(data);
+                }
+            })
+        }
+        var t = setInterval(refresh, 1000);
+    });
+</script>
