@@ -68,7 +68,7 @@ namespace ProbbySocialNetwork.Models
 			}
 			
 			var statuses = (from s in db.Statuses
-                            where (((a.Id == s.UserID) && (s.GroupID == null)) || (a.Id == s.PostedToID))
+                            where (((a.Id == s.UserID) && (s.GroupID == null)) /*|| (a.Id == s.PostedToID)*/)
                             orderby s.Date descending
                             select s).ToList();
 
