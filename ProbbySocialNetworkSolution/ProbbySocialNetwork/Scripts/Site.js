@@ -30,19 +30,23 @@ function validateHobby(form) {
     return true;
 }
 
-/*function validateGroup(form) {
+function validateGroup(form) {
+
+    
     if ($("#groupName").val() == '') {
         alert("You must provide a group name!");
         return false;
     }
-    else {
         
-        var testRegex2 = /^([a-zA-Z0-9_-]){3,5}$/.exec($("#groupName").val());
-        if (testRegex == null) {
-            alert("Group name must consist only of letters and numbers!");
+        else($("#groupName").val().length > 5)
+         {
+
+            alert("Group name too too long!");
             return false;
-        }*/
+        }
+        
+         return true;
 
     }
-    return true;
-}
+    
+
