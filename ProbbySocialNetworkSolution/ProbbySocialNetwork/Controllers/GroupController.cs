@@ -30,6 +30,7 @@ namespace ProbbySocialNetwork.Controllers
 			model.currentGroupMembers = groupService.getUsersByGroup(model.currentGroup);
             model.availableHobbies = hobbyService.getAllHobbies();
 			model.currentGroupStatusHistory = statusService.getGroupStatusHistory(model.currentGroup);
+			model.currentGroupHobbies = hobbyService.getHobbiesByGroup(model.currentGroup);
 
 			foreach (Status s in model.currentGroupStatusHistory)
 			{
@@ -47,6 +48,8 @@ namespace ProbbySocialNetwork.Controllers
         public ActionResult CreateGroup(FormCollection collection)
         {
 			Group g = new Group();
+			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+			List<Hobby> currentUserHobbies = hobbyService.getHobbiesByUser(currentUser);
 
 			g.name = collection["groupName"];
 			g.description = collection["groupDesc"];
@@ -54,7 +57,13 @@ namespace ProbbySocialNetwork.Controllers
 
 			groupService.addGroup(g);
 
-			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+			foreach (Hobby h in currentUserHobbies)
+			{
+				if (collection[h.Name] == h.Name)
+				{
+					hobbyService.addHobbyGroupConnection(h, g);
+				}
+			}
 
             groupService.addAdminToGroup(g, currentUser);
 

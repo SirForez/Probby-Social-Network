@@ -68,13 +68,33 @@ namespace ProbbySocialNetwork.Models
             return users;
         }
 
+		public bool addHobbyGroupConnection(Hobby h, Group g)
+		{
+			HobbyGroupConnection hConnection = new HobbyGroupConnection();
+			hConnection.GroupID = g.ID;
+			hConnection.HobbyID = h.ID;
+			db.HobbyGroupConnections.Add(hConnection);
+
+			return db.SaveChanges() != 1;
+		}
+
         public List<Group> getGroupsByHobby(Hobby h)
         {
-            var groups = (from g in db.Groups
-                          where g.hobby.ID == h.ID
+            var groups = (from c in db.HobbyGroupConnections
+                          where h.ID == c.HobbyID
+						  join g in db.Groups on c.GroupID equals g.ID
                           select g).ToList();
             return groups;
         }
+
+		public List<Hobby> getHobbiesByGroup(Group g)
+		{
+			var hobbies = (from c in db.HobbyGroupConnections
+						  where g.ID == c.GroupID
+						  join h in db.Hobbies on c.HobbyID equals h.ID
+						  select h).ToList();
+			return hobbies;
+		}
 
         public bool addHobby(Hobby h)
         {
