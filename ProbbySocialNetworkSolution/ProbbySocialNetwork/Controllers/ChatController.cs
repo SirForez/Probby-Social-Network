@@ -25,8 +25,27 @@ namespace ProbbySocialNetwork.Controllers
             model.currentUser = accountService.getUserByName(User.Identity.Name);
             model.otherUser = accountService.getUserByName(username);
 
+            model.userChats = chatService.GetChatsByUser(model.currentUser);
+
+            //user can initiate a chat with those he is following
+            model.availableChatUsers = accountService.getFollowingByUser(model.currentUser);
+            model.usersChattingWith = chatService.getUsersChattingWithByUser(model.currentUser);
+
             model.chat = chatService.getChatByUsers(model.currentUser, model.otherUser);
             model.messages = chatService.GetMessagesByChat(model.chat);
+
+            return View(model);
+        }
+
+        public ActionResult Chats()
+        {
+            ChatListViewModel model = new ChatListViewModel();
+            model.currentUser = accountService.getUserByName(User.Identity.Name);
+            model.userChats = chatService.GetChatsByUser(model.currentUser);
+
+            //user can initiate a chat with those he is following
+            model.availableChatUsers = accountService.getFollowingByUser(model.currentUser);
+            model.usersChattingWith = chatService.getUsersChattingWithByUser(model.currentUser);
 
             return View(model);
         }
