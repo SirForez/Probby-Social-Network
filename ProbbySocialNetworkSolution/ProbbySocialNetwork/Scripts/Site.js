@@ -38,7 +38,7 @@ function validateGroup(form) {
         return false;
     }
 
-    else if ($("#groupName").val().length > 3) {
+    else if ($("#groupName").val().length > 70) {
     
         alert("Group name can not be longer than 70 characters!");
             return false;
