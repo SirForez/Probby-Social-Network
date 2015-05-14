@@ -1,4 +1,8 @@
-﻿.profilePic {
+﻿a {
+    cursor: pointer;
+}
+
+.profilePic {
     text-align: right;
     width: 100px;
     height: 100px;

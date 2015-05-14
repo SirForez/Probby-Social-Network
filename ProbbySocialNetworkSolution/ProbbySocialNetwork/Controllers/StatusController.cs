@@ -84,6 +84,13 @@ namespace ProbbySocialNetwork.Controllers
 
 		public ActionResult EditStatus(FormCollection collection)
 		{
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			
+			if (collection["cancel"] == "cancel")
+			{
+				return Redirect(url);
+			}
+			
 			int? id = Convert.ToInt32(collection["StatusId"]);
 			Status currentStatus = statusService.getStatusByID(id);
 			Status editedStatus = new Status();
@@ -105,8 +112,6 @@ namespace ProbbySocialNetwork.Controllers
 			}
 				
 			statusService.editStatus(editedStatus);
-
-			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 			
 		}
