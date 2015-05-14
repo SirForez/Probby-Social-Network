@@ -11,5 +11,8 @@ namespace ProbbySocialNetwork.Models.ViewModels
         public ApplicationUser otherUser;
         public Chat chat;
         public List<Message> messages;
+        public List<ApplicationUser> availableChatUsers;
+        public List<ApplicationUser> usersChattingWith;
+        public List<Chat> userChats;
     }
 }
