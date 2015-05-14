@@ -3,7 +3,7 @@ namespace ProbbySocialNetwork.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class R : DbMigration
     {
         public override void Up()
         {
@@ -14,6 +14,14 @@ namespace ProbbySocialNetwork.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         UserID = c.String(),
                         GroupID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.Chats",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -59,6 +67,18 @@ namespace ProbbySocialNetwork.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         HobbyID = c.Int(nullable: false),
                         GroupID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.Messages",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        UserID = c.String(),
+                        UserName = c.String(),
+                        DateInserted = c.DateTime(nullable: false),
+                        Text = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -218,10 +238,12 @@ namespace ProbbySocialNetwork.Migrations
             DropTable("dbo.Status");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Messages");
             DropTable("dbo.HobbyGroupConnections");
             DropTable("dbo.Hobbies");
             DropTable("dbo.Groups");
             DropTable("dbo.Comments");
+            DropTable("dbo.Chats");
             DropTable("dbo.AdminGroupConnections");
         }
     }

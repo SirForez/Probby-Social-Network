@@ -52,13 +52,6 @@ namespace ProbbySocialNetwork.Controllers
             return View();
         }
 
-		public ActionResult Messages()
-		{
-			ViewBag.Message = "Here you should see your messages!";
-
-			return View();
-		}
-
         [Authorize]
         [HttpGet]
 		public ActionResult Profile(string username)
@@ -116,6 +109,11 @@ namespace ProbbySocialNetwork.Controllers
 
 			return View(model);
 		}
+
+        public ActionResult Chat()
+        {
+            return View();
+        }
 
 		public ActionResult EditProfilePic(FormCollection collection)
 		{

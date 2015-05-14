@@ -160,7 +160,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Connections\ChatMessageConnection.cs" />
+    <Compile Include="Connections\UserChatConnection.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HobbyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -170,23 +173,28 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Connections\AdminGroupConnection.cs" />
-    <Compile Include="Migrations\201505140142217_init.cs" />
-    <Compile Include="Migrations\201505140142217_init.Designer.cs">
-      <DependentUpon>201505140142217_init.cs</DependentUpon>
+    <Compile Include="Migrations\201505141352117_R.cs" />
+    <Compile Include="Migrations\201505141352117_R.Designer.cs">
+      <DependentUpon>201505141352117_R.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Hobby.cs" />
     <Compile Include="Connections\HobbyGroupConnection.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\ServiceSingleton.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\ViewModels\ChatListViewModel.cs" />
+    <Compile Include="Models\ViewModels\ChatViewModel.cs" />
     <Compile Include="Models\ViewModels\FeedViewModel.cs" />
     <Compile Include="Models\ViewModels\GroupViewModel.cs" />
     <Compile Include="Models\ViewModels\HobbyViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\GroupService.cs" />
     <Compile Include="Services\HobbyService.cs" />
     <Compile Include="Connections\StatusHobbyConnection.cs" />
@@ -268,6 +276,8 @@
     <Content Include="Views\Status\EditStatus.cshtml" />
     <Content Include="Views\Shared\Test.cshtml" />
     <Content Include="Views\Shared\_UnauthorizedLayout.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Home\Chats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,8 +291,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505140142217_init.resx">
-      <DependentUpon>201505140142217_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505141352117_R.resx">
+      <DependentUpon>201505141352117_R.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

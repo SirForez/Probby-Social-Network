@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProbbySocialNetwork.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,7 @@ namespace ProbbySocialNetwork.Models
         private static HobbyService hobbyService = null;
         private static GroupService groupService = null;
         private static AccountService accountService = null;
+        private static ChatService chatService = null;
 
         private ServiceSingleton()
         {
@@ -83,6 +85,19 @@ namespace ProbbySocialNetwork.Models
                 }
 
                 return accountService;
+            }
+        }
+
+        public static ChatService GetChatService
+        {
+            get
+            {
+                if (chatService == null)
+                {
+                    chatService = new ChatService(db);
+                }
+
+                return chatService;
             }
         }
     }
