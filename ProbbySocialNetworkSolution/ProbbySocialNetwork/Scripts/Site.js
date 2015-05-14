@@ -46,6 +46,13 @@ function validateGroup(form) {
         
          return true;
 
+}
+var checkedAtLeastOne = false;
+$('input[type="checkbox"]').each(function () {
+    if ($(this).is(":checked")) {
+        checkedAtLeastOne = true;
     }
+    else { alert("check at least once") }
+});
     
 
