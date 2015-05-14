@@ -220,7 +220,7 @@
                             
                             @if (Model.commentsForStatuses != null)
                             {
-                                <div class="allComments">
+                                <div class="allComments" id="commentList">
                                     @foreach (Comment c in Model.commentsForStatuses)
                                     {
                                         if (c.StatusID == s.ID)
@@ -259,7 +259,7 @@
                                 <input type="hidden" name="statusID" value="@s.ID" />
                                 <div class="form-horizontal">
                                     <label class="sr-only" for="commentText">Status</label>
-                                    <input type="text" class="form-control commentTextbox" name="commentText" placeholder="Write a comment..." />
+                                    <input type="text" class="form-control commentTextbox" id="commentInputBox" name="commentText" placeholder="Write a comment..." />
                                 </div>
                                 <input type="hidden" name="returnUrl" value="" />
                                 @Html.ValidationSummary(false)

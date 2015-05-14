@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,5 +14,8 @@ namespace ProbbySocialNetwork.Models
         public string UserName { get; set; }
 		public System.DateTime DateInserted { get; set; }
 		public string Body { get; set; }
+
+		[NotMapped]
+		public string DisplayDate { get { return DateInserted.ToString("dd.MM.yyyy HH:mm:ss"); } }
 	}
 }
