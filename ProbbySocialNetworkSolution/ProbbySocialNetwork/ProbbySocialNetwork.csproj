@@ -188,6 +188,7 @@
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\ViewModels\ChatListViewModel.cs" />
     <Compile Include="Models\ViewModels\ChatViewModel.cs" />
+    <Compile Include="Models\ViewModels\CommentAjax.cs" />
     <Compile Include="Models\ViewModels\FeedViewModel.cs" />
     <Compile Include="Models\ViewModels\GroupViewModel.cs" />
     <Compile Include="Models\ViewModels\HobbyViewModel.cs" />
