@@ -24,7 +24,7 @@
 
                 theForm.find('#messageText').val('');
             }).fail(function () {
-                alert('Villa kom upp!');
+                //alert('Villa kom upp!');
             });
             return false;
         }
