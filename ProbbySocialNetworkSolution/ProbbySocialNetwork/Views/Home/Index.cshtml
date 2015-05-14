@@ -164,8 +164,8 @@
                                     Hobby statusHobby = service.getHobbyByID(s.HobbyID);
                                     if (statusHobby != null)
                                     {
-                                        <p>#@statusHobby.Name</p>
-                                    }   
+                                        @Html.ActionLink("#" + statusHobby.Name, "Index", "Hobby", routeValues: statusHobby, htmlAttributes: new { id = statusHobby.ID });
+                                    }
                                 }
                         </div>
                         <span class="rhsStatus">
@@ -193,7 +193,8 @@
                                                 <input type="text" name="@("picTextbox"+s.ID)" value="@s.MediaURL" />
                                                 <br />
                                             }
-                                            <button type="submit" class="btn btn-primary">Confirm Edit</button>
+                                            <button type="submit" name="confirm" value="confirm" class="btn btn-primary">Confirm Edit</button>
+                                            <button type="submit" name ="cancel" value="cancel" class="btn btn-primary">Cancel</button>
                                         </div>
                                     }
 
@@ -236,7 +237,8 @@
                                                     <br />
                                                     <input type="text" name="@("commentTextbox"+c.ID)" value="@c.Body" />
                                                     <br />
-                                                    <button type="submit" class="btn btn-primary">Confirm Edit</button>
+                                                    <button type="submit" name="confirm" value="confirm" class="btn btn-primary">Confirm Edit</button>
+                                                    <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
                                                 </div>
                                             }
                                             <a href="/Home/Profile?username=@c.UserName">@c.UserName</a> | @c.DateInserted

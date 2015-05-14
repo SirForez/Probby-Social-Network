@@ -55,7 +55,7 @@
             Hobby statusHobby = service.getHobbyByID(s.HobbyID);
             if (statusHobby != null)
             {
-                <p>#@statusHobby.Name</p>
+                @Html.ActionLink("#" + statusHobby.Name, "Index", "Hobby", routeValues: statusHobby, htmlAttributes: new { id = statusHobby.ID });
             }
                     }
                 </div>
@@ -73,7 +73,8 @@
                                 {
                                     <input type="text" name="@("picTextbox"+s.ID)" value="@s.MediaURL" />
                                 }
-                                <button type="submit" class="btn btn-primary">Confirm Edit</button>
+                                <button type="submit" name="confirm" value="confirm" class="btn btn-primary">Confirm Edit</button>
+                                <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
                             </div>
                         }
 

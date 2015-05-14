@@ -1,4 +1,8 @@
-﻿.profilePic {
+﻿a {
+    cursor: pointer;
+}
+
+.profilePic {
     text-align: right;
     width: 100px;
     height: 100px;
@@ -269,8 +273,8 @@ ul {
 }
 
 img {
-    width: 400px;
-    height: 400px;
+    max-width: 675px;
+    height: auto;
 
 }
 
