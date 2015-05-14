@@ -20,14 +20,14 @@
 
 .group, .hobby, .follow, .inGroup, .peopleInGroup, .adminsInGroup {
     background: rgba(228, 228, 228, 0.51);
-    border-radius: 15px;
+    border-radius: 3px;
     box-shadow: 1px 2px 5px rgba(215, 212, 212, 1);
 }
 
 .group > h2 , .hobby > h2, .follow > h2, .inGroup > h2, .adminsInGroup > h2, .peopleInGroup > h2 {
     font-weight: bold;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     width: 100%;
     font-size: 18px;
     background-color: rgba(54, 215, 182, 1);
@@ -58,7 +58,7 @@
 .status {
     background: rgba(228, 228, 228, 0.51);
     box-shadow: 1px 2px 5px rgba(215, 212, 212, 1);
-    border-radius: 15px;
+    border-radius: 3px;
     padding: 3%;
     margin-top: 2%;
     width: 100%;
@@ -148,8 +148,12 @@ textarea {
     padding-top: 5%;
 }
 
-#homePic{
+.homeImg {
     width: 70%;
+}
+
+#homePic{
+    max-width: 100%;
     height: auto;
     margin-top: 5%;
     padding: 0%;
@@ -160,7 +164,7 @@ textarea {
     width: 30%;
     padding-left: 5%;
     margin-top: 5%;
-    float: left;
+    float: right;
 }
 
 .col-md-8{
@@ -237,7 +241,7 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     color: white;
     background-color: #36D7B6;
     box-shadow: 1px 2px 5px rgba(54, 215, 182, 1);
-    border-radius: 15px;
+    border-radius: 3px;
 }
 
 .followButton {
@@ -282,3 +286,8 @@ img {
     width: 30px;
     height: 30px;
 }
+
+.editForm {
+    display:none;
+}
+

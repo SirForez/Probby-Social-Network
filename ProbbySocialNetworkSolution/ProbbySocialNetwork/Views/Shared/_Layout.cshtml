@@ -25,9 +25,9 @@
                 @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { id = "searchBar" }))
                 {
                     <div class="form-horizontal">
-                        <input type="text" class="searchBar" id="searchBar" name="searchBar" placeholder="Search"/>
+                        <input type="text" class="searchBar form-control" id="searchBar" name="searchBar" placeholder="Search" />
                     </div>
-                    @Html.ValidationSummary(false)
+                    //@Html.ValidationSummary(false)
                 }
             </div>
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -44,6 +44,9 @@
                     @*Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })*@
                 </li>-->
                 <li>
+                    @Html.ActionLink("Chats", "Chats", "Home", new { }, null)
+
+<li>
                     @Html.ActionLink("Profile", "Profile", "Home", new { username = User.Identity.Name }, null)
                     
                 </li>

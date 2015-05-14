@@ -2,8 +2,8 @@
     $('body').on('keypress', '.commentTextbox', function (e) {
         var keyCode = e.which || e.keyCode;
         if (e.keyCode == 13) {
-            alert('testing');
-            var theForm = $(this);
+            //alert('testing');
+            var theForm = $(this).parents('form');
 
             $.ajax({
                 type: 'POST',
@@ -13,18 +13,34 @@
 
                 console.log(result);
 
-                $('#commentList blockquote').remove();
+                $('#commentList').html('');
 
-                for (var i = 0; i < result.Reviews.length; i++) {
-                    $('#commentList').append('<blockquote>' +
-                    '<p>' + result.Reviews[i].Username + ' | ' + result.Reviews[i].Text + '</p>' + '</blockquote>');
+                for (var i = 0; i < result.length; i++) {
+                    //if (result[i].ID == result[i].StatusID) {
+                        $('#commentList').append("<div class='comment'>" +
+                        '<h5 id="commentText' + result[i].ID + '" class="commentContent2">' + result[i].Body + '</h5>' +
+                        '<form action="/Status/EditComment" id="' + result[i].ID +'" method="post">' +
+                        '<input type="hidden" name="commentId" value="'+ result[i].ID + '">' +
+                        '<div id="commentTextForm'+ result[i].ID + '" class="editForm">' +
+                        '<label for="commentTextbox'+ result[i].ID + '">Comment:</label>' +
+                        '<br>' + 
+                        '<input type="text" name="commentTextbox id="commentInputBox"'+ result[i].ID + '" placeholder="Write a comment">' +
+                        '<br>' +
+                        '<button type="submit" class="btn btn-primary">Confirm Edit</button>' +
+                        '</div></form>' +                                           
+                        '<a href="/Home/Profile?username=' + result[i].UserName + '">sjomli</a> | ' + result[i].DisplayDate +
+                        '<span> | </span>' +
+                        '<a class="editLink" onclick="editComment('+ result[i].ID+')">Edit</a>' +
+                        '<span> | </span>' +
+                        '<a href="/Status/RemoveComment/'+ result[i].ID +'">Remove</a></div>');
+                    //}   
                 }
-
-                theForm.find('#reviewtext').val('');
+                theForm.find('#commentInputBox').val('');
             }).fail(function () {
                 alert('Villa kom upp!');
             });
+
+            return false;
         }
-        return false;
     });
 })

@@ -9,6 +9,7 @@ namespace ProbbySocialNetwork.Models.ViewModels
     {
         public ApplicationUser currentUser;
         public List<ApplicationUser> availableChatUsers;
+        public List<ApplicationUser> usersChattingWith;
         public List<Chat> userChats;
     }
 }
