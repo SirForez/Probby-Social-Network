@@ -16,7 +16,7 @@ namespace ProbbySocialNetwork.Services
             db = _db;
         }
 
-        public List<Chat> GetChatsByUser()
+        public List<Chat> GetChatsByUser(ApplicationUser a)
         {
             return new List<Chat>();
         }

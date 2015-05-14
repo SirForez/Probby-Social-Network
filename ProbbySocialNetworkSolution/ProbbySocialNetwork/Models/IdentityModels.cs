@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using ProbbySocialNetwork.Connections;
 
 namespace ProbbySocialNetwork.Models
 {
@@ -44,6 +45,8 @@ namespace ProbbySocialNetwork.Models
         public DbSet<UserFollowConnection> UserFollowConnections { get; set; }
         public DbSet<UserGroupConnection> UserGroupConnections { get; set; }
         public DbSet<UserHobbyConnection> UserHobbyConnections { get; set; }
+        public DbSet<UserChatConnection> UserChatConnections { get; set; }
+        public DbSet<ChatMessageConnection> ChatMessageConnections { get; set; }
 		//public DbSet<ApplicationUser> Users { get; set; }
 		//public DbSet<UserConnection> UserConnections { get; set; }
 		

@@ -7,8 +7,8 @@ namespace ProbbySocialNetwork.Connections
 {
     public class ChatMessageConnection
     {
-        public int ID;
-        public int chatID;
-        public int messageID;
+        public int ID { get; set; }
+        public int ChatID { get; set; }
+        public int MessageID { get; set; }
     }
 }
