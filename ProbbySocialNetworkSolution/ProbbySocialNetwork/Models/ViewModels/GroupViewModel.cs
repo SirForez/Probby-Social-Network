@@ -13,6 +13,7 @@ namespace ProbbySocialNetwork.Models.ViewModels
         public List<ApplicationUser> currentGroupAdmins;
 		public List<Status> currentGroupStatusHistory;
 		public List<Comment> commentsForStatuses;
+		public List<Hobby> currentGroupHobbies;
         public List<Hobby> availableHobbies;
 	}
 }
