@@ -29,6 +29,9 @@ namespace ProbbySocialNetwork.Controllers
 		[HttpPost]
         public ActionResult CreateStatus(FormCollection collection, string id, int? groupID)
 		{
+			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+			List <Hobby> currentUserHobbies = hobbyService.getHobbiesByUser(currentUser);
+			
 			Status s = new Status();
 
 			s.Post = collection["statusText"];
@@ -45,21 +48,6 @@ namespace ProbbySocialNetwork.Controllers
 				s.GroupID = g.ID;
                 s.HobbyID = g.hobby.ID;
             }
-            else
-            {
-                if (collection["chosenHobby"] != "Misc")
-                {
-					Hobby statusHobby = hobbyService.getHobbyByName(collection["chosenHobby"]);
-					s.HobbyID = statusHobby.ID;
-                }
-                else
-                {
-                    Hobby defaultHobby = hobbyService.getDefaultHobby();
-                    s.HobbyID = defaultHobby.ID;
-                }
-            }
-
-			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 
 			s.ProfilePic = currentUser.ProfilePic;
 			s.Date = DateTime.Now;
@@ -77,6 +65,25 @@ namespace ProbbySocialNetwork.Controllers
 			//ApplicationUser a = accountService.getUserByName(User.Identity.Name);
 			//s.UserID = a.Id;
 			statusService.addStatus(s);
+
+			if (groupID == null)
+			{
+				foreach (Hobby h in currentUserHobbies)
+				{
+					if (collection[h.Name] == h.Name)
+					{
+						statusService.addHobbyToStatus(s, h);
+					}
+				}
+			}
+			else
+			{
+				int realGroupID = groupID.Value;
+				Group g = groupService.getGroupByID(realGroupID);
+				statusService.addHobbyToStatus(s, g.hobby);
+			}
+
+			
 
 			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);

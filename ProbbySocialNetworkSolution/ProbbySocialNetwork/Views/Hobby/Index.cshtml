@@ -24,10 +24,8 @@
         @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
         {
             <input type="hidden" name="userid" value="@Model.currentUser.Id " />
-            <input type="hidden" name="groupID" value="" />
-            <input type="hidden" name="postedToID" value="" />
-            <input type="hidden" name="chosenHobby" value="@Model.currentHobby.Name" />
             <label>#@Model.currentHobby.Name</label>
+            <input type="hidden" name="@Model.currentHobby.Name" value="@Model.currentHobby.Name" />
             <div class="form-horizontal">
                 <label class="sr-only" for="statusText">Status</label>
                 <textarea class="form-control" rows="4" id="statusText" name="statusText"></textarea>
@@ -49,19 +47,18 @@
                     <p>
                         <img src="@s.ProfilePic" class="postPic" />
                     <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
-                    @{
-            ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-            HobbyService service = ServiceSingleton.GetHobbyService;
-            Hobby statusHobby = service.getHobbyByID(s.HobbyID);
-            if (statusHobby != null)
-            {
-                @Html.ActionLink("#" + statusHobby.Name, "Index", "Hobby", routeValues: statusHobby, htmlAttributes: new { id = statusHobby.ID });
-            }
-                    }
+                    
+                    @Html.ActionLink("#" + Model.currentHobby.Name, "Index", "Hobby", routeValues: Model.currentHobby, htmlAttributes: new { id = Model.currentHobby.ID });
                 </div>
                 <span class="rhsStatus">
                     <div class="statusContent">
                         <!--Status content and edit form for status-->
+                        @if (s.PostedToID != "" && s.PostedToID != s.UserID)
+                        {
+                            AccountService accountService = ServiceSingleton.GetAccountService;
+                            ApplicationUser postedToUser = accountService.getUserByID(s.PostedToID);
+                            <p>Posted to <a href="/Home/Profile?username=@postedToUser.UserName">@postedToUser.UserName</a>'s profile</p>
+                        }
                         <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
                         @using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID }))
                         {
