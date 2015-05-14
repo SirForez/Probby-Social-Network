@@ -273,8 +273,8 @@ ul {
 }
 
 img {
-    width: 400px;
-    height: 400px;
+    max-width: 675px;
+    height: auto;
 
 }
 
