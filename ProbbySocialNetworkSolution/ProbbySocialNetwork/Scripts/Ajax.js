@@ -46,7 +46,7 @@
 
     $('body').on('click', '.editLink', function () {
         
-        alert('testing');
+        //alert('testing');
         /*
         var theForm = $(this).parents('form');
 
