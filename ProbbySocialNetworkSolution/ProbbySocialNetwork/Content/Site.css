@@ -148,8 +148,12 @@ textarea {
     padding-top: 5%;
 }
 
-#homePic{
+.homeImg {
     width: 70%;
+}
+
+#homePic{
+    max-width: 100%;
     height: auto;
     margin-top: 5%;
     padding: 0%;
@@ -160,7 +164,7 @@ textarea {
     width: 30%;
     padding-left: 5%;
     margin-top: 5%;
-    float: left;
+    float: right;
 }
 
 .col-md-8{
@@ -284,5 +288,6 @@ img {
 }
 
 .editForm {
-display:none;
+    display:none;
 }
+
