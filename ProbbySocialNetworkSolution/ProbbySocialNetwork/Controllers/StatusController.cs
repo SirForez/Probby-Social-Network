@@ -153,6 +153,7 @@ namespace ProbbySocialNetwork.Controllers
             c.UserID = User.Identity.GetUserId();
             c.UserName = User.Identity.Name;
             c.StatusID = Convert.ToInt32(collection["statusID"]);
+			c.CurrentLogedinUser = User.Identity.GetUserId();
 
 			var status = statusService.getStatusByID(c.StatusID);
 			c.StatusUserID = status.UserID;
@@ -173,6 +174,7 @@ namespace ProbbySocialNetwork.Controllers
 			editComment.DateInserted = currentComment.DateInserted;
 			editComment.Body = null;
 			editComment.StatusUserID = currentComment.StatusUserID;
+			editComment.CurrentLogedinUser = User.Identity.GetUserId();
 			
 			string commentTextboxId = "commentTextbox" + Convert.ToString(id);
 

@@ -13,6 +13,8 @@
                 var statusid = result[0].StatusID;
                 var commentHtmlId = '#commentForStatus' + statusid.toString();
                 $(commentHtmlId).html('');
+
+                window.UserID = '<%=HttpUtility.JavaScriptStringEncode(this.User.Identity.Name)%>';
        
                 for (var i = 0; i < result.length; i++) {
                     $(commentHtmlId).append(
@@ -26,7 +28,9 @@
                         '<input type="text" name="commentTextbox id="commentInputBox"'+ result[i].ID + '" placeholder="Write a comment"/>' +
                         '<br>' +
                         '<button type="submit" class="btn btn-primary">Confirm Edit</button>' +
-                        '</div></form>' +                                           
+                        '</div></form>');
+                        
+                        if (result[i].UserID == result[i].StatusUserID || )
                         '<a href="/Home/Profile?username=' + result[i].UserName + '">' + result[i].UserName + '</a> | ' + result[i].DisplayDate +
                         '<span> | </span>' +
                         '<a class="editLink" onclick="editComment('+ result[i].ID+')">Edit</a>' +

@@ -15,6 +15,7 @@ namespace ProbbySocialNetwork.Models
 		public System.DateTime DateInserted { get; set; }
 		public string Body { get; set; }
 		public string StatusUserID { get; set; }
+		public string CurrentLogedinUser { get; set; }
 
 		[NotMapped]
 		public string DisplayDate { get { return DateInserted.ToString("dd.MM.yyyy HH:mm:ss"); } }
