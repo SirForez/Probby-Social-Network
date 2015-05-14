@@ -37,11 +37,10 @@ function validateGroup(form) {
         alert("You must provide a group name!");
         return false;
     }
-        
-        else($("#groupName").val().length > 5)
-         {
 
-            alert("Group name too too long!");
+    else if ($("#groupName").val().length > 3) {
+    
+        alert("Group name can not be longer than 70 characters!");
             return false;
         }
         
