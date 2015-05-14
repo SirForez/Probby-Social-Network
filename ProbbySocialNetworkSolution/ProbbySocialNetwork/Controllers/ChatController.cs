@@ -39,14 +39,15 @@ namespace ProbbySocialNetwork.Controllers
             m.UserName = collection["username"];
             m.Text = collection["messageText"];
             m.DateInserted = DateTime.Now;
-
-            Chat c = chatService.getChatByID(chatID);
+			
+			Chat c = chatService.getChatByID(chatID);
 
             chatService.AddMessage(m);
             chatService.AddMessageToChat(c, m);
 
-            string url = this.Request.UrlReferrer.AbsoluteUri;
-            return Redirect(url);
+			var currMessages = chatService.GetMessagesByChat(c);
+
+			return Json(currMessages, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CreateChat(string username)

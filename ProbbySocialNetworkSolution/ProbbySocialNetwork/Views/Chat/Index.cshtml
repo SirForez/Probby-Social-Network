@@ -11,7 +11,7 @@
     <!--breyta i html helper-->
 
     <section>
-        @using (Html.BeginForm("PostMessage", "Chat", new { chatID = Model.chat.ID }, FormMethod.Post, new { id = "statusForm" }))
+        @using (Html.BeginForm("PostMessage", "Chat", new { chatID = Model.chat.ID }, FormMethod.Post, new { id = "chatForm" }))
         {
             <input type="hidden" name="userid" value="@Model.currentUser.Id " />
             <input type="hidden" name="username" value="@Model.currentUser.UserName" />
@@ -25,7 +25,7 @@
     </section>
 
     <section>
-        <div class="messageList">
+        <div class="messageList" id="messageList">
             @foreach (Message m in Model.messages)
             {
                 <div class="message">

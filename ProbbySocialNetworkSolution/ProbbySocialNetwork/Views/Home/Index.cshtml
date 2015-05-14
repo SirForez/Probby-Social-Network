@@ -21,7 +21,7 @@
                     }
                 </ul>
                 <section>
-                    @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm" }))
+                    @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm", onsubmit="return validateGroup(this);" }))
                     {
                         <div class="groupCreation">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createGroup" data-whatever="">Create a new group</button>
@@ -74,7 +74,7 @@
                     }
                 </ul>
                 <section>
-                    @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm" }))
+                    @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm", onsubmit = "return validateHobby(this);" }))
                     {
                         <div class="hobbyCreation">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createHobby" data-whatever="">Create a new hobby</button>
