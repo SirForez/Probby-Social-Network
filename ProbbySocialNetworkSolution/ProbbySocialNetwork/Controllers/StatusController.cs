@@ -147,6 +147,7 @@ namespace ProbbySocialNetwork.Controllers
 		[HttpPost]
 		public ActionResult CreateComment(FormCollection collection)
 		{
+			/*
             Comment c = new Comment();
             c.Body = collection["commentText"];
             c.DateInserted = DateTime.Now;
@@ -166,6 +167,19 @@ namespace ProbbySocialNetwork.Controllers
             //return Json(currComments, JsonRequestBehavior.AllowGet);
 			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
+			 */
+			Comment c = new Comment();
+			c.Body = collection["commentText"];
+			c.DateInserted = DateTime.Now;
+			c.UserID = User.Identity.GetUserId();
+			c.UserName = User.Identity.Name;
+			c.StatusID = Convert.ToInt32(collection["statusID"]);
+			statusService.addComment(c);
+
+			var currStatus = statusService.getStatusByID(c.StatusID);
+			var currComments = statusService.getCommentsByStatus(currStatus);
+
+			return Json(currComments, JsonRequestBehavior.AllowGet);
 		}
 
 		public ActionResult EditComment(FormCollection collection)

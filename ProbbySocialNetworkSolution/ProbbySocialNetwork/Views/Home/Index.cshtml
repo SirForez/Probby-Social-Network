@@ -213,7 +213,7 @@
                                     }
                                 </p>
                             </div>
-
+                            @*
                             @if (Model.commentsForStatuses != null)
                             {
                                 <div class="allComments" id='@("commentForStatus" + s.ID)'>
@@ -227,7 +227,7 @@
                                                 {
                                                     <input type="hidden" name="commentId" value="@c.ID" />
                                                     <div id='@(" commenttextform"+c.ID)' class="editForm">
-                                                        @*need id for textarea to get into controller*@
+                                                        <!--need id for textarea to get into controller-->
                                                         <label for='@(" commenttextbox"+c.ID)'>Comment:</label>
                                                         <br />
                                                         <input type="text" name='@(" commenttextbox"+c.ID)' value="@c.Body" />
@@ -253,6 +253,51 @@
                             @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                             {
                                 <input type="hidden" name="statusID" id="statusID" value="@s.ID" />
+                                <div class="form-horizontal">
+                                    <label class="sr-only" for="commentText">Status</label>
+                                    <input type="text" class="form-control commentTextbox" id="commentInputBox" name="commentText" placeholder="Write a comment..." />
+                                </div>
+                                @Html.ValidationSummary(false)
+                            }
+                            *@
+                            @if (Model.commentsForStatuses != null)
+                            {
+                                <div class="allComments" id="@(" commentforstatus"+s.id)">
+                                    @foreach (Comment c in Model.commentsForStatuses)
+                                    {
+                                        if (c.StatusID == s.ID)
+                                        {
+                                            <div class="comment">
+                                                <h5 id="@(" commenttext"+c.id)" class="commentContent2">@c.Body</h5>
+                                                @using (Html.BeginForm("EditComment", "Status", FormMethod.Post, new { id = c.ID }))
+                                                {
+                                                    <input type="hidden" name="commentId" value="@c.ID" />
+                                                    <div id="@(" commenttextform"+c.id)" class="editForm">
+                                                        @*need id for textarea to get into controller*@
+                                                        <label for="@(" commenttextbox"+c.id)">Comment:</label>
+                                                        <br />
+                                                        <input type="text" name="@(" commenttextbox"+c.id)" value="@c.Body" />
+                                                        <br />
+                                                        <button type="submit" name="confirm" value="confirm" class="btn btn-primary">Confirm Edit</button>
+                                                        <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
+                                                    </div>
+                                                }
+                                                <a href="/Home/Profile?username=@c.UserName">@c.UserName</a> | @c.DateInserted
+                                                @if (Model.currentUser.Id == c.UserID || Model.currentUser.Id == s.UserID)
+                                                {
+                                                    <span> | </span>
+                                                    <a class="editLink" onclick="editComment(@c.ID)">Edit</a>
+                                                    <span> | </span>
+                                                    @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            }
+                            @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
+                            {
+                                <input type="hidden" name="statusID" value="@s.ID" />
                                 <div class="form-horizontal">
                                     <label class="sr-only" for="commentText">Status</label>
                                     <input type="text" class="form-control commentTextbox" id="commentInputBox" name="commentText" placeholder="Write a comment..." />
