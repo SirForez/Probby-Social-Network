@@ -44,10 +44,13 @@
                     @*Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })*@
                 </li>-->
                 <li>
-                    @Html.ActionLink("Profile", "Profile", "Home", new { username = User.Identity.Name }, null)  
+                    @Html.ActionLink("Profile", "Profile", "Home", new { }, null)  
                 </li>
                 <li>
                     @Html.ActionLink("Messages", "Chats", "Chat", new { }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Saved", "Saved", "Home", new { }, null)
                 </li>
                 <li>
                     @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

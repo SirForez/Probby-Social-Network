@@ -142,7 +142,7 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult SavedFeed (ApplicationUser a)
+		public ActionResult SavedFeed ()
 		{
 			SavedFeedViewModel model = new SavedFeedViewModel();
 
@@ -162,8 +162,10 @@ namespace ProbbySocialNetwork.Controllers
 			return View(model);
 		}
 
-		public ActionResult AddStatusToSavedFeed (Status s)
+		public ActionResult AddStatusToSavedFeed (int id)
 		{
+			Status s = statusService.getStatusByID(id);
+			
 			ApplicationUser a = accountService.getUserByName(User.Identity.Name);
 			
 			statusService.addSavedStatus(s, a);
@@ -172,8 +174,10 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult RemoveStatusFromSavedFeed (Status s)
+		public ActionResult RemoveStatusFromSavedFeed (int id)
 		{
+			Status s = statusService.getStatusByID(id);
+			
 			ApplicationUser a = accountService.getUserByName(User.Identity.Name);
 			
 			statusService.removeSavedStatus(s, a);

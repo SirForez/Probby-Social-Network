@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProbbySocialNetwork.Connections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -261,19 +262,38 @@ namespace ProbbySocialNetwork.Models
 			return db.SaveChanges() != 1;
 		}
 
-		internal List<Status> getSavedFeedByUser(ApplicationUser applicationUser)
+		public List<Status> getSavedFeedByUser(ApplicationUser a)
 		{
-			throw new NotImplementedException();
+			var statuses = (from c in db.UserSavedStatusConnections
+							where c.UserID == a.Id
+							join s in db.Statuses on c.StatusID equals s.ID
+							orderby s.Date descending
+							select s).ToList();
+			return statuses;
 		}
 
-		internal void addSavedStatus(Status s, ApplicationUser a)
+		public bool addSavedStatus(Status s, ApplicationUser a)
 		{
-			throw new NotImplementedException();
+			UserSavedStatusConnection connection = new UserSavedStatusConnection();
+
+			connection.StatusID = s.ID;
+			connection.UserID = a.Id;
+
+			db.UserSavedStatusConnections.Add(connection);
+
+			return db.SaveChanges() != 1;
 		}
 
-		internal void removeSavedStatus(Status s, ApplicationUser a)
+		public bool removeSavedStatus(Status s, ApplicationUser a)
 		{
-			throw new NotImplementedException();
+			UserSavedStatusConnection connection = new UserSavedStatusConnection();
+
+			connection.StatusID = s.ID;
+			connection.UserID = a.Id;
+
+			db.UserSavedStatusConnections.Remove(connection);
+
+			return db.SaveChanges() != 1;
 		}
 	}
 }

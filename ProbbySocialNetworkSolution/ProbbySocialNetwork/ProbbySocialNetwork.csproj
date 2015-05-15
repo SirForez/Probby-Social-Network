@@ -174,9 +174,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Connections\AdminGroupConnection.cs" />
-    <Compile Include="Migrations\201505150522063_bla.cs" />
-    <Compile Include="Migrations\201505150522063_bla.Designer.cs">
-      <DependentUpon>201505150522063_bla.cs</DependentUpon>
+    <Compile Include="Migrations\201505151009374_init.cs" />
+    <Compile Include="Migrations\201505151009374_init.Designer.cs">
+      <DependentUpon>201505151009374_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chat.cs" />
@@ -284,6 +284,7 @@
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\Chats.cshtml" />
     <Content Include="Views\Manage\ChangeEmail.cshtml" />
+    <Content Include="Views\Home\Saved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -297,8 +298,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505150522063_bla.resx">
-      <DependentUpon>201505150522063_bla.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505151009374_init.resx">
+      <DependentUpon>201505151009374_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

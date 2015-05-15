@@ -47,6 +47,7 @@ namespace ProbbySocialNetwork.Models
         public DbSet<UserHobbyConnection> UserHobbyConnections { get; set; }
         public DbSet<UserChatConnection> UserChatConnections { get; set; }
         public DbSet<ChatMessageConnection> ChatMessageConnections { get; set; }
+		public DbSet<UserSavedStatusConnection> UserSavedStatusConnections { get; set; }
 		//public DbSet<ApplicationUser> Users { get; set; }
 		//public DbSet<UserConnection> UserConnections { get; set; }
 		
