@@ -12,14 +12,16 @@
 
             <div class="group">
                 <h2>Your groups</h2>
-                <ul>
-                    @foreach (Group g in Model.currentUserGroups)
-                    {
-                        <li>
-                            @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
-                        </li>
-                    }
-                </ul>
+                <div class="group-list">
+                    <ul>
+                        @foreach (Group g in Model.currentUserGroups)
+                        {
+                            <li>
+                                @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
+                            </li>
+                        }
+                    </ul>
+                </div>
                 <section>
                     @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm", onsubmit="return validateGroup(this);" }))
                     {
@@ -64,15 +66,17 @@
             </div>
             <div class="hobby">
                 <h2>Hobbies</h2>
-                <ul>
-                    @using ProbbySocialNetwork.Models;
-                    @foreach (Hobby h in Model.currentUserHobbies)
-                    {
+                <div class="hobby-list">
+                    <ul>
+                        @using ProbbySocialNetwork.Models;
+                        @foreach (Hobby h in Model.currentUserHobbies)
+                        {
                         <li>
                             @Html.ActionLink("#" + h.Name, "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID })
                         </li>
-                    }
-                </ul>
+                        }
+                    </ul>
+                </div>
                 <section>
                     @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm", onsubmit = "return validateHobby(this);" }))
                     {
