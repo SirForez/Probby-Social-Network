@@ -18,7 +18,7 @@
                 {
                     <div class="form-horizontal">
                         <label class="sr-only" for="picLink">New Picture</label>
-                        <input tyep="text" id="newProfilePic" name="picLink" placeholder="Link to profile picture..." />
+                        <input type="text" id="newProfilePic" name="picLink" placeholder="Link to profile picture..." />
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     @Html.ValidationSummary(false)
@@ -27,7 +27,8 @@
             </div>
         }
 
-        <p>@Model.profileOwner.UserName's Profile</p>
+        <h4>@Model.profileOwner.UserName's Profile</h4>
+        <p> @Model.profileOwner.UserName's Total Karma: @Model.profileOwner.Karma</p>
         @if (Model.profileOwner.UserName != Model.currentUser.UserName)
         {
             if (Model.profileOwnerFollowers.Contains(Model.currentUser))
@@ -99,16 +100,35 @@
                             <img src="@s.ProfilePic" class="postPic" />
                         <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
                         @{
-                //Put this in the viewmodel!!!
+                            //Put this in the viewmodel!!!
 
-                ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-                HobbyService service = ServiceSingleton.GetHobbyService;
-                List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
+                            ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+                            HobbyService service = ServiceSingleton.GetHobbyService;
+                            List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
 
-                foreach (Hobby h in statusHobbies)
-                {
-                    @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
-                }
+                            foreach (Hobby h in statusHobbies)
+                            {
+                                @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
+                            }
+
+                            <br />
+                            //Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { id = s.ID }, null)
+                            //Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s, htmlAttributes: null)
+                            using (Html.BeginForm("UpvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
+                            {
+                                <input type="hidden" name="statusId" value="@s.ID" />
+                                <button type="submit" class="btn btn-primary">Up</button>
+                            }
+
+                            <p>@s.Karma</p>
+
+                            //Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { id = s.ID }, null)
+                            //Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s, htmlAttributes: null)
+                            using (Html.BeginForm("DownvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
+                            {
+                                <input type="hidden" name="statusId" value="@s.ID" />
+                                <button type="submit" class="btn btn-primary">Down</button>
+                            }
                         }
                     </div>
                     <span class="rhsStatus">
