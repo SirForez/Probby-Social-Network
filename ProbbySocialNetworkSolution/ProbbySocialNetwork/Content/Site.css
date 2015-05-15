@@ -90,17 +90,6 @@
     overflow: auto;
 }
 
-.lhsStatus {
-    float: left;
-    width: 18%;
-    height: 100%;
-}
-
-.rhsStatus {
-    float: right;
-    width: 82%;
-}
-
 body {
     background-color: rgba(174, 174, 174, 0.07);
     padding-top: 50px;
@@ -315,3 +304,35 @@ img {
     display:none;
 }
 
+.lhsStatus {
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+
+.rhsStatus {
+    float: right;
+    width: 75%;
+}
+
+.karmaContent {
+    float: left;
+    width:30%;
+}
+
+.lhsContent {
+    float:left;
+    width: 70%;
+}
+
+.karmaCount {
+    font-size: 22px;
+    margin-left: 6px;
+    margin-top: 
+}
+
+.arrow {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
+}
