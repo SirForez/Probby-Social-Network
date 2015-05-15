@@ -84,9 +84,14 @@ $(function () {
                 url: theForm.attr('action'),
                 data: theForm.serialize(),
             }).done(function (result) {
-                console.log(result);
+                //$(".allComments").html('');
+                
                 var statusid = result[0].StatusID;
                 var commentHtmlId = '#commentForStatus' + statusid.toString();
+
+                
+
+                console.log(commentHtmlId);
                 $(commentHtmlId).html('');
 
                 for (var i = 0; i < result.length; i++) {
