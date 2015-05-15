@@ -31,9 +31,7 @@ function validateHobby(form) {
 }
 
 function validateGroup(form) {
-
-    
-    if ($("#groupName").val() == "") {
+    if ($("#groupName").val() == '') {
         alert("You must provide a group name!");
         return false;
     }
@@ -42,17 +40,22 @@ function validateGroup(form) {
     
         alert("Group name can not be longer than 70 characters!");
             return false;
-        }
+    }
         
-         return true;
+    return true;
 
 }
-var checkedAtLeastOne = false;
-$('input[type="checkbox"]').each(function () {
-    if ($(this).is(":checked")) {
-        checkedAtLeastOne = true;
-    }
-    
-});
-    
 
+function validateHobbiesForStatuses() {
+    var checkedAtLeastOne = false;
+    $('input[type="checkbox"].hobbyCheckboxes').each(function () {
+        if ($(this).is(":checked")) {
+            checkedAtLeastOne = true;
+        }
+    });
+
+    if (checkedAtLeastOne == false) {
+        alert("You must select a hobby");
+        return false;
+    }
+}
