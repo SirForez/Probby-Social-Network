@@ -35,6 +35,17 @@ namespace ProbbySocialNetwork.Models
             return user;
         }
 
+        public bool changeEmail(string userID, string oldEmail, string newEmail)
+        {
+            ApplicationUser a = getUserByID(userID);
+            if (a != null)
+            {
+                a.Email = newEmail;
+                return db.SaveChanges() != 0;
+            }
+            return false;
+        }
+
         public List<ApplicationUser> getFollowersByUser(ApplicationUser a)
         {
             var followers = (from c in db.UserFollowConnections
@@ -60,7 +71,7 @@ namespace ProbbySocialNetwork.Models
             uConnection.FollowingID = a.Id;
             uConnection.FollowerID = toAdd.Id;
             db.UserFollowConnections.Add(uConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool removeFollowerFromUser(ApplicationUser a, ApplicationUser toDel)
@@ -70,7 +81,7 @@ namespace ProbbySocialNetwork.Models
             a.NumberOfFollowers--;
             uConnection.FollowerID = toDel.Id;
             db.UserFollowConnections.Remove(uConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool addFollowingToUser(ApplicationUser a, ApplicationUser toAdd)
@@ -80,7 +91,7 @@ namespace ProbbySocialNetwork.Models
             a.NumberOfFollowing++;
             uConnection.FollowingID = toAdd.Id;
             db.UserFollowConnections.Add(uConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public UserFollowConnection getUserFollowConnectionByUsers(ApplicationUser follower, ApplicationUser following)
@@ -96,7 +107,7 @@ namespace ProbbySocialNetwork.Models
             UserFollowConnection uConnection = getUserFollowConnectionByUsers(a, toDel);
             a.NumberOfFollowing--;
             db.UserFollowConnections.Remove(uConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public List<ApplicationUser> userSearch(String searchString)

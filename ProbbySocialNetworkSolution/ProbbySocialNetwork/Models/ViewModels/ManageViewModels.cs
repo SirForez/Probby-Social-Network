@@ -58,6 +58,21 @@ namespace ProbbySocialNetwork.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ChangeEmailViewModel
+    {
+        [Required]
+        [Display(Name = "Current email")]
+        public string OldEmail { get; set; }
+
+        [Required]
+        [Display(Name = "New email")]
+        public string NewEmail { get; set; }
+
+        [Required]
+        [Compare("NewEmail", ErrorMessage = "The new email and confirmation email do not match.")]
+        public string ConfirmEmail { get; set; }
+    }
+
     public class AddPhoneNumberViewModel
     {
         [Required]

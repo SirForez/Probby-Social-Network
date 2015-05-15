@@ -75,7 +75,7 @@ namespace ProbbySocialNetwork.Models
 			hConnection.HobbyID = h.ID;
 			db.HobbyGroupConnections.Add(hConnection);
 
-			return db.SaveChanges() != 1;
+			return db.SaveChanges() != 0;
 		}
 
         public List<Group> getGroupsByHobby(Hobby h)
@@ -99,13 +99,13 @@ namespace ProbbySocialNetwork.Models
         public bool addHobby(Hobby h)
         {
             db.Hobbies.Add(h);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool removeHobby(Hobby h)
         {
             db.Hobbies.Remove(h);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool addHobbyToUser(ApplicationUser a, Hobby toAdd)
@@ -114,7 +114,7 @@ namespace ProbbySocialNetwork.Models
             hConnection.UserID = a.Id;
             hConnection.HobbyID = toAdd.ID;
             db.UserHobbyConnections.Add(hConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public UserHobbyConnection getUserHobbyConnection(ApplicationUser a, Hobby h)
@@ -129,7 +129,7 @@ namespace ProbbySocialNetwork.Models
         {
             UserHobbyConnection hConnection = getUserHobbyConnection(a, toDel);
             db.UserHobbyConnections.Remove(hConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public List<Hobby> hobbySearch(String searchString)
