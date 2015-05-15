@@ -121,7 +121,8 @@ namespace ProbbySocialNetwork.Services
         public bool AddMessage(Message m)
         {
             db.Messages.Add(m);
-            return db.SaveChanges() != 0;
+            
+			return db.SaveChanges() != 0;
         }
 
         public bool RemoveMessage(Message m)

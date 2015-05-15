@@ -16,6 +16,6 @@ namespace ProbbySocialNetwork.Models
 		public string Post { get; set; }
 		public string MediaURL { get; set; }
 		public string ProfilePic { get; set; }
-		public int? Karma { get; set; }
+		public int Karma { get; set; }
 	}
 }

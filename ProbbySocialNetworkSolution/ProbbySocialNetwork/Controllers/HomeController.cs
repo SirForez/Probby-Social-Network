@@ -134,6 +134,7 @@ namespace ProbbySocialNetwork.Controllers
 			automaticProfileUpdateStatus.Post = currentUser.UserName + " just got a new profile picture!";
 			automaticProfileUpdateStatus.ProfilePic = currentUser.ProfilePic;
 			automaticProfileUpdateStatus.UserID = currentUser.Id;
+			automaticProfileUpdateStatus.Karma = 0;
 
 			statusService.addStatus(automaticProfileUpdateStatus);
 

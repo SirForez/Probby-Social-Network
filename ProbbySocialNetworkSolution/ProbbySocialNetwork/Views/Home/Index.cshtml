@@ -154,13 +154,24 @@
                                     }
                                     
                                     <br />
-                                    
-                                    @Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s, htmlAttributes: null) 
-                                    
+                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { id = s.ID }, null)
+                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s, htmlAttributes: null)
+                                    using (Html.BeginForm("UpvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
+                                    {
+                                        <input type="hidden" name="statusId" value="@s.ID"/>
+                                        <button type="submit" class="btn btn-primary" >Up</button>
+                                    }
+
                                     <p>@s.Karma</p>
-                                    
-                                    @Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s, htmlAttributes: null)
-                                }
+
+                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { id = s.ID }, null)
+                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s, htmlAttributes: null)
+                                    using (Html.BeginForm("DownvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
+                                    {
+                                        <input type="hidden" name="statusId" value="@s.ID" />
+                                        <button type="submit" class="btn btn-primary">Down</button>
+                                    }
+}
 
                         </div>
                         <span class="rhsStatus">

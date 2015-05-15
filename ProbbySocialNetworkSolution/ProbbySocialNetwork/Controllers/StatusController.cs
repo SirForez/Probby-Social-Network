@@ -223,9 +223,13 @@ namespace ProbbySocialNetwork.Controllers
 				return View("Error");
 			}
 		}
-
-		public ActionResult UpvoteStatus(Status s)
+		
+		public ActionResult UpvoteStatus(FormCollection collection)
 		{
+			int? statusid = Convert.ToInt32(collection["statusId"]);
+			var s = statusService.getStatusByID(statusid);
+			
+			//var s = statusService.getStatusByID(statusId);
 			statusService.upvoteStatus(s);
 			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
 			accountService.userGainsKarma(currentUser);
@@ -234,8 +238,11 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult DownvoteStatus(Status s)
+		public ActionResult DownvoteStatus(FormCollection collection)
 		{
+			int? statusid = Convert.ToInt32(collection["statusId"]);
+			var s = statusService.getStatusByID(statusid);
+
 			statusService.downvoteStatus(s);
 			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
 			accountService.userLosesKarma(currentUser);
