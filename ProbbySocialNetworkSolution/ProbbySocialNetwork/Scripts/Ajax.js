@@ -87,9 +87,9 @@ $(function () {
                 //$(".allComments").html('');
                 
                 var statusid = result[0].StatusID;
-                var commentHtmlId = '#commentForStatus' + statusid.toString();
+                                var commentHtmlId = '#commentForStatus' + statusid.toString();
 
-                
+
 
                 console.log(commentHtmlId);
                 $(commentHtmlId).html('');

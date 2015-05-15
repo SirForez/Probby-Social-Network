@@ -154,22 +154,20 @@
                                     }
                                     
                                     <br />
-                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { id = s.ID }, null)
-                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s, htmlAttributes: null)
-                                    using (Html.BeginForm("UpvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
+                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { statusID = s.ID }, new { @class = "upvoteLink"});
+                                    @using (Html.BeginForm("UpvoteStatus", "Status", FormMethod.Post, new { statusID = s.ID }))
                                     {
-                                        <input type="hidden" name="statusId" value="@s.ID"/>
-                                        <button type="submit" class="btn btn-primary" >Up</button>
+                                        <input type="hidden" name="statusIdForKarma" id="statusIdForKarma" value="@s.ID" />
+                                        <button type="submit" class="btn btn-primary upvoteButton">UP</button>
+                                        @Html.ValidationSummary(false)
                                     }
+                                    <p id="@("karmaDisplay"+s.ID)">@s.Karma</p>
 
-                                    <p>@s.Karma</p>
-
-                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { id = s.ID }, null)
-                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s, htmlAttributes: null)
-                                    using (Html.BeginForm("DownvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
+                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { statusID = s.ID }, new { @class = "downvoteLink" });
+                                    @using (Html.BeginForm("DownvoteStatus", "Status", FormMethod.Post, new { statusID = s.ID }))
                                     {
-                                        <input type="hidden" name="statusId" value="@s.ID" />
-                                        <button type="submit" class="btn btn-primary">Down</button>
+                                        <button type="submit" class="btn btn-primary downvoteButton">UP</button>
+                                        @Html.ValidationSummary(false)
                                     }
 }
 

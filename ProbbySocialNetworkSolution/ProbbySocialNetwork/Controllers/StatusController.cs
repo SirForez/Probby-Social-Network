@@ -224,24 +224,27 @@ namespace ProbbySocialNetwork.Controllers
 			}
 		}
 		
+		[HttpPost]
 		public ActionResult UpvoteStatus(FormCollection collection)
 		{
-			int? statusid = Convert.ToInt32(collection["statusId"]);
+			int? statusid = Convert.ToInt32(collection["statusID"]);
 			var s = statusService.getStatusByID(statusid);
 			
 			//var s = statusService.getStatusByID(statusId);
 			statusService.upvoteStatus(s);
 			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
 			accountService.userGainsKarma(currentUser);
-			
-			string url = this.Request.UrlReferrer.AbsoluteUri;
-			return Redirect(url);
+
+			return Json(s, JsonRequestBehavior.AllowGet);
+			//string url = this.Request.UrlReferrer.AbsoluteUri;
+			//return Redirect(url);
 		}
 
-		public ActionResult DownvoteStatus(FormCollection collection)
+		[HttpPost]
+		public ActionResult DownvoteStatus(int statusID)
 		{
-			int? statusid = Convert.ToInt32(collection["statusId"]);
-			var s = statusService.getStatusByID(statusid);
+			//int? statusid = Convert.ToInt32(collection["statusId"]);
+			var s = statusService.getStatusByID(statusID);
 
 			statusService.downvoteStatus(s);
 			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
