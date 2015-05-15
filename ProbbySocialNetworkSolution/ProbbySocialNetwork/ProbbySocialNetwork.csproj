@@ -162,6 +162,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Connections\ChatMessageConnection.cs" />
     <Compile Include="Connections\UserChatConnection.cs" />
+    <Compile Include="Connections\UserSavedStatusConnection.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\GroupController.cs" />

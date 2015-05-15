@@ -27,7 +27,11 @@
                                 '</div>' +
                                 '<div class="rhsMessage">' +
                                 '<div class="message-body">' +
+                                '<div class="panel panel-default">' +
+                                '<div class="panel-body">' +
                                 data[i].Text +
+                                '</div>' +
+                                '</div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>');

@@ -6,8 +6,8 @@
 
 <div class="container">
     <div class="lhsNav">
-        <h2>@Model.currentGroup.name</h2>
-        <p>@Model.currentGroup.description</p>
+        <h2>@Model.currentGroup.Name</h2>
+        <p>@Model.currentGroup.Description</p>
         @if (Model.currentGroupMembers.Contains(Model.currentUser))
         {
             @Html.ActionLink("Leave Group", "LeaveGroup", "Group", new { id = Model.currentGroup.ID }, new { @class = "leaveGroupButton" })
@@ -69,7 +69,7 @@
                                             <input type="hidden" name="groupID" class="groupID" id="groupID" value="@Model.currentGroup.ID" />
                                             <div class="form-group">
                                                 <label for="groupName" class="control-label">Name of group</label>
-                                                <input type="text" name="groupName" class="form-control" id="groupName" value="@Model.currentGroup.name">
+                                                <input type="text" name="groupName" class="form-control" id="groupName" value="@Model.currentGroup.Name">
                                             </div>
                                             <div class="form-group">
                                                 <select name="groupHobby">
@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="description" class="control-label">Description</label>
-                                                <textarea class="form-control" name="groupDesc" id="description" value="@Model.currentGroup.description"></textarea>
+                                                <textarea class="form-control" name="groupDesc" id="description" value="@Model.currentGroup.Description"></textarea>
                                             </div>
                                         </form>
                                     </div>
