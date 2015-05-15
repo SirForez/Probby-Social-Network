@@ -260,5 +260,20 @@ namespace ProbbySocialNetwork.Models
 
 			return db.SaveChanges() != 1;
 		}
-    }
+
+		internal List<Status> getSavedFeedByUser(ApplicationUser applicationUser)
+		{
+			throw new NotImplementedException();
+		}
+
+		internal void addSavedStatus(Status s, ApplicationUser a)
+		{
+			throw new NotImplementedException();
+		}
+
+		internal void removeSavedStatus(Status s, ApplicationUser a)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

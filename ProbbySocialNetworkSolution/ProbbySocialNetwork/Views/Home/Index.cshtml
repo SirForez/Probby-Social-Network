@@ -41,7 +41,11 @@
                                                 <div class="form-group">
                                                         @foreach (Hobby h in Model.currentUserHobbies)
                                                         {
-                                                                <input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br/>
+                                                            <div class="squaredFour">
+                                                                <input type="checkbox" value="@h.Name" id="squaredFour" name="check" />@h.Name <br/>
+                                                                <label for="squaredFour"></label>
+                                                            </div>
+                                                                @*<input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br/>*@
                                                         }
                                                 </div>
                                                 <div class="form-group">
@@ -154,20 +158,22 @@
                                     }
                                     
                                     <br />
-                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { statusID = s.ID }, new { @class = "upvoteLink"});
-                                    @using (Html.BeginForm("UpvoteStatus", "Status", FormMethod.Post, new { statusID = s.ID }))
+                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { id = s.ID }, null)
+                                    //Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s, htmlAttributes: null)
+                                    using (Html.BeginForm("UpvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
                                     {
-                                        <input type="hidden" name="statusIdForKarma" id="statusIdForKarma" value="@s.ID" />
-                                        <button type="submit" class="btn btn-primary upvoteButton">UP</button>
-                                        @Html.ValidationSummary(false)
+                                        <input type="hidden" name="statusId" value="@s.ID"/>
+                                        <button type="submit" class="btn btn-primary" >Up</button>
                                     }
-                                    <p id="@("karmaDisplay"+s.ID)">@s.Karma</p>
 
-                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { statusID = s.ID }, new { @class = "downvoteLink" });
-                                    @using (Html.BeginForm("DownvoteStatus", "Status", FormMethod.Post, new { statusID = s.ID }))
+                                    <p>@s.Karma</p>
+
+                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { id = s.ID }, null)
+                                    //Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s, htmlAttributes: null)
+                                    using (Html.BeginForm("DownvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
                                     {
-                                        <button type="submit" class="btn btn-primary downvoteButton">UP</button>
-                                        @Html.ValidationSummary(false)
+                                        <input type="hidden" name="statusId" value="@s.ID" />
+                                        <button type="submit" class="btn btn-primary">Down</button>
                                     }
 }
 
@@ -222,9 +228,12 @@
                                         <span> | </span>
                                         @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
                                     }
+                                    
+                                    <span> | </span>
+                                    @Html.ActionLink("Save", "AddStatusToSavedFeed", "Home", new { s = s }, null)
                                 </p>
                             </div>
-                            @*
+                            
                             @if (Model.commentsForStatuses != null)
                             {
                                 <div class="allComments" id='@("commentForStatus" + s.ID)'>
@@ -264,51 +273,6 @@
                             @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                             {
                                 <input type="hidden" name="statusID" id="statusID" value="@s.ID" />
-                                <div class="form-horizontal">
-                                    <label class="sr-only" for="commentText">Status</label>
-                                    <input type="text" class="form-control commentTextbox" id="commentInputBox" name="commentText" placeholder="Write a comment..." />
-                                </div>
-                                @Html.ValidationSummary(false)
-                            }
-                            *@
-                            @if (Model.commentsForStatuses != null)
-                            {
-                                <div class="allComments" id='@("commentforstatus"+s.ID)'>
-                                    @foreach (Comment c in Model.commentsForStatuses)
-                                    {
-                                        if (c.StatusID == s.ID)
-                                        {
-                                            <div class="comment">
-                                                <h5 id='@(" commenttext"+c.ID)' class="commentContent2">@c.Body</h5>
-                                                @using (Html.BeginForm("EditComment", "Status", FormMethod.Post, new { id = c.ID }))
-                                                {
-                                                    <input type="hidden" name="commentId" value="@c.ID" />
-                                                    <div id='@(" commenttextform"+c.ID)' class="editForm">
-                                                        @*need id for textarea to get into controller*@
-                                                        <label for='@(" commenttextbox"+c.ID)'>Comment:</label>
-                                                        <br />
-                                                        <input type="text" name='@(" commenttextbox"+c.ID)' value="@c.Body" />
-                                                        <br />
-                                                        <button type="submit" name="confirm" value="confirm" class="btn btn-primary">Confirm Edit</button>
-                                                        <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
-                                                    </div>
-                                                }
-                                                <a href="/Home/Profile?username=@c.UserName">@c.UserName</a> | @c.DateInserted
-                                                @if (Model.currentUser.Id == c.UserID || Model.currentUser.Id == s.UserID)
-                                                {
-                                                    <span> | </span>
-                                                    <a class="editLink" onclick="editComment(@c.ID)">Edit</a>
-                                                    <span> | </span>
-                                                    @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                                }
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                            }
-                            @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
-                            {
-                                <input type="hidden" name="statusID" value="@s.ID" />
                                 <div class="form-horizontal">
                                     <label class="sr-only" for="commentText">Status</label>
                                     <input type="text" class="form-control commentTextbox" id="commentInputBox" name="commentText" placeholder="Write a comment..." />

@@ -141,5 +141,45 @@ namespace ProbbySocialNetwork.Controllers
 			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 		}
+
+		public ActionResult SavedFeed (ApplicationUser a)
+		{
+			SavedFeedViewModel model = new SavedFeedViewModel();
+
+			model.currentUser = accountService.getUserByName(User.Identity.Name);
+			model.savedStatusHistory = statusService.getSavedFeedByUser(model.currentUser);
+			
+			foreach (Status s in model.savedStatusHistory)
+			{
+                List<Comment> currentCommentList = statusService.getCommentsByStatus(s);
+                foreach(Comment c in currentCommentList)
+                {
+					model.commentsForStatuses.Add(c);
+                }
+            }
+
+
+			return View(model);
+		}
+
+		public ActionResult AddStatusToSavedFeed (Status s)
+		{
+			ApplicationUser a = accountService.getUserByName(User.Identity.Name);
+			
+			statusService.addSavedStatus(s, a);
+			
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
+		}
+
+		public ActionResult RemoveStatusFromSavedFeed (Status s)
+		{
+			ApplicationUser a = accountService.getUserByName(User.Identity.Name);
+			
+			statusService.removeSavedStatus(s, a);
+
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
+		}
     }
 }

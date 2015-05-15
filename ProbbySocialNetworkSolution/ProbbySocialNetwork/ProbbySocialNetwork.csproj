@@ -193,6 +193,7 @@
     <Compile Include="Models\ViewModels\GroupViewModel.cs" />
     <Compile Include="Models\ViewModels\HobbyViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
+    <Compile Include="Models\ViewModels\SavedFeedViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\ChatService.cs" />
