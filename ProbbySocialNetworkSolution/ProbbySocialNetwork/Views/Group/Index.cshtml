@@ -322,21 +322,21 @@
                         </p>
                         @if (Model.commentsForStatuses != null)
                         {
-                            <div class="allComments" id="@(" commentforstatus"+s.ID)">
+                            <div class="allComments" id='@("commentForStatus" + s.ID)'>
                                 @foreach (Comment c in Model.commentsForStatuses)
                                 {
                                     if (c.StatusID == s.ID)
                                     {
                                         <div class="comment">
-                                            <h5 id="@(" commenttext"+c.ID)" class="commentContent2">@c.Body</h5>
+                                            <h5 id='@("commenttext"+c.ID)' class="commentContent2">@c.Body</h5>
                                             @using (Html.BeginForm("EditComment", "Status", FormMethod.Post, new { id = c.ID }))
                                             {
                                                 <input type="hidden" name="commentId" value="@c.ID" />
-                                                <div id="@(" commenttextform"+c.ID)" class="editForm">
+                                                <div id='@(" commenttextform"+c.ID)' class="editForm">
                                                     @*need id for textarea to get into controller*@
-                                                    <label for="@(" commenttextbox"+c.ID)">Comment:</label>
+                                                    <label for='@(" commenttextbox"+c.ID)'>Comment:</label>
                                                     <br />
-                                                    <input type="text" name="@(" commenttextbox"+c.ID)" value="@c.Body" />
+                                                    <input type="text" name='@(" commenttextbox"+c.ID)' value="@c.Body" />
                                                     <br />
                                                     <button type="submit" name="confirm" value="confirm" class="btn btn-primary">Confirm Edit</button>
                                                     <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
