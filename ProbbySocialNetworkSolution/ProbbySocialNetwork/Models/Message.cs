@@ -11,6 +11,7 @@ namespace ProbbySocialNetwork.Models
         //public int ChatID { get; set; }
         public string UserID { get; set; }
         public string UserName { get; set; }
+        public string UserProfilePic { get; set; }
         public System.DateTime DateInserted { get; set; }
         public string Text { get; set; }
     }

@@ -3,7 +3,7 @@ namespace ProbbySocialNetwork.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class nit : DbMigration
+    public partial class t : DbMigration
     {
         public override void Up()
         {
@@ -55,13 +55,13 @@ namespace ProbbySocialNetwork.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        description = c.String(),
-                        hobby_ID = c.Int(),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Hobby_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Hobbies", t => t.hobby_ID)
-                .Index(t => t.hobby_ID);
+                .ForeignKey("dbo.Hobbies", t => t.Hobby_ID)
+                .Index(t => t.Hobby_ID);
             
             CreateTable(
                 "dbo.Hobbies",
@@ -89,6 +89,7 @@ namespace ProbbySocialNetwork.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         UserID = c.String(),
                         UserName = c.String(),
+                        UserProfilePic = c.String(),
                         DateInserted = c.DateTime(nullable: false),
                         Text = c.String(),
                     })
@@ -131,6 +132,7 @@ namespace ProbbySocialNetwork.Migrations
                         MediaURL = c.String(),
                         HobbyID = c.Int(nullable: false),
                         ProfilePic = c.String(),
+                        Karma = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -242,14 +244,14 @@ namespace ProbbySocialNetwork.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Groups", "hobby_ID", "dbo.Hobbies");
+            DropForeignKey("dbo.Groups", "Hobby_ID", "dbo.Hobbies");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Groups", new[] { "hobby_ID" });
+            DropIndex("dbo.Groups", new[] { "Hobby_ID" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
