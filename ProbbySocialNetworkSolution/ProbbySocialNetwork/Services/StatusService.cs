@@ -272,28 +272,49 @@ namespace ProbbySocialNetwork.Models
 			return statuses;
 		}
 
-		public bool addSavedStatus(Status s, ApplicationUser a)
+		public bool savedConnectionExists(UserSavedStatusConnection testCase)
 		{
-			UserSavedStatusConnection connection = new UserSavedStatusConnection();
+			var connection = (from c in db.UserSavedStatusConnections
+							  where (c.UserID == testCase.UserID && c.StatusID == testCase.StatusID)
+							  select c).SingleOrDefault();
+			if (connection == null)
+			{
+				return false;
+			}
 
-			connection.StatusID = s.ID;
-			connection.UserID = a.Id;
-
-			db.UserSavedStatusConnections.Add(connection);
-
-			return db.SaveChanges() != 1;
+			return true;
 		}
 
-		public bool removeSavedStatus(Status s, ApplicationUser a)
+		public void addSavedStatus(Status s, ApplicationUser a)
 		{
 			UserSavedStatusConnection connection = new UserSavedStatusConnection();
 
 			connection.StatusID = s.ID;
 			connection.UserID = a.Id;
 
-			db.UserSavedStatusConnections.Remove(connection);
+			if (savedConnectionExists(connection))
+			{
+				return;
+			}
+			
+			db.UserSavedStatusConnections.Add(connection);
+			db.SaveChanges();
+		}
 
-			return db.SaveChanges() != 1;
+		public UserSavedStatusConnection getUserSavedConnectionByStatusAndUser(Status s, ApplicationUser a)
+		{
+			var connection = (from c in db.UserSavedStatusConnections
+							 where (c.StatusID == s.ID) && (c.UserID == a.Id)
+							 select c).SingleOrDefault();
+			return connection;
+		}
+
+		public void removeSavedStatus(Status s, ApplicationUser a)
+		{
+			UserSavedStatusConnection connection = getUserSavedConnectionByStatusAndUser(s, a);
+
+			db.UserSavedStatusConnections.Remove(connection);
+			db.SaveChanges();
 		}
 	}
 }

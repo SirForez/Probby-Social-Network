@@ -142,7 +142,7 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult SavedFeed ()
+		public ActionResult Saved ()
 		{
 			SavedFeedViewModel model = new SavedFeedViewModel();
 
@@ -157,7 +157,6 @@ namespace ProbbySocialNetwork.Controllers
 					model.commentsForStatuses.Add(c);
                 }
             }
-
 
 			return View(model);
 		}

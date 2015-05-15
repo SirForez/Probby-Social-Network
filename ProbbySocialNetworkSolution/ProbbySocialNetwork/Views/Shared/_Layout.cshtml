@@ -44,7 +44,7 @@
                     @*Html.ActionLink("Notifications", "Notifications", "Home", routeValues: null, htmlAttributes: new { title = "Notifications" })*@
                 </li>-->
                 <li>
-                    @Html.ActionLink("Profile", "Profile", "Home", new { }, null)  
+                    @Html.ActionLink("Profile", "Profile", "Home", new { username = User.Identity.Name }, null)  
                 </li>
                 <li>
                     @Html.ActionLink("Messages", "Chats", "Chat", new { }, null)
