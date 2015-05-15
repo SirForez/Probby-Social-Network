@@ -254,21 +254,6 @@
                                 </div>
                                 @Html.ValidationSummary(false)
                             }
-
-                            @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
-                            {
-                                <input type="hidden" name="userid" value="@Model.currentUser.Id " />
-                                
-                                <div class="form-horizontal">
-                                    <label class="sr-only" for="statusText">Status</label>
-                                    <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Insert a status..."></textarea>
-                                    <span class="appendTo"></span>
-                                    <button type="submit" class="btn btn-primary">Post</button>
-                                </div>
-
-                                @Html.ValidationSummary(false)
-                            }
-
                         </span>
                     </div>
                 }

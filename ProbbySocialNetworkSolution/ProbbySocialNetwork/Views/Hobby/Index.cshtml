@@ -23,7 +23,7 @@
         <h4>Create Status</h4>
         @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
         {
-            <input type="hidden" name="userid" value="@Model.currentUser.Id " />
+            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
             <label>#@Model.currentHobby.Name</label>
             <input type="hidden" name="@Model.currentHobby.Name" value="@Model.currentHobby.Name" />
             <div class="form-horizontal">
@@ -53,7 +53,7 @@
                 <span class="rhsStatus">
                     <div class="statusContent">
                         <!--Status content and edit form for status-->
-                        @if (s.PostedToID != "" && s.PostedToID != s.UserID)
+                        @if (s.PostedToID != "" && s.PostedToID != s.UserID && s.PostedToID != null)
                         {
                             AccountService accountService = ServiceSingleton.GetAccountService;
                             ApplicationUser postedToUser = accountService.getUserByID(s.PostedToID);

@@ -68,7 +68,7 @@ namespace ProbbySocialNetwork.Models
             gConnection.GroupID = g.ID;
             gConnection.UserID = toAdd.Id;
             db.UserGroupConnections.Add(gConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public UserGroupConnection getUserGroupConnection(Group g, ApplicationUser u)
@@ -83,7 +83,7 @@ namespace ProbbySocialNetwork.Models
         {
             UserGroupConnection gConnection = getUserGroupConnection(g, toDel);
             db.UserGroupConnections.Remove(gConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool addAdminToGroup(Group g, ApplicationUser toAdd)
@@ -92,7 +92,7 @@ namespace ProbbySocialNetwork.Models
             gConnection.GroupID = g.ID;
             gConnection.UserID = toAdd.Id;
             db.AdminGroupConnections.Add(gConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public AdminGroupConnection getAdminGroupConnection(Group g, ApplicationUser u)
@@ -107,7 +107,7 @@ namespace ProbbySocialNetwork.Models
         {
             AdminGroupConnection gConnection = getAdminGroupConnection(g, toDel);
             db.AdminGroupConnections.Remove(gConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public List<Group> tagGroupSearch(String tag)

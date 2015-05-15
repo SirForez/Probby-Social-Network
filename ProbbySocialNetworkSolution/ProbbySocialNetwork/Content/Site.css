@@ -18,13 +18,13 @@
     font-weight: bold;
 }
 
-.group, .hobby, .follow, .inGroup, .peopleInGroup, .adminsInGroup {
+.group, .hobby, .follow, .inGroup, .peopleInGroup, .adminsInGroup, .peopleToChat, .createNewChat {
     background: rgba(228, 228, 228, 0.51);
     border-radius: 3px;
     box-shadow: 1px 2px 5px rgba(215, 212, 212, 1);
 }
 
-.group > h2 , .hobby > h2, .follow > h2, .inGroup > h2, .adminsInGroup > h2, .peopleInGroup > h2 {
+.group > h2 , .hobby > h2, .follow > h2, .inGroup > h2, .adminsInGroup > h2, .peopleInGroup > h2, .peopleToChat > h2, .createNewChat > h2 {
     font-weight: bold;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -36,10 +36,9 @@
     color: white;
 }
 
-.groupCreation, .hobbyCreation, #follow-list, .adminsInGroup-list, .peopleInGroup-list {
+.groupCreation, .hobbyCreation, .group-list, .hobby-list, .follow-list, .adminsInGroup-list, .peopleInGroup-list, .peopleToChat-list, .createNewChat-list {
     padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
@@ -277,9 +276,9 @@ ul {
 }
 
 img {
-    max-width: 675px;
+    max-width: 100%;
     height: auto;
-
+    border-radius: 7px;
 }
 
 .searchResultPic {

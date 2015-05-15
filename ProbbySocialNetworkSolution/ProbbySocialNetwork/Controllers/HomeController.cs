@@ -126,6 +126,17 @@ namespace ProbbySocialNetwork.Controllers
 				statusService.editStatusProfilePicture(s, currentUser.ProfilePic);
 			}
 
+			Status automaticProfileUpdateStatus = new Status();
+
+			automaticProfileUpdateStatus.UserName = currentUser.UserName;
+			automaticProfileUpdateStatus.Date = DateTime.Now;
+			automaticProfileUpdateStatus.MediaURL = collection["picLink"];
+			automaticProfileUpdateStatus.Post = currentUser.UserName + " just got a new profile picture!";
+			automaticProfileUpdateStatus.ProfilePic = currentUser.ProfilePic;
+			automaticProfileUpdateStatus.UserID = currentUser.Id;
+
+			statusService.addStatus(automaticProfileUpdateStatus);
+
 			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 		}

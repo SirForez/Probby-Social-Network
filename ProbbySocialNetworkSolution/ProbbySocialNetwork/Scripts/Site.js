@@ -31,14 +31,12 @@ function validateHobby(form) {
 }
 
 function validateGroup(form) {
-
-
     if ($("#groupName").val() == '') {
         alert("You must provide a group name!");
         return false;
     }
 
-    else if ($("#groupName").val().length > 3) {
+    else if ($("#groupName").val().length > 70) {
     
         alert("Group name can not be longer than 70 characters!");
             return false;
@@ -47,7 +45,6 @@ function validateGroup(form) {
     return true;
 
 }
-
 
 function validateHobbiesForStatuses() {
     var checkedAtLeastOne = false;
@@ -61,7 +58,4 @@ function validateHobbiesForStatuses() {
         alert("You must select a hobby");
         return false;
     }
-    return true;
 }
-    
-
