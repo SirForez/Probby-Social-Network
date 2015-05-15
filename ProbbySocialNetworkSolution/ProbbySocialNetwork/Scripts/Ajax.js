@@ -1,9 +1,11 @@
-﻿$(function () {
+﻿/*$(function () {
+    
     $('body').on('keypress', '#commentInputBox', function (e) {
         var keyCode = e.which || e.keyCode;
         if (e.keyCode == 13) {
             alert('yoyoo');
-            var theForm = $(this).parents('form');
+            var theForm = $(this).parent('form');
+            console.log(theForm);
 
             $.ajax({
                 type: 'POST',
@@ -53,7 +55,7 @@
             return false;
         }
     });
-
+    /*
     $('body').on('click', '.editLink', function () {
         
         //alert('testing');
@@ -67,6 +69,7 @@
         }).done(function (result) {
     
         });
-        */
-    });
-})
+        
+});
+ 
+*/

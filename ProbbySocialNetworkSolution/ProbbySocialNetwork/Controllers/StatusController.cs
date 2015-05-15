@@ -161,11 +161,13 @@ namespace ProbbySocialNetwork.Controllers
 			var status = statusService.getStatusByID(c.StatusID);
 			c.StatusUserID = status.UserID;
             statusService.addComment(c);
-
-            var currStatus = statusService.getStatusByID(c.StatusID);
-            var currComments = statusService.getCommentsByStatus(currStatus);
-
-            return Json(currComments, JsonRequestBehavior.AllowGet);
+			
+            //var currStatus = statusService.getStatusByID(c.StatusID);
+            //var currComments = statusService.getCommentsByStatus(currStatus);
+			
+            //return Json(currComments, JsonRequestBehavior.AllowGet);
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
 		}
 
 		public ActionResult EditComment(FormCollection collection)
