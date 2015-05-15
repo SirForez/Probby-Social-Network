@@ -12,7 +12,6 @@ namespace ProbbySocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
-        //FUTURE NOTE: To get current foloower, var UserID = User.Identity.getUserID()
 		public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
 		public AccountService accountService = ServiceSingleton.GetAccountService;
 		public StatusService statusService = ServiceSingleton.GetStatusService;
@@ -20,7 +19,6 @@ namespace ProbbySocialNetwork.Controllers
 		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
         public ChatService chatService = ServiceSingleton.GetChatService;
 
-        // This is the feed
         [Authorize]
         public ActionResult Index()
         {
@@ -44,7 +42,6 @@ namespace ProbbySocialNetwork.Controllers
 				}
 			}
 		    
-			
 			return View(model);
         }
 
@@ -93,13 +90,7 @@ namespace ProbbySocialNetwork.Controllers
             return View(model);
 		}
 
-		public ActionResult Notifications()
-		{
-			ViewBag.Message = "Here you should see your notifications!";
-
-			return View();
-		}
-
+        [Authorize]
 		public ActionResult Search(FormCollection collection)
 		{
             String searchString = collection["searchBar"];
@@ -113,6 +104,7 @@ namespace ProbbySocialNetwork.Controllers
 			return View(model);
 		}
 
+        [Authorize]
 		public ActionResult EditProfilePic(FormCollection collection)
 		{
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
@@ -142,7 +134,8 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
-		public ActionResult Saved ()
+        [Authorize]
+		public ActionResult Saved()
 		{
 			SavedFeedViewModel model = new SavedFeedViewModel();
 
@@ -162,6 +155,7 @@ namespace ProbbySocialNetwork.Controllers
 			return View(model);
 		}
 
+        [Authorize]
 		public ActionResult AddStatusToSavedFeed (int id)
 		{
 			Status s = statusService.getStatusByID(id);
@@ -174,6 +168,7 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
 		}
 
+        [Authorize]
 		public ActionResult RemoveStatusFromSavedFeed (int id)
 		{
 			Status s = statusService.getStatusByID(id);

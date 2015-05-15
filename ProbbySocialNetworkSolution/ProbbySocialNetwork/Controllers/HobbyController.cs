@@ -39,6 +39,7 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult CreateHobby(FormCollection collection)
         {
             Hobby h = new Hobby();
@@ -53,6 +54,7 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
         }
 
+        [Authorize]
         public ActionResult AddHobby(int? id)
         {
             if (id.HasValue)
@@ -72,6 +74,7 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult RemoveHobby(int? id)
         {
             if (id.HasValue)
@@ -89,12 +92,6 @@ namespace ProbbySocialNetwork.Controllers
             {
                 return View("Error");
             }
-        }
-
-        public ActionResult Search()
-        {
-            //TODO: Implement
-            return View();
         }
     }
 }

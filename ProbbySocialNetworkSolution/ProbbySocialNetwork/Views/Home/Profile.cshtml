@@ -4,14 +4,11 @@
     ViewBag.Title = "Profile";
 }
 
-
-
 <div class="container nw">
     <div class="lhsNav">
     <img src="@Model.profileOwner.ProfilePic" class="profilePic">
         @if (Model.currentUser.Id == Model.profileOwner.Id)
         {
-
             <button class="changeProfilePic">Change profile picture</button>
             <div id="hideChangePic">
                 @using (Html.BeginForm("EditProfilePic", "Home", FormMethod.Post, new { id = "profilePictureForm" }))
@@ -22,11 +19,9 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     @Html.ValidationSummary(false)
-
                 }
             </div>
         }
-
         <h4>@Model.profileOwner.UserName's Profile</h4>
         <p> @Model.profileOwner.UserName's Total Karma: @Model.profileOwner.Karma</p>
         @if (Model.profileOwner.UserName != Model.currentUser.UserName)
@@ -124,13 +119,10 @@
                             </p>
                             <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
 
-                            @{
-                            //Put this in the viewmodel!!!
-
+                            @{ //404 ERROR: No better way to do this found
                             ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
                             HobbyService service = ServiceSingleton.GetHobbyService;
                             List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
-
 
                             foreach (Hobby h in statusHobbies)
                             {
@@ -143,13 +135,11 @@
                     <span class="rhsStatus">
                         <div class="allStatus">
                             <div class="statusContent">
-                                <!--Status content and edit form for status-->
                                 <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
                                 @using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID }))
                                 {
                                     <input type="hidden" name="statusId" value="@s.ID" />
                                     <div id="@("statusTextForm"+s.ID)" class="editForm">
-                                        @*need id for textarea to get into controller*@
                                         <label for="@("statusTextbox"+s.ID)">Status:</label>
                                         <input type="text" name="@("statusTextbox"+s.ID)" value="@s.Post" />
                                         <br />
@@ -163,33 +153,25 @@
                                         <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
                                     </div>
                                 }
-
-                                <!--img status and edit form for img url-->
                                 @if (s.MediaURL != null)
                                 {
                                     <img src="@s.MediaURL" alt="image" class="statusContent2" id="@("statusPic"+s.ID)" />
                                 }
                             </div>
-
-                            <!--edit and remove links-->
                             <p>
                                 @s.Date
                                 @if (Model.currentUser.Id == s.UserID)
                                 {
-                                <!--onclick it will hide status content and show edit form-->
                                     <span> | </span>
                                     <a class="editLink" onclick="editStatus(@s.ID)">Edit</a>
                                     <span> | </span>
-    
                                     @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
 
                                 }
-                                
                                 <span> | </span>
                                 @Html.ActionLink("Save", "AddStatusToSavedFeed", "Home", new { id = s.ID }, null)
                             </p>
                         </div>
-                            
                             @if (Model.commentsForStatuses != null)
                             {
                                 <div class="allComments" id='@("commentForStatus"+s.ID)'>
@@ -203,7 +185,6 @@
                                                 {
                                                     <input type="hidden" name="commentId" value="@c.ID" />
                                                     <div id="@("commenttextform"+c.ID)" class="editForm">
-                                                        @*need id for textarea to get into controller*@
                                                         <label for="@(" commenttextbox"+c.ID)">Comment:</label>
                                                         <br />
                                                         <input type="text" name="@(" commenttextbox"+c.ID)" value="@c.Body" />
@@ -225,7 +206,6 @@
                                     }
                                 </div>
                             }
-
                             @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                             {
                                 <input type="hidden" name="statusID" value="@s.ID" />

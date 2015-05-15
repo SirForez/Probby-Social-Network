@@ -6,11 +6,6 @@ using System.Web;
 
 namespace ProbbySocialNetwork.Models
 {
-    public class StatusComparer
-    {
-
-    }
-
     public class StatusService
     {
         ApplicationDbContext db = null;
@@ -84,7 +79,7 @@ namespace ProbbySocialNetwork.Models
 			}
 
 			var statuses = (from s in db.Statuses
-							where (((a.Id == s.UserID) && (s.GroupID == null)) /*|| (a.Id == s.PostedToID)*/)
+							where ((a.Id == s.UserID) && (s.GroupID == null))
 							orderby s.Date descending
 							select s).ToList();
 
@@ -174,8 +169,6 @@ namespace ProbbySocialNetwork.Models
             Status s = getStatusByID(edited.ID);
             if (s != null)
             {
-                //NOTE: Do hobbies on statuses need ever to be edited?
-                //If so: TODO: implement hobby status editing
                 s.Date = edited.Date;
                 s.Post = edited.Post;
                 s.MediaURL = edited.MediaURL;
@@ -202,7 +195,6 @@ namespace ProbbySocialNetwork.Models
             return db.SaveChanges() != 0;
         }
 
-        //NOTE: Should this not be in the hobby service? Think about moving it there.
         public Hobby getHobbyFromTag(String tag)
         {
             var hobby = (from h in db.Hobbies
@@ -245,21 +237,21 @@ namespace ProbbySocialNetwork.Models
 		{
 			s.ProfilePic = link;
 
-			return db.SaveChanges() != 1;
+			return db.SaveChanges() != 0;
 		}
 
 		public bool upvoteStatus(Status s)
 		{
 			s.Karma++;
 
-			return db.SaveChanges() != 1;
+			return db.SaveChanges() != 0;
 		}
 
 		public bool downvoteStatus(Status s)
 		{
 			s.Karma--;
 
-			return db.SaveChanges() != 1;
+			return db.SaveChanges() != 0;
 		}
 
 		public List<Status> getSavedFeedByUser(ApplicationUser a)

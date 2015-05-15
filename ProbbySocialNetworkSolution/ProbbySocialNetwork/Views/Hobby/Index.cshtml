@@ -17,8 +17,6 @@
         }
     </div>
     <div class="theContent">
-        <!--breyta i html helper-->
-
     <section>
         <h4>Create Status</h4>
         @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
@@ -73,9 +71,7 @@
                         </p>
                         <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
 
-                        @{
-                            //Put this in the viewmodel!!!
-
+                        @{ //404 ERROR: No better way to do this found
                             ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
                             HobbyService service = ServiceSingleton.GetHobbyService;
                             List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
@@ -92,7 +88,7 @@
                     <div class="statusContent">
                         <!--Status content and edit form for status-->
                         @if (s.PostedToID != "" && s.PostedToID != s.UserID && s.PostedToID != null)
-                        {
+                        { //404 ERROR: No better way to do this found
                             AccountService accountService = ServiceSingleton.GetAccountService;
                             ApplicationUser postedToUser = accountService.getUserByID(s.PostedToID);
                             <p>Posted to <a href="/Home/Profile?username=@postedToUser.UserName">@postedToUser.UserName</a>'s profile</p>
@@ -102,7 +98,6 @@
                         {
                             <input type="hidden" name="statusId" value="@s.ID" />
                             <div id="@("statusTextForm"+s.ID)" class="editForm">
-                                @*need id for textarea to get into controller*@
                                 <input type="text" name="@("statusTextbox"+s.ID)" value="@s.Post" />
                                 @if (s.MediaURL != null)
                                 {
@@ -112,20 +107,16 @@
                                 <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
                             </div>
                         }
-
-                        <!--img status and edit form for img url-->
                         @if (s.MediaURL != null)
                         {
                             <img src="@s.MediaURL" alt="image" class="statusContent2" id="@("statusPic"+s.ID)" />
                         }
                     </div>
-                    <!--edit and remove links-->
                     <p>
                         @s.Date 
                         @if (Model.currentUser.Id == s.UserID)
                         {
                             <span> | </span>
-                                    <!--onclick it will hide status content and show edit form-->
                             <a href="#" class="editLink" onclick="editStatus(@s.ID)">Edit</a>
                             <span> | </span>
                             @Html.ActionLink("Remove", "RemoveStatus", "Status", new { id = s.ID }, null)
@@ -147,7 +138,6 @@
                                         {
                                             <input type="hidden" name="commentId" value="@c.ID" />
                                             <div id="@("commentTextForm"+c.ID)" class="editForm">
-                                                @*need id for textarea to get into controller*@
                                                 <label for="@("commentTextbox"+c.ID)">Comment:</label>
                                                 <br />
                                                 <input type="text" name="@("commentTextbox"+c.ID)" value="@c.Body" />
@@ -169,7 +159,6 @@
                             }
                         </div>
                     }
-
                     @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                     {
                         <input type="hidden" name="statusID" value="@s.ID" />

@@ -16,10 +16,6 @@ namespace ProbbySocialNetwork.Models
         public string ProfilePic { get; set; }
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }
-        //public virtual ICollection<UserConnection> Followers { get; set; }
-        //public virtual ICollection<UserConnection> Followings { get; set; }
-        //public virtual ICollection<Hobby> Hobbies { get; set; }
-        //public virtual ICollection<Group> Groups { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -38,7 +34,6 @@ namespace ProbbySocialNetwork.Models
 		public DbSet<Status> Statuses { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Message> Messages { get; set; }
-        //public DbSet<Message> ChatMessages { get; set; }
         public DbSet<AdminGroupConnection> AdminGroupConnections { get; set; }
         public DbSet<HobbyGroupConnection> HobbyGroupConnections { get; set; }
         public DbSet<StatusHobbyConnection> StatusHobbyConnections { get; set; }
@@ -48,8 +43,6 @@ namespace ProbbySocialNetwork.Models
         public DbSet<UserChatConnection> UserChatConnections { get; set; }
         public DbSet<ChatMessageConnection> ChatMessageConnections { get; set; }
 		public DbSet<UserSavedStatusConnection> UserSavedStatusConnections { get; set; }
-		//public DbSet<ApplicationUser> Users { get; set; }
-		//public DbSet<UserConnection> UserConnections { get; set; }
 		
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

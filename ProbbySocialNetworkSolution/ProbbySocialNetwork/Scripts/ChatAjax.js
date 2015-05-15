@@ -12,9 +12,7 @@
 
                 console.log(result);
 
-                //this clear the messagelist
                 $('#messageList').html('');
-                //this returns the new messages
                 for (var i = 0; i < result.length; i++) {
                     $('#messageList').append('<div class="messageWrapper">' +
                                 '<div class="lhsMessage">' +
@@ -38,12 +36,8 @@
                 }
 
                 $('#messageText').val("");
-                //$('#messageText').attr('value', '');
-                //$('#messageText').html('');
-                //document.getElementById('#messageText').value = "";
 
             }).fail(function () {
-                //alert('Villa kom upp!');
             });
             return false;
         }

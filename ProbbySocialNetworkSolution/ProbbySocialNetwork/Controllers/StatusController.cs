@@ -21,11 +21,10 @@ namespace ProbbySocialNetwork.Controllers
         // GET: Status
         public ActionResult Index()
         {
-
-            //TODO: Implement
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CreateStatus(FormCollection collection, string id, int? groupID)
         {
@@ -63,8 +62,6 @@ namespace ProbbySocialNetwork.Controllers
                 s.PostedToID = collection["PostedToID"];
             }
 
-            //ApplicationUser a = accountService.getUserByName(User.Identity.Name);
-            //s.UserID = a.Id;
             statusService.addStatus(s);
 
             if (groupID == null)
@@ -96,6 +93,7 @@ namespace ProbbySocialNetwork.Controllers
             return Redirect(url);
         }
 
+        [Authorize]
         public ActionResult EditStatus(FormCollection collection)
         {
             string url = this.Request.UrlReferrer.AbsoluteUri;
@@ -130,6 +128,7 @@ namespace ProbbySocialNetwork.Controllers
 
         }
 
+        [Authorize]
         public ActionResult RemoveStatus(int? id)
         {
             if (id != null)
@@ -146,30 +145,10 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CreateComment(FormCollection collection)
         {
-            /*
-            Comment c = new Comment();
-            c.Body = collection["commentText"];
-            c.DateInserted = DateTime.Now;
-            c.UserID = User.Identity.GetUserId();
-            c.UserName = User.Identity.Name;
-            var i = collection["statusID"];
-            c.StatusID = Convert.ToInt32(collection["statusID"]);
-            c.CurrentLogedinUser = User.Identity.GetUserId();
-
-            var status = statusService.getStatusByID(c.StatusID);
-            c.StatusUserID = status.UserID;
-            statusService.addComment(c);
-			
-            //var currStatus = statusService.getStatusByID(c.StatusID);
-            //var currComments = statusService.getCommentsByStatus(currStatus);
-			
-            //return Json(currComments, JsonRequestBehavior.AllowGet);
-            string url = this.Request.UrlReferrer.AbsoluteUri;
-            return Redirect(url);
-             */
             Comment c = new Comment();
             c.Body = collection["commentText"];
             c.DateInserted = DateTime.Now;
@@ -181,16 +160,12 @@ namespace ProbbySocialNetwork.Controllers
             var status = statusService.getStatusByID(c.StatusID);
             c.StatusUserID = status.UserID;
             statusService.addComment(c);
-
-            /*var currStatus = statusService.getStatusByID(c.StatusID);
-            var currComments = statusService.getCommentsByStatus(currStatus);
-
-            return Json(currComments, JsonRequestBehavior.AllowGet);*/
 
             string url = this.Request.UrlReferrer.AbsoluteUri;
             return Redirect(url);
         }
 
+        [Authorize]
         public ActionResult EditComment(FormCollection collection)
         {
             int? id = Convert.ToInt32(collection["commentId"]);
@@ -215,6 +190,7 @@ namespace ProbbySocialNetwork.Controllers
             return Redirect(url);
         }
 
+        [Authorize]
         public ActionResult RemoveComment(int? id)
         {
             if (id != null)
@@ -231,26 +207,25 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult UpvoteStatus(FormCollection collection)
         {
             int? statusid = Convert.ToInt32(collection["statusID"]);
             var s = statusService.getStatusByID(statusid);
 
-            //var s = statusService.getStatusByID(statusId);
             statusService.upvoteStatus(s);
             ApplicationUser currentUser = accountService.getUserByID(s.UserID);
             accountService.userGainsKarma(currentUser);
 
-            //return Json(s, JsonRequestBehavior.AllowGet);
             string url = this.Request.UrlReferrer.AbsoluteUri;
             return Redirect(url);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult DownvoteStatus(int statusID)
         {
-            //int? statusid = Convert.ToInt32(collection["statusId"]);
             var s = statusService.getStatusByID(statusID);
 
             statusService.downvoteStatus(s);

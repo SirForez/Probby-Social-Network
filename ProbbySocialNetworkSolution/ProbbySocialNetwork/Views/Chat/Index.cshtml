@@ -41,7 +41,6 @@
     <div class="theContent">
         <div class="rhsMessages">
             <h2>Your chat with @Model.otherUser.UserName</h2>
-            <!--breyta i html helper-->
             <section>
                 @using (Html.BeginForm("PostMessage", "Chat", new { chatID = Model.chat.ID }, FormMethod.Post, new { id = "chatForm" }))
                 {
@@ -89,14 +88,11 @@
             var url = "@Url.Action("GetMessages", "Chat", new { chatID = Model.chat.ID })";
             $('document').ready(function () {
                 function refresh() {
-                    //NOTE: Find a better fix, you trifiling gnome.
-                    //Otherwise your arrogance will be your undoing.
-                    //if ($("#messageText").focusout) {
                         $.ajax({
                             type: 'GET',
                             url: url,
                             success: function (data) {
-                //                console.log(data);
+                                //console.log(data);
                                 //this clear the messagelist
                                 $('#messageList').html('');
                                 //this returns the new messages
@@ -122,10 +118,8 @@
                                 '</div>' +
                                 '</div>');
                                 }
-                                //alert(data);
                             }
                         })
-                    //}
                 }
                 var t = setInterval(refresh, 500);
             });

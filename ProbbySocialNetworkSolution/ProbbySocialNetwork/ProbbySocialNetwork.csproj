@@ -189,7 +189,6 @@
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\ViewModels\ChatListViewModel.cs" />
     <Compile Include="Models\ViewModels\ChatViewModel.cs" />
-    <Compile Include="Models\ViewModels\CommentAjax.cs" />
     <Compile Include="Models\ViewModels\FeedViewModel.cs" />
     <Compile Include="Models\ViewModels\GroupViewModel.cs" />
     <Compile Include="Models\ViewModels\HobbyViewModel.cs" />
@@ -214,14 +213,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\feed.css" />
     <Content Include="Content\Images\dabs.jpg" />
     <Content Include="Content\Images\taco.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\Ajax.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

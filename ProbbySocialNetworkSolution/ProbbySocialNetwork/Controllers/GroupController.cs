@@ -44,6 +44,7 @@ namespace ProbbySocialNetwork.Controllers
             return View(model);
         }
 
+        [Authorize]
 		[HttpPost]
         public ActionResult CreateGroup(FormCollection collection)
         {
@@ -70,6 +71,7 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
         }
 
+        [Authorize]
 		public ActionResult JoinGroup(int? id)
 		{
             if (id.HasValue)
@@ -88,6 +90,7 @@ namespace ProbbySocialNetwork.Controllers
             }
 		}
 
+        [Authorize]
         public ActionResult EditGroup(FormCollection collection)
         {
             int groupID = Int32.Parse(collection["groupID"]);
@@ -103,6 +106,7 @@ namespace ProbbySocialNetwork.Controllers
             return Redirect(url);
         }
 
+        [Authorize]
         public ActionResult LeaveGroup(int? id)
         {
             if (id.HasValue)
@@ -121,6 +125,7 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult DeleteGroup(int? id)
         {
             if (id.HasValue)
@@ -137,6 +142,7 @@ namespace ProbbySocialNetwork.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult AssignAdmin(FormCollection collection)
         {
             int groupID = Int32.Parse(collection["groupID"]);
@@ -150,6 +156,7 @@ namespace ProbbySocialNetwork.Controllers
 			return Redirect(url);
         }
 
+        [Authorize]
         public ActionResult RemoveAdmin(FormCollection collection)
         {
             int groupID = Int32.Parse(collection["groupID"]);
@@ -163,19 +170,7 @@ namespace ProbbySocialNetwork.Controllers
             return Redirect(url);
         }
 
-        //Do not need this yet, until we implement notifications (if we do)
-        /*public ActionResult AddUser(FormCollection collection)
-        {
-            int groupID = Int32.Parse(collection["groupID"]);
-            Group g = groupService.getGroupByID(groupID);
-            ApplicationUser a = accountService.getUserByName(collection["userName"]);
-
-            groupService.addUserToGroup(g, a);
-
-            string url = this.Request.UrlReferrer.AbsoluteUri;
-            return Redirect(url);
-        }*/
-
+        [Authorize]
         public ActionResult RemoveUser(FormCollection collection)
         {
             int groupID = Int32.Parse(collection["groupID"]);
@@ -186,12 +181,6 @@ namespace ProbbySocialNetwork.Controllers
 
             string url = this.Request.UrlReferrer.AbsoluteUri;
             return Redirect(url);
-        }
-
-        public ActionResult Search()
-        {
-            //TODO: Implement
-            return View();
         }
     }
 }

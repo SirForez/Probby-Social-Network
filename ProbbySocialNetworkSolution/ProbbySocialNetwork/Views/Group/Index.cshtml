@@ -167,40 +167,6 @@
                         </div>
                         @Html.ValidationSummary(false)
                     }
-                    @* //We do not need this, at least until we add notifications
-                        @using (Html.BeginForm("AddUser", "Group", FormMethod.Post, new { id = "addUserToGroupForm" }))
-                        {
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeAdmin" data-whatever="">Remove admin privileges</button>
-                            <div class="modal fade" id="removeAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Remove admin privileges</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <input type="hidden" name="groupID" class="groupID" id="groupID" value="@Model.currentGroup.ID" />
-                                                <div class="form-group">
-                                                    <select name="userName">
-                                                        @foreach (ApplicationUser a in Model.currentGroupAdmins)
-                                                        {
-                                                            <option value="@a.UserName">@a.UserName</option>
-                                                        }
-                                                    </select>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Assign</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @Html.ValidationSummary(false)
-                        }
-                    *@
                     @using (Html.BeginForm("RemoveUser", "Group", FormMethod.Post, new { id = "removeUserFromGroupForm" }))
                     {
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeUser" data-whatever="">Remove user</button>
@@ -239,7 +205,6 @@
 
     </div>
     <div class="theContent">
-        <!--breyta i html helper-->
         <section>
             @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm", groupID = Model.currentGroup.ID }))
             {
@@ -295,9 +260,7 @@
                             </p>
                             <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
 
-                            @{
-                            //Put this in the viewmodel!!!
-
+                            @{ //404 ERROR: no better way to do this found.
                             ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
                             HobbyService service = ServiceSingleton.GetHobbyService;
                             List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
@@ -313,13 +276,11 @@
                     </div>
                     <div class="rhsStatus">
                         <div class="statusContent">
-                            <!--Status content and edit form for status-->
                             <h3 id="@("statusText"+s.ID)" class="statusContent2">@s.Post</h3>
                             @using (Html.BeginForm("EditStatus", "Status", FormMethod.Post, new { id = s.ID }))
                             {
                                 <input type="hidden" name="statusId" value="@s.ID" />
                                 <div id="@("statusTextForm"+s.ID)" class="editForm">
-                                    @*need id for textarea to get into controller*@
                                     <input type="text" name="@("statusTextbox"+s.ID)" value="@s.Post" />
                                     @if (s.MediaURL != null)
                                     {
@@ -329,19 +290,15 @@
                                     <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
                                 </div>
                             }
-
-                            <!--img status and edit form for img url-->
                             @if (s.MediaURL != null)
                             {
                                 <img src="@s.MediaURL" alt="image" class="statusContent2" id="@("statusPic"+s.ID)" />
                             }
                         </div>
-                        <!--edit and remove links-->
                         <p>
                             @s.Date
                             @if (Model.currentUser.Id == s.UserID || Model.currentGroupAdmins.Contains(Model.currentUser))
                             {
-                                    <!--onclick it will hide status content and show edit form-->
                                 <span> | </span>
                                 <a href="#" class="editLink" onclick="editStatus(@s.ID)">Edit</a>
                                 <span> | </span>
@@ -364,7 +321,6 @@
                                             {
                                                 <input type="hidden" name="commentId" value="@c.ID" />
                                                 <div id='@(" commenttextform"+c.ID)' class="editForm">
-                                                    @*need id for textarea to get into controller*@
                                                     <label for='@(" commenttextbox"+c.ID)'>Comment:</label>
                                                     <br />
                                                     <input type="text" name='@(" commenttextbox"+c.ID)' value="@c.Body" />

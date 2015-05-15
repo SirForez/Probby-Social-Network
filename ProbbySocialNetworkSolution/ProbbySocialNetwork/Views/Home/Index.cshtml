@@ -45,7 +45,6 @@
                                                                 <input type="checkbox" value="@h.Name" id="squaredFour" name="@h.Name" />@h.Name <br/>
                                                                 <label for="squaredFour"></label>
                                                             </div>
-                                                                @*<input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br/>*@
                                                         }
                                                 </div>
                                                 <div class="form-group">
@@ -111,8 +110,6 @@
             </div>
         </div>
         <div class="theContent">
-            <!--breyta i html helper-->
-
             <section>
                 @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
                 {
@@ -132,7 +129,6 @@
                 }
                 <button class="onClick">Upload image</button>
             </section>
-
             @using ProbbySocialNetwork.Models
             <section id="statusList">
                 @foreach (Status s in Model.newestStatuses)
@@ -166,13 +162,10 @@
                                 </p>
                                 <p class="postUserName"><a href="/Home/Profile?username=@s.UserName">@s.UserName</a></p>
 
-                                @{
-                                //Put this in the viewmodel!!!
-
+                                @{ //404 ERROR: No better way to do this found
                                 ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
                                 HobbyService service = ServiceSingleton.GetHobbyService;
                                 List<Hobby> statusHobbies = service.getHobbiesByStatus(s);
-
 
                                 foreach (Hobby h in statusHobbies)
                                 {
@@ -186,10 +179,8 @@
                         <span class="rhsStatus">
                             <div class="allStatus">
                                 <div class="statusContent">
-                                    <!--Status content and edit form for status-->
-
                                     @if (s.PostedToID != "" && s.PostedToID != null && s.PostedToID != s.UserID)
-                                    {
+                                    { //404 ERROR: No better way to do this found
                                         AccountService accountService = ServiceSingleton.GetAccountService;
                                         ApplicationUser postedToUser = accountService.getUserByID(s.PostedToID);
                                         <p>Posted to <a href="/Home/Profile?username=@postedToUser.UserName">@postedToUser.UserName</a>'s profile</p>
@@ -200,7 +191,6 @@
                                     {
                                         <input type="hidden" name="statusId" value="@s.ID" />
                                         <div id="@("statusTextForm"+s.ID)" class="editForm">
-                                            @*need id for textarea to get into controller*@
                                             <label for="@("statusTextbox"+s.ID)">Status:</label>
                                             <input type="text" name="@("statusTextbox"+s.ID)" value="@s.Post" />
                                             <br />
@@ -214,20 +204,16 @@
                                             <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
                                         </div>
                                     }
-
-                                    <!--img status and edit form for img url-->
                                     @if (s.MediaURL != null)
                                     {
                                         <img src="@s.MediaURL" alt="image" class="statusContent2" id="@("statusPic"+s.ID)" />
                                     }
                                 </div>
-                                <!--edit and remove links-->
                                 <p>
 
                                     @s.Date
                                     @if (Model.currentUser.Id == s.UserID)
                                     {
-                                    <!--onclick it will hide status content and show edit form-->
                                         <span> | </span>
                                         <a class="editLink" onclick="editStatus(@s.ID)">Edit</a>
                                         <span> | </span>
@@ -252,7 +238,6 @@
                                                 {
                                                     <input type="hidden" name="commentId" value="@c.ID" />
                                                     <div id='@(" commenttextform"+c.ID)' class="editForm">
-                                                        <!--need id for textarea to get into controller-->
                                                         <label for='@(" commenttextbox"+c.ID)'>Comment:</label>
                                                         <br />
                                                         <input type="text" name='@(" commenttextbox"+c.ID)' value="@c.Body" />
@@ -274,7 +259,6 @@
                                     }
                                 </div>
                             }
-
                             @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                             {
                                 <input type="hidden" name="statusID" id="statusID" value="@s.ID" />

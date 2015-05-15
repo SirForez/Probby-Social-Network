@@ -24,7 +24,6 @@ namespace ProbbySocialNetwork
                       "~/Scripts/respond.js",
 					  "~/Scripts/EditStatus.js",
 					  "~/Scripts/Site.js",
-                      "~/Scripts/Ajax.js", 
 					  "~/Scripts/ChatAjax.js",
 					  "~/Scripts/KarmaAjax.js"));
 

@@ -81,6 +81,7 @@ namespace ProbbySocialNetwork.Controllers
 			return Json(currMessages, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public ActionResult CreateChat(string username)
         {
             Chat c = new Chat();
