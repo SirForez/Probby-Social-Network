@@ -68,12 +68,27 @@ namespace ProbbySocialNetwork.Models
 			}
 			
 			var statuses = (from s in db.Statuses
-                            where (((a.Id == s.UserID) && (s.GroupID == null)) /*|| (a.Id == s.PostedToID)*/)
+                            where (((a.Id == s.UserID) && (s.GroupID == null)) || (a.Id == s.PostedToID))
                             orderby s.Date descending
                             select s).ToList();
 
             return statuses;
         }
+
+		public List<Status> getStatusesByUserForEditProfilePic(ApplicationUser a)
+		{
+			if (a == null)
+			{
+				return null;
+			}
+
+			var statuses = (from s in db.Statuses
+							where (((a.Id == s.UserID) && (s.GroupID == null)) /*|| (a.Id == s.PostedToID)*/)
+							orderby s.Date descending
+							select s).ToList();
+
+			return statuses;
+		}
 
 		public List<Status> getStatusesByHobby(Hobby h)
 		{
@@ -118,7 +133,7 @@ namespace ProbbySocialNetwork.Models
             sConnection.StatusID = s.ID;
             sConnection.HobbyID = toAdd.ID;
             db.StatusHobbyConnections.Add(sConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool removeHobbyFromStatus(Status s, Hobby toDel)
@@ -127,7 +142,7 @@ namespace ProbbySocialNetwork.Models
             sConnection.StatusID = s.ID;
             sConnection.HobbyID = toDel.ID;
             db.StatusHobbyConnections.Remove(sConnection);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public List<Status> getGroupStatusHistory(Group g)
@@ -150,7 +165,7 @@ namespace ProbbySocialNetwork.Models
         public bool addStatus(Status s)
         {
             db.Statuses.Add(s);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool editStatus(Status edited)
@@ -163,7 +178,7 @@ namespace ProbbySocialNetwork.Models
                 s.Date = edited.Date;
                 s.Post = edited.Post;
                 s.MediaURL = edited.MediaURL;
-                return db.SaveChanges() != 1;
+                return db.SaveChanges() != 0;
             }
             return false;
         }
@@ -171,19 +186,19 @@ namespace ProbbySocialNetwork.Models
         public bool addComment(Comment toAdd)
         {
             db.Comments.Add(toAdd);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool removeStatus(Status toDel)
         {
             db.Statuses.Remove(toDel);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool removeComment(Comment toDel)
         {
             db.Comments.Remove(toDel);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         //NOTE: Should this not be in the hobby service? Think about moving it there.
@@ -220,7 +235,7 @@ namespace ProbbySocialNetwork.Models
             {
                 c.Body = edited.Body;
                 c.DateInserted = edited.DateInserted;
-                return db.SaveChanges() != 1;
+                return db.SaveChanges() != 0;
             }
             return false;
         }

@@ -61,6 +61,7 @@ namespace ProbbySocialNetwork.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeEmailSuccess ? "Your email has been changed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -242,6 +243,33 @@ namespace ProbbySocialNetwork.Controllers
             return View(model);
         }
 
+        public AccountService accountService = ServiceSingleton.GetAccountService;
+
+        //
+        // GET: /Manage/ChangePassword
+        public ActionResult ChangeEmail()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeEmail(ChangeEmailViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            
+            if (accountService.changeEmail(User.Identity.GetUserId(), model.OldEmail, model.NewEmail))
+            {
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangeEmailSuccess });
+            }
+            return View(model);
+        }
+
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
@@ -375,6 +403,7 @@ namespace ProbbySocialNetwork.Controllers
         {
             AddPhoneSuccess,
             ChangePasswordSuccess,
+            ChangeEmailSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,

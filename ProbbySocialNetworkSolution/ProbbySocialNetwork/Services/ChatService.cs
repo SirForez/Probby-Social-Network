@@ -85,7 +85,7 @@ namespace ProbbySocialNetwork.Services
         public bool AddUserChatConnection(UserChatConnection uc)
         {
             db.UserChatConnections.Add(uc);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool AddUserToChat(Chat c, ApplicationUser toAdd)
@@ -94,7 +94,7 @@ namespace ProbbySocialNetwork.Services
             uc.ChatID = c.ID;
             uc.UserID = toAdd.Id;
             db.UserChatConnections.Add(uc);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool AddMessageToChat(Chat c, Message toAdd)
@@ -103,31 +103,31 @@ namespace ProbbySocialNetwork.Services
             cm.ChatID = c.ID;
             cm.MessageID = toAdd.ID;
             db.ChatMessageConnections.Add(cm);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool AddChat(Chat c)
         {
             db.Chats.Add(c);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool RemoveChat(Chat c)
         {
             db.Chats.Remove(c);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool AddMessage(Message m)
         {
             db.Messages.Add(m);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
 
         public bool RemoveMessage(Message m)
         {
             db.Messages.Remove(m);
-            return db.SaveChanges() != 1;
+            return db.SaveChanges() != 0;
         }
     }
 }
