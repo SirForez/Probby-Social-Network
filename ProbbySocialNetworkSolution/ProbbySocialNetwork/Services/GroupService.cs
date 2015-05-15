@@ -33,9 +33,9 @@ namespace ProbbySocialNetwork.Models
             var group = getGroupByID(edited.ID);
             if (group != null)
             {
-                group.description = edited.description;
-                group.hobby = edited.hobby;
-                group.name = edited.name;
+                group.Description = edited.Description;
+                group.Hobby = edited.Hobby;
+                group.Name = edited.Name;
 
                 //We do not know if this works, must test:
                 var users = getUsersByGroup(group);
@@ -57,7 +57,7 @@ namespace ProbbySocialNetwork.Models
         public List<Group> groupSearch(String searchString)
         {
             var groups = (from g in db.Groups
-                          where g.name.Contains(searchString)
+                          where g.Name.Contains(searchString)
                           select g).ToList();
             return groups;
         }
@@ -113,7 +113,7 @@ namespace ProbbySocialNetwork.Models
         public List<Group> tagGroupSearch(String tag)
         {
             var groups = (from g in db.Groups
-                          where g.hobby.Name == tag
+                          where g.Hobby.Name == tag
                           select g).ToList();
             return groups;
         }

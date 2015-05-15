@@ -156,7 +156,12 @@
                                     {
                                         @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
                                     }
-                            }
+                                    
+                                    @Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s)
+                                    
+                                    <p>@s.Karma</p>
+                                    
+                                    @Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s)
 
                         </div>
                         <span class="rhsStatus">

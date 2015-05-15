@@ -240,11 +240,25 @@ namespace ProbbySocialNetwork.Models
             return false;
         }
 
-		public void editStatusProfilePicture(Status s, string link)
+		public bool editStatusProfilePicture(Status s, string link)
 		{
 			s.ProfilePic = link;
 
-			db.SaveChanges();
+			return db.SaveChanges() != 1;
+		}
+
+		public bool upvoteStatus(Status s)
+		{
+			s.Karma++;
+
+			return db.SaveChanges() != 1;
+		}
+
+		public bool downvoteStatus(Status s)
+		{
+			s.Karma--;
+
+			return db.SaveChanges() != 1;
 		}
     }
 }
