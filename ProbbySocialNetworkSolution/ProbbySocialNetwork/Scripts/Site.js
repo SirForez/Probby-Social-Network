@@ -52,7 +52,7 @@ $('input[type="checkbox"]').each(function () {
     if ($(this).is(":checked")) {
         checkedAtLeastOne = true;
     }
-    else { alert("check at least once"); }
+    
 });
     
 
