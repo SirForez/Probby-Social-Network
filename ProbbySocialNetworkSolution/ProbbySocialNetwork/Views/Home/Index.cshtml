@@ -16,7 +16,7 @@
                     @foreach (Group g in Model.currentUserGroups)
                     {
                         <li>
-                            @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
+                            @Html.ActionLink(g.Name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
                         </li>
                     }
                 </ul>
@@ -153,11 +153,12 @@
                                         @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
                                     }
                                     
-                                    @Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s)
+                                    @Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { s = s }, null) //routeValues: s
                                     
                                     <p>@s.Karma</p>
                                     
-                                    @Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s)
+                                    @Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { s = s }, null)
+                                }
 
                         </div>
                         <span class="rhsStatus">
