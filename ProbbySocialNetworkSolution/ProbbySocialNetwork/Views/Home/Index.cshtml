@@ -1,7 +1,7 @@
 ﻿@model ProbbySocialNetwork.Models.ViewModels.FeedViewModel
 
 @{
-    //ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home Page";
 }
 
 <div class="newsfeed">
@@ -42,7 +42,7 @@
                                                         @foreach (Hobby h in Model.currentUserHobbies)
                                                         {
                                                             <div class="squaredFour">
-                                                                <input type="checkbox" value="@h.Name" id="squaredFour" name="check" />@h.Name <br/>
+                                                                <input type="checkbox" value="@h.Name" id="squaredFour" name="@h.Name" />@h.Name <br/>
                                                                 <label for="squaredFour"></label>
                                                             </div>
                                                                 @*<input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br/>*@
@@ -145,7 +145,6 @@
                                     <input type="hidden" name="statusId" value="@s.ID" />
                                     <button type="submit" class="glyphicon glyphicon-chevron-up upvote arrow"></button>
                                 }
-
                                 
                                 @if (s.Karma >= 0) {
                                     <p class="karmaCount">@s.Karma</p>
@@ -154,9 +153,7 @@
                                 {
                                     <p class="karmaCount">0</p>
                                 }
-                                        
-
-
+                            
                                 @using (Html.BeginForm("DownvoteStatus", "Status", FormMethod.Post, new { id = s.ID }))
                                 {
                                     <input type="hidden" name="statusId" value="@s.ID" />
@@ -181,10 +178,9 @@
                                 {
                                     @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
                                 }
+                            }
+                        </div>
 
-
-                                }
-                            </div>
 
                         </div>
                         <span class="rhsStatus">

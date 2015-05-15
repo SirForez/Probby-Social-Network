@@ -118,11 +118,11 @@ namespace ProbbySocialNetwork.Models
             return users;
         }
 
-		public void editProfilePicture(ApplicationUser a, string link)
+		public bool editProfilePicture(ApplicationUser a, string link)
 		{
 			a.ProfilePic = link;
 			
-			db.SaveChanges();
+			return db.SaveChanges() != 0;
 		}
 
 		public bool userGainsKarma(ApplicationUser a)

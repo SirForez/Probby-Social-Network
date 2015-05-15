@@ -53,7 +53,6 @@ namespace ProbbySocialNetwork.Controllers
 
 			g.Name = collection["groupName"];
 			g.Description = collection["groupDesc"];
-            g.Hobby = hobbyService.getHobbyByName(collection["groupHobby"]);
 
 			groupService.addGroup(g);
 
