@@ -148,6 +148,7 @@ namespace ProbbySocialNetwork.Controllers
 
 			model.currentUser = accountService.getUserByName(User.Identity.Name);
 			model.savedStatusHistory = statusService.getSavedFeedByUser(model.currentUser);
+            model.commentsForStatuses = new List<Comment>();
 			
 			foreach (Status s in model.savedStatusHistory)
 			{

@@ -239,9 +239,9 @@ namespace ProbbySocialNetwork.Controllers
 			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
 			accountService.userGainsKarma(currentUser);
 
-			return Json(s, JsonRequestBehavior.AllowGet);
-			//string url = this.Request.UrlReferrer.AbsoluteUri;
-			//return Redirect(url);
+			//return Json(s, JsonRequestBehavior.AllowGet);
+	        string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
 		}
 
 		[HttpPost]
@@ -254,6 +254,7 @@ namespace ProbbySocialNetwork.Controllers
 			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
 			accountService.userLosesKarma(currentUser);
 
+            //return Json(s, JsonRequestBehavior.AllowGet);
 			string url = this.Request.UrlReferrer.AbsoluteUri;
 			return Redirect(url);
 		}
