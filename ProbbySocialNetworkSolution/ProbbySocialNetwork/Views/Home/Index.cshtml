@@ -12,16 +12,14 @@
 
             <div class="group">
                 <h2>Your groups</h2>
-                <div class="group-list">
-                    <ul>
-                        @foreach (Group g in Model.currentUserGroups)
-                        {
-                            <li>
-                                @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
-                            </li>
-                        }
-                    </ul>
-                </div>
+                <ul>
+                    @foreach (Group g in Model.currentUserGroups)
+                    {
+                        <li>
+                            @Html.ActionLink(g.name, "Index", "Group", routeValues: g, htmlAttributes: new { id = g.ID })
+                        </li>
+                    }
+                </ul>
                 <section>
                     @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { id = "groupForm", onsubmit="return validateGroup(this);" }))
                     {
@@ -66,17 +64,15 @@
             </div>
             <div class="hobby">
                 <h2>Hobbies</h2>
-                <div class="hobby-list">
-                    <ul>
-                        @using ProbbySocialNetwork.Models;
-                        @foreach (Hobby h in Model.currentUserHobbies)
-                        {
+                <ul>
+                    @using ProbbySocialNetwork.Models;
+                    @foreach (Hobby h in Model.currentUserHobbies)
+                    {
                         <li>
                             @Html.ActionLink("#" + h.Name, "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID })
                         </li>
-                        }
-                    </ul>
-                </div>
+                    }
+                </ul>
                 <section>
                     @using (Html.BeginForm("CreateHobby", "Hobby", FormMethod.Post, new { id = "hobbyForm", onsubmit = "return validateHobby(this);" }))
                     {
@@ -119,13 +115,13 @@
                     <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                     foreach (Hobby h in Model.currentUserHobbies)
                     {
-                        <input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br />
+                        <input type="checkbox" name="@h.Name" class="hobbyCheckboxes" value="@h.Name" />@h.Name<br />
                     }
                     <div class="form-horizontal">
                         <label class="sr-only" for="statusText">Status</label>
                         <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Insert a status..."></textarea>
                         <span class="appendTo"></span>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <button type="submit" class="btn btn-primary" onclick="return validateHobbiesForStatuses()">Post</button>
                     </div>
 
                     @Html.ValidationSummary(false)
@@ -156,7 +152,12 @@
                                     {
                                         @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
                                     }
-                            }
+                                    
+                                    @Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s)
+                                    
+                                    <p>@s.Karma</p>
+                                    
+                                    @Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s)
 
                         </div>
                         <span class="rhsStatus">
@@ -251,7 +252,7 @@
 
                             @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                             {
-                                <input type="hidden" name="statusID" value="@s.ID" />
+                                <input type="hidden" name="statusID" id="statusID" value="@s.ID" />
                                 <div class="form-horizontal">
                                     <label class="sr-only" for="commentText">Status</label>
                                     <input type="text" class="form-control commentTextbox" id="commentInputBox" name="commentText" placeholder="Write a comment..." />

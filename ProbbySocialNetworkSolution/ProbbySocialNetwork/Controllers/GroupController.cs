@@ -51,9 +51,9 @@ namespace ProbbySocialNetwork.Controllers
 			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
 			List<Hobby> currentUserHobbies = hobbyService.getHobbiesByUser(currentUser);
 
-			g.name = collection["groupName"];
-			g.description = collection["groupDesc"];
-            g.hobby = hobbyService.getHobbyByName(collection["groupHobby"]);
+			g.Name = collection["groupName"];
+			g.Description = collection["groupDesc"];
+            g.Hobby = hobbyService.getHobbyByName(collection["groupHobby"]);
 
 			groupService.addGroup(g);
 
@@ -94,9 +94,9 @@ namespace ProbbySocialNetwork.Controllers
             int groupID = Int32.Parse(collection["groupID"]);
             Group g = groupService.getGroupByID(groupID);
 
-            g.name = collection["groupName"];
-            g.description = collection["groupDesc"];
-            g.hobby = hobbyService.getHobbyByName(collection["groupHobby"]);
+            g.Name = collection["groupName"];
+            g.Description = collection["groupDesc"];
+            g.Hobby = hobbyService.getHobbyByName(collection["groupHobby"]);
 
             groupService.editGroup(g);
 

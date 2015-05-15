@@ -19,6 +19,7 @@ namespace ProbbySocialNetwork.Controllers
         public ChatService chatService = ServiceSingleton.GetChatService;
 
         // GET: Chat
+        [Authorize]
         public ActionResult Index(string username)
         {
             ChatViewModel model = new ChatViewModel();
@@ -37,6 +38,7 @@ namespace ProbbySocialNetwork.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Chats()
         {
             ChatListViewModel model = new ChatListViewModel();

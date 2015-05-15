@@ -152,7 +152,8 @@ namespace ProbbySocialNetwork.Controllers
             c.DateInserted = DateTime.Now;
             c.UserID = User.Identity.GetUserId();
             c.UserName = User.Identity.Name;
-            c.StatusID = Convert.ToInt32(collection["statusID"]);
+			var i = collection["statusID"];
+			c.StatusID = Convert.ToInt32(collection["statusID"]);
 			c.CurrentLogedinUser = User.Identity.GetUserId();
 
 			var status = statusService.getStatusByID(c.StatusID);
@@ -203,6 +204,26 @@ namespace ProbbySocialNetwork.Controllers
 			{
 				return View("Error");
 			}
+		}
+
+		public ActionResult UpvoteStatus(Status s)
+		{
+			statusService.upvoteStatus(s);
+			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
+			accountService.userGainsKarma(currentUser);
+			
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
+		}
+
+		public ActionResult DownvoteStatus(Status s)
+		{
+			statusService.downvoteStatus(s);
+			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
+			accountService.userLosesKarma(currentUser);
+
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
 		}
 	}
 }
