@@ -3,7 +3,7 @@ namespace ProbbySocialNetwork.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class t : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -130,9 +130,8 @@ namespace ProbbySocialNetwork.Migrations
                         Date = c.DateTime(nullable: false),
                         Post = c.String(),
                         MediaURL = c.String(),
-                        HobbyID = c.Int(nullable: false),
                         ProfilePic = c.String(),
-                        Karma = c.Int(nullable: false),
+                        Karma = c.Int(),
                     })
                 .PrimaryKey(t => t.ID);
             

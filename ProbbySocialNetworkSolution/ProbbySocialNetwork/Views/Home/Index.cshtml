@@ -153,11 +153,13 @@
                                         @Html.ActionLink("#" + h.Name + " ", "Index", "Hobby", routeValues: h, htmlAttributes: new { id = h.ID });
                                     }
                                     
-                                    @Html.ActionLink("Upvote", "UpvoteStatus", "Status", new { s = s }, null) //routeValues: s
+                                    <br />
+                                    
+                                    @Html.ActionLink("Upvote", "UpvoteStatus", "Status", routeValues: s, htmlAttributes: null) 
                                     
                                     <p>@s.Karma</p>
                                     
-                                    @Html.ActionLink("Downvote", "DownvoteStatus", "Status", new { s = s }, null)
+                                    @Html.ActionLink("Downvote", "DownvoteStatus", "Status", routeValues: s, htmlAttributes: null)
                                 }
 
                         </div>

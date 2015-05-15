@@ -35,6 +35,8 @@ namespace ProbbySocialNetwork.Controllers
 			Status s = new Status();
 
 			s.Post = collection["statusText"];
+
+			s.Karma = 0;
 			
 			if (collection["url"] != null)
 			{
