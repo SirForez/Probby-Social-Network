@@ -84,15 +84,14 @@ $(function () {
                 url: theForm.attr('action'),
                 data: theForm.serialize(),
             }).done(function (result) {
-                //$(".allComments").html('');
                 
                 var statusid = result[0].StatusID;
-                                var commentHtmlId = '#commentForStatus' + statusid.toString();
-
-
+                var commentHtmlId = '#commentForStatus' + statusid.toString();
 
                 console.log(commentHtmlId);
                 $(commentHtmlId).html('');
+
+                var currentUserLogedin = result[0].CurrentLogedinUser;
 
                 for (var i = 0; i < result.length; i++) {
                     $(commentHtmlId).append(
@@ -107,13 +106,17 @@ $(function () {
                         '<br>' +
                         '<button type="submit" class="btn btn-primary">Confirm Edit</button>' +
                         '</div></form>' +
-                        '<a href="/Home/Profile?username=' + result[i].UserName + '">' + result[i].UserName + '</a> | ' + result[i].DisplayDate +
-                        '<span> | </span>' +
-                        '<a class="editLink" onclick="editComment(' + result[i].ID + ')">Edit</a>' +
-                        '<span> | </span>' +
-                        '<a href="/Status/RemoveComment/' + result[i].ID + '">Remove</a></div>');
+                        '<a href="/Home/Profile?username=' + result[i].UserName + '">' + result[i].UserName + '</a> | ' + result[i].DisplayDate );
 
+                    if (result[i].UserID == result[i].StatusUserID || result[i].UserID == currentUserLogedin) {
+                        $(commentHtmlId).append(
+                            '<span> | </span>' +
+                            '<a class="editLink" onclick="editComment(' + result[i].ID + ')">Edit</a>' +
+                            '<span> | </span>' +
+                            '<a href="/Status/RemoveComment/' + result[i].ID + '">Remove</a></div>');
+                    }
                 }
+                
 
                 theForm.find('#commentInputBox').val('');
             }).fail(function () {

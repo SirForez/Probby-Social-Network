@@ -49,7 +49,7 @@
                     <input type="hidden" name="username" value="@Model.currentUser.UserName" />
                     <div class="form-horizontal">
                         <label class="sr-only" for="messageText">Text: </label>
-                        <textarea class="form-control" rows="4" id="messageText" name="messageText" placeholder="Insert message..."></textarea>
+                        <textarea class="form-control" rows="4" id="messageText" value="" name="messageText" placeholder="Insert message..."></textarea>
                     </div>
 
                     @Html.ValidationSummary(false)
