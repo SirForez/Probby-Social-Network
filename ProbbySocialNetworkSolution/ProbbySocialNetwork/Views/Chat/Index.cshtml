@@ -4,8 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Your chat with @Model.otherUser.UserName</h2>
-
 @using ProbbySocialNetwork.Models
 <div class="container">
     <div class="lhsNav">
@@ -41,6 +39,7 @@
         </div>
     </div>
     <div class="theContent">
+        <h2>Your chat with @Model.otherUser.UserName</h2>
         <div class="rhsMessages">
             <!--breyta i html helper-->
             <section>
