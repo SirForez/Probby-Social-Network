@@ -33,7 +33,7 @@ function validateHobby(form) {
 function validateGroup(form) {
 
     
-    if ($("#groupName").val() == '') {
+    if ($("#groupName").val() == "") {
         alert("You must provide a group name!");
         return false;
     }
