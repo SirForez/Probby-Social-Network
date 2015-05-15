@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
 }
 
+<h2>Your chat with @Model.otherUser.UserName</h2>
+
 @using ProbbySocialNetwork.Models
 <div class="container">
     <div class="lhsNav">
@@ -39,7 +41,6 @@
         </div>
     </div>
     <div class="theContent">
-        <h2>Your chat with @Model.otherUser.UserName</h2>
         <div class="rhsMessages">
             <!--breyta i html helper-->
             <section>
@@ -62,14 +63,7 @@
                         <div class="messageWrapper">
                             <div class="lhsMessage">
                                 <div class="message-info">
-                                    @if (Model.currentUser.UserName == m.UserName)
-                                    {
-                                        <img src="@Model.currentUser.ProfilePic" alt="@Model.currentUser.UserName" class="MessageUserProfilePic" id="MessageUserProfilePic" />
-                                    }
-                                    else
-                                    {
-                                        <img src="@Model.otherUser.ProfilePic" alt="@Model.otherUser.UserName" class="MessageUserProfilePic" id="MessageUserProfilePic" />
-                                    }
+                                    <img src="@m.UserProfilePic" alt="@m.UserName" class="MessageUserProfilePic" id="MessageUserProfilePic" />
                                 </div>
                                 <div class="Message-UserName">
                                     @m.UserName
@@ -87,6 +81,7 @@
         </div>
     </div>
 </div>
+
     <script>
             var url = "@Url.Action("GetMessages", "Chat", new { chatID = Model.chat.ID })";
             $('document').ready(function () {
@@ -101,11 +96,22 @@
                                 //this clear the messagelist
                                 $('#messageList').html('');
                                 //this returns the new messages
-                                for (var i = 0; i < data.length; i++) {
+                                for (var i = 0; i < data.length; i++) { //data[i].UserName, data[i].Text, 
                                     $('#messageList').append(
-                                        "<div class='message'>" +
-                                            '<div class="message-user-info">' + data[i].UserName + '</div>' +
-                                            '<div class="message-body">' + data[i].Text + '</div>' +
+                                        "<div class='messageWrapper'>" +
+                                            '<div class="lhsMessage">' +
+                                                '<div class="message-info">' +
+                                                    '<img src="' + data[i].UserProfilePic + '" alt="' + data[i].UserName + '" class="MessageUserProfilePic" id="MessageUserProfilePic" />' +
+                                                '</div>' + 
+                                                '<div class="Message-UserName'> +
+                                                    data[i].UserName +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<div class="rhsMessage">' +
+                                                '<div class="message-body">' +
+                                                    data[i].Text +
+                                                '</div>' +
+                                            '</div>' +
                                         '</div>');
                                 }
                                 //alert(data);
