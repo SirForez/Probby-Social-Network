@@ -59,12 +59,26 @@
                 <div class="messageList" id="messageList">
                     @foreach (Message m in Model.messages)
                     {
-                        <div class="message">
-                            <div class="message-user-info">
-                                @m.UserName
+                        <div class="messageWrapper">
+                            <div class="lhsMessage">
+                                <div class="message-info">
+                                    @if (Model.currentUser.UserName == m.UserName)
+                                    {
+                                        <img src="@Model.currentUser.ProfilePic" alt="@Model.currentUser.UserName" class="MessageUserProfilePic" id="MessageUserProfilePic" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@Model.otherUser.ProfilePic" alt="@Model.otherUser.UserName" class="MessageUserProfilePic" id="MessageUserProfilePic" />
+                                    }
+                                </div>
+                                <div class="Message-UserName">
+                                    @m.UserName
+                                </div>
                             </div>
-                            <div class="message-body">
-                                @m.Text
+                            <div class="rhsMessage">
+                                <div class="message-body">
+                                    @m.Text
+                                </div>
                             </div>
                         </div>
                     }
@@ -73,32 +87,32 @@
         </div>
     </div>
 </div>
-
-<script>
-    var url = "@Url.Action("GetMessages", "Chat", new { chatID = Model.chat.ID })";
-    $('document').ready(function () {
-        function refresh() {
-            //NOTE: Find a better fix, you trifiling gnome.
-            //Otherwise your arrogance will be your undoing.
-            if ($("#messageText").focusout) {
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    success: function (data) {
-                        //this clear the messagelist
-                        $('#messageList').html('');
-                        //this returns the new messages
-                        for (var i = 0; i < data.length; i++) {
-                            $('#messageList').append("<div class='message'>" +
-                                '<div class="message-user-info">' + data[i].UserName + '</div>' +
-                                '<div class="message-body">' + data[i].Text + '</div>' +
-                                '</div>');
-                        }
-                        //alert(data);
+    <script>
+            var url = "@Url.Action("GetMessages", "Chat", new { chatID = Model.chat.ID })";
+            $('document').ready(function () {
+                function refresh() {
+                    //NOTE: Find a better fix, you trifiling gnome.
+                    //Otherwise your arrogance will be your undoing.
+                    if ($("#messageText").focusout) {
+                        $.ajax({
+                            type: 'GET',
+                            url: url,
+                            success: function (data) {
+                                //this clear the messagelist
+                                $('#messageList').html('');
+                                //this returns the new messages
+                                for (var i = 0; i < data.length; i++) {
+                                    $('#messageList').append(
+                                        "<div class='message'>" +
+                                            '<div class="message-user-info">' + data[i].UserName + '</div>' +
+                                            '<div class="message-body">' + data[i].Text + '</div>' +
+                                        '</div>');
+                                }
+                                //alert(data);
+                            }
+                        })
                     }
-                })
-            }
-        }
-        var t = setInterval(refresh, 500);
-    });
-</script>
+                }
+                var t = setInterval(refresh, 500);
+            });
+    </script>

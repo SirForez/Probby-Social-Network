@@ -67,6 +67,8 @@ namespace ProbbySocialNetwork.Controllers
             m.UserID = collection["userid"];
             m.UserName = collection["username"];
             m.Text = collection["messageText"];
+            ApplicationUser a = accountService.getUserByID(m.UserID);
+            m.UserProfilePic = a.ProfilePic;
             m.DateInserted = DateTime.Now;
 			
 			Chat c = chatService.getChatByID(chatID);

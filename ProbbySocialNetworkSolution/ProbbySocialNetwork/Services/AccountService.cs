@@ -124,5 +124,19 @@ namespace ProbbySocialNetwork.Models
 			
 			db.SaveChanges();
 		}
+
+		public bool userGainsKarma(ApplicationUser a)
+		{
+			a.Karma++;
+
+			return db.SaveChanges() != 1;
+		}
+
+		public bool userLosesKarma(ApplicationUser a)
+		{
+			a.Karma--;
+
+			return db.SaveChanges() != 1;
+		}
     }
 }

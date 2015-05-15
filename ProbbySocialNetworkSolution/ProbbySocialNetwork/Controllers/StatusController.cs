@@ -207,5 +207,25 @@ namespace ProbbySocialNetwork.Controllers
 				return View("Error");
 			}
 		}
+
+		public ActionResult UpvoteStatus(Status s)
+		{
+			statusService.upvoteStatus(s);
+			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
+			accountService.userGainsKarma(currentUser);
+			
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
+		}
+
+		public ActionResult DownvoteStatus(Status s)
+		{
+			statusService.downvoteStatus(s);
+			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
+			accountService.userLosesKarma(currentUser);
+
+			string url = this.Request.UrlReferrer.AbsoluteUri;
+			return Redirect(url);
+		}
 	}
 }
