@@ -1,10 +1,10 @@
-﻿$(function () {
+﻿/*$(function () {
     
     $('body').on('keypress', '#commentInputBox', function (e) {
         var keyCode = e.which || e.keyCode;
         if (e.keyCode == 13) {
             alert('yoyoo');
-            var theForm = document.forms["commentForm"];   //$(this).parent('form');
+            var theForm = $(this).parent('form');
             console.log(theForm);
 
             $.ajax({
@@ -69,6 +69,7 @@
         }).done(function (result) {
     
         });
-        */
+        
 });
  
+*/
