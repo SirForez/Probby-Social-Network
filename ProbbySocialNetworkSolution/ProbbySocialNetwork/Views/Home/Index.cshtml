@@ -115,13 +115,13 @@
                     <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                     foreach (Hobby h in Model.currentUserHobbies)
                     {
-                        <input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br />
+                        <input type="checkbox" name="@h.Name" class="hobbyCheckboxes" value="@h.Name" />@h.Name<br />
                     }
                     <div class="form-horizontal">
                         <label class="sr-only" for="statusText">Status</label>
                         <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Insert a status..."></textarea>
                         <span class="appendTo"></span>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <button type="submit" class="btn btn-primary" onclick="return validateHobbiesForStatuses()">Post</button>
                     </div>
 
                     @Html.ValidationSummary(false)
@@ -247,13 +247,28 @@
 
                             @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
                             {
-                                <input type="hidden" name="statusID" value="@s.ID" />
+                                <input type="hidden" name="statusID" id="statusID" value="@s.ID" />
                                 <div class="form-horizontal">
                                     <label class="sr-only" for="commentText">Status</label>
                                     <input type="text" class="form-control commentTextbox" id="commentInputBox" name="commentText" placeholder="Write a comment..." />
                                 </div>
                                 @Html.ValidationSummary(false)
                             }
+
+                            @using (Html.BeginForm("CreateStatus", "Status", FormMethod.Post, new { id = "statusForm" }))
+                            {
+                                <input type="hidden" name="userid" value="@Model.currentUser.Id " />
+                                
+                                <div class="form-horizontal">
+                                    <label class="sr-only" for="statusText">Status</label>
+                                    <textarea class="form-control" rows="4" id="statusText" name="statusText" placeholder="Insert a status..."></textarea>
+                                    <span class="appendTo"></span>
+                                    <button type="submit" class="btn btn-primary">Post</button>
+                                </div>
+
+                                @Html.ValidationSummary(false)
+                            }
+
                         </span>
                     </div>
                 }
