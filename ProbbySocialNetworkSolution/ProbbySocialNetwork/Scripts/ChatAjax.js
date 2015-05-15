@@ -16,10 +16,21 @@
                 $('#messageList').html('');
                 //this returns the new messages
                 for (var i = 0; i < result.length; i++) {
-                    $('#messageList').append("<div class='message'>" +
-                        '<div class="message-user-info">' + result[i].UserName + '</div>' +
-                        '<div class="message-body">' + result[i].Text + '</div>' +
-                        '</div>');
+                    $('#messageList').append('<div class="messageWrapper">' +
+                                '<div class="lhsMessage">' +
+                                '<div class="message-info">' +
+                                '<img src="' + data[i].UserProfilePic + '" alt="' + data[i].UserName + '" class="MessageUserProfilePic" id="MessageUserProfilePic" />' +
+                                '</div>' +
+                                '<div class="Message-UserName">' +
+                                data[i].UserName +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="rhsMessage">' +
+                                '<div class="message-body">' +
+                                data[i].Text +
+                                '</div>' +
+                                '</div>' +
+                                '</div>');
                 }
 
                 theForm.find('#messageText').val('');
