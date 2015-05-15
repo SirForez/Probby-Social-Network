@@ -36,8 +36,8 @@
                                 '</div>' +
                                 '</div>');
                 }
-
                 theForm.find('#messageText').val('');
+                //$('#messageText').val('');
             }).fail(function () {
                 //alert('Villa kom upp!');
             });

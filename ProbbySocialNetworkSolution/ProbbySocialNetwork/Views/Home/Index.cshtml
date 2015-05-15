@@ -119,7 +119,7 @@
                     <input type="hidden" name="userid" value="@Model.currentUser.Id " />
                     foreach (Hobby h in Model.currentUserHobbies)
                     {
-                        <input type="checkbox" name="@h.Name" class="hobbyCheckboxes" value="@h.Name" />@h.Name<br />
+                        <span class="hobby-check"><input type="checkbox" name="@h.Name" class="hobbyCheckboxes" value="@h.Name" />@h.Name</span>
                     }
                     <div class="form-horizontal">
                         <label class="sr-only" for="statusText">Status</label>
