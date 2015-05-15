@@ -75,6 +75,21 @@ namespace ProbbySocialNetwork.Models
             return statuses;
         }
 
+		public List<Status> getStatusesByUserForEditProfilePic(ApplicationUser a)
+		{
+			if (a == null)
+			{
+				return null;
+			}
+
+			var statuses = (from s in db.Statuses
+							where (((a.Id == s.UserID) && (s.GroupID == null)) /*|| (a.Id == s.PostedToID)*/)
+							orderby s.Date descending
+							select s).ToList();
+
+			return statuses;
+		}
+
 		public List<Status> getStatusesByHobby(Hobby h)
 		{
 			var statuses = (from c in db.StatusHobbyConnections

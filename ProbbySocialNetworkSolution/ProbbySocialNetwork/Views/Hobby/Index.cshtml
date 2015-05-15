@@ -95,20 +95,38 @@
                     </p>
                     @if (Model.commentsForStatuses != null)
                     {
-                        foreach (Comment c in Model.commentsForStatuses)
-                        {
-                            if (c.StatusID == s.ID)
+                        <div class="allComments" id="@("commentForStatus"+s.ID)">
+                            @foreach (Comment c in Model.commentsForStatuses)
                             {
-                                <p class="comment">
-                                    <a href="/Home/Profile?username=@c.UserName">@c.UserName</a> | @c.Body | @c.DateInserted
-                                    <span> | </span>
-                                    @if (Model.currentUser.Id == s.UserID)
-                                    {
-                                        @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
-                                    }
-                                </p>
+                                if (c.StatusID == s.ID)
+                                {
+                                    <div class="comment">
+                                        <h5 id="@("commentText"+c.ID)" class="commentContent2">@c.Body</h5>
+                                        @using (Html.BeginForm("EditComment", "Status", FormMethod.Post, new { id = c.ID }))
+                                        {
+                                            <input type="hidden" name="commentId" value="@c.ID" />
+                                            <div id="@("commentTextForm"+c.ID)" class="editForm">
+                                                @*need id for textarea to get into controller*@
+                                                <label for="@("commentTextbox"+c.ID)">Comment:</label>
+                                                <br />
+                                                <input type="text" name="@("commentTextbox"+c.ID)" value="@c.Body" />
+                                                <br />
+                                                <button type="submit" name="confirm" value="confirm" class="btn btn-primary">Confirm Edit</button>
+                                                <button type="submit" name="cancel" value="cancel" class="btn btn-primary">Cancel</button>
+                                            </div>
+                                        }
+                                        <a href="/Home/Profile?username=@c.UserName">@c.UserName</a> | @c.DateInserted
+                                        @if (Model.currentUser.Id == c.UserID)
+                                        {
+                                            <span> | </span>
+                                            <a class="editLink" onclick="editComment(@c.ID)">Edit</a>
+                                            <span> | </span>
+                                            @Html.ActionLink("Remove", "RemoveComment", "Status", new { id = c.ID }, null)
+                                        }
+                                    </div>
+                                }
                             }
-                        }
+                        </div>
                     }
 
                     @using (Html.BeginForm("CreateComment", "Status", FormMethod.Post, new { id = "commentForm" }))
