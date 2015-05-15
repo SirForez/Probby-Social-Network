@@ -76,7 +76,7 @@
                 <input type="hidden" name="postedToID" value="@Model.profileOwner.Id" />
                 foreach (Hobby h in Model.profileOwnerHobbies)
                 {
-                    <input type="checkbox" name="@h.Name" value="@h.Name" />@h.Name<br />
+                    <span class="hobby-check"><input type="checkbox" name="@h.Name" class="hobbyCheckboxes" value="@h.Name" />@h.Name</span>
                 }
                 <div class="form-horizontal">
                     <label class="sr-only" for="statusText">Status</label>
