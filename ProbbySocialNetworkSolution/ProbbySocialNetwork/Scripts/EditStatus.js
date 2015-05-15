@@ -9,6 +9,6 @@ function editStatus(id) {
 };
 
 function editComment(id) {
-    $("#commentText" + id).toggle();
-    $("#commentTextForm" + id).toggle();
+    $("#commenttext" + id).toggle();
+    $("#commenttextform" + id).toggle();
 };
