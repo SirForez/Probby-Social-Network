@@ -7,13 +7,13 @@ namespace ProbbySocialNetwork.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class Y : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Y));
         
         string IMigrationMetadata.Id
         {
-            get { return "201505151009374_init"; }
+            get { return "201505151737112_Y"; }
         }
         
         string IMigrationMetadata.Source
