@@ -10,49 +10,49 @@ using ProbbySocialNetwork.Models.ViewModels;
 
 namespace ProbbySocialNetwork.Controllers
 {
-	public class StatusController : Controller
-	{
-		public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
-		public AccountService accountService = ServiceSingleton.GetAccountService;
-		public StatusService statusService = ServiceSingleton.GetStatusService;
-		public GroupService groupService = ServiceSingleton.GetGroupService;
-		public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
-		
-		// GET: Status
-		public ActionResult Index()
-		{
+    public class StatusController : Controller
+    {
+        public ServiceSingleton serviceManager = ServiceSingleton.GetInstance;
+        public AccountService accountService = ServiceSingleton.GetAccountService;
+        public StatusService statusService = ServiceSingleton.GetStatusService;
+        public GroupService groupService = ServiceSingleton.GetGroupService;
+        public HobbyService hobbyService = ServiceSingleton.GetHobbyService;
 
-			//TODO: Implement
-			return View();
-		}
+        // GET: Status
+        public ActionResult Index()
+        {
 
-		[HttpPost]
+            //TODO: Implement
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult CreateStatus(FormCollection collection, string id, int? groupID)
-		{
-			ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
-			List <Hobby> currentUserHobbies = hobbyService.getHobbiesByUser(currentUser);
-			
-			Status s = new Status();
+        {
+            ApplicationUser currentUser = accountService.getUserByName(User.Identity.Name);
+            List<Hobby> currentUserHobbies = hobbyService.getHobbiesByUser(currentUser);
 
-			s.Post = collection["statusText"];
+            Status s = new Status();
 
-			s.Karma = 0;
-			
-			if (collection["url"] != null)
-			{
-				s.MediaURL = collection["url"];
-			}
+            s.Post = collection["statusText"];
 
-			if (groupID != null)
-			{
-                int realGroupID = groupID.Value;
-                Group g = groupService.getGroupByID(realGroupID);
-				s.GroupID = g.ID;
+            s.Karma = 0;
+
+            if (collection["url"] != null)
+            {
+                s.MediaURL = collection["url"];
             }
 
-			s.ProfilePic = currentUser.ProfilePic;
-			s.Date = DateTime.Now;
-			s.UserID = User.Identity.GetUserId();
+            if (groupID != null)
+            {
+                int realGroupID = groupID.Value;
+                Group g = groupService.getGroupByID(realGroupID);
+                s.GroupID = g.ID;
+            }
+
+            s.ProfilePic = currentUser.ProfilePic;
+            s.Date = DateTime.Now;
+            s.UserID = User.Identity.GetUserId();
             s.UserName = User.Identity.Name;
             if (id != null)
             {
@@ -63,200 +63,202 @@ namespace ProbbySocialNetwork.Controllers
                 s.PostedToID = collection["PostedToID"];
             }
 
-			//ApplicationUser a = accountService.getUserByName(User.Identity.Name);
-			//s.UserID = a.Id;
-			statusService.addStatus(s);
+            //ApplicationUser a = accountService.getUserByName(User.Identity.Name);
+            //s.UserID = a.Id;
+            statusService.addStatus(s);
 
-			if (groupID == null)
-			{
-				foreach (Hobby h in currentUserHobbies)
-				{
-					if (collection[h.Name] == h.Name)
-					{
-						statusService.addHobbyToStatus(s, h);
-					}
-				}
-			}
-			else
-			{
-				int realGroupID = groupID.Value;
-				Group g = groupService.getGroupByID(realGroupID);
-				List<Hobby> currentGroupHobbies = hobbyService.getHobbiesByGroup(g);
+            if (groupID == null)
+            {
+                foreach (Hobby h in currentUserHobbies)
+                {
+                    if (collection[h.Name] == h.Name)
+                    {
+                        statusService.addHobbyToStatus(s, h);
+                    }
+                }
+            }
+            else
+            {
+                int realGroupID = groupID.Value;
+                Group g = groupService.getGroupByID(realGroupID);
+                List<Hobby> currentGroupHobbies = hobbyService.getHobbiesByGroup(g);
 
-				foreach (Hobby h in currentGroupHobbies)
-				{
-					if (collection[h.Name] == h.Name)
-					{
-						statusService.addHobbyToStatus(s, h);
-					}
-				}
-			}
+                foreach (Hobby h in currentGroupHobbies)
+                {
+                    if (collection[h.Name] == h.Name)
+                    {
+                        statusService.addHobbyToStatus(s, h);
+                    }
+                }
+            }
 
-			string url = this.Request.UrlReferrer.AbsoluteUri;
-			return Redirect(url);
-		}
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+        }
 
-		public ActionResult EditStatus(FormCollection collection)
-		{
-			string url = this.Request.UrlReferrer.AbsoluteUri;
-			
-			if (collection["cancel"] == "cancel")
-			{
-				return Redirect(url);
-			}
-			
-			int? id = Convert.ToInt32(collection["StatusId"]);
-			Status currentStatus = statusService.getStatusByID(id);
-			Status editedStatus = new Status();
-			editedStatus.ID = currentStatus.ID;
-			editedStatus.Date = currentStatus.Date;
-			editedStatus.Post = null;
-			editedStatus.MediaURL = null;
+        public ActionResult EditStatus(FormCollection collection)
+        {
+            string url = this.Request.UrlReferrer.AbsoluteUri;
 
-			string statusTextboxId = "statusTextbox" + Convert.ToString(id);
-			string picTextboxId = "picTextbox" + Convert.ToString(id);
+            if (collection["cancel"] == "cancel")
+            {
+                return Redirect(url);
+            }
 
-			if (currentStatus.Post != null)
-			{
-				editedStatus.Post = collection[statusTextboxId];
-			}
-			if (currentStatus.MediaURL != null)
-			{
-				editedStatus.MediaURL = collection[picTextboxId];
-			}
-				
-			statusService.editStatus(editedStatus);
-			return Redirect(url);
-			
-		}
+            int? id = Convert.ToInt32(collection["StatusId"]);
+            Status currentStatus = statusService.getStatusByID(id);
+            Status editedStatus = new Status();
+            editedStatus.ID = currentStatus.ID;
+            editedStatus.Date = currentStatus.Date;
+            editedStatus.Post = null;
+            editedStatus.MediaURL = null;
 
-		public ActionResult RemoveStatus(int? id)
-		{
-			if (id != null)
-			{
-				Status currentStatus = statusService.getStatusByID(id);
-				statusService.removeStatus(currentStatus);
+            string statusTextboxId = "statusTextbox" + Convert.ToString(id);
+            string picTextboxId = "picTextbox" + Convert.ToString(id);
 
-				string url = this.Request.UrlReferrer.AbsolutePath;
-				return Redirect(url);
-			}
-			else
-			{
-				return View("Error");
-			}
-		}
+            if (currentStatus.Post != null)
+            {
+                editedStatus.Post = collection[statusTextboxId];
+            }
+            if (currentStatus.MediaURL != null)
+            {
+                editedStatus.MediaURL = collection[picTextboxId];
+            }
 
-		[HttpPost]
-		public ActionResult CreateComment(FormCollection collection)
-		{
-			/*
+            statusService.editStatus(editedStatus);
+            return Redirect(url);
+
+        }
+
+        public ActionResult RemoveStatus(int? id)
+        {
+            if (id != null)
+            {
+                Status currentStatus = statusService.getStatusByID(id);
+                statusService.removeStatus(currentStatus);
+
+                string url = this.Request.UrlReferrer.AbsolutePath;
+                return Redirect(url);
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateComment(FormCollection collection)
+        {
+            /*
             Comment c = new Comment();
             c.Body = collection["commentText"];
             c.DateInserted = DateTime.Now;
             c.UserID = User.Identity.GetUserId();
             c.UserName = User.Identity.Name;
-			var i = collection["statusID"];
-			c.StatusID = Convert.ToInt32(collection["statusID"]);
-			c.CurrentLogedinUser = User.Identity.GetUserId();
+            var i = collection["statusID"];
+            c.StatusID = Convert.ToInt32(collection["statusID"]);
+            c.CurrentLogedinUser = User.Identity.GetUserId();
 
-			var status = statusService.getStatusByID(c.StatusID);
-			c.StatusUserID = status.UserID;
+            var status = statusService.getStatusByID(c.StatusID);
+            c.StatusUserID = status.UserID;
             statusService.addComment(c);
 			
             //var currStatus = statusService.getStatusByID(c.StatusID);
             //var currComments = statusService.getCommentsByStatus(currStatus);
 			
             //return Json(currComments, JsonRequestBehavior.AllowGet);
-			string url = this.Request.UrlReferrer.AbsoluteUri;
-			return Redirect(url);
-			 */
-			Comment c = new Comment();
-			c.Body = collection["commentText"];
-			c.DateInserted = DateTime.Now;
-			c.UserID = User.Identity.GetUserId();
-			c.UserName = User.Identity.Name;
-			c.StatusID = Convert.ToInt32(collection["statusID"]);
-			c.CurrentLogedinUser = User.Identity.GetUserId();
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+             */
+            Comment c = new Comment();
+            c.Body = collection["commentText"];
+            c.DateInserted = DateTime.Now;
+            c.UserID = User.Identity.GetUserId();
+            c.UserName = User.Identity.Name;
+            c.StatusID = Convert.ToInt32(collection["statusID"]);
+            c.CurrentLogedinUser = User.Identity.GetUserId();
 
-			var status = statusService.getStatusByID(c.StatusID);
-			c.StatusUserID = status.UserID;
-			statusService.addComment(c);
+            var status = statusService.getStatusByID(c.StatusID);
+            c.StatusUserID = status.UserID;
+            statusService.addComment(c);
 
-			var currStatus = statusService.getStatusByID(c.StatusID);
-			var currComments = statusService.getCommentsByStatus(currStatus);
+            /*var currStatus = statusService.getStatusByID(c.StatusID);
+            var currComments = statusService.getCommentsByStatus(currStatus);
 
-			return Json(currComments, JsonRequestBehavior.AllowGet);
-		}
+            return Json(currComments, JsonRequestBehavior.AllowGet);*/
 
-		public ActionResult EditComment(FormCollection collection)
-		{
-			int? id = Convert.ToInt32(collection["commentId"]);
-			Comment currentComment = statusService.getCommentByID(id);
-			Comment editComment = new Comment();
-			editComment.ID = currentComment.ID;
-			editComment.DateInserted = currentComment.DateInserted;
-			editComment.Body = null;
-			editComment.StatusUserID = currentComment.StatusUserID;
-			editComment.CurrentLogedinUser = User.Identity.GetUserId();
-			
-			string commentTextboxId = "commentTextbox" + Convert.ToString(id);
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+        }
 
-			if (currentComment.Body != null)
-			{
-				editComment.Body = collection[commentTextboxId];
-			}
+        public ActionResult EditComment(FormCollection collection)
+        {
+            int? id = Convert.ToInt32(collection["commentId"]);
+            Comment currentComment = statusService.getCommentByID(id);
+            Comment editComment = new Comment();
+            editComment.ID = currentComment.ID;
+            editComment.DateInserted = currentComment.DateInserted;
+            editComment.Body = null;
+            editComment.StatusUserID = currentComment.StatusUserID;
+            editComment.CurrentLogedinUser = User.Identity.GetUserId();
 
-			statusService.editComment(editComment);
+            string commentTextboxId = "commentTextbox" + Convert.ToString(id);
 
-			string url = this.Request.UrlReferrer.AbsoluteUri;
-			return Redirect(url);
-		}
+            if (currentComment.Body != null)
+            {
+                editComment.Body = collection[commentTextboxId];
+            }
 
-		public ActionResult RemoveComment(int? id)
-		{
-			if (id != null)
-			{
-				Comment currentComment = statusService.getCommentByID(id);
-				statusService.removeComment(currentComment);
+            statusService.editComment(editComment);
 
-				string url = this.Request.UrlReferrer.AbsoluteUri;
-				return Redirect(url);
-			}
-			else
-			{
-				return View("Error");
-			}
-		}
-		
-		[HttpPost]
-		public ActionResult UpvoteStatus(FormCollection collection)
-		{
-			int? statusid = Convert.ToInt32(collection["statusID"]);
-			var s = statusService.getStatusByID(statusid);
-			
-			//var s = statusService.getStatusByID(statusId);
-			statusService.upvoteStatus(s);
-			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
-			accountService.userGainsKarma(currentUser);
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+        }
 
-			//return Json(s, JsonRequestBehavior.AllowGet);
-	        string url = this.Request.UrlReferrer.AbsoluteUri;
-			return Redirect(url);
-		}
+        public ActionResult RemoveComment(int? id)
+        {
+            if (id != null)
+            {
+                Comment currentComment = statusService.getCommentByID(id);
+                statusService.removeComment(currentComment);
 
-		[HttpPost]
-		public ActionResult DownvoteStatus(int statusID)
-		{
-			//int? statusid = Convert.ToInt32(collection["statusId"]);
-			var s = statusService.getStatusByID(statusID);
+                string url = this.Request.UrlReferrer.AbsoluteUri;
+                return Redirect(url);
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
 
-			statusService.downvoteStatus(s);
-			ApplicationUser currentUser = accountService.getUserByID(s.UserID);
-			accountService.userLosesKarma(currentUser);
+        [HttpPost]
+        public ActionResult UpvoteStatus(FormCollection collection)
+        {
+            int? statusid = Convert.ToInt32(collection["statusID"]);
+            var s = statusService.getStatusByID(statusid);
+
+            //var s = statusService.getStatusByID(statusId);
+            statusService.upvoteStatus(s);
+            ApplicationUser currentUser = accountService.getUserByID(s.UserID);
+            accountService.userGainsKarma(currentUser);
 
             //return Json(s, JsonRequestBehavior.AllowGet);
-			string url = this.Request.UrlReferrer.AbsoluteUri;
-			return Redirect(url);
-		}
-	}
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+        }
+
+        [HttpPost]
+        public ActionResult DownvoteStatus(int statusID)
+        {
+            //int? statusid = Convert.ToInt32(collection["statusId"]);
+            var s = statusService.getStatusByID(statusID);
+
+            statusService.downvoteStatus(s);
+            ApplicationUser currentUser = accountService.getUserByID(s.UserID);
+            accountService.userLosesKarma(currentUser);
+
+            string url = this.Request.UrlReferrer.AbsoluteUri;
+            return Redirect(url);
+        }
+    }
 }

@@ -72,7 +72,7 @@
         
 });
  
-*/
+
 $(function () {
     $('body').on('keypress', '#commentInputBox', function (e) {
         var keyCode = e.which || e.keyCode;
@@ -102,10 +102,11 @@ $(function () {
                         '<div id="commentTextForm' + result[i].ID + '" class="editForm">' +
                         '<label for="commentTextbox' + result[i].ID + '">Comment:</label>' +
                         '<br>' +
-                        '<input type="text" name="commentTextbox id="commentInputBox"' + result[i].ID + '" placeholder="Write a comment"/>' +
+                        '<input type="text" name="commentTextbox' + result[i].ID + '" id="commentInputBox' + result[i].ID + '" placeholder="Write a comment"/>' +
                         '<br>' +
                         '<button type="submit" class="btn btn-primary">Confirm Edit</button>' +
-                        '</div></form>' +
+                        '</div>' +
+                        '</form>' +
                         '<a href="/Home/Profile?username=' + result[i].UserName + '">' + result[i].UserName + '</a> | ' + result[i].DisplayDate );
 
                     if (result[i].UserID == result[i].StatusUserID || result[i].UserID == currentUserLogedin) {
@@ -113,9 +114,10 @@ $(function () {
                             '<span> | </span>' +
                             '<a class="editLink" onclick="editComment(' + result[i].ID + ')">Edit</a>' +
                             '<span> | </span>' +
-                            '<a href="/Status/RemoveComment/' + result[i].ID + '">Remove</a></div>');
-                    }
-                }
+                            '<a href="/Status/RemoveComment/' + result[i].ID + '">Remove</a>');
+                        }
+                    $(commentHtmlId).append('</div>');
+                 }
                 
 
                 theForm.find('#commentInputBox').val('');
@@ -126,4 +128,4 @@ $(function () {
             return false;
         }
     });
-});
+});*/
