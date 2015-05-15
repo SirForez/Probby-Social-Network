@@ -19,25 +19,29 @@
                     $('#messageList').append('<div class="messageWrapper">' +
                                 '<div class="lhsMessage">' +
                                 '<div class="message-info">' +
-                                '<img src="' + data[i].UserProfilePic + '" alt="' + data[i].UserName + '" class="MessageUserProfilePic" id="MessageUserProfilePic" />' +
+                                '<img src="' + result[i].UserProfilePic + '" alt="' + result[i].UserName + '" class="MessageUserProfilePic" id="MessageUserProfilePic" />' +
                                 '</div>' +
                                 '<div class="Message-UserName">' +
-                                data[i].UserName +
+                                result[i].UserName +
                                 '</div>' +
                                 '</div>' +
                                 '<div class="rhsMessage">' +
                                 '<div class="message-body">' +
                                 '<div class="panel panel-default">' +
                                 '<div class="panel-body">' +
-                                data[i].Text +
+                                result[i].Text +
                                 '</div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>');
                 }
-                theForm.find('#messageText').val('');
-                //$('#messageText').val('');
+
+                $('#messageText').val("");
+                //$('#messageText').attr('value', '');
+                //$('#messageText').html('');
+                //document.getElementById('#messageText').value = "";
+
             }).fail(function () {
                 //alert('Villa kom upp!');
             });
