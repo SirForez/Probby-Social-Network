@@ -119,7 +119,7 @@ namespace ProbbySocialNetwork.Controllers
 			
 			accountService.editProfilePicture(currentUser, collection["picLink"]);
 
-			List<Status> userStatuses = statusService.getStatusesByUser(currentUser);
+			List<Status> userStatuses = statusService.getStatusesByUserForEditProfilePic(currentUser);
 
 			foreach (Status s in userStatuses)
 			{
